@@ -1,0 +1,131 @@
+﻿@model SpentBook.Web.Models.DashboardModel
+
+@{
+    ViewBag.Title = Model.Dashboard.Name;
+}
+
+<div id="title-and-buttons">
+    <h2>@ViewBag.Title</h2>
+    <a href="#modal-new-panel" class="btn btn2 no-action">+ Painel</a>
+</div>
+
+<div id="modal-new-panel" class="modalDialog">
+    <div>
+        <a href="#close" title="Close" class="close">X</a>
+
+        <div class="form-wrapper">
+            <form id="form-new-panel">
+                <label for="field-group-by-1">Nome do painel:</label>
+                @Html.TextBox("name")
+                
+                <label for="field-group-by-1">Tipo de transação:</label>
+                <select name="field-transaction-type">
+                    <option>Ambos</option>
+                    <option>Somente gastos</option>
+                    <option>Somente receitas</option>
+                </select>
+
+                <label for="field-group-by-1">De:</label>
+                @Html.TextBox("dateFrom")
+
+                <label for="field-group-by-1">Até:</label>
+                @Html.TextBox("dateTo")
+
+                <label for="field-group-by-1">Agrupamento principal:</label>
+                <select name="field-group-by-1">
+                    <option>Não agrupar</option>
+                    <option>Dia</option>
+                    <option>Mes</option>
+                    <option>Ano</option>
+                </select>
+
+                <label for="field-group-by-2">Agrupamento secundário:</label>
+                <select name="field-group-by-2">
+                    <option>Não agrupar</option>
+                    <option>Categoria</option>
+                    <option>Sub-Categoria</option>
+                    <option>Nome</option>
+                </select>
+
+                <label for="field-category">Categoria(s):</label>
+                @Html.TextBox("field-category")
+
+                <label for="field-subcategory">Sub-Categoria(s):</label>
+                @Html.TextBox("field-subcategory")
+
+                <label for="field-name">Nome(s) da(s) transação(ões):</label>
+                @Html.TextBox("field-transaction-name")
+
+                <select name="field-view-type">
+                    <option>Tabela</option>
+                    <option>Gráfico de barras</option>
+                    <option>Gráfico de pizzas</option>
+                </select>
+
+                <a href="#save" class="btn btn2 no-action" id="save">+ Adicionar</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="box-container">
+    @*@if (Model.Dashboard.Panels != null && Model.Dashboard.Panels.Count > 0)
+    {
+        <div>
+            @foreach (var panel in Model.Dashboard.Panels)
+            {
+                
+            }
+        </div>
+    }
+    else
+    {
+        <span>Você ainda não criou nenhum painel!</span>
+    }*@
+    
+    
+
+    <style type="text/css">
+        /* show the move cursor as the user moves the mouse over the panel header.*/
+        #draggablePanelList .panel-heading {
+            cursor: move;
+        }
+    </style>
+
+    <!-- Bootstrap 3 panel list. -->
+    <ul id="draggablePanelList" class="list-unstyled">
+        <li class="panel panel-info">
+            <div class="panel-heading">You can drag this panel.</div>
+            <div class="panel-body">Content Content Content Content Content Content Content ContentContent ContentContentContentContentContentContentContentContentContent Content Content Content Content Content ...</div>
+        </li>
+        <li class="panel panel-info">
+            <div class="panel-heading">You can drag this panel.</div>
+            <div class="panel-body">Content Content Content Content Content Content Content ContentContent ContentContentContentContentContentContentContentContentContent Content Content Content Content Content ...</div>
+        </li>
+        <li class="panel panel-info">
+            <div class="panel-heading">You can drag this panel.</div>
+            <div class="panel-body">Content Content Content ContentContentContentContentContentContentContent ContentContent Content Content Content</div>
+        </li>
+        <li class="panel panel-info">
+            <div class="panel-heading">You can drag this panel too.</div>
+            <div class="panel-body">Content ...</div>
+        </li>
+        <li class="panel panel-info">
+            <div class="panel-heading">You can drag this panel too.</div>
+            <div class="panel-body">Content ...</div>
+        </li>
+    </ul>
+</div>
+
+<div class="clearfix"></div>
+
+@section Styles
+{
+    @Styles.Render("~/Content/css/jqueryui")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/Custom/Dashboard")
+    @Scripts.Render("~/bundles/Custom/ChartHelper")
+}

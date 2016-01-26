@@ -1,0 +1,51 @@
+﻿@model List<SpentBook.Web.Controllers.ResumeController.Spent>
+
+<h1>Dados</h1>
+@if (Model.Count > 0)
+{
+    <table class="rwd-table">
+        <tr>
+            <th></th>
+            <th>@Html.CheckBox("spentItemAll", false)</th>
+            <th>Data</th>
+            <th>Categoria</th>
+            <th>SubCategoria</th>
+            <th>Local</th>
+            <th>Valor</th>
+        </tr>
+        @{
+            var i = 1;
+            foreach (var spent in Model) {
+                <tr class="@(i % 2 == 0 ? "pair" : "odd")">
+                    <td>
+                        @i
+                    </td>           
+                    <td>
+                        @Html.CheckBox("spentItem", false)
+                    </td>  
+                    <td>
+                        @spent.Date
+                    </td>
+                    <td>
+                        @spent.Category
+                    </td>
+                    <td>
+                        @spent.SubCategory
+                    </td>
+                    <td>
+                        @spent.Establishment
+                    </td>
+                     <td>
+                        @spent.Value
+                    </td>
+                </tr>
+            
+                i++;
+            }
+        }
+    </table>
+}
+else
+{
+    <p>Nenhuma informação foi encontrada para ser exibida</p>
+}

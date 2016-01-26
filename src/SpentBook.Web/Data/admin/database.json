@@ -1,0 +1,112 @@
+{
+  "Dashboards": [
+    {
+      "Id": "77e325b3-d62e-4a66-a981-1c701aec58b9",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "dividas2",
+      "Panels": [
+        {
+          "Id": "00000000-0000-0000-0000-000000000000",
+          "CreateDate": "0001-01-01T00:00:00",
+          "LastUpdateDate": "0001-01-01T00:00:00",
+          "Title": null,
+          "PanelOrder": 0,
+          "Filter": null,
+          "Blocks": [
+            0
+          ]
+        }
+      ],
+      "FriendlyUrl": "dividas2"
+    },
+    {
+      "Id": "92384107-afec-4d7c-8eb5-bee8dad12390",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "dividas",
+      "Panels": [
+        {
+          "Id": "00000000-0000-0000-0000-000000000000",
+          "CreateDate": "0001-01-01T00:00:00",
+          "LastUpdateDate": "0001-01-01T00:00:00",
+          "Title": null,
+          "PanelOrder": 0,
+          "Filter": null,
+          "Blocks": [
+            0
+          ]
+        }
+      ],
+      "FriendlyUrl": "dividas"
+    }
+  ],
+  "Transactions": [
+    {
+      "Id": "4e3f5c16-db35-484a-bea0-2b2567c8aa51",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": null,
+      "Date": "2016-01-25T23:06:37.3833847-02:00",
+      "Category": "cat",
+      "SubCategory": "sub",
+      "Value": 10.0,
+      "ValueAsPositive": 10.0
+    },
+    {
+      "Id": "3b670d06-c61e-48cd-93a7-c288ec84a7b1",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": null,
+      "Date": "2016-01-25T23:12:20.8570303-02:00",
+      "Category": "cat",
+      "SubCategory": "sub",
+      "Value": 10.0,
+      "ValueAsPositive": 10.0
+    },
+    {
+      "Id": "a278ea2a-f179-44e1-ae2c-188ec0b33c98",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": null,
+      "Date": "2016-01-25T23:59:20.9843323-02:00",
+      "Category": "cat",
+      "SubCategory": "sub",
+      "Value": 10.0,
+      "ValueAsPositive": 10.0
+    },
+    {
+      "Id": "1266ce70-1194-4d64-ac21-4b6c1af91690",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": null,
+      "Date": "2016-01-26T09:25:47.2803814-02:00",
+      "Category": "cat",
+      "SubCategory": "sub",
+      "Value": 10.0,
+      "ValueAsPositive": 10.0
+    },
+    {
+      "Id": "b40949d9-e039-4b9a-8912-8630686b6204",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": null,
+      "Date": "2016-01-26T09:25:52.9820374-02:00",
+      "Category": "cat",
+      "SubCategory": "sub",
+      "Value": 10.0,
+      "ValueAsPositive": 10.0
+    },
+    {
+      "Id": "b5159af0-5a6b-4af1-8f53-73c78856df1b",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": null,
+      "Date": "2016-01-26T09:26:25.5697069-02:00",
+      "Category": "cat",
+      "SubCategory": "sub",
+      "Value": 10.0,
+      "ValueAsPositive": 10.0
+    }
+  ]
+}

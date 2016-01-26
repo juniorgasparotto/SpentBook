@@ -1,0 +1,47 @@
+﻿@model SpentBook.Web.Models.DashboardsModel
+
+<div id="form-new-dashboard-wrapper" class="modalDialog">
+    <div>
+        <a href="#close" title="Close" class="close">X</a>
+
+        <div class="form-group">
+            <form id="form-new-dashboard">
+                @Html.Label("Nome", new { @class = "col-md-2 control-label" })
+                @Html.TextBox("name")
+
+                <a href="#save" class="btn btn2 no-action" id="save">+ Adicionar</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="dashboardBox" class="box">
+    <div class="box-title">
+        <h4>Meus paineis</h4>
+
+        <div class="clearfix"></div>
+    </div>
+
+    <div id="content">
+        @if (Model.Dashboards.Count > 0)
+        {
+            <div>
+                @foreach (SpentBook.Domain.Dashboard dashboard in Model.Dashboards)
+                {
+                    <button type="button" class="btn btn-default btn-xs btn-delete">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true">
+                            @Html.ActionLink("delete", "Delete", "Dashboard", new { id = dashboard.Id }, new { @class = "collapse" })
+                        </span>
+                    </button>
+
+                    @Html.ActionLink(dashboard.Name ?? "-", "View", "Dashboard", new { id = dashboard.FriendlyUrl }, null)
+                    <br />
+                }
+            </div>
+        }
+        else
+        {
+            <span>Você ainda não criou nenhum Dashboard!</span>
+        }
+    </div>
+</div>

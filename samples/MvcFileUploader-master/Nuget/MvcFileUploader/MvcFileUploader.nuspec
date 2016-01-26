@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>MvcFileUploader</id>
+	<title>MvcFileUploader</title>
+    <version>1.3.6</version>
+    <authors>maruf, Sebastian Tschan (JQuery Plugin)</authors>
+    <owners>maruf</owners>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/marufbd/MvcFileUploader</projectUrl>    
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Easy file upload integration in mvc application with JQuery File Upload javascript plugin and Html helpers</description>
+    <releaseNotes>Bug fixes and improvements</releaseNotes>
+    <tags>FileUpload, JQuery File Upload, Mvc</tags>
+    <dependencies>
+	  <!--
+      <dependency id="SampleDependency" version="1.0" />
+	  -->
+    </dependencies>
+  </metadata>
+</package>
