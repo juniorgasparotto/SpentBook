@@ -21,7 +21,8 @@ namespace SpentBook.Web.Controllers
 
         public ActionResult FilesList()
         {
-            return PartialView(this.GetAllFiles().Select(f=>f.Split('\\').LastOrDefault()).ToList());
+            var files = this.GetAllFiles() ?? new string[0];
+            return PartialView(files.Select(f => f.Split('\\').LastOrDefault()).ToList());
         }
 
         public ActionResult SpentsList()
@@ -153,15 +154,17 @@ namespace SpentBook.Web.Controllers
 
             var uploadPath = Server.MapPath("/Data");
             var userPath = uploadPath + "/" + userName + "/Spents";
+            if (Directory.Exists(userPath))
+                return Directory.GetFiles(userPath, "*.csv", SearchOption.AllDirectories);
 
-            return Directory.GetFiles(userPath, "*.csv", SearchOption.AllDirectories);
+            return null;
         }
 
         public List<Transaction> GetSpents()
         {
             var files = GetAllFiles();
             var list = new List<Transaction>();
-            if (files.Length > 0)
+            if (files != null && files.Length > 0)
             {
                 foreach(var file in files)
                     list.AddRange(this.GetSpents(file));
@@ -172,7 +175,7 @@ namespace SpentBook.Web.Controllers
 
         public List<Transaction> GetSpents(string fullName)
         {
-            var spents = new List<Transaction>();
+            var transactions = new List<Transaction>();
             using (var sr = new StreamReader(fullName))
             {
                 var reader = new CsvReader(sr);
@@ -182,10 +185,32 @@ namespace SpentBook.Web.Controllers
                 reader.Parser.Configuration.Delimiter = ";";
                 reader.Parser.Configuration.IgnoreReadingExceptions = true;
 
-                spents = reader.GetRecords<Transaction>().ToList();
+                var lines = reader.GetRecords<CSVLine>().ToList();
+                foreach(var line in lines)
+                {
+                    var transaction = new Transaction()
+                    {
+                        Date = line.Date,
+                        Category = line.Category,
+                        SubCategory = line.SubCategory,
+                        Name = line.Name,
+                        Value = line.Value,
+                    };
+
+                    transactions.Add(transaction);
+                }
             }
 
-            return spents;
+            return transactions;
+        }
+
+        private class CSVLine
+        {
+            public DateTime Date { get; set; }
+            public string Category { get; set; }
+            public string SubCategory { get; set; }
+            public string Name { get; set; }
+            public decimal Value { get; set; }
         }
     }
 }

@@ -72,16 +72,14 @@ window.onload = function () {
         });
     };
 
-    /*
     var updateAll = function () {
         updateChartBar();
-        //updateChartDoughnut();
+        updateChartDoughnut();
         updateFilesList();
         updateSpentList();
     };
 
     updateAll();
-    */
 };
 
 function SumByCategory(datasets, label) {
