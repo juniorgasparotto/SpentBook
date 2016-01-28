@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,8 +44,10 @@
     <Compile Include="Repository\IUnitOfWork.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Services.cs" />
+    <Compile Include="TransactionOrderClassification.cs" />
+    <Compile Include="TransactionOrder.cs" />
     <Compile Include="TransactionGroupBy.cs" />
-    <Compile Include="PanelBlock.cs" />
+    <Compile Include="PanelType.cs" />
     <Compile Include="TransactionType.cs" />
     <Compile Include="Panel.cs" />
     <Compile Include="TransactionFilter.cs" />

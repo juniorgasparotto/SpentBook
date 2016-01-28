@@ -1,20 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SpentBook.Domain
 {
     public enum TransactionGroupBy
     {
-        Date,
+        [Display(Name = "Dia")]
         DateDay,
-        DateWeek,
+        //DateDay,
+        //DateWeek,
+        [Display(Name = "Mês")]
         DateMonth,
+        [Display(Name = "Ano")]
         DateYear,
+        [Display(Name = "Categoria")]
         Category,
+        [Display(Name = "Sub-categoria")]
         SubCategory,
+        [Display(Name = "Nome da transação")]
         Name,
     }
 }

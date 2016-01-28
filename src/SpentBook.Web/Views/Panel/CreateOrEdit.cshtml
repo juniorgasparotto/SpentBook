@@ -1,0 +1,108 @@
+﻿@model SpentBook.Web.Models.PanelModel
+
+@{
+    if (ViewBag.IsEdit)
+    { 
+        ViewBag.Title = "Alterar painel";
+        ViewBag.ButtonName = "Alterar";
+    }
+    else
+    {
+        ViewBag.Title = "Novo painel";
+        ViewBag.ButtonName = "Adicionar";
+    }
+}
+
+
+@using (Html.BeginForm())
+{
+    <h2>@ViewBag.Title</h2>
+    
+    <hr />
+    
+    @Html.ValidationSummary()
+
+    <div class="form-group form-group-extension">
+        @Html.LabelFor(m => m.Title)
+        @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group form-group-extension">
+        @Html.LabelFor(m => m.PanelType)
+        @Html.EditorFor(m => m.PanelType, "RadioButtonListEnum")
+    </div>
+
+    <fieldset>
+        <legend>Agrupamento dos dados</legend>
+        <div class="form-group form-group-extension">
+            @Html.LabelFor(m => m.GroupBy)
+            @Html.EditorFor(m => m.GroupBy, "RadioButtonListEnum")
+        </div>
+
+        <div class="form-group form-group-extension">
+            @Html.LabelFor(m => m.GroupBy2)
+            @Html.EditorFor(m => m.GroupBy2, "RadioButtonListEnum")
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Ordem dos dados</legend>
+        <div class="form-group form-group-extension">
+            @Html.LabelFor(m => m.OrderBy)
+            @Html.EditorFor(m => m.OrderBy, "RadioButtonListEnum")
+        </div>
+        <div class="form-group form-group-extension">
+            @Html.LabelFor(m => m.OrderByClassification)
+            @Html.EditorFor(m => m.OrderByClassification, "RadioButtonListEnum")
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Filtros</legend>
+
+        <div class="form-group form-group-extension">
+            @Html.LabelFor(m => m.FilterTransactionType)
+            @Html.EditorFor(m => m.FilterTransactionType, "RadioButtonListEnum")
+        </div>
+
+        <div class="form-group form-group-extension field-date-from-to">
+            @Html.Label("Filtrar transações por periodo")
+            <div class="input-group input-daterange">
+                @Html.TextBoxFor(m => m.FilterDateStart, new { @class = "form-control" })
+                <span class="input-group-addon">até</span>
+                @Html.TextBoxFor(m => m.FilterDateEnd, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group form-group-extension field-decimal-from-to">
+            @Html.Label("Filtrar transações por valor")
+            <div class="input-group input-daterange">
+                <span class="input-group-addon">R$</span>
+                @Html.TextBoxFor(m => m.FilterValueStart, new { @class = "form-control" })
+                <span class="input-group-addon">até</span>
+                @Html.TextBoxFor(m => m.FilterValueEnd, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.FilterCategories)
+            @Html.TextBoxFor(m => m.FilterCategories, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group form-group-extension">
+            @Html.LabelFor(m => m.FilterSubCategories)
+            @Html.TextBoxFor(m => m.FilterSubCategories, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group form-group-extension">
+            @Html.LabelFor(m => m.FilterTransactionNames)
+            @Html.TextBoxFor(m => m.FilterTransactionNames, new { @class = "form-control" })
+        </div>
+    </fieldset>
+    
+    <div class="btn-group">
+        <button type="submit" class="btn btn2 btn-default">
+            @ViewBag.ButtonName
+        </button>
+    </div>
+}

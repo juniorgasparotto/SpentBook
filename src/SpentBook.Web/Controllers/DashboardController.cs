@@ -16,6 +16,7 @@ namespace SpentBook.Web.Controllers
 {
     [JsonOutputWhenModelInvalid]
     [JsonOutputWhenGenericException]
+    [Authorize]
     public class DashboardController : Controller
     {
         public ActionResult Index()
@@ -36,22 +37,8 @@ namespace SpentBook.Web.Controllers
         public ActionResult Dashboard(string id)
         {
             var uow = Helper.GetUnitOfWorkByCurrentUser();
-            var transaction = new Transaction();
-            transaction.Category = "cat";
-            transaction.Date = DateTime.Now;
-            transaction.SubCategory = "sub";
-            transaction.Value = 10;
-
-            uow.Transactions.Insert(transaction);
-
             var model = new DashboardModel();
             model.Dashboard = uow.Dashboards.Get(f => f.FriendlyUrl == id).FirstOrDefault();
-            model.Dashboard.Panels = new List<Panel>();
-            model.Dashboard.Panels.Add(new Panel());
-            model.Dashboard.Panels.LastOrDefault().Blocks = new List<PanelBlock>();
-            model.Dashboard.Panels.LastOrDefault().Blocks.Add(PanelBlock.Table);
-            uow.Dashboards.Update(model.Dashboard);
-
             return View("Dashboard", model);
         }
         
