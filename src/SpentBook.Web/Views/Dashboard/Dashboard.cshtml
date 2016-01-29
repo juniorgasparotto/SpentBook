@@ -14,53 +14,17 @@
     
 </div>
 
-<div id="box-container">
-    @*@if (Model.Dashboard.Panels != null && Model.Dashboard.Panels.Count > 0)
+<div id="content-panels">
+    @if (Model.Dashboard.Panels != null && Model.Dashboard.Panels.Count > 0)
     {
         <div>
-            @foreach (var panel in Model.Dashboard.Panels)
-            {
-                
-            }
+            <ul id="draggablePanelList" class="list-unstyled"></ul>
         </div>
     }
     else
     {
         <span>Você ainda não criou nenhum painel!</span>
-    }*@
-    
-    
-
-    <style type="text/css">
-        /* show the move cursor as the user moves the mouse over the panel header.*/
-        #draggablePanelList .panel-heading {
-            cursor: move;
-        }
-    </style>
-
-    <!-- Bootstrap 3 panel list. -->
-    <ul id="draggablePanelList" class="list-unstyled">
-        <li class="panel panel-info">
-            <div class="panel-heading">You can drag this panel.</div>
-            <div class="panel-body">Content Content Content Content Content Content Content ContentContent ContentContentContentContentContentContentContentContentContent Content Content Content Content Content ...</div>
-        </li>
-        <li class="panel panel-info">
-            <div class="panel-heading">You can drag this panel.</div>
-            <div class="panel-body">Content Content Content Content Content Content Content ContentContent ContentContentContentContentContentContentContentContentContent Content Content Content Content Content ...</div>
-        </li>
-        <li class="panel panel-info">
-            <div class="panel-heading">You can drag this panel.</div>
-            <div class="panel-body">Content Content Content ContentContentContentContentContentContentContent ContentContent Content Content Content</div>
-        </li>
-        <li class="panel panel-info">
-            <div class="panel-heading">You can drag this panel too.</div>
-            <div class="panel-body">Content ...</div>
-        </li>
-        <li class="panel panel-info">
-            <div class="panel-heading">You can drag this panel too.</div>
-            <div class="panel-body">Content ...</div>
-        </li>
-    </ul>
+    }
 </div>
 
 <div class="clearfix"></div>
@@ -73,5 +37,10 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/Custom/Dashboard")
-    @Scripts.Render("~/bundles/Custom/ChartHelper")
+    @*@Scripts.Render("~/bundles/Custom/ChartHelper")*@
+
+    <script>
+        Dashboard.Id = '@Model.Dashboard.Id.ToString()';
+        Dashboard.Context = $("#content-panels #draggablePanelList");
+    </script>
 }

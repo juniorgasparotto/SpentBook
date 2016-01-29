@@ -136,6 +136,28 @@
             ],
             "TransactionType": 0
           }
+        },
+        {
+          "Id": "c3a25658-b23b-4caa-af8d-60f9580e7ab6",
+          "CreateDate": "2016-01-29T00:02:31.9530643-02:00",
+          "LastUpdateDate": "0001-01-01T00:00:00",
+          "Title": "testeeeeeee",
+          "PanelType": 0,
+          "PanelOrder": 7,
+          "GroupBy": 0,
+          "GroupBy2": 0,
+          "OrderBy": 0,
+          "OrderByClassification": 0,
+          "Filter": {
+            "DateStart": null,
+            "DateEnd": null,
+            "ValueStart": null,
+            "ValueEnd": null,
+            "Categories": null,
+            "SubCategories": null,
+            "Names": null,
+            "TransactionType": 0
+          }
         }
       ],
       "FriendlyUrl": "dividas2"

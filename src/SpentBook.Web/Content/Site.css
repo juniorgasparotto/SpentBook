@@ -254,6 +254,11 @@ div#legend span
     margin-right: 10px;
 }
 
+/* show the move cursor as the user moves the mouse over the panel header.*/
+#draggablePanelList .panel-heading {
+    cursor: move;
+}
+
 /*bootstrap extensions*/
 .field-date-from-to {
     width: 240px;

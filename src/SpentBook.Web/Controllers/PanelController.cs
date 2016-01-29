@@ -19,7 +19,7 @@ namespace SpentBook.Web.Controllers
     public class PanelController : Controller
     {
         private const string CREATE_OR_EDIT_TEMPLATE = "CreateOrEdit";
-
+        
         [HttpGet]
         public ActionResult Details(Guid dashboardId, Guid panelId)
         {
@@ -75,7 +75,7 @@ namespace SpentBook.Web.Controllers
                 if (Request.IsAjaxRequest())
                     return Json(new { Success = true });
 
-                return RedirectToAction("Index");
+                return RedirectToDashboard(dashboard.FriendlyUrl);
             }
             else
             {
@@ -128,7 +128,7 @@ namespace SpentBook.Web.Controllers
                 if (Request.IsAjaxRequest())
                     return Json(new { Success = true });
 
-                return RedirectToAction("Index");
+                return RedirectToDashboard(dashboard.FriendlyUrl);
             }
             else
             {
@@ -150,8 +150,17 @@ namespace SpentBook.Web.Controllers
             if (Request.IsAjaxRequest())
                 return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
             else
-                return RedirectToAction("Index");
+                return RedirectToDashboard(dashboard.FriendlyUrl);
         }
+
+        [HttpGet]
+        public JsonResult PanelsUpdated(Guid dashboardId, Guid? panelId)
+        {
+            var uow = Helper.GetUnitOfWorkByCurrentUser();
+            var model = new DashboardModel();
+            model.Dashboard = uow.Dashboards.Get(f => f.Id == dashboardId).FirstOrDefault();
+            return Json(model.Dashboard.Panels, JsonRequestBehavior.AllowGet);
+        }        
 
         private PanelModel ConvertObjectDomainToModel(Panel panel)
         {
@@ -219,6 +228,11 @@ namespace SpentBook.Web.Controllers
             }
 
             return panel;
+        }
+
+        private ActionResult RedirectToDashboard(string url)
+        {
+            return RedirectToAction("Dashboard", "Dashboard", new { id = url });
         }
     }
 }

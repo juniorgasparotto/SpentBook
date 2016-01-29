@@ -41,7 +41,7 @@ namespace SpentBook.Web.Controllers
             model.Dashboard = uow.Dashboards.Get(f => f.FriendlyUrl == id).FirstOrDefault();
             return View("Dashboard", model);
         }
-        
+
         [HttpPost]
         public JsonResult Create(DashboardModel model)
         {
