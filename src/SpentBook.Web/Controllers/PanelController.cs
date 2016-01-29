@@ -232,7 +232,7 @@ namespace SpentBook.Web.Controllers
 
         private ActionResult RedirectToDashboard(string url)
         {
-            return RedirectToAction("Dashboard", "Dashboard", new { id = url });
+            return RedirectToAction("View", "Dashboard", new { id = url });
         }
     }
 }

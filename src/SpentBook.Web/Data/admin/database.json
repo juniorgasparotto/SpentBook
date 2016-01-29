@@ -158,6 +158,28 @@
             "Names": null,
             "TransactionType": 0
           }
+        },
+        {
+          "Id": "4dab9983-8fb3-481e-8b96-4beb4310ed9f",
+          "CreateDate": "2016-01-29T00:05:21.4477589-02:00",
+          "LastUpdateDate": "0001-01-01T00:00:00",
+          "Title": "testiculo",
+          "PanelType": 0,
+          "PanelOrder": 8,
+          "GroupBy": 0,
+          "GroupBy2": 0,
+          "OrderBy": 0,
+          "OrderByClassification": 0,
+          "Filter": {
+            "DateStart": null,
+            "DateEnd": null,
+            "ValueStart": null,
+            "ValueEnd": null,
+            "Categories": null,
+            "SubCategories": null,
+            "Names": null,
+            "TransactionType": 0
+          }
         }
       ],
       "FriendlyUrl": "dividas2"
