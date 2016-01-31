@@ -1,6 +1,22 @@
 ﻿@model SpentBook.Web.Models.PanelModel
 
-<li class="panel panel-info">
-    <div class="panel-heading">@Model.Title</div>
-    <div class="panel-body">Content ...</div>
+<li class="panel panel-info @Model.Id">
+    <div class="panel-heading">
+        @Model.Title
+
+        <div class="panel-actions">
+            <button type="button" class="btn btn-default btn-xs btn-delete">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true">
+                    @Html.ActionLink("edit", "Edit", "Panel", new { dashboardId = @Model.Dashboard.Id, panelId = Model.Id }, new { @class = "collapse" })
+                </span>
+            </button>
+
+            <button type="button" class="btn btn-default btn-xs btn-delete">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true">
+                    @Html.ActionLink("delete", "Delete", "Panel", new { dashboardId = @Model.Dashboard.Id, panelId = Model.Id }, new { @class = "collapse" })
+                </span>
+            </button>
+        </div>
+    </div>
+    <div class="panel-body">Content ...Content ...Content ...Content ...Content ...Content ...</div>
 </li>

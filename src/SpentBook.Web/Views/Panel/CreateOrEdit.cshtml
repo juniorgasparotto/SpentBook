@@ -32,6 +32,11 @@
         @Html.EditorFor(m => m.PanelType, "RadioButtonListEnum")
     </div>
 
+    <div class="form-group form-group-extension">
+        @Html.LabelFor(m => m.PanelOrder)
+        @Html.TextBoxFor(m => m.PanelOrder, new { @class = "form-control" })
+    </div>
+    
     <fieldset>
         <legend>Agrupamento dos dados</legend>
         <div class="form-group form-group-extension">

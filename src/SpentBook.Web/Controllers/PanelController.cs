@@ -26,8 +26,8 @@ namespace SpentBook.Web.Controllers
             var uow = Helper.GetUnitOfWorkByCurrentUser();
             var dashboard = uow.Dashboards.Get(f => f.Id == dashboardId).First();
             var panel = dashboard.Panels.First(f => f.Id == panelId);
-            var model = this.ConvertObjectDomainToModel(panel);
-
+            var model = this.ConvertObjectDomainToModel(panel, dashboard);
+            
             if (Request.IsAjaxRequest())
                 return PartialView(model);
 
@@ -39,7 +39,7 @@ namespace SpentBook.Web.Controllers
         {
             ViewBag.IsEdit = false;
 
-            var model = this.ConvertObjectDomainToModel(null);
+            var model = new PanelModel();
 
             if (Request.IsAjaxRequest())
                 return PartialView(CREATE_OR_EDIT_TEMPLATE, model);
@@ -89,12 +89,12 @@ namespace SpentBook.Web.Controllers
         [HttpGet]
         public ActionResult Edit(Guid dashboardId, Guid panelId)
         {
-            ViewBag.IsEdit = false;
+            ViewBag.IsEdit = true;
 
             var uow = Helper.GetUnitOfWorkByCurrentUser();
             var dashboard = uow.Dashboards.Get(f => f.Id == dashboardId).First();
             var panel = dashboard.Panels.First(f => f.Id == panelId);
-            var model = this.ConvertObjectDomainToModel(panel);
+            var model = this.ConvertObjectDomainToModel(panel, dashboard);
 
             if (Request.IsAjaxRequest())
                 return PartialView(CREATE_OR_EDIT_TEMPLATE, model);
@@ -160,15 +160,65 @@ namespace SpentBook.Web.Controllers
             var model = new DashboardModel();
             model.Dashboard = uow.Dashboards.Get(f => f.Id == dashboardId).FirstOrDefault();
             return Json(model.Dashboard.Panels, JsonRequestBehavior.AllowGet);
-        }        
+        }
 
-        private PanelModel ConvertObjectDomainToModel(Panel panel)
+        [HttpPost]
+        public JsonResult PanelsUpdated(Guid dashboardId, List<Panel> panelsExistsInInterface)
+        {
+            var uow = Helper.GetUnitOfWorkByCurrentUser();
+            var dashboard = uow.Dashboards.Get(f => f.Id == dashboardId).FirstOrDefault();
+            var panelsExistsInDB = dashboard.Panels;
+
+            panelsExistsInDB = panelsExistsInDB ?? new List<Panel>();
+            panelsExistsInInterface = panelsExistsInInterface ?? new List<Panel>();
+
+            // exists in DB but not exists in interface
+            var news = (
+                from panelDB in panelsExistsInDB
+                from panelInterface in panelsExistsInInterface.Where(f => f.Id == panelDB.Id).DefaultIfEmpty()
+                where panelInterface == null
+                orderby panelDB.PanelOrder, panelDB.Title ascending
+                select panelDB
+            ).ToList();
+
+            // exists in interface but not exists in DB
+            var deleteds = (
+                from panelInterface in panelsExistsInInterface
+                from panelDB in panelsExistsInDB.Where(f => f.Id == panelInterface.Id).DefaultIfEmpty()
+                where panelDB == null
+                orderby panelInterface.PanelOrder, panelInterface.Title ascending
+                select panelInterface
+            ).ToList();
+
+            // exists in both, but the update date in DB is more than interface
+            var updateds = (
+                from panelDB in panelsExistsInDB
+                join panelInterface in panelsExistsInInterface on panelDB.Id equals panelInterface.Id
+                where panelDB.LastUpdateDate > panelInterface.LastUpdateDate
+                orderby panelDB.PanelOrder, panelDB.Title ascending
+                select panelDB
+            ).ToList();
+
+            var changes = new
+            {
+                News = news,
+                Deleteds = deleteds,
+                Updateds = updateds
+            };
+
+            return Json(changes, JsonRequestBehavior.AllowGet);
+        }  
+
+        private PanelModel ConvertObjectDomainToModel(Panel panel, Dashboard dashboard)
         {
             var model = new PanelModel();
             
             if (panel != null)
             {
                 model.Title = panel.Title;
+                model.Id = panel.Id;
+                model.Dashboard = dashboard;
+                model.PanelOrder = panel.PanelOrder;
                 model.PanelType = panel.PanelType;
                 model.GroupBy = panel.GroupBy;
                 model.GroupBy2 = panel.GroupBy2;
@@ -198,6 +248,7 @@ namespace SpentBook.Web.Controllers
             var panel = new Panel();
             panel.Title = model.Title;
             panel.PanelType = model.PanelType;
+            panel.PanelOrder = model.PanelOrder;
             panel.GroupBy = model.GroupBy;
             panel.GroupBy2 = model.GroupBy2;
             panel.OrderBy = model.OrderBy;

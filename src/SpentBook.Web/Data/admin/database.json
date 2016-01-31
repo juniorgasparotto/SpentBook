@@ -7,165 +7,12 @@
       "Name": "dividas2",
       "Panels": [
         {
-          "Id": "80e41c93-c662-4f08-9a52-0a87c075b5f4",
-          "CreateDate": "2016-01-27T23:34:03.223978-02:00",
+          "Id": "400e7947-417a-4f7d-8b31-42353c943b42",
+          "CreateDate": "2016-01-31T02:53:40.0462329-02:00",
           "LastUpdateDate": "0001-01-01T00:00:00",
-          "Title": "teste",
-          "PanelType": 1,
-          "PanelOrder": 2,
-          "GroupBy": 5,
-          "GroupBy2": 4,
-          "OrderBy": 3,
-          "OrderByClassification": 0,
-          "Filter": {
-            "DateStart": "2015-12-13T00:00:00",
-            "DateEnd": "2015-12-14T00:00:00",
-            "ValueStart": 10.20,
-            "ValueEnd": 10.30,
-            "Categories": [
-              "teste",
-              "teste1",
-              "teste2"
-            ],
-            "SubCategories": [
-              "teste",
-              "teste1",
-              "teste2"
-            ],
-            "Names": [
-              "teste",
-              "teste1",
-              "teste2"
-            ],
-            "TransactionType": 2
-          }
-        },
-        {
-          "Id": "09272c99-f4ec-4f33-9505-96399857a81c",
-          "CreateDate": "2016-01-27T23:36:06.1860111-02:00",
-          "LastUpdateDate": "0001-01-01T00:00:00",
-          "Title": "teste",
-          "PanelType": 1,
-          "PanelOrder": 3,
-          "GroupBy": 5,
-          "GroupBy2": 4,
-          "OrderBy": 3,
-          "OrderByClassification": 0,
-          "Filter": {
-            "DateStart": "2015-12-13T00:00:00",
-            "DateEnd": "2015-12-14T00:00:00",
-            "ValueStart": 10.20,
-            "ValueEnd": 10.30,
-            "Categories": [
-              "teste",
-              "teste1",
-              "teste2"
-            ],
-            "SubCategories": [
-              "teste",
-              "teste1",
-              "teste2"
-            ],
-            "Names": [
-              "teste",
-              "teste1",
-              "teste2"
-            ],
-            "TransactionType": 2
-          }
-        },
-        {
-          "Id": "9f38b44e-34c7-40fb-8099-62da97568f7c",
-          "CreateDate": "2016-01-27T23:39:39.1211902-02:00",
-          "LastUpdateDate": "2016-01-27T23:45:22.7748461-02:00",
           "Title": "editado2",
-          "PanelType": 1,
-          "PanelOrder": 5,
-          "GroupBy": 4,
-          "GroupBy2": 3,
-          "OrderBy": 0,
-          "OrderByClassification": 0,
-          "Filter": {
-            "DateStart": "2015-12-05T00:00:00",
-            "DateEnd": "2015-12-15T00:00:00",
-            "ValueStart": 1220.0,
-            "ValueEnd": 10.30,
-            "Categories": [
-              "a",
-              "basd"
-            ],
-            "SubCategories": [
-              "c",
-              "dasdsa"
-            ],
-            "Names": [
-              "e",
-              "fasasd"
-            ],
-            "TransactionType": 1
-          }
-        },
-        {
-          "Id": "d5588375-77e5-4769-94c4-7e6f86e35833",
-          "CreateDate": "2016-01-28T09:46:40.1656029-02:00",
-          "LastUpdateDate": "0001-01-01T00:00:00",
-          "Title": "teste",
-          "PanelType": 2,
-          "PanelOrder": 6,
-          "GroupBy": 4,
-          "GroupBy2": 3,
-          "OrderBy": 2,
-          "OrderByClassification": 0,
-          "Filter": {
-            "DateStart": "2015-12-13T00:00:00",
-            "DateEnd": "2015-12-14T00:00:00",
-            "ValueStart": 10.20,
-            "ValueEnd": 10.30,
-            "Categories": [
-              "a",
-              "b"
-            ],
-            "SubCategories": [
-              "teste",
-              "teste1",
-              "teste2"
-            ],
-            "Names": [
-              "e",
-              "fasasd"
-            ],
-            "TransactionType": 0
-          }
-        },
-        {
-          "Id": "c3a25658-b23b-4caa-af8d-60f9580e7ab6",
-          "CreateDate": "2016-01-29T00:02:31.9530643-02:00",
-          "LastUpdateDate": "0001-01-01T00:00:00",
-          "Title": "testeeeeeee",
           "PanelType": 0,
-          "PanelOrder": 7,
-          "GroupBy": 0,
-          "GroupBy2": 0,
-          "OrderBy": 0,
-          "OrderByClassification": 0,
-          "Filter": {
-            "DateStart": null,
-            "DateEnd": null,
-            "ValueStart": null,
-            "ValueEnd": null,
-            "Categories": null,
-            "SubCategories": null,
-            "Names": null,
-            "TransactionType": 0
-          }
-        },
-        {
-          "Id": "4dab9983-8fb3-481e-8b96-4beb4310ed9f",
-          "CreateDate": "2016-01-29T00:05:21.4477589-02:00",
-          "LastUpdateDate": "0001-01-01T00:00:00",
-          "Title": "testiculo",
-          "PanelType": 0,
-          "PanelOrder": 8,
+          "PanelOrder": 3,
           "GroupBy": 0,
           "GroupBy2": 0,
           "OrderBy": 0,
@@ -194,7 +41,7 @@
           "Id": "00000000-0000-0000-0000-000000000000",
           "CreateDate": "0001-01-01T00:00:00",
           "LastUpdateDate": "0001-01-01T00:00:00",
-          "Title": null,
+          "Title": "aa",
           "PanelType": 0,
           "PanelOrder": 0,
           "GroupBy": 0,

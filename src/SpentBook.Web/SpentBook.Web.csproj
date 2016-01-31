@@ -169,6 +169,7 @@
     <Compile Include="Controllers\ResumeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\JsonOutputWhenGenericExceptionAttribute.cs" />
+    <Compile Include="Filters\JsonInputDateTimeParse.cs" />
     <Compile Include="Filters\JsonOutputWhenModelInvalidAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -219,6 +220,7 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Scripts\json.date-extensions.js" />
     <Content Include="Views\favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

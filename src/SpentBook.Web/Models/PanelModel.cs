@@ -10,9 +10,8 @@ namespace SpentBook.Web.Models
 {
     public class PanelModel
     {
-        //public Guid DashboardId { get; set; }
-        //public int PanelOrder { get; set; }
-        //public Guid Id { get; set; }
+        public Guid Id { get; set; }
+        public Dashboard Dashboard { get; set; }
 
         #region Panel info
 
@@ -24,6 +23,10 @@ namespace SpentBook.Web.Models
         [Display(Name = "Tipo do painel")]
         [Required]
         public PanelType PanelType { get; set; }
+
+        [Display(Name = "Ordem do painel")]
+        [Required]
+        public int PanelOrder { get; set; }
 
         #endregion
 
@@ -78,5 +81,6 @@ namespace SpentBook.Web.Models
         public string FilterTransactionNames { get; set; }
 
         #endregion
+
     }
 }

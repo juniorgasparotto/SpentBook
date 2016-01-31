@@ -15,16 +15,20 @@
 </div>
 
 <div id="content-panels">
-    @if (Model.Dashboard.Panels != null && Model.Dashboard.Panels.Count > 0)
-    {
-        <div>
-            <ul id="draggablePanelList" class="list-unstyled"></ul>
-        </div>
-    }
-    else
-    {
+    <div>
+        <ul id="draggablePanelList" class="list-unstyled"></ul>
+    </div>
+
+    <div id="empty-panels" class="collapse">
         <span>Você ainda não criou nenhum painel!</span>
-    }
+    </div>
+
+    @*@if (Model.Dashboard.Panels == null || Model.Dashboard.Panels.Count == 0)
+    {
+        <div class="empty-panels">
+            <span>Você ainda não criou nenhum painel!</span>
+        </div>
+    }*@
 </div>
 
 <div class="clearfix"></div>
@@ -42,5 +46,6 @@
     <script>
         Dashboard.Id = '@Model.Dashboard.Id.ToString()';
         Dashboard.Context = $("#content-panels #draggablePanelList");
+        Dashboard.EmptyContext = $("#content-panels #empty-panels");
     </script>
 }
