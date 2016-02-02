@@ -15,5 +15,21 @@ namespace SpentBook.Domain
         public List<Panel> Panels { get; set; }
 
         public string FriendlyUrl { get; set; }
+
+        public void ReorderPanels(bool addAfterIfOccurConflict = false)
+        {
+            List<Panel> panels;
+
+            // add after  : order by panelOrder and if has conflict, set the oldest first.
+            if (addAfterIfOccurConflict)
+                panels = this.Panels.OrderBy(one => one.PanelOrder).ThenBy(two => two.LastUpdateDate).ToList();
+            // add before: order by panelOrder and if has conflict, set the newest first.
+            else
+                panels = this.Panels.OrderBy(one => one.PanelOrder).ThenByDescending(two => two.LastUpdateDate).ToList();
+
+            var i = 1;
+            foreach (var panel in panels)
+                panel.PanelOrder = i++;
+        }
     }
 }

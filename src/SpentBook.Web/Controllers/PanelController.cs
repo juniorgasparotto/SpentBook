@@ -38,8 +38,15 @@ namespace SpentBook.Web.Controllers
         public ActionResult Create(Guid dashboardId)
         {
             ViewBag.IsEdit = false;
-
+            var uow = Helper.GetUnitOfWorkByCurrentUser();
+            var dashboard = uow.Dashboards.Get(f => f.Id == dashboardId).FirstOrDefault();
+            
             var model = new PanelModel();
+
+            if (dashboard.Panels == null || dashboard.Panels.Count == 0)
+                model.PanelOrder = 1;
+            else
+                model.PanelOrder = dashboard.Panels.Max(f => f.PanelOrder) + 1;
 
             if (Request.IsAjaxRequest())
                 return PartialView(CREATE_OR_EDIT_TEMPLATE, model);
@@ -60,16 +67,17 @@ namespace SpentBook.Web.Controllers
                 var panel = this.ConvertModelToObjectDomain(model);
                 panel.Id = Guid.NewGuid();
                 panel.CreateDate = DateTime.Now;
+                panel.LastUpdateDate = panel.CreateDate;
                 
                 if (dashboard.Panels == null)
                     dashboard.Panels = new List<Panel>();
 
-                if (dashboard.Panels.Count > 0)
-                    panel.PanelOrder = dashboard.Panels.Max(f=>f.PanelOrder) + 1;
-                else
-                    panel.PanelOrder = 1;
-
                 dashboard.Panels.Add(panel);
+
+                // reorder panels, set the new panel in first if has conflict
+                dashboard.ReorderPanels(false);
+
+                // save dashboard
                 uow.Dashboards.Update(dashboard);
 
                 if (Request.IsAjaxRequest())
@@ -110,19 +118,24 @@ namespace SpentBook.Web.Controllers
             if (ModelState.IsValid)
             {
                 var uow = Helper.GetUnitOfWorkByCurrentUser();
-                var panelReplaced = this.ConvertModelToObjectDomain(model);
+                var panelUpdate = this.ConvertModelToObjectDomain(model);
                 
                 var dashboard = uow.Dashboards.Get(f => f.Id == dashboardId).FirstOrDefault();
-                var panelExists = dashboard.Panels.FirstOrDefault(f => f.Id == panelId);
-                var panelPosition = dashboard.Panels.IndexOf(panelExists);
+                var panelOld = dashboard.Panels.FirstOrDefault(f => f.Id == panelId);
+                var panelPosition = dashboard.Panels.IndexOf(panelOld);
 
-                panelReplaced.Id = panelExists.Id;
-                panelReplaced.CreateDate = panelExists.CreateDate;
-                panelReplaced.LastUpdateDate = DateTime.Now;
-                panelReplaced.PanelOrder = panelExists.PanelOrder;
+                panelUpdate.Id = panelOld.Id;
+                panelUpdate.CreateDate = panelOld.CreateDate;
+                panelUpdate.LastUpdateDate = DateTime.Now;
 
-                dashboard.Panels.Remove(panelExists);
-                dashboard.Panels.Insert(panelPosition, panelReplaced);
+                dashboard.Panels.Remove(panelOld);
+                dashboard.Panels.Insert(panelPosition, panelUpdate);
+
+                // reorder panels
+                var addAfterIfOccurConflict = panelUpdate.PanelOrder > panelOld.PanelOrder;
+                dashboard.ReorderPanels(addAfterIfOccurConflict);
+
+                // save dashboard
                 uow.Dashboards.Update(dashboard);
 
                 if (Request.IsAjaxRequest())
@@ -145,12 +158,30 @@ namespace SpentBook.Web.Controllers
             var uow = Helper.GetUnitOfWorkByCurrentUser();
             var dashboard = uow.Dashboards.Get(f => f.Id == dashboardId).FirstOrDefault();
             dashboard.Panels.RemoveAll(f => f.Id == panelId);
+
+            // reorder panels
+            dashboard.ReorderPanels();
+
+            // save dashboard
             uow.Dashboards.Update(dashboard);
 
             if (Request.IsAjaxRequest())
                 return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
             else
                 return RedirectToDashboard(dashboard.FriendlyUrl);
+        }
+
+        [HttpGet]
+        public JsonResult ChangePanelOrder(Guid dashboardId, Guid panelId, int newOrder)
+        {
+            var uow = Helper.GetUnitOfWorkByCurrentUser();
+            var dashboard = uow.Dashboards.Get(f => f.Id == dashboardId).FirstOrDefault();
+            var panel = dashboard.Panels.FirstOrDefault(f => f.Id == panelId);
+            var addAfterIfOccurConflict = panel.PanelOrder > newOrder;
+            panel.PanelOrder = newOrder;
+            dashboard.ReorderPanels(addAfterIfOccurConflict);
+            uow.Dashboards.Update(dashboard);
+            return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -178,16 +209,7 @@ namespace SpentBook.Web.Controllers
                 from panelInterface in panelsExistsInInterface.Where(f => f.Id == panelDB.Id).DefaultIfEmpty()
                 where panelInterface == null
                 orderby panelDB.PanelOrder, panelDB.Title ascending
-                select panelDB
-            ).ToList();
-
-            // exists in interface but not exists in DB
-            var deleteds = (
-                from panelInterface in panelsExistsInInterface
-                from panelDB in panelsExistsInDB.Where(f => f.Id == panelInterface.Id).DefaultIfEmpty()
-                where panelDB == null
-                orderby panelInterface.PanelOrder, panelInterface.Title ascending
-                select panelInterface
+                select new { panelDB.Id, panelDB.LastUpdateDate, panelDB.PanelOrder }
             ).ToList();
 
             // exists in both, but the update date in DB is more than interface
@@ -196,7 +218,16 @@ namespace SpentBook.Web.Controllers
                 join panelInterface in panelsExistsInInterface on panelDB.Id equals panelInterface.Id
                 where panelDB.LastUpdateDate > panelInterface.LastUpdateDate
                 orderby panelDB.PanelOrder, panelDB.Title ascending
-                select panelDB
+                select new { panelDB.Id, panelDB.LastUpdateDate, panelDB.PanelOrder }
+            ).ToList();
+
+            // exists in interface but not exists in DB
+            var deleteds = (
+                from panelInterface in panelsExistsInInterface
+                from panelDB in panelsExistsInDB.Where(f => f.Id == panelInterface.Id).DefaultIfEmpty()
+                where panelDB == null
+                orderby panelInterface.PanelOrder, panelInterface.Title ascending
+                select panelInterface.Id
             ).ToList();
 
             var changes = new

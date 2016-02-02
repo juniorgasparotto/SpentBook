@@ -1,67 +1,65 @@
 $(document).ready(function ($) {
-    // use date parser for all JSON.parse() requests
-    // make sure to call before any JSON conversions
-    //    JSON.useDateParser();
-
-
     Dashboard.UpdateAllPanels();
     Dashboard.EmptyContext.hide();
+    Dashboard.EnableSortable();
 
-    Dashboard.IntervalRef = setInterval(
-        function () {
-            Dashboard.UpdateAllPanels();
-        }
-        , 10000
-    );
+    //Dashboard.IntervalRef = setInterval(
+    //    function () {
+    //        Dashboard.UpdateAllPanels();
+    //    }
+    //    , 10000
+    //);
 
-    Dashboard.Context.sortable({
-        // Only make the .panel-heading child elements support dragging.
-        // Omit this to make then entire <li>...</li> draggable.
-        handle: '.panel-heading',
-        update: function () {
-
-        }
-    });
+    
 });
 
 (function() {
     window.Dashboard = window.Dashboard || {};
 
     Dashboard = Dashboard.prototype = {
+        EnableSortable: function() {
+            Dashboard.Context.sortable({
+                handle: '.panel-heading',
+                update: function (event, ui) {
+                    var id = ui.item.attr("id");
+                    var index = ui.item.index();
+
+                    $.ajax({
+                        type: "GET",
+                        url: '/Panel/ChangePanelOrder',
+                        data: { dashboardId: Dashboard.Id, panelId: id, newOrder: index },
+                        success: function (json) {
+
+                        },
+                        error: function (error) {
+                            ErrorResponse(error);
+                        }
+                    });
+                }
+            });
+        },
         SetPanelActionsUI: function (panelHtmlObject) {
-            //var panelList = Dashboard.Context;
-
-            //panelList.sortable({
-            //    // Only make the .panel-heading child elements support dragging.
-            //    // Omit this to make then entire <li>...</li> draggable.
-            //    handle: '.panel-heading',
-            //    update: function () {
-            //        panelList.find('.panel', panelList).each(function (index, elem) {
-            //            var $listItem = $(elem)
-            //            var newIndex = $listItem.index();
-
-            //            alert(newIndex)
-
-            //            // Persist the new indices.
-            //        });
-            //    }
-            //});
+            panelHtmlObject.find("button.btn-edit").click(function (e) {
+                OpenUrl($(this).find("a").attr("href"));
+            });
 
             panelHtmlObject.find("button.btn-delete a").click(function (e) {
                 e.preventDefault();
             });
 
             panelHtmlObject.find("button.btn-delete").click(function (e) {
-                $.ajax({
-                    type: "GET",
-                    url: $(this).find("a").attr("href"),
-                    success: function (html) {
-                        Dashboard.UpdateAllPanels();
-                    },
-                    error: function (error) {
-                        ErrorResponse(error);
-                    }
-                });
+                if (confirm("Deseja realmente excluir este painel?")) {
+                    $.ajax({
+                        type: "GET",
+                        url: $(this).find("a").attr("href"),
+                        success: function (html) {
+                            Dashboard.UpdateAllPanels();
+                        },
+                        error: function (error) {
+                            ErrorResponse(error);
+                        }
+                    });
+                }
             });
         },
         UpdateAllPanels: function () {
@@ -72,39 +70,54 @@ $(document).ready(function ($) {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (changes) {
-                    if (changes.News) {
-                        if (changes.News.length > 0)
-                            Dashboard.ShowEmptyMessage(false);
-                        else if (!Dashboard.Panels || (!Dashboard.Panels.length && !changes.News.length))
-                            Dashboard.ShowEmptyMessage(true);
-
-                        for (var panelIndex in changes.News) {
-                            var panel = changes.News[panelIndex];
-                            Dashboard.AddPanelUI(panel);
-                        }
-                    }
-
-                    if (changes.Updateds) {
-                        for (var panelIndex in changes.Updateds) {
-                            var panel = changes.Updateds[panelIndex];
-                            Dashboard.UpdatePanelUI(panel);
-                        }
-                    }
-
                     if (changes.Deleteds) {
                         for (var panelIndex in changes.Deleteds) {
-                            var panel = changes.Deleteds[panelIndex];
-                            Dashboard.DeletePanelUI(panel);
+                            var panelId = changes.Deleteds[panelIndex];
+                            Dashboard.DeletePanelUI(panelId);
                         }
                     }
 
+                    var hasPanel = changes.News.length || (Dashboard.Panels && Dashboard.Panels.length);
+
+                    if (!hasPanel) {
+                        Dashboard.ShowEmptyMessage(true);
+                    }
+                    else {
+                        Dashboard.ShowEmptyMessage(false);
+
+                        var panelsChangeds = Enumerable
+                            .From(changes.News)
+                            .Union(changes.Updateds)
+                            .OrderBy(function (item) { return item.PanelOrder })
+                            .ToArray();
+
+                        var itemTemplate = '<li class="panel panel-info" id="{0}">{1}</li>';
+
+                        for (var iPanel in panelsChangeds) {
+                            var panel = panelsChangeds[iPanel];
+                            var panelHtmlObjectWrapper = $(itemTemplate.format(panel.Id, "Aguarde"));
+
+                            // remove if already exists to update
+                            Dashboard.Context.find("#" + panel.Id).remove();
+
+                            // get element before (used -2 because in interface, the start position is "1" and in DOM is "0")
+                            var before = Dashboard.Context.children()[panel.PanelOrder - 2];
+
+                            if (before)
+                                $(before).after(panelHtmlObjectWrapper);
+                            else
+                                Dashboard.Context.prepend(panelHtmlObjectWrapper);
+
+                            Dashboard.UpdatePanelUI(panel, panelHtmlObjectWrapper);
+                        }
+                    }
                 },
                 error: function (error) {
                     ErrorResponse(error);
                 }
             });
         },
-        AddPanelUI: function (panel) {
+        UpdatePanelUI: function (panel, panelHtmlObjectWrapper) {
             $.ajax({
                 type: "GET",
                 url: '/Panel/Details',
@@ -113,46 +126,29 @@ $(document).ready(function ($) {
                 success: function (html) {
                     if (!Dashboard.Panels)
                         Dashboard.Panels = new Array();
-                    Dashboard.Panels.push(panel);
 
-                    var panelHtmlObject = $(html);
-
-                    Dashboard.Context.append(panelHtmlObject);
-                    Dashboard.SetPanelActionsUI(panelHtmlObject);
-                },
-                error: function (error) {
-                    ErrorResponse(error);
-                }
-            });
-        },
-        UpdatePanelUI: function (panel) {
-            $.ajax({
-                type: "GET",
-                url: '/Panel/Details',
-                data: { dashboardId: Dashboard.Id, panelId: panel.Id },
-                dataType: "html",
-                success: function (html) {
                     var index = Dashboard.Panels.map(function (e) { return e.Id; }).indexOf(panel.Id);
 
                     if (index !== -1)
                         Dashboard.Panels[index] = panel;
+                    else
+                        Dashboard.Panels.push(panel);
 
-                    var panelHtmlObject = Dashboard.Context.find("." + panel.Id);
-                    panelHtmlObject.replaceWith(html);
-                    Dashboard.SetPanelActionsUI(panelHtmlObject);
+                    panelHtmlObjectWrapper.html(html);
+                    Dashboard.SetPanelActionsUI(panelHtmlObjectWrapper);
                 },
                 error: function (error) {
                     ErrorResponse(error);
                 }
             });
         },
-        DeletePanelUI: function (panel) {
-            var index = Dashboard.Panels.map(function (e) { return e.Id; }).indexOf(panel.Id);
+        DeletePanelUI: function (id) {
+            var index = Dashboard.Panels.map(function (e) { return e.Id; }).indexOf(id);
 
             if (index !== -1)
                 Dashboard.Panels.splice(index, 1);
 
-            Dashboard.Context.find("." + panel.Id).remove();
+            Dashboard.Context.find("#" + id).remove();
             if (Dashboard.Panels.length == 0)
                 Dashboard.ShowEmptyMessage(true);
         },
@@ -184,4 +180,17 @@ function ErrorResponse(error) {
         // Type: Inexpected Exception
         alert(error.statusText)
     }
+}
+
+String.prototype.format = function () {
+    var formatted = this;
+    for (var arg in arguments) {
+        formatted = formatted.replace("{" + arg + "}", arguments[arg]);
+    }
+    return formatted;
+};
+
+function OpenUrl(url) {
+    var win = window.open(url, '_self');
+    win.focus();
 }

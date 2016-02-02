@@ -26,6 +26,7 @@ namespace SpentBook.Web.Models
 
         [Display(Name = "Ordem do painel")]
         [Required]
+        [Range(1, int.MaxValue)]
         public int PanelOrder { get; set; }
 
         #endregion

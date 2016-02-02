@@ -57,5 +57,11 @@ namespace SpentBook.Data.FileSystem
                 serializer.Serialize(jw, fdb);
             }
         }
+
+        public static void Refresh(string fileDb)
+        {
+            if (_staticFilesDataBases.ContainsKey(fileDb))
+                _staticFilesDataBases.Remove(fileDb);
+        }
     }
 }

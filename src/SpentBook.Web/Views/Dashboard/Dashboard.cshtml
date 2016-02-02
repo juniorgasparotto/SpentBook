@@ -8,6 +8,7 @@
     <h2>@ViewBag.Title</h2>
     @*<a href="#modal-new-panel" class="btn btn2 no-action">+ Painel</a>*@
     @Html.ActionLink("+ Painel", "Create", "Panel", new { dashboardId = Model.Dashboard.Id }, new { @class = "btn btn2 no-action" })
+    <a href="javascript: Dashboard.UpdateAllPanels();" class="btn btn2 no-action">Atualizar</a>
 </div>
 
 <div id="modal-new-panel" class="modalDialog">
