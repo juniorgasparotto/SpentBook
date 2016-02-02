@@ -177,7 +177,7 @@ namespace SpentBook.Web.Controllers
             var uow = Helper.GetUnitOfWorkByCurrentUser();
             var dashboard = uow.Dashboards.Get(f => f.Id == dashboardId).FirstOrDefault();
             var panel = dashboard.Panels.FirstOrDefault(f => f.Id == panelId);
-            var addAfterIfOccurConflict = panel.PanelOrder > newOrder;
+            var addAfterIfOccurConflict = newOrder > panel.PanelOrder;
             panel.PanelOrder = newOrder;
             dashboard.ReorderPanels(addAfterIfOccurConflict);
             uow.Dashboards.Update(dashboard);
