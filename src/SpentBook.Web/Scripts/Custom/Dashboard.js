@@ -22,12 +22,14 @@ $(document).ready(function ($) {
                 handle: '.panel-heading',
                 update: function (event, ui) {
                     var id = ui.item.attr("id");
-                    var index = ui.item.index();
+
+                    // for final user, the position start with "1" and not "0"
+                    var index = ui.item.index() + 1;
 
                     $.ajax({
                         type: "GET",
                         url: '/Panel/ChangePanelOrder',
-                        data: { dashboardId: Dashboard.Id, panelId: id, newOrder: index },
+                        data: { dashboardId: Dashboard.Id, panelId: id, newOrder: index},
                         success: function (json) {
 
                         },
