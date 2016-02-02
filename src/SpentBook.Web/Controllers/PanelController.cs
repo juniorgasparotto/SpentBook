@@ -74,8 +74,8 @@ namespace SpentBook.Web.Controllers
 
                 dashboard.Panels.Add(panel);
 
-                // reorder panels, set the new panel in first if has conflict
-                dashboard.ReorderPanels(false);
+                // reorder panels
+                dashboard.ReorderPanel(panel, panel.PanelOrder);
 
                 // save dashboard
                 uow.Dashboards.Update(dashboard);
@@ -132,8 +132,10 @@ namespace SpentBook.Web.Controllers
                 dashboard.Panels.Insert(panelPosition, panelUpdate);
 
                 // reorder panels
-                var addAfterIfOccurConflict = panelUpdate.PanelOrder > panelOld.PanelOrder;
-                dashboard.ReorderPanels(addAfterIfOccurConflict);
+                dashboard.ReorderPanel(panelUpdate, panelUpdate.PanelOrder);
+
+                //var addAfterIfOccurConflict = panelUpdate.PanelOrder > panelOld.PanelOrder;
+                //dashboard.ReorderPanels(addAfterIfOccurConflict);
 
                 // save dashboard
                 uow.Dashboards.Update(dashboard);
@@ -160,7 +162,7 @@ namespace SpentBook.Web.Controllers
             dashboard.Panels.RemoveAll(f => f.Id == panelId);
 
             // reorder panels
-            dashboard.ReorderPanels();
+            dashboard.ReorderPanel();
 
             // save dashboard
             uow.Dashboards.Update(dashboard);
@@ -177,9 +179,7 @@ namespace SpentBook.Web.Controllers
             var uow = Helper.GetUnitOfWorkByCurrentUser();
             var dashboard = uow.Dashboards.Get(f => f.Id == dashboardId).FirstOrDefault();
             var panel = dashboard.Panels.FirstOrDefault(f => f.Id == panelId);
-            var addAfterIfOccurConflict = newOrder > panel.PanelOrder;
-            panel.PanelOrder = newOrder;
-            dashboard.ReorderPanels(addAfterIfOccurConflict);
+            dashboard.ReorderPanel(panel, newOrder);
             uow.Dashboards.Update(dashboard);
             return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
         }

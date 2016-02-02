@@ -20,7 +20,7 @@ $(document).ready(function ($) {
         EnableSortable: function() {
             Dashboard.Context.sortable({
                 handle: '.panel-heading',
-                update: function (event, ui) {
+                stop: function (event, ui) {
                     var id = ui.item.attr("id");
 
                     // for final user, the position start with "1" and not "0"
@@ -29,14 +29,18 @@ $(document).ready(function ($) {
                     $.ajax({
                         type: "GET",
                         url: '/Panel/ChangePanelOrder',
-                        data: { dashboardId: Dashboard.Id, panelId: id, newOrder: index},
+                        data: { dashboardId: Dashboard.Id, panelId: id, newOrder: index },
                         success: function (json) {
-
+                            
                         },
                         error: function (error) {
                             ErrorResponse(error);
+                            Dashboard.Context.sortable('cancel');
                         }
                     });
+                },
+                update: function (event, ui) {
+                    
                 }
             });
         },
