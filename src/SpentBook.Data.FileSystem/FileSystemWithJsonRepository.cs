@@ -45,6 +45,12 @@ namespace SpentBook.Data.FileSystem
             return query.ToList();
         }
 
+        public IQueryable<TEntity> AsQueryable()
+        {
+            var query = _set.AsQueryable();
+            return query;
+        }
+
         public TEntity GetById(Guid id)
         {
             return this.Get(f => f.Id == id).FirstOrDefault();
@@ -78,7 +84,7 @@ namespace SpentBook.Data.FileSystem
             {
                 var entityFound = this.GetById(entityToUpdate.Id);
                 var pos = this._set.IndexOf(entityFound);
-                this.Delete(entityFound);
+                this._set.Remove(entityFound);
                 this._set.Insert(pos, entityToUpdate);
                 FileDataBase.Persists(this._fileDb, this._fileDataBase);
             }

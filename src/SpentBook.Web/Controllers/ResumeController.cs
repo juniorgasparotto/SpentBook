@@ -52,8 +52,15 @@ namespace SpentBook.Web.Controllers
                         System.IO.File.Delete(fileFullName);
 
                     file.SaveAs(fileFullName);
+
+                    var spents = this.GetSpents(fileFullName);
+                    var uow = Helper.GetUnitOfWorkByCurrentUser();
+
+                    foreach (var spent in spents)
+                        uow.Transactions.Insert(spent);
                 }
             }
+
 
             return new EmptyResult();
         }

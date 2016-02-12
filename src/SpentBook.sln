@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpentBook.Domain", "SpentBo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpentBook.Data.FileSystem", "SpentBook.Data.FileSystem\SpentBook.Data.FileSystem.csproj", "{5A1FFABF-780D-430F-BBF6-5D3B8D56864E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNet.Highcharts", "DotNet.Highcharts\DotNet.Highcharts.csproj", "{6FE2EA1E-85E3-4969-BE6C-C08C9BA9029A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{5A1FFABF-780D-430F-BBF6-5D3B8D56864E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A1FFABF-780D-430F-BBF6-5D3B8D56864E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A1FFABF-780D-430F-BBF6-5D3B8D56864E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FE2EA1E-85E3-4969-BE6C-C08C9BA9029A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FE2EA1E-85E3-4969-BE6C-C08C9BA9029A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FE2EA1E-85E3-4969-BE6C-C08C9BA9029A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FE2EA1E-85E3-4969-BE6C-C08C9BA9029A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

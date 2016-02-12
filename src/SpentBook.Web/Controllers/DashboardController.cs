@@ -1,4 +1,5 @@
 ﻿using CsvHelper;
+using DotNet.Highcharts.Options;
 using SpentBook.Data.FileSystem;
 using SpentBook.Domain;
 using SpentBook.Web.Filters;
@@ -20,7 +21,7 @@ namespace SpentBook.Web.Controllers
     public class DashboardController : Controller
     {
         public ActionResult Index()
-        {
+        {   
             return View();
         }
 

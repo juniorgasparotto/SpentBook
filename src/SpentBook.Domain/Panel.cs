@@ -11,6 +11,7 @@ namespace SpentBook.Domain
         public Guid Id { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime LastUpdateDate { get; set; }
+        public string ViewName { get; set; }
         
         public string Title { get; set; }
         public PanelType PanelType { get; set; }
@@ -23,5 +24,9 @@ namespace SpentBook.Domain
         public TransactionOrderClassification OrderByClassification { get; set; }
 
         public TransactionFilter Filter { get; set; }
+        public PanelWidth PanelWidth { get; set; }
+
+        //public PanelPosition PanelPosition { get; set; }
+
     }
 }

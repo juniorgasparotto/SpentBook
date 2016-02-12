@@ -27,7 +27,7 @@ namespace SpentBook.Web.Controllers
             var dashboard = uow.Dashboards.Get(f => f.Id == dashboardId).First();
             var panel = dashboard.Panels.First(f => f.Id == panelId);
             var model = this.ConvertObjectDomainToModel(panel, dashboard);
-            
+
             if (Request.IsAjaxRequest())
                 return PartialView(model);
 
@@ -184,62 +184,6 @@ namespace SpentBook.Web.Controllers
             return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
-        public JsonResult PanelsUpdated(Guid dashboardId, Guid? panelId)
-        {
-            var uow = Helper.GetUnitOfWorkByCurrentUser();
-            var model = new DashboardModel();
-            model.Dashboard = uow.Dashboards.Get(f => f.Id == dashboardId).FirstOrDefault();
-            return Json(model.Dashboard.Panels, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public JsonResult PanelsUpdated(Guid dashboardId, List<Panel> panelsExistsInInterface)
-        {
-            var uow = Helper.GetUnitOfWorkByCurrentUser();
-            var dashboard = uow.Dashboards.Get(f => f.Id == dashboardId).FirstOrDefault();
-            var panelsExistsInDB = dashboard.Panels;
-
-            panelsExistsInDB = panelsExistsInDB ?? new List<Panel>();
-            panelsExistsInInterface = panelsExistsInInterface ?? new List<Panel>();
-
-            // exists in DB but not exists in interface
-            var news = (
-                from panelDB in panelsExistsInDB
-                from panelInterface in panelsExistsInInterface.Where(f => f.Id == panelDB.Id).DefaultIfEmpty()
-                where panelInterface == null
-                orderby panelDB.PanelOrder, panelDB.Title ascending
-                select new { panelDB.Id, panelDB.LastUpdateDate, panelDB.PanelOrder }
-            ).ToList();
-
-            // exists in both, but the update date in DB is more than interface
-            var updateds = (
-                from panelDB in panelsExistsInDB
-                join panelInterface in panelsExistsInInterface on panelDB.Id equals panelInterface.Id
-                where panelDB.LastUpdateDate > panelInterface.LastUpdateDate
-                orderby panelDB.PanelOrder, panelDB.Title ascending
-                select new { panelDB.Id, panelDB.LastUpdateDate, panelDB.PanelOrder }
-            ).ToList();
-
-            // exists in interface but not exists in DB
-            var deleteds = (
-                from panelInterface in panelsExistsInInterface
-                from panelDB in panelsExistsInDB.Where(f => f.Id == panelInterface.Id).DefaultIfEmpty()
-                where panelDB == null
-                orderby panelInterface.PanelOrder, panelInterface.Title ascending
-                select panelInterface.Id
-            ).ToList();
-
-            var changes = new
-            {
-                News = news,
-                Deleteds = deleteds,
-                Updateds = updateds
-            };
-
-            return Json(changes, JsonRequestBehavior.AllowGet);
-        }  
-
         private PanelModel ConvertObjectDomainToModel(Panel panel, Dashboard dashboard)
         {
             var model = new PanelModel();
@@ -250,6 +194,7 @@ namespace SpentBook.Web.Controllers
                 model.Id = panel.Id;
                 model.Dashboard = dashboard;
                 model.PanelOrder = panel.PanelOrder;
+                model.PanelWidth = panel.PanelWidth;
                 model.PanelType = panel.PanelType;
                 model.GroupBy = panel.GroupBy;
                 model.GroupBy2 = panel.GroupBy2;
@@ -260,6 +205,7 @@ namespace SpentBook.Web.Controllers
                 model.FilterDateEnd = panel.Filter.DateEnd;
                 model.FilterValueStart = panel.Filter.ValueStart;
                 model.FilterValueEnd = panel.Filter.ValueEnd;
+                model.ViewName = panel.ViewName;
 
                 if (panel.Filter.Categories != null)
                     model.FilterCategories = string.Join(",", panel.Filter.Categories);
@@ -280,6 +226,7 @@ namespace SpentBook.Web.Controllers
             panel.Title = model.Title;
             panel.PanelType = model.PanelType;
             panel.PanelOrder = model.PanelOrder;
+            panel.PanelWidth = model.PanelWidth;
             panel.GroupBy = model.GroupBy;
             panel.GroupBy2 = model.GroupBy2;
             panel.OrderBy = model.OrderBy;
@@ -290,23 +237,24 @@ namespace SpentBook.Web.Controllers
             panel.Filter.DateEnd = model.FilterDateEnd;
             panel.Filter.ValueStart = model.FilterValueStart;
             panel.Filter.ValueEnd = model.FilterValueEnd;
-            
+            panel.ViewName = model.ViewName;
+
             if (!string.IsNullOrWhiteSpace(model.FilterCategories))
             { 
                 panel.Filter.Categories = new List<string>();
-                panel.Filter.Categories = model.FilterCategories.Split(',').ToList();
+                panel.Filter.Categories = model.FilterCategories.Split(',').Select(s => s.Trim()).ToList();
             }
 
             if (!string.IsNullOrWhiteSpace(model.FilterSubCategories))
             {
                 panel.Filter.SubCategories = new List<string>();
-                panel.Filter.SubCategories = model.FilterSubCategories.Split(',').ToList();
+                panel.Filter.SubCategories = model.FilterSubCategories.Split(',').Select(s => s.Trim()).ToList();
             }
 
             if (!string.IsNullOrWhiteSpace(model.FilterTransactionNames))
             {
                 panel.Filter.Names = new List<string>();
-                panel.Filter.Names = model.FilterTransactionNames.Split(',').ToList(); string.Join(",", panel.Filter.Names);
+                panel.Filter.Names = model.FilterTransactionNames.Split(',').Select(s => s.Trim()).ToList(); 
             }
 
             return panel;

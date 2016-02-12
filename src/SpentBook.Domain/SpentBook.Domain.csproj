@@ -40,10 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PanelPosition.cs" />
     <Compile Include="Repository\IEntity.cs" />
     <Compile Include="Repository\IUnitOfWork.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Services.cs" />
+    <Compile Include="PanelWidth.cs" />
     <Compile Include="TransactionOrderClassification.cs" />
     <Compile Include="TransactionOrder.cs" />
     <Compile Include="TransactionGroupBy.cs" />

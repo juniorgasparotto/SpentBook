@@ -1,16 +1,17 @@
 {
   "Dashboards": [
     {
-      "Id": "77e325b3-d62e-4a66-a981-1c701aec58b9",
+      "Id": "ab5ff597-be2b-4757-83f8-ab205dba0454",
       "CreateDate": "0001-01-01T00:00:00",
       "LastUpdateDate": "0001-01-01T00:00:00",
-      "Name": "dividas2",
+      "Name": "teste",
       "Panels": [
         {
-          "Id": "ae8267fe-330a-480e-98f9-9179fd4a92c3",
-          "CreateDate": "2016-02-01T21:07:01.5824484-02:00",
-          "LastUpdateDate": "2016-02-01T22:42:09.6899335-02:00",
-          "Title": "1",
+          "Id": "f40b1a87-c941-4eab-92b0-fafefa3367c5",
+          "CreateDate": "2016-02-02T21:36:54.4080847-02:00",
+          "LastUpdateDate": "2016-02-02T21:36:54.4080847-02:00",
+          "ViewName": null,
+          "Title": "teste1",
           "PanelType": 0,
           "PanelOrder": 1,
           "GroupBy": 0,
@@ -26,41 +27,21 @@
             "SubCategories": null,
             "Names": null,
             "TransactionType": 0
-          }
+          },
+          "PanelWidth": 0
         },
         {
-          "Id": "eb92ecf5-ea6a-4f07-a886-0be03aeb80e7",
-          "CreateDate": "2016-02-01T21:09:54.6343464-02:00",
-          "LastUpdateDate": "2016-02-02T00:15:37.3366725-02:00",
-          "Title": "2",
-          "PanelType": 0,
-          "PanelOrder": 5,
-          "GroupBy": 0,
-          "GroupBy2": 0,
-          "OrderBy": 0,
-          "OrderByClassification": 0,
-          "Filter": {
-            "DateStart": null,
-            "DateEnd": null,
-            "ValueStart": null,
-            "ValueEnd": null,
-            "Categories": null,
-            "SubCategories": null,
-            "Names": null,
-            "TransactionType": 0
-          }
-        },
-        {
-          "Id": "7945c35a-1a3c-4dc3-a89e-0f6edceeb612",
-          "CreateDate": "2016-02-01T22:37:38.2104057-02:00",
-          "LastUpdateDate": "2016-02-01T23:04:52.6238888-02:00",
-          "Title": "3",
+          "Id": "c4c40721-0bb4-4757-9152-9a6e5c3b7c25",
+          "CreateDate": "2016-02-11T22:37:26.0078002-02:00",
+          "LastUpdateDate": "2016-02-11T22:46:02.5233432-02:00",
+          "ViewName": "~/Views/CustomPanels/Chart1.cshtml",
+          "Title": "Teste",
           "PanelType": 0,
           "PanelOrder": 2,
-          "GroupBy": 0,
-          "GroupBy2": 0,
-          "OrderBy": 0,
-          "OrderByClassification": 0,
+          "GroupBy": 2,
+          "GroupBy2": 4,
+          "OrderBy": 1,
+          "OrderByClassification": 1,
           "Filter": {
             "DateStart": null,
             "DateEnd": null,
@@ -70,98 +51,11 @@
             "SubCategories": null,
             "Names": null,
             "TransactionType": 0
-          }
-        },
-        {
-          "Id": "bea1825e-2a92-4540-b33b-e35d057e2db0",
-          "CreateDate": "2016-02-01T23:25:05.1802431-02:00",
-          "LastUpdateDate": "2016-02-02T00:21:23.7874884-02:00",
-          "Title": "11",
-          "PanelType": 0,
-          "PanelOrder": 6,
-          "GroupBy": 0,
-          "GroupBy2": 0,
-          "OrderBy": 0,
-          "OrderByClassification": 0,
-          "Filter": {
-            "DateStart": null,
-            "DateEnd": null,
-            "ValueStart": null,
-            "ValueEnd": null,
-            "Categories": null,
-            "SubCategories": null,
-            "Names": null,
-            "TransactionType": 0
-          }
-        },
-        {
-          "Id": "3fb81576-8bd6-4d3d-b2fa-bc728cbe715c",
-          "CreateDate": "2016-02-02T00:17:23.5617483-02:00",
-          "LastUpdateDate": "2016-02-02T01:19:47.4358856-02:00",
-          "Title": "last",
-          "PanelType": 0,
-          "PanelOrder": 4,
-          "GroupBy": 0,
-          "GroupBy2": 0,
-          "OrderBy": 0,
-          "OrderByClassification": 0,
-          "Filter": {
-            "DateStart": null,
-            "DateEnd": null,
-            "ValueStart": null,
-            "ValueEnd": null,
-            "Categories": null,
-            "SubCategories": null,
-            "Names": null,
-            "TransactionType": 0
-          }
-        },
-        {
-          "Id": "e379ba03-904e-4f24-9fcf-404d3d7fd850",
-          "CreateDate": "2016-02-02T00:21:04.391379-02:00",
-          "LastUpdateDate": "2016-02-02T01:19:38.4623724-02:00",
-          "Title": "teste 1",
-          "PanelType": 0,
-          "PanelOrder": 3,
-          "GroupBy": 0,
-          "GroupBy2": 0,
-          "OrderBy": 0,
-          "OrderByClassification": 0,
-          "Filter": {
-            "DateStart": null,
-            "DateEnd": null,
-            "ValueStart": null,
-            "ValueEnd": null,
-            "Categories": null,
-            "SubCategories": null,
-            "Names": null,
-            "TransactionType": 0
-          }
+          },
+          "PanelWidth": 2
         }
       ],
-      "FriendlyUrl": "dividas2"
-    },
-    {
-      "Id": "92384107-afec-4d7c-8eb5-bee8dad12390",
-      "CreateDate": "0001-01-01T00:00:00",
-      "LastUpdateDate": "0001-01-01T00:00:00",
-      "Name": "dividas",
-      "Panels": [
-        {
-          "Id": "00000000-0000-0000-0000-000000000000",
-          "CreateDate": "0001-01-01T00:00:00",
-          "LastUpdateDate": "0001-01-01T00:00:00",
-          "Title": "aa",
-          "PanelType": 0,
-          "PanelOrder": 0,
-          "GroupBy": 0,
-          "GroupBy2": 0,
-          "OrderBy": 0,
-          "OrderByClassification": 0,
-          "Filter": null
-        }
-      ],
-      "FriendlyUrl": "dividas"
+      "FriendlyUrl": "teste"
     }
   ],
   "Transactions": [
@@ -230,6 +124,424 @@
       "SubCategory": "sub",
       "Value": 10.0,
       "ValueAsPositive": 10.0
+    },
+    {
+      "Id": "58f525ff-8725-4d32-b5ef-5e78bc703085",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Global Foods ",
+      "Date": "2015-12-01T00:00:00",
+      "Category": "alimentação",
+      "SubCategory": "café",
+      "Value": -2.8,
+      "ValueAsPositive": 2.8
+    },
+    {
+      "Id": "3d956aa1-c241-44f3-920e-476c39186698",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Iof Util Limite ",
+      "Date": "2015-12-02T00:00:00",
+      "Category": "bradesco",
+      "SubCategory": "imposto?",
+      "Value": -8.73,
+      "ValueAsPositive": 8.73
+    },
+    {
+      "Id": "2d5d8500-6364-448b-aa3b-7cee5da92619",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Picanharia Jasmim",
+      "Date": "2015-12-03T00:00:00",
+      "Category": "alimentação",
+      "SubCategory": "almoço",
+      "Value": -13.76,
+      "ValueAsPositive": 13.76
+    },
+    {
+      "Id": "d742b469-9658-4fc8-808e-99b1e38b39d2",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Global Foods",
+      "Date": "2015-12-04T00:00:00",
+      "Category": "alimentação",
+      "SubCategory": "café",
+      "Value": -5.2,
+      "ValueAsPositive": 5.2
+    },
+    {
+      "Id": "da00d33f-5c66-4149-acc2-412b42fb4f95",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Deb.automaticoCgmp-sem Parar/sp*-02158779",
+      "Date": "2015-12-07T00:00:00",
+      "Category": "carro",
+      "SubCategory": "sem parar",
+      "Value": -321.92,
+      "ValueAsPositive": 321.92
+    },
+    {
+      "Id": "48d5f9d8-a908-4e88-9863-f3b91f635767",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "ki Pao",
+      "Date": "2015-12-07T00:00:00",
+      "Category": "alimentação",
+      "SubCategory": "café",
+      "Value": -6.23,
+      "ValueAsPositive": 6.23
+    },
+    {
+      "Id": "1cabb540-275f-4287-ac9f-2be221c8b22c",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Supermercados Sao Vice",
+      "Date": "2015-12-07T00:00:00",
+      "Category": "alimentação",
+      "SubCategory": "mercado",
+      "Value": -50.0,
+      "ValueAsPositive": 50.0
+    },
+    {
+      "Id": "cad4f6b7-a534-4dc1-9861-cda8dced0057",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Fabio Alves e me",
+      "Date": "2015-12-07T00:00:00",
+      "Category": "diversão",
+      "SubCategory": "jair",
+      "Value": -15.7,
+      "ValueAsPositive": 15.7
+    },
+    {
+      "Id": "02e7720b-6bfe-478f-9aa4-01ec3af9faa0",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "jj Rodrigues Santos la",
+      "Date": "2015-12-07T00:00:00",
+      "Category": "diversão",
+      "SubCategory": "jair",
+      "Value": -15.0,
+      "ValueAsPositive": 15.0
+    },
+    {
+      "Id": "c4475e72-3c56-4883-90ef-f49e0ec14455",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Auto Posto da Ilha",
+      "Date": "2015-12-07T00:00:00",
+      "Category": "carro",
+      "SubCategory": "gasolina",
+      "Value": -126.05,
+      "ValueAsPositive": 126.05
+    },
+    {
+      "Id": "b78aee52-16ad-4287-a296-7591c9a8d709",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "tv p/assinaturaClaro Tv-0210798311398",
+      "Date": "2015-12-08T00:00:00",
+      "Category": "diversão",
+      "SubCategory": "claro",
+      "Value": -83.08,
+      "ValueAsPositive": 83.08
+    },
+    {
+      "Id": "70a872f2-e0b2-4a87-9877-9deadf506da9",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Dia Brasil lj 373",
+      "Date": "2015-12-08T00:00:00",
+      "Category": "alimentação",
+      "SubCategory": "mercado",
+      "Value": -4.52,
+      "ValueAsPositive": 4.52
+    },
+    {
+      "Id": "2efcdd87-2e5b-4108-9a53-35f79b388e9a",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Gilmar Barbosa",
+      "Date": "2015-12-08T00:00:00",
+      "Category": "?",
+      "SubCategory": "?",
+      "Value": -10.0,
+      "ValueAsPositive": 10.0
+    },
+    {
+      "Id": "3d44afc6-9432-45db-b8f6-4ac2a197429d",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Gilmar Barbosa",
+      "Date": "2015-12-08T00:00:00",
+      "Category": "?",
+      "SubCategory": "?",
+      "Value": -8.0,
+      "ValueAsPositive": 8.0
+    },
+    {
+      "Id": "bf9a0264-8a25-4e87-a282-b916ba604fc7",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Enc Lim CreditoEncargo - 11,92%",
+      "Date": "2015-12-10T00:00:00",
+      "Category": "bradesco",
+      "SubCategory": "estouro de limite",
+      "Value": -106.23,
+      "ValueAsPositive": 106.23
+    },
+    {
+      "Id": "9de72dee-97f7-460a-90c4-e49c1093ac92",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Vision Vistoria Tecnic",
+      "Date": "2015-12-11T00:00:00",
+      "Category": "carro",
+      "SubCategory": "vistoria",
+      "Value": -100.0,
+      "ValueAsPositive": 100.0
+    },
+    {
+      "Id": "194f0eed-1894-4066-a164-f9c637dc801d",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Cart.protegido",
+      "Date": "2015-12-14T00:00:00",
+      "Category": "bradesco",
+      "SubCategory": "seguro cartão de crédito",
+      "Value": -4.2,
+      "ValueAsPositive": 4.2
+    },
+    {
+      "Id": "c173c285-c072-4cd7-86e4-4f058ab564dd",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Extra Loja 2060 Campin",
+      "Date": "2015-12-14T00:00:00",
+      "Category": "alimentação",
+      "SubCategory": "mercado",
+      "Value": -102.68,
+      "ValueAsPositive": 102.68
+    },
+    {
+      "Id": "46eaf4de-7888-400e-8a5f-393b0a1ceba8",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Confeitaria Romana",
+      "Date": "2015-12-14T00:00:00",
+      "Category": "alimentação",
+      "SubCategory": "café",
+      "Value": -5.39,
+      "ValueAsPositive": 5.39
+    },
+    {
+      "Id": "c281ff41-9e30-4a77-ba9e-596e1b6227c5",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Auto Posto da Ilha",
+      "Date": "2015-12-14T00:00:00",
+      "Category": "carro",
+      "SubCategory": "gasolina",
+      "Value": -137.01,
+      "ValueAsPositive": 137.01
+    },
+    {
+      "Id": "fbea1d79-89b7-4902-aed5-0fb26ca8a568",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Fabio Alves e me",
+      "Date": "2015-12-14T00:00:00",
+      "Category": "diversão",
+      "SubCategory": "jair",
+      "Value": -29.2,
+      "ValueAsPositive": 29.2
+    },
+    {
+      "Id": "9caa1d9a-68a9-4d0b-99aa-27fd79f3e86d",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Pagto CobrancaBradesco Auto re S/a",
+      "Date": "2015-12-15T00:00:00",
+      "Category": "carro",
+      "SubCategory": "seguro",
+      "Value": -293.05,
+      "ValueAsPositive": 293.05
+    },
+    {
+      "Id": "9e85c9da-fd54-4544-a4b7-dbd40d33dc88",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Tarifa BancariaCesta Exclusive",
+      "Date": "2015-12-15T00:00:00",
+      "Category": "bradesco",
+      "SubCategory": "???",
+      "Value": -42.0,
+      "ValueAsPositive": 42.0
+    },
+    {
+      "Id": "d6dc010c-0910-445e-9695-0f7e85699e3d",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Gilmar Barbosa",
+      "Date": "2015-12-15T00:00:00",
+      "Category": "diversão",
+      "SubCategory": "jair",
+      "Value": -11.5,
+      "ValueAsPositive": 11.5
+    },
+    {
+      "Id": "80c92961-5ce6-4c96-ad65-48b9ab42a973",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Mingui e Aliche",
+      "Date": "2015-12-18T00:00:00",
+      "Category": "diversão",
+      "SubCategory": "?",
+      "Value": -33.4,
+      "ValueAsPositive": 33.4
+    },
+    {
+      "Id": "ba195145-bb09-4e45-b766-ee2ae7dbaf1b",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Pontal Loja 19",
+      "Date": "2015-12-21T00:00:00",
+      "Category": "roupa",
+      "SubCategory": "sapato",
+      "Value": -189.69,
+      "ValueAsPositive": 189.69
+    },
+    {
+      "Id": "031f7ff3-b86b-45ff-9395-76910948a832",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Fabio Alves e me",
+      "Date": "2015-12-21T00:00:00",
+      "Category": "diversão",
+      "SubCategory": "jair",
+      "Value": -16.0,
+      "ValueAsPositive": 16.0
+    },
+    {
+      "Id": "d91d108f-9b1b-4001-96d3-96049fa39e7a",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "jj Rodrigues Santos la",
+      "Date": "2015-12-21T00:00:00",
+      "Category": "diversão",
+      "SubCategory": "jair",
+      "Value": -35.75,
+      "ValueAsPositive": 35.75
+    },
+    {
+      "Id": "96d32547-5ace-4b64-922d-9635155595f3",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "jj Rodrigues Santos la",
+      "Date": "2015-12-21T00:00:00",
+      "Category": "diversão",
+      "SubCategory": "jair",
+      "Value": -17.5,
+      "ValueAsPositive": 17.5
+    },
+    {
+      "Id": "fd4af7f7-f623-48d3-a71e-2d983a4840a8",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Auto Posto Madri",
+      "Date": "2015-12-21T00:00:00",
+      "Category": "carro",
+      "SubCategory": "gasolina",
+      "Value": -170.0,
+      "ValueAsPositive": 170.0
+    },
+    {
+      "Id": "97db4948-c5b5-4e99-bb5c-ffe8e2c2572e",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Global Foods",
+      "Date": "2015-12-22T00:00:00",
+      "Category": "alimentação",
+      "SubCategory": "café",
+      "Value": -2.8,
+      "ValueAsPositive": 2.8
+    },
+    {
+      "Id": "8e43ac10-7d36-4cec-bf47-7d05f2a5fabe",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Casa da Moqueca",
+      "Date": "2015-12-22T00:00:00",
+      "Category": "alimentação",
+      "SubCategory": "almoço",
+      "Value": -39.6,
+      "ValueAsPositive": 39.6
+    },
+    {
+      "Id": "d4ad6b8b-5e74-41e9-9d80-46467c4c0fb9",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Bar Dos Lagos Rest e p",
+      "Date": "2015-12-23T00:00:00",
+      "Category": "alimentação",
+      "SubCategory": "jantar",
+      "Value": -33.93,
+      "ValueAsPositive": 33.93
+    },
+    {
+      "Id": "34c32677-3924-4d56-ae2b-bb27731e1c12",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Global Foods",
+      "Date": "2015-12-23T00:00:00",
+      "Category": "alimentação",
+      "SubCategory": "café",
+      "Value": -5.6,
+      "ValueAsPositive": 5.6
+    },
+    {
+      "Id": "f8c69b1a-eb19-435f-bb3e-930c4b42bcbf",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Saque cc AutoatAg06468maq052939seq0734028121200",
+      "Date": "2015-12-28T00:00:00",
+      "Category": "saque",
+      "SubCategory": "",
+      "Value": -200.0,
+      "ValueAsPositive": 200.0
+    },
+    {
+      "Id": "319a5f5e-40eb-4b4c-a954-8e3ff039c0ec",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "jj Rodrigues Santos la",
+      "Date": "2015-12-28T00:00:00",
+      "Category": "diversão",
+      "SubCategory": "jair",
+      "Value": -33.0,
+      "ValueAsPositive": 33.0
+    },
+    {
+      "Id": "68c21861-6c7b-48f7-a081-a4bcecc75405",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Supermercados Lavape",
+      "Date": "2015-12-28T00:00:00",
+      "Category": "alimentação",
+      "SubCategory": "mercado",
+      "Value": -127.06,
+      "ValueAsPositive": 127.06
+    },
+    {
+      "Id": "86d25fcc-a598-4583-af05-f0956ac022c8",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Bodega do Petisco",
+      "Date": "2015-12-28T00:00:00",
+      "Category": "alimentação",
+      "SubCategory": "almoço",
+      "Value": -30.0,
+      "ValueAsPositive": 30.0
     }
   ]
 }

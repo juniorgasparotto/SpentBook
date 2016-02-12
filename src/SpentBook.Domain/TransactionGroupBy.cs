@@ -4,6 +4,8 @@ namespace SpentBook.Domain
 {
     public enum TransactionGroupBy
     {
+        [Display(Name = "Nenhum")]
+        None,
         [Display(Name = "Dia")]
         DateDay,
         //DateDay,

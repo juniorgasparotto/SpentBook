@@ -24,10 +24,19 @@ namespace SpentBook.Web.Models
         [Required]
         public PanelType PanelType { get; set; }
 
+        [Display(Name = "Tamanho do painel")]
+        [Required]
+        public PanelWidth PanelWidth { get; set; }
+
         [Display(Name = "Ordem do painel")]
         [Required]
         [Range(1, int.MaxValue)]
         public int PanelOrder { get; set; }
+
+        [Required]
+        [StringLength(300)]
+        [Display(Name = "Caminho do template")]
+        public string ViewName { get; set; }
 
         #endregion
 

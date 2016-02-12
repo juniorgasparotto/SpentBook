@@ -1,0 +1,64 @@
+﻿@model SpentBook.Web.Models.PanelModel
+@using DotNet.Highcharts.Helpers;
+@using DotNet.Highcharts.Options;
+@using DotNet.Highcharts.Attributes;
+@using DotNet.Highcharts.Enums;
+@using SpentBook.Web.Controllers;
+@using System.Drawing;
+
+@{
+    var chartVarName = "chart_" + this.Model.Id.ToString().Replace("-", "");
+    var chart = new DotNet.Highcharts.Highcharts(chartVarName)
+            .InitChart(new DotNet.Highcharts.Options.Chart { Type = ChartTypes.Column })
+            .SetTitle(new Title { Text = Model.Title })
+            .SetXAxis(new XAxis { Type = AxisTypes.Category })
+            .SetExporting(new Exporting() { Enabled = true })
+            .SetPlotOptions(new PlotOptions
+            {
+                Column = new PlotOptionsColumn
+                {
+                    DataLabels = new PlotOptionsColumnDataLabels
+                    {
+                        Enabled = true,
+                        //Color = ColorTranslator.FromHtml("#000"),
+                        Align = HorizontalAligns.Left,
+                        Formatter = "function() { return this.key; }",
+                        Style = "width: '20px'"
+                    },
+                }
+            });
+}
+
+@(chart)
+
+<script language="javascript">
+    $(document).ready(function () {
+        $.ajax({
+            url: '/HighchartsData/Transactions',
+            type: "GET",
+            dataType: "json",
+            data: { dashboardId: '@Model.Dashboard.Id', panelId: '@Model.Id' },
+            success: function (json) {
+                console.log(json);
+                var chart = eval('@chartVarName');
+
+                for (var index in json.Series) {
+                    //chart.addSeries({
+                    //    data: [7, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
+                    //    name: 'Tokyo'
+                    //});
+                    console.log(json.Series[index]);
+                    chart.addSeries(json.Series[index]);
+                }
+
+                for (var index in json.Drilldown) {
+                    chart.addSeriesAsDrilldown(json.Drilldown[index]);
+                }
+
+            },
+            cache: false
+        });
+    });
+</script>
+
+

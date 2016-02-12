@@ -16,9 +16,9 @@
 </div>
 
 <div id="content-panels">
-    <div>
-        <ul id="draggablePanelList" class="list-unstyled"></ul>
-    </div>
+    <ul id="sortable">
+
+    </ul>
 
     <div id="empty-panels" class="collapse">
         <span>Você ainda não criou nenhum painel!</span>
@@ -39,14 +39,21 @@
     @Styles.Render("~/Content/css/jqueryui")
 }
 
+@section ScriptsTop {
+    @Scripts.Render("~/bundles/dotnethighcharts")
+}
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/Custom/Dashboard")
     @*@Scripts.Render("~/bundles/Custom/ChartHelper")*@
 
-    <script>
-        Dashboard.Id = '@Model.Dashboard.Id.ToString()';
-        Dashboard.Context = $("#content-panels #draggablePanelList");
+    <script language="javascript">
+        Dashboard.Id = '@Model.Dashboard.Id.ToString()';        
+        Dashboard.Context = $("#content-panels #sortable");
         Dashboard.EmptyContext = $("#content-panels #empty-panels");
+        Dashboard.UrlChangePanelOrder = '/Panel/ChangePanelOrder';
+        Dashboard.UrlPanelView = '/Panel/Details';
+        Dashboard.UrlPanelsUpdated = '/HighchartsData/Panels';
     </script>
 }

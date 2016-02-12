@@ -17,6 +17,7 @@ namespace SpentBook.Domain
             string includeProperties = ""
         );
 
+        IQueryable<TEntity> AsQueryable();
 
         TEntity GetById(Guid id);
         void Insert(TEntity entity);

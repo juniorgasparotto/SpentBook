@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - SpentBook</title>
     @Styles.Render("~/Content/css")
-    @RenderSection("styles", required: false)
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
 
+    @RenderSection("styles", required: false)
+    @RenderSection("scriptsTop", required: false)
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -38,7 +40,6 @@
         </footer>*@
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/linq")
     @Scripts.Render("~/bundles/jquery-linq")
     @Scripts.Render("~/bundles/bootstrap")

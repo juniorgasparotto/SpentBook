@@ -1,22 +1,27 @@
 ﻿@model SpentBook.Web.Models.PanelModel
 
-@*<li class="panel panel-info @Model.Id">*@
-    <div class="panel-heading">
-        @Model.Title
+<div class="panel-heading clearfix">
+    <h4 class="panel-title pull-left">@Model.Title</h4>
 
-        <div class="panel-actions">
-            <button type="button" class="btn btn-default btn-xs btn-edit">
-                <span class="glyphicon glyphicon-edit" aria-hidden="true">
-                    @Html.ActionLink("edit", "Edit", "Panel", new { dashboardId = @Model.Dashboard.Id, panelId = Model.Id }, new { @class = "collapse" })
-                </span>
-            </button>
+    <div class="btn-group pull-right panel-actions">
+        <button type="button" class="btn btn-default btn-xs btn-edit">
+            <span class="glyphicon glyphicon-edit" aria-hidden="true">
+                @Html.ActionLink("edit", "Edit", "Panel", new { dashboardId = @Model.Dashboard.Id, panelId = Model.Id }, new { @class = "collapse" })
+            </span>
+        </button>
 
-            <button type="button" class="btn btn-default btn-xs btn-delete">
-                <span class="glyphicon glyphicon-trash" aria-hidden="true">
-                    @Html.ActionLink("delete", "Delete", "Panel", new { dashboardId = @Model.Dashboard.Id, panelId = Model.Id }, new { @class = "collapse" })
-                </span>
-            </button>
-        </div>
+        <button type="button" class="btn btn-default btn-xs btn-delete">
+            <span class="glyphicon glyphicon-trash" aria-hidden="true">
+                @Html.ActionLink("delete", "Delete", "Panel", new { dashboardId = @Model.Dashboard.Id, panelId = Model.Id }, new { @class = "collapse" })
+            </span>
+        </button>
     </div>
-    <div class="panel-body">Content ...Content ...Content ...Content ...Content ...Content ...</div>
-@*</li>*@
+</div>
+
+<div class="panel-body">
+    @Html.Partial(Model.ViewName, Model)
+</div>
+
+@section ScriptsTop {
+    @Scripts.Render("~/bundles/dotnethighcharts")
+}

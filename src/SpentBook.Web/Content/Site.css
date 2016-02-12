@@ -249,14 +249,34 @@ div#legend span
 }
 
 /*dashboard page*/
-.panel.panel-info {
+
+#sortable .panel.panel-info {
     float: left;
-    margin-right: 10px;
+    margin-right: 0.5%;
+    min-height: 200px;
 }
 
+#sortable { list-style-type: none; margin: 0; padding: 0; }
+#sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left;  }
+
 /* show the move cursor as the user moves the mouse over the panel header.*/
-#draggablePanelList .panel-heading {
+#sortable .panel-heading {
     cursor: move;
+}
+
+#sortable .panel.small 
+{
+    width: 24.5%;
+}
+
+#sortable .panel.medium 
+{
+    width: 49%;
+}
+
+#sortable .panel.large 
+{
+    width: 100%;
 }
 
 /*bootstrap extensions*/
@@ -279,4 +299,10 @@ div#legend span
     border-radius: 10px;
     margin-bottom: 20px;
     padding: 15px 6px 6px;
+}
+
+.ui-sortable {
+    background: black none repeat scroll 0 0;
+    /*height: 2000px;*/
+    width: 100%;
 }
