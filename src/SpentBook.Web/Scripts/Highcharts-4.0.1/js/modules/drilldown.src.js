@@ -88,6 +88,7 @@
 		this.applyDrilldown();
 	};
 	Chart.prototype.addSingleSeriesAsDrilldown = function (point, ddOptions) {
+	    console.log(point)
 		var oldSeries = point.series,
 			xAxis = oldSeries.xAxis,
 			yAxis = oldSeries.yAxis,

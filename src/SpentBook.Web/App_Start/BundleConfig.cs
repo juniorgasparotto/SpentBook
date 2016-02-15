@@ -16,7 +16,16 @@ namespace SpentBook.Web
             bundles.Add(new ScriptBundle("~/bundles/linq").Include("~/Scripts/linq.js"));
             bundles.Add(new ScriptBundle("~/bundles/jquery-linq").Include("~/Scripts/jquery.linq.js"));
             bundles.Add(new ScriptBundle("~/bundles/jquery-gridster").Include("~/Scripts/jquery.gridster.js"));
-            bundles.Add(new ScriptBundle("~/bundles/dotnethighcharts").Include("~/Scripts/Highcharts-4.0.1/js/highcharts.src.js", "~/Scripts/Highcharts-4.0.1/js/modules/*.src.js"));
+            
+            bundles.Add(new ScriptBundle("~/bundles/dotnethighcharts")
+                .Include("~/Scripts/highcharts/4.2.3/highcharts.src.js")
+                .Include("~/Scripts/Highcharts/4.2.3/modules/data.src.js")
+                .Include("~/Scripts/Highcharts/4.2.3/modules/exporting.src.js")
+                //.Include("~/Scripts/Highcharts/plugins/value-in-legend.js")
+                //.Include("~/Scripts/Highcharts/4.2.3/modules/funnel.src.js")
+                //.Include("~/Scripts/Highcharts/4.2.3/modules/solid-gauge.src.js")
+                //.Include("~/Scripts/Highcharts/4.2.3/modules/drilldown.src.js")
+            );
 
             // scripts base
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

@@ -10,51 +10,178 @@
     var chartVarName = "chart_" + this.Model.Id.ToString().Replace("-", "");
     var chart = new DotNet.Highcharts.Highcharts(chartVarName)
             .InitChart(new DotNet.Highcharts.Options.Chart { Type = ChartTypes.Column })
+            .SetOptions(new GlobalOptions()
+            {
+                Lang = new DotNet.Highcharts.Helpers.Lang
+                {
+                    ThousandsSep = ".",
+                    DecimalPoint = ","
+                }
+            })
             .SetTitle(new Title { Text = Model.Title })
-            .SetXAxis(new XAxis { Type = AxisTypes.Category })
+            //.SetXAxis(new XAxis { Type = AxisTypes.Category })
+            .SetYAxis(new YAxis
+            {
+                Min = null,
+                Title = new YAxisTitle { Text = "R$" }
+            })
+            .SetLegend(new Legend
+            {
+                Align = HorizontalAligns.Center,
+                Y = 3,
+                //LabelFormat = "<span style='color:{color}'>{name}</span>: {point.y}<br/>",
+                //LabelFormatter = "function () { console.log(this.name, this.data); return this.name + this.data + ' a <br/> ( R$ ' + Highcharts.numberFormat(Enumerable.From(this.data).Sum('$.options.y')) + ')'; }",
+                LabelFormatter = "function() { var count = 0; for (var i = 0 ; i < this.yData.length; i++) { count += this.yData[i]; } return this.name + ' (' + Highcharts.numberFormat(count) + ')'; }",
+            })
+            .SetTooltip(new Tooltip
+            {
+                //Formatter = @"function() { return 'R$' + this.y; }",
+                HeaderFormat = "",
+                PointFormat = "<span style='color:{series.color}'>\u25CF</span> {series.name}: <b>R$ {point.y:.2f}</b><br/>"
+            })
             .SetExporting(new Exporting() { Enabled = true })
             .SetPlotOptions(new PlotOptions
             {
                 Column = new PlotOptionsColumn
                 {
+                    PointPadding = 0.2,
+                    BorderWidth = 0,
                     DataLabels = new PlotOptionsColumnDataLabels
                     {
                         Enabled = true,
-                        //Color = ColorTranslator.FromHtml("#000"),
+                        Color = ColorTranslator.FromHtml("#000"),
+                        Rotation = 270,
                         Align = HorizontalAligns.Left,
-                        Formatter = "function() { return this.key; }",
-                        Style = "width: '20px'"
+                        VerticalAlign = VerticalAligns.Middle,
+                        //Formatter = @"function() { return this.series.name + ' = <span style=""transform: rotate(180deg);""> ' + this.y + '  </span>'; }",
+                        Format = "{point.y:.2f}",
+                        //Style = @"width: '20px'"
                     },
                 }
             });
 }
 
 @(chart)
-
 <script language="javascript">
     $(document).ready(function () {
+        var addCategoriesTotal = function(chart) {
+            var series = chart.series,
+                axis = chart.xAxis[0],
+                categories = axis.categories,
+                cl = categories.length, 
+                sl = series.length, 
+                i=0, j, sum;
+    
+    
+            for (; i<cl; i++) {
+                for(j=0, sum=0; j<sl; j++)
+                    sum += series[j].data[i].y
+
+                categories[i] += '<br/> <b>Total:</b> (' + Highcharts.numberFormat(sum) + ')';
+            }
+
+
+            //chart.setSize(chart.chartWidth, chart.chartHeight);
+        };
+
         $.ajax({
             url: '/HighchartsData/Transactions',
             type: "GET",
             dataType: "json",
             data: { dashboardId: '@Model.Dashboard.Id', panelId: '@Model.Id' },
             success: function (json) {
-                console.log(json);
                 var chart = eval('@chartVarName');
 
+                //chart.addSeries({
+                //        name: 'alimentação',
+                //        data: [{
+                //            name: '2016/01',
+                //            y: 24.2
+                //        }, {
+                //            name: 'Feb',
+                //            y: 24.6
+                //        }, {
+                //            name: 'Mar',
+                //            y: 26.7
+                //        }, {
+                //            name: 'Apr',
+                //            y: 28.6
+                //        }, {
+                //            name: 'May',
+                //            y: 30.1
+                //        }, {
+                //            name: 'Jun',
+                //            y: 29.0
+                //        }, {
+                //            name: 'Jul',
+                //            y: 27.5
+                //        }, {
+                //            name: 'Aug',
+                //            y: 27.2
+                //        }, {
+                //            name: 'Sep',
+                //            y: 27.4
+                //        }, {
+                //            name: 'Oct',
+                //            y: 28.2
+                //        }, {
+                //            name: 'Nov',
+                //            y: 27.4
+                //        }, {
+                //            name: 'Dec',
+                //            y: 25.6
+                //        }]
+                //});
+
+                //chart.addSeries({
+                //    name: 'carro',
+                //    data: [{
+                //        name: '2016/01',
+                //        y: 0
+                //    }, {
+                //        name: 'Feb',
+                //        y: 2.6
+                //    }, {
+                //        name: 'Mar',
+                //        y: 5.7
+                //    }, {
+                //        name: 'Apr',
+                //        y: 48.6
+                //    }, {
+                //        name: 'May',
+                //        y: 70.1
+                //    }, {
+                //        name: 'Jun',
+                //        y: 89.0
+                //    }, {
+                //        name: 'Jul',
+                //        y: 27.5
+                //    }, {
+                //        name: 'Aug',
+                //        y: 27.2
+                //    }, {
+                //        name: 'Sep',
+                //        y: 27.4
+                //    }, {
+                //        name: 'Oct',
+                //        y: 28.2
+                //    }, {
+                //        name: 'Nov',
+                //        y: 27.4
+                //    }, {
+                //        name: 'Dec',
+                //        y: 25.6
+                //    }]
+                //});
+                //return;
+                chart.xAxis[0].setCategories(json.Categories);
+
                 for (var index in json.Series) {
-                    //chart.addSeries({
-                    //    data: [7, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
-                    //    name: 'Tokyo'
-                    //});
-                    console.log(json.Series[index]);
                     chart.addSeries(json.Series[index]);
                 }
-
-                for (var index in json.Drilldown) {
-                    chart.addSeriesAsDrilldown(json.Drilldown[index]);
-                }
-
+                console.log(chart.options.drilldown);
+                chart.options.drilldown.series = json.Drilldown.series;
+                addCategoriesTotal(chart);
             },
             cache: false
         });

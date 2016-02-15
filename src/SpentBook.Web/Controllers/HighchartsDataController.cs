@@ -73,9 +73,13 @@ namespace SpentBook.Web.Controllers
         public JsonResult Transactions(Guid dashboardId, Guid panelId)
         {
             var transactionGroup = this.GetTransactionsGroupByPanel(dashboardId, panelId);
+            var categories = new List<string>();
             var seriesDatas = new List<SeriesData>();
             var series = new List<Series>();
             var seriesDrilldown = new List<Series>();
+
+            var dicSeries = new Dictionary<string, Series>();
+            var dicSeriesData = new Dictionary<string, object[]>();
 
             if (transactionGroup.SubGroups == null)
             {
@@ -89,7 +93,7 @@ namespace SpentBook.Web.Controllers
             }
             else
             {
-                foreach (var group in transactionGroup.SubGroups)
+                foreach (var group in transactionGroup.SubGroups.Values)
                 {
                     seriesDatas.Add(new SeriesData()
                     {
@@ -103,37 +107,113 @@ namespace SpentBook.Web.Controllers
                     {
                         var seriesDatasDrill = new List<object[]>();
 
-                        foreach (var group2 in group.SubGroups)
+                        foreach (var group2 in group.SubGroups.Values)
                         {
-                            seriesDatasDrill.Add(new object[] { group.Name, group2.Total });
+                            seriesDatasDrill.Add(new object[] { group2.Name, group2.Total });
                         }
 
                         var serieDrilldown = new Series
                         {
-                            Name = "Drill",
+                            //Id = group.Name,
+                            Name = group.Name,
                             Data = new DotNet.Highcharts.Helpers.Data(seriesDatasDrill.ToArray()),
-                            PlotOptionsBar = new PlotOptionsBar { ColorByPoint = true }
+                            //PlotOptionsBar = new PlotOptionsBar { ColorByPoint = false }
                         };
                         seriesDrilldown.Add(serieDrilldown);
                     }
                 }
+
+                // modelo 2
+                //foreach (var parent in transactionGroup.SubGroups)
+                //{
+                //    categories.Add(parent.Name);
+
+                //    if (parent.SubGroups != null)
+                //    {
+                //        foreach (var child in parent.SubGroups)
+                //        {
+                //            var seriesDatas2 = new SeriesData[transactionGroup.SubGroups.Count];
+                //            series.Add(new Series
+                //            {
+                //                Id = child.Name,
+                //                Name = child.Name,
+                //                Data = new DotNet.Highcharts.Helpers.Data(seriesDatas2),
+                //                PlotOptionsBar = new PlotOptionsBar { ColorByPoint = true }
+                //            });
+
+                //            var parentIndex = transactionGroup.SubGroups.IndexOf(transactionGroup.SubGroups.FirstOrDefault(f => f.Name == child.ParentName));
+                //            seriesDatas2[parentIndex] = new SeriesData()
+                //            {
+                //                Y = (Number)child.Total,
+                //                Name = parent.Name,
+                //                //Id = group.Name,
+                //            };
+                //        }
+                //    }
+                //}
+                
+                var index = 0;
+                foreach (var parent in transactionGroup.SubGroups.Values)
+                {
+                    categories.Add(parent.Name);
+
+                    if (parent.SubGroups != null)
+                    {
+                        foreach (var child in parent.SubGroups.Values)
+                        {
+                            var serie = default(Series);
+                            var serieData = default(object[]);
+
+                            if (dicSeries.ContainsKey(child.Name))
+                            {
+                                serie = dicSeries[child.Name];
+                                serieData = dicSeriesData[child.Name];
+                            }
+                            else
+                            {
+                                serieData = new object[transactionGroup.SubGroups.Count];
+                                serie = new Series
+                                {
+                                    Id = child.Name,
+                                    Name = child.Name,
+                                    Data = new DotNet.Highcharts.Helpers.Data(serieData),
+                                    //PlotOptionsBar = new PlotOptionsBar { ColorByPoint = true }
+                                };
+
+                                dicSeriesData.Add(child.Name, serieData);
+                                dicSeries.Add(child.Name, serie);
+                            }
+                            serieData[index] = child.Total;
+                        }
+
+                        index++;
+                    }
+                }
             }
 
-            
-            var serie = new Series
-                {
-                    Name = "Browser brands",
-                    Data = new DotNet.Highcharts.Helpers.Data(seriesDatas.ToArray()),
-                    PlotOptionsBar = new PlotOptionsBar { ColorByPoint = true }
-                };
-            series.Add(serie);
+            //var serie1 = new Series
+            //    {
+            //        Name = "Browser brands",
+            //        Data = new DotNet.Highcharts.Helpers.Data(seriesDatas.ToArray()),
+            //        PlotOptionsBar = new PlotOptionsBar { ColorByPoint = true }
+            //    };
+
+            //var serie2 = new Series
+            //{
+            //    Name = "Browser brands 2",
+            //    Data = new DotNet.Highcharts.Helpers.Data(seriesDatas.ToArray()),
+            //    PlotOptionsBar = new PlotOptionsBar { ColorByPoint = true }
+            //};
+
+            //series.Add(serie1);
+            //series.Add(serie2);
             
             var drilldown = new DotNet.Highcharts.Options.Drilldown
             {
                 Series = seriesDrilldown.ToArray()
             };
 
-            return Json(new { Series = series, Drilldown = drilldown }, JsonRequestBehavior.AllowGet);
+            return Json(new { Categories = categories, Series = dicSeries.Values, Drilldown = drilldown }, JsonRequestBehavior.AllowGet);
         }
 
         public TransactionGroup GetTransactionsGroupByPanel(Guid dashboardId, Guid panelId)
@@ -218,20 +298,17 @@ namespace SpentBook.Web.Controllers
             {   
                 if (panel.GroupBy2 == TransactionGroupBy.None)
                 {
-                    var dicReturn = new Dictionary<object, List<Transaction>>();
                     var group1 = query.GroupBy(this.GetGroupExpression(panel.GroupBy));
 
                     foreach (var groupItem in group1)
                     { 
-                        dicReturn.Add(groupItem.Key, groupItem.ToList());
-
                         var transactionGroup2 = new TransactionGroup();
                         transactionGroup2.Name = groupItem.Key.ToString();
                         transactionGroup2.Transactions = groupItem.ToList();
                         transactionGroup2.Total = transactionGroup2.Transactions.Sum(f => f.Value);
                         transactionGroup2.Count = transactionGroup2.Transactions.Count;
 
-                        transactionGroup1.SubGroups.Add(transactionGroup2);
+                        transactionGroup1.SubGroups.Add(transactionGroup2.Name, transactionGroup2);
                     }
                     return transactionGroup1;
                 }
@@ -249,19 +326,20 @@ namespace SpentBook.Web.Controllers
                         transactionGroup2.Total = transactionGroup2.Transactions.Sum(f => f.Value);
                         transactionGroup2.Count = transactionGroup2.Transactions.Count;
 
-                        transactionGroup1.SubGroups.Add(transactionGroup2);
+                        transactionGroup1.SubGroups.Add(transactionGroup2.Name, transactionGroup2);
 
                         var group2 = groupItem.AsQueryable().GroupBy(this.GetGroupExpression(panel.GroupBy2));
                         foreach (var groupItem2 in group2)
                         {
                             dicGroup2.Add(groupItem2.Key, groupItem2.ToList());
                             var transactionGroup3 = new TransactionGroup();
+                            transactionGroup3.ParentName = transactionGroup2.Name;
                             transactionGroup3.Name = groupItem2.Key.ToString();
                             transactionGroup3.Transactions = groupItem2.ToList();
                             transactionGroup3.Total = transactionGroup3.Transactions.Sum(f => f.Value);
                             transactionGroup3.Count = transactionGroup3.Transactions.Count;
 
-                            transactionGroup2.SubGroups.Add(transactionGroup3);
+                            transactionGroup2.SubGroups.Add(transactionGroup3.Name, transactionGroup3);
                         }
                         dicReturn.Add(groupItem.Key, dicGroup2);
                     }
@@ -296,15 +374,17 @@ namespace SpentBook.Web.Controllers
             public string Name { get; set; }
             public decimal Total { get; set; }
             public List<Transaction> Transactions { get; set; }
-            public List<TransactionGroup> SubGroups { get; set; }
+            public Dictionary<object, TransactionGroup> SubGroups { get; set; }
 
             public TransactionGroup()
             {
                 this.Transactions = new List<Transaction>();
-                this.SubGroups = new List<TransactionGroup>();
+                this.SubGroups = new Dictionary<object, TransactionGroup>();
             }
 
             public int Count { get; set; }
+
+            public string ParentName { get; set; }
         }
     }
 }
