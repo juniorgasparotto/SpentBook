@@ -155,11 +155,11 @@ namespace SpentBook.Web.Controllers
 
         public string[] GetAllFiles()
         {
-            var userName = User.Identity.Name;
+            var userName = "admin"; // User.Identity.Name;
             if (string.IsNullOrWhiteSpace(userName))
                 throw new Exception("Not logged");
 
-            var uploadPath = Server.MapPath("/Data");
+            var uploadPath = System.Web.HttpContext.Current.Server.MapPath("/Data");
             var userPath = uploadPath + "/" + userName + "/Spents";
             if (Directory.Exists(userPath))
                 return Directory.GetFiles(userPath, "*.csv", SearchOption.AllDirectories);

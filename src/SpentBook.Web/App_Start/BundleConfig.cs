@@ -21,6 +21,7 @@ namespace SpentBook.Web
                 .Include("~/Scripts/highcharts/4.2.3/highcharts.src.js")
                 .Include("~/Scripts/Highcharts/4.2.3/modules/data.src.js")
                 .Include("~/Scripts/Highcharts/4.2.3/modules/exporting.src.js")
+                .Include("~/Scripts/Highcharts/4.2.3/modules/drilldown.src.js")
                 //.Include("~/Scripts/Highcharts/plugins/value-in-legend.js")
                 //.Include("~/Scripts/Highcharts/4.2.3/modules/funnel.src.js")
                 //.Include("~/Scripts/Highcharts/4.2.3/modules/solid-gauge.src.js")

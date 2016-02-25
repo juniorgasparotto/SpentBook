@@ -19,6 +19,7 @@ namespace SpentBook.Domain
 
         public TransactionGroupBy GroupBy { get; set; }
         public TransactionGroupBy GroupBy2 { get; set; }
+        public TransactionGroupBy GroupBy3 { get; set; }
 
         public TransactionOrder OrderBy { get; set; }
         public TransactionOrderClassification OrderByClassification { get; set; }
@@ -27,6 +28,7 @@ namespace SpentBook.Domain
         public PanelWidth PanelWidth { get; set; }
 
         //public PanelPosition PanelPosition { get; set; }
+
 
     }
 }

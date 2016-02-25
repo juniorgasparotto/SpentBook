@@ -48,6 +48,9 @@ namespace SpentBook.Web.Models
         [Display(Name = "Agrupamento secundário por")]
         public TransactionGroupBy GroupBy2 { get; set; }
 
+        [Display(Name = "Agrupamento terciario por")]
+        public TransactionGroupBy GroupBy3 { get; set; }
+
         #endregion
 
         #region Ordenação

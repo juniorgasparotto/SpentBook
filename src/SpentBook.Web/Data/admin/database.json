@@ -13,9 +13,10 @@
           "ViewName": null,
           "Title": "teste1",
           "PanelType": 0,
-          "PanelOrder": 1,
+          "PanelOrder": 2,
           "GroupBy": 0,
           "GroupBy2": 0,
+          "GroupBy3": 0,
           "OrderBy": 0,
           "OrderByClassification": 0,
           "Filter": {
@@ -33,13 +34,14 @@
         {
           "Id": "c4c40721-0bb4-4757-9152-9a6e5c3b7c25",
           "CreateDate": "2016-02-11T22:37:26.0078002-02:00",
-          "LastUpdateDate": "2016-02-11T22:46:02.5233432-02:00",
+          "LastUpdateDate": "2016-02-20T22:56:45.4490139-02:00",
           "ViewName": "~/Views/CustomPanels/Chart1.cshtml",
           "Title": "Teste",
           "PanelType": 0,
-          "PanelOrder": 2,
+          "PanelOrder": 1,
           "GroupBy": 2,
           "GroupBy2": 4,
+          "GroupBy3": 5,
           "OrderBy": 1,
           "OrderByClassification": 1,
           "Filter": {
@@ -50,9 +52,9 @@
             "Categories": null,
             "SubCategories": null,
             "Names": null,
-            "TransactionType": 0
+            "TransactionType": 2
           },
-          "PanelWidth": 2
+          "PanelWidth": 0
         }
       ],
       "FriendlyUrl": "teste"
@@ -79,7 +81,7 @@
       "Category": "cat",
       "SubCategory": "sub",
       "Value": 49.0,
-      "ValueAsPositive": 10.0
+      "ValueAsPositive": 49.0
     },
     {
       "Id": "a278ea2a-f179-44e1-ae2c-188ec0b33c98",

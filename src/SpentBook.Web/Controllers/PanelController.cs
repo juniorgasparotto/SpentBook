@@ -198,6 +198,7 @@ namespace SpentBook.Web.Controllers
                 model.PanelType = panel.PanelType;
                 model.GroupBy = panel.GroupBy;
                 model.GroupBy2 = panel.GroupBy2;
+                model.GroupBy3 = panel.GroupBy3;
                 model.OrderBy = panel.OrderBy;
                 model.OrderByClassification = panel.OrderByClassification;
                 model.FilterTransactionType = panel.Filter.TransactionType;
@@ -229,6 +230,7 @@ namespace SpentBook.Web.Controllers
             panel.PanelWidth = model.PanelWidth;
             panel.GroupBy = model.GroupBy;
             panel.GroupBy2 = model.GroupBy2;
+            panel.GroupBy3 = model.GroupBy3;
             panel.OrderBy = model.OrderBy;
             panel.OrderByClassification = model.OrderByClassification;
             panel.Filter = new TransactionFilter();

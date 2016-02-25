@@ -6,7 +6,7 @@
 @using SpentBook.Web.Controllers;
 @using System.Drawing;
 
-@{
+@*@{
     var chartVarName = "chart_" + this.Model.Id.ToString().Replace("-", "");
     var chart = new DotNet.Highcharts.Highcharts(chartVarName)
             .InitChart(new DotNet.Highcharts.Options.Chart { Type = ChartTypes.Column })
@@ -59,133 +59,181 @@
                     },
                 }
             });
-}
+}*@
 
-@(chart)
+@*@(chart)*@
+
+<div id='chart_@(@Model.Id)_container'></div>
+
 <script language="javascript">
     $(document).ready(function () {
+        Highcharts.setOptions({ "lang": { "decimalPoint": ",", "thousandsSep": "." } });
+        var chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'chart_@(@Model.Id)_container',
+                "type": "column"
+            },
+            legend: {
+                "align": "center",
+                "labelFormatter": function () {
+                    var count = 0;
+                    for (var i = 0 ; i < this.yData.length; i++)
+                    {
+                        count += this.yData[i];
+                    }
+                    return this.name + ' (' + Highcharts.numberFormat(count) + ')';
+                },
+                "y": 3
+            },
+            plotOptions: {
+                "column":
+                    {
+                        "borderWidth": 0,
+                        "dataLabels": {
+                            "align": "left",
+                            "color": "#000000",
+                            "enabled": true,
+                            "format": "{point.y:.2f}",
+                            "rotation": 270,
+                            "verticalAlign": "middle"
+                        },
+                        "pointPadding": 0.2,
+                        //point: {
+                        //    events: {
+                        //        click: function (e) {
+                        //            var name = this.series.name;
+                        //            var category = this.category;
+
+                        //            //debugger;
+                        //            var categories = [
+                        //                "carro",
+                        //            ];
+                        //            var series = [{
+                        //                "data": [20],
+                        //                "id": "gasolina",
+                        //                "name": "gasolina"
+                        //            }];
+                        //            setChart(chart, categories, series);
+                        //        }
+                        //    }
+                        //}
+                    }
+            },
+            title: {
+                "text": "Teste"
+            },
+            tooltip: {
+                "headerFormat": "",
+                "pointFormat": "<span style='color:{series.color}'>\u25CF</span> {series.name}: <b>R$ {point.y:.2f}</b><br/>"
+            },
+            yAxis: {
+                "title": {
+                    "text": "R$"
+                }
+            },
+            xAxis: {
+                type: 'category',
+            },
+            exporting: {
+                "enabled": true
+            },
+            drilldown: {
+                drillUpButton: {
+                    relativeTo: 'spacingBox',
+                    position: {
+                        y: 0,
+                        x: 0
+                    },
+                    theme: {
+                        fill: 'white',
+                        'stroke-width': 1,
+                        stroke: 'silver',
+                        r: 0,
+                        states: {
+                            hover: {
+                                fill: '#bada55'
+                            },
+                            select: {
+                                stroke: '#039',
+                                fill: '#bada55'
+                            }
+                        }
+                    }
+
+                }
+            }
+        });
+
         var addCategoriesTotal = function(chart) {
             var series = chart.series,
                 axis = chart.xAxis[0],
                 categories = axis.categories,
                 cl = categories.length, 
                 sl = series.length, 
-                i=0, j, sum;
-    
-    
-            for (; i<cl; i++) {
+                i = 0, j, sum;
+
+            for (; i < cl; i++) {
+
                 for(j=0, sum=0; j<sl; j++)
                     sum += series[j].data[i].y
 
                 categories[i] += '<br/> <b>Total:</b> (' + Highcharts.numberFormat(sum) + ')';
             }
 
-
             //chart.setSize(chart.chartWidth, chart.chartHeight);
+            chart.redraw();
+        };
+
+        var setChart = function (chartSet, categories, series, drilldown) {
+            if (categories)
+                chartSet.xAxis[0].setCategories(categories);
+
+            while (chart.series.length > 0) {
+                chart.series[0].remove(true);
+            }
+
+            for (var index in series) {
+                chart.addSeries(series[index]);
+            }
+
+
+            if (chart.options.drilldown) {
+                chart.options.drilldown.series = drilldown;
+                //chart.options.drilldown.series = [{
+                //    id: 'b',
+                //    //name: 'teste',
+                //    data: [
+                //        ['Katten', 4],
+                //        ['Honden', 2],
+                //        ['Koeien', 1],
+                //        ['Schapen', 2],
+                //        ['Varkens', 1]
+                //    ]
+                //}, {
+                //    id: 'bradesco',
+                //    //name: 'teste2',
+                //    data: [
+                //        ['Appels', 4],
+                //        ['Sinaasappels', 2]
+                //    ]
+                //}];
+            }
+
+            //addCategoriesTotal(chart);
         };
 
         $.ajax({
-            url: '/HighchartsData/Transactions',
+            url: '/HighchartsData/Transactions3',
             type: "GET",
             dataType: "json",
             data: { dashboardId: '@Model.Dashboard.Id', panelId: '@Model.Id' },
             success: function (json) {
-                var chart = eval('@chartVarName');
-
-                //chart.addSeries({
-                //        name: 'alimentação',
-                //        data: [{
-                //            name: '2016/01',
-                //            y: 24.2
-                //        }, {
-                //            name: 'Feb',
-                //            y: 24.6
-                //        }, {
-                //            name: 'Mar',
-                //            y: 26.7
-                //        }, {
-                //            name: 'Apr',
-                //            y: 28.6
-                //        }, {
-                //            name: 'May',
-                //            y: 30.1
-                //        }, {
-                //            name: 'Jun',
-                //            y: 29.0
-                //        }, {
-                //            name: 'Jul',
-                //            y: 27.5
-                //        }, {
-                //            name: 'Aug',
-                //            y: 27.2
-                //        }, {
-                //            name: 'Sep',
-                //            y: 27.4
-                //        }, {
-                //            name: 'Oct',
-                //            y: 28.2
-                //        }, {
-                //            name: 'Nov',
-                //            y: 27.4
-                //        }, {
-                //            name: 'Dec',
-                //            y: 25.6
-                //        }]
-                //});
-
-                //chart.addSeries({
-                //    name: 'carro',
-                //    data: [{
-                //        name: '2016/01',
-                //        y: 0
-                //    }, {
-                //        name: 'Feb',
-                //        y: 2.6
-                //    }, {
-                //        name: 'Mar',
-                //        y: 5.7
-                //    }, {
-                //        name: 'Apr',
-                //        y: 48.6
-                //    }, {
-                //        name: 'May',
-                //        y: 70.1
-                //    }, {
-                //        name: 'Jun',
-                //        y: 89.0
-                //    }, {
-                //        name: 'Jul',
-                //        y: 27.5
-                //    }, {
-                //        name: 'Aug',
-                //        y: 27.2
-                //    }, {
-                //        name: 'Sep',
-                //        y: 27.4
-                //    }, {
-                //        name: 'Oct',
-                //        y: 28.2
-                //    }, {
-                //        name: 'Nov',
-                //        y: 27.4
-                //    }, {
-                //        name: 'Dec',
-                //        y: 25.6
-                //    }]
-                //});
-                //return;
-                chart.xAxis[0].setCategories(json.Categories);
-
-                for (var index in json.Series) {
-                    chart.addSeries(json.Series[index]);
-                }
-                console.log(chart.options.drilldown);
-                chart.options.drilldown.series = json.Drilldown.series;
-                addCategoriesTotal(chart);
+                setChart(chart, json.Categories, json.Series, json.Drilldown);
             },
             cache: false
         });
     });
+
 </script>
 
 
