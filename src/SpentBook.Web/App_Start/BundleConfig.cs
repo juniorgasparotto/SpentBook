@@ -45,6 +45,7 @@ namespace SpentBook.Web
             bundles.Add(new ScriptBundle("~/bundles/Custom/ChartHelper").Include("~/Scripts/Custom/ChartHelper.js"));
             bundles.Add(new ScriptBundle("~/bundles/Custom/ChartHelper").Include("~/Scripts/Custom/ChartHelper.js"));
             bundles.Add(new ScriptBundle("~/bundles/Custom/Dashboards").Include("~/Scripts/Custom/Dashboards.js"));
+            bundles.Add(new ScriptBundle("~/bundles/custom/dashboard").Include("~/Scripts/Custom/Dashboard.js"));
             bundles.Add(new ScriptBundle("~/bundles/custom/highcharts-helper").Include("~/Scripts/Custom/HighchartsHelper.js"));
 
             //styles
