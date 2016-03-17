@@ -172,7 +172,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\DBUpdateController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HighchartsDataController.cs" />
+    <Compile Include="Controllers\_deleted\HighchartsDataController - Copy.cs" />
+    <Compile Include="Controllers\JsonDataController.cs" />
     <Compile Include="Controllers\PanelController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
@@ -189,6 +190,9 @@
     <Compile Include="Models\Chart\ChartBarModel.cs" />
     <Compile Include="Models\Chart\ChartDoughnutModel.cs" />
     <Compile Include="Models\DashboardsModel.cs" />
+    <Compile Include="Models\TransactionGroupTransversal.cs" />
+    <Compile Include="Models\TransactionGroupDefinition.cs" />
+    <Compile Include="Models\TransactionGroup.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\PanelModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -231,6 +235,8 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\treegrid\jquery.treegrid.css" />
+    <Content Include="Scripts\Custom\HighchartsHelper.js" />
     <Content Include="Scripts\Highcharts-4.0.1\js\adapters\standalone-framework.js" />
     <Content Include="Scripts\Highcharts-4.0.1\js\adapters\standalone-framework.src.js" />
     <Content Include="Scripts\Highcharts-4.0.1\js\highcharts-3d.js" />
@@ -350,6 +356,10 @@
     <Content Include="Scripts\jquery.linq.min.js" />
     <Content Include="Scripts\json.date-extensions.js" />
     <Content Include="Scripts\linq.js" />
+    <Content Include="Scripts\treegrid\jquery.treegrid.bootstrap2.js" />
+    <Content Include="Scripts\treegrid\jquery.treegrid.bootstrap3.js" />
+    <Content Include="Scripts\treegrid\jquery.treegrid.js" />
+    <Content Include="Scripts\treegrid\jquery.treegrid.min.js" />
     <Content Include="Views\favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -409,7 +419,13 @@
     <Content Include="Views\Panel\Details.cshtml" />
     <Content Include="Views\Panel\CreateOrEdit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\RadioButtonListEnum.cshtml" />
-    <Content Include="Views\CustomPanels\Chart1.cshtml" />
+    <Content Include="Views\Templates\Charts\Columns.cshtml" />
+    <Content Include="Views\Templates\Charts\Lines.cshtml" />
+    <Content Include="Views\Templates\Tables\TransactionsGroupDay.cshtml" />
+    <Content Include="Views\Templates\Tables\TransactionsGroupMulti.cshtml" />
+    <Content Include="Views\Templates\Tables\TransactionsSimple.cshtml" />
+    <Content Include="Views\_deleted\Columns.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CheckboxListEnum.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -423,6 +439,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\ExpressionGraph\src\ExpressionGraph\ExpressionGraph.csproj">
+      <Project>{8de63a2d-7367-473d-8cf2-0efa652e5fbd}</Project>
+      <Name>ExpressionGraph</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DotNet.Highcharts\DotNet.Highcharts.csproj">
       <Project>{6fe2ea1e-85e3-4969-be6c-c08c9ba9029a}</Project>
       <Name>DotNet.Highcharts</Name>

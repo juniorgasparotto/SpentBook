@@ -19,9 +19,62 @@
 </div>
 
 <div class="panel-body">
-    @Html.Partial(Model.ViewName, Model)
+    @if (Model.PanelType == SpentBook.Domain.PanelType.ChartBar)
+    { 
+        <div id="chart-@Model.Id">
+            @switch (Model.Panel.GetChartType())
+            {
+                case SpentBook.Domain.Panel.PanelChartType.NonGroup:
+                case SpentBook.Domain.Panel.PanelChartType.NonGroupAndSortDate:
+                    @Html.Partial("~/Views/Templates/Charts/Lines.cshtml", Model)
+                    break;
+                case SpentBook.Domain.Panel.PanelChartType.OneGroup:
+                case SpentBook.Domain.Panel.PanelChartType.TwoGroup:
+                case SpentBook.Domain.Panel.PanelChartType.ThreeOrMoreGroup:
+                @Html.Partial("~/Views/Templates/Charts/Columns.cshtml", Model)
+                    break;
+            }
+
+            <div class="content-chart">
+
+            </div>
+        </div>
+    }
+    
+    @if (Model.PanelType == SpentBook.Domain.PanelType.Table)
+    {
+        <div id="table-@Model.Id">
+            <script language="javascript">
+                $(document).ready(function () {
+                    $.ajax({
+                        url: '/JsonData/TransactionsTable',
+                        type: "GET",
+                        dataType: "json",
+                        data: { dashboardId: '@Model.Dashboard.Id', panelId: '@Model.Id', tryCategorize: false },
+                        success: function (json) {
+                            var wrapper = $('#table-@Model.Id .content-table');
+                            wrapper.html(json.Table);
+                            wrapper.find("table").treegrid();
+                        },
+                        cache: false
+                    });
+                });
+            </script>
+
+            <div class="content-table">
+
+            </div>
+        </div>
+    }
 </div>
 
 @section ScriptsTop {
-    @Scripts.Render("~/bundles/dotnethighcharts")
+    @Scripts.Render("~/bundles/jquery-treegrid")
+    @Scripts.Render("~/bundles/highcharts")
+    @Scripts.Render("~/bundles/custom/highcharts-helper")
+
+}
+
+@section styles {
+    @Styles.Render("~/Content/css/treegrid")
 }

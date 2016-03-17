@@ -1,0 +1,24 @@
+﻿@model List<ExpressionGraph.Expression<SpentBook.Web.Models.TransactionGroup>>
+
+<table class="table tree">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Total</th>
+            <th>Quantidade</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var expression in Model)
+        {
+            foreach (var expressionItem in expression)
+            {
+                <tr class="treegrid-@expressionItem.Id @(expressionItem.Parent == null ? "" : "treegrid-parent-" + expressionItem.Parent.Id)">
+                    <td>@expressionItem.ToString()</td>
+                    <td>@expressionItem.Entity.TotalAsNormal</td>
+                    <td>@expressionItem.Entity.TransactionCount</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

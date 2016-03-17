@@ -1,0 +1,42 @@
+ROOT (4 agrupamentos)
+	2015/10
+		2015/10/01
+			alimentação
+				cafe
+			alimentação2
+				cafe
+		2015/10/02
+			bradesco
+				imposto?
+		2015/10/04
+			alimentação
+				almoço
+		2015/10/03
+			alimentação
+				almoço
+	2015/11
+		2015/11/04
+			b
+				almoço
+		2015/11/03
+			alimentação
+				almoço
+----
+
+Root  (3 agrupamentos)
+	2015/10
+		alimentacao
+			cafe
+			almoco
+		alimentação2
+			cafe
+		bradesco
+			imposto
+			cafe
+	2015/11
+		alimentacao
+			almoco
+		b
+			almoco
+--
+ ROOT + (2015/10 + (2015/10/01 + (alimentação + café) + (alimentação2 + café)) + (2015/10/02 + (bradesco + imposto?)) + (2015/10/04 + (alimentação + almoço)) + (2015/10/03 + (alimentação + almoço))) + (2015/11 + (2015/11/04 + (b + almoço)) + (2015/11/03 + (alimentação + almoço)))

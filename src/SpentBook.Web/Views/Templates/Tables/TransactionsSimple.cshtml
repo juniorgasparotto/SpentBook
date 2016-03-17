@@ -1,0 +1,25 @@
+﻿@model List<SpentBook.Domain.Transaction>
+
+<table class="table tree">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Data</th>
+            <th>Total</th>
+            <th>Categoria</th>
+            <th>Sub-Categoria</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var transaction in Model)
+        {
+            <tr>
+                <td>@transaction.Name</td>
+                <td>@transaction.Date</td>
+                <td>@transaction.Value</td>
+                <td>@transaction.Category</td>
+                <td>@transaction.SubCategory</td>
+            </tr>
+        }
+    </tbody>
+</table>

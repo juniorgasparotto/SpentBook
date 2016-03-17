@@ -1,0 +1,93 @@
+﻿@model SpentBook.Web.Models.PanelModel
+
+<script language="javascript">
+    $(document).ready(function () {
+        Highcharts.setOptions({ "lang": { "decimalPoint": ",", "thousandsSep": "." } });
+        var chart = new Highcharts.Chart({
+            chart: {
+                renderTo: $('#chart-@Model.Id .content-chart')[0],
+                type: "column"
+            },
+            legend: {
+                align: "center",
+                labelFormatter: function () {
+                    var count = 0;
+                    for (var i = 0 ; i < this.yData.length; i++)
+                    {
+                        count += this.yData[i];
+                    }
+                    return this.name + ' (' + Highcharts.numberFormat(count) + ')';
+                },
+                y: 3
+            },
+            plotOptions: {
+                column:
+                    {
+                        borderWidth: 0,
+                        dataLabels: {
+                            align: "left",
+                            color: "#000000",
+                            enabled: true,
+                            format: "{point.y:.2f}",
+                            rotation: 270,
+                            verticalAlign: "middle"
+                        },
+                        pointPadding: 0.2,
+                    }
+            },
+            title: {
+                text: null
+            },
+            tooltip: {
+                headerFormat: "",
+                pointFormat: "<span style='color:{series.color}'>\u25CF</span> {series.name} - {point.name}: <b>R$ {point.y:.2f}</b><br/>"
+            },
+            yAxis: {
+                title: {
+                    text: "R$"
+                }
+            },
+            xAxis: {
+                type: 'category',
+            },
+            exporting: {
+                enabled: true
+            },
+            drilldown: {
+                drillUpButton: {
+                    relativeTo: 'spacingBox',
+                    position: {
+                        y: 0,
+                        x: 0
+                    },
+                    theme: {
+                        fill: 'white',
+                        'stroke-width': 1,
+                        stroke: 'silver',
+                        r: 0,
+                        states: {
+                            hover: {
+                                fill: '#bada55'
+                            },
+                            select: {
+                                stroke: '#039',
+                                fill: '#bada55'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        $.ajax({
+            url: '/JsonData/TransactionsHighcharts',
+            type: "GET",
+            dataType: "json",
+            data: { dashboardId: '@Model.Dashboard.Id', panelId: '@Model.Id' },
+            success: function (json) {
+                HighchartsHelper.SetChart(chart, json.Categories, json.Series, json.Drilldown);
+            },
+            cache: false
+        });
+    });
+</script>

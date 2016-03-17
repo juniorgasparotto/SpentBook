@@ -16,16 +16,22 @@ namespace SpentBook.Web
             bundles.Add(new ScriptBundle("~/bundles/linq").Include("~/Scripts/linq.js"));
             bundles.Add(new ScriptBundle("~/bundles/jquery-linq").Include("~/Scripts/jquery.linq.js"));
             bundles.Add(new ScriptBundle("~/bundles/jquery-gridster").Include("~/Scripts/jquery.gridster.js"));
-            
-            bundles.Add(new ScriptBundle("~/bundles/dotnethighcharts")
+
+            bundles.Add(new ScriptBundle("~/bundles/highcharts")
                 .Include("~/Scripts/highcharts/4.2.3/highcharts.src.js")
                 .Include("~/Scripts/Highcharts/4.2.3/modules/data.src.js")
                 .Include("~/Scripts/Highcharts/4.2.3/modules/exporting.src.js")
                 .Include("~/Scripts/Highcharts/4.2.3/modules/drilldown.src.js")
+                .Include("~/Scripts/Highcharts/4.2.3/highcharts-more.js")
                 //.Include("~/Scripts/Highcharts/plugins/value-in-legend.js")
                 //.Include("~/Scripts/Highcharts/4.2.3/modules/funnel.src.js")
                 //.Include("~/Scripts/Highcharts/4.2.3/modules/solid-gauge.src.js")
                 //.Include("~/Scripts/Highcharts/4.2.3/modules/drilldown.src.js")
+            );
+
+            bundles.Add(new ScriptBundle("~/bundles/jquery-treegrid")
+                .Include("~/Scripts/treegrid/jquery.treegrid.js")
+                .Include("~/Scripts/treegrid/jquery.treegrid.bootstrap3.js")
             );
 
             // scripts base
@@ -37,13 +43,15 @@ namespace SpentBook.Web
             // scripts custom
             bundles.Add(new ScriptBundle("~/bundles/chart.js").Include("~/Scripts/Chart.js"));
             bundles.Add(new ScriptBundle("~/bundles/Custom/ChartHelper").Include("~/Scripts/Custom/ChartHelper.js"));
+            bundles.Add(new ScriptBundle("~/bundles/Custom/ChartHelper").Include("~/Scripts/Custom/ChartHelper.js"));
             bundles.Add(new ScriptBundle("~/bundles/Custom/Dashboards").Include("~/Scripts/Custom/Dashboards.js"));
-            bundles.Add(new ScriptBundle("~/bundles/Custom/Dashboard").Include("~/Scripts/Custom/Dashboard.js"));
+            bundles.Add(new ScriptBundle("~/bundles/custom/highcharts-helper").Include("~/Scripts/Custom/HighchartsHelper.js"));
 
             //styles
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/bootstrap.css", "~/Content/site.css"));
             bundles.Add(new StyleBundle("~/Content/css/jqueryui").Include("~/Content/themes/base/*.css"));
             bundles.Add(new ScriptBundle("~/Content/css/jquery-gridster").Include("~/Content/jquery.gridster.css"));
+            bundles.Add(new ScriptBundle("~/Content/css/treegrid").Include("~/Content/treegrid/jquery.treegrid.css"));
         }
     }
 }

@@ -1,0 +1,36 @@
+﻿@model List<IGrouping<DateTime, SpentBook.Domain.Transaction>>
+
+<table class="table tree">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Total</th>
+            <th>Hora</th>
+            <th>Categoria</th>
+            <th>Sub-Categoria</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var group in Model)
+        {
+            <tr class="treegrid-@group.GetHashCode()">
+                <td>@group.Key.ToString("d")</td>
+                <td>@group.Sum(f => f.Value)</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            foreach (var transaction in group)
+            {
+                <tr class="treegrid-parent-@group.GetHashCode()">
+                    <td>@transaction.Name</td>
+                    <td>@transaction.Value</td>
+                    <td>@transaction.Date.ToString("hh:mm")</td>
+                    <td>@transaction.Category</td>
+                    <td>@transaction.SubCategory</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

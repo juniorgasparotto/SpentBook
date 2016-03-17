@@ -63,7 +63,9 @@
 
 @*@(chart)*@
 
-<div id='chart_@(@Model.Id)_container'></div>
+<div id='chart-@Model.Id-content'>
+
+</div>
 
 <script language="javascript">
     $(document).ready(function () {
@@ -120,11 +122,11 @@
                     }
             },
             title: {
-                "text": "Teste"
+                "text": null
             },
             tooltip: {
                 "headerFormat": "",
-                "pointFormat": "<span style='color:{series.color}'>\u25CF</span> {series.name}: <b>R$ {point.y:.2f}</b><br/>"
+                "pointFormat": "<span style='color:{series.color}'>\u25CF</span> {series.name} - {point.name}: <b>R$ {point.y:.2f}</b><br/>"
             },
             yAxis: {
                 "title": {
@@ -222,13 +224,19 @@
             //addCategoriesTotal(chart);
         };
 
+        var setTable = function (htmlTable) {
+            $('.content-table').html(htmlTable);
+            $('.tree').treegrid();
+        };
+
         $.ajax({
-            url: '/HighchartsData/Transactions3',
+            url: '/HighchartsData/Transactions',
             type: "GET",
             dataType: "json",
-            data: { dashboardId: '@Model.Dashboard.Id', panelId: '@Model.Id' },
+            data: { dashboardId: '@Model.Dashboard.Id', panelId: '@Model.Id', tryCategorize: true },
             success: function (json) {
                 setChart(chart, json.Categories, json.Series, json.Drilldown);
+                setTable(json.Table);
             },
             cache: false
         });
@@ -236,4 +244,6 @@
 
 </script>
 
+<div class="content-table">
 
+</div>

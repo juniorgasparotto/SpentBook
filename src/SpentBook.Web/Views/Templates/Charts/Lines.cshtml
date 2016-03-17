@@ -1,0 +1,46 @@
+﻿@model SpentBook.Web.Models.PanelModel
+
+<script language="javascript">
+    $(document).ready(function () {
+        Highcharts.setOptions({ global: { useUTC: false } });
+        Highcharts.setOptions({ "lang": { "decimalPoint": ",", "thousandsSep": "." } });
+
+        var chart = new Highcharts.Chart({
+            chart:
+                {
+                    renderTo: $('#chart-@Model.Id .content-chart')[0],
+                    type: 'spline'
+                },
+            subtitle: {
+                text: ''
+            },
+            title: {
+                text: ''
+            },
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.point.name + '</b><br/>' + 'R$ ' + Highcharts.numberFormat(this.y);
+                }
+            },
+            xAxis: {
+                dateTimeLabelFormats: { month: '%e. %b', year: '%b' }, type: 'datetime'
+            },
+            yAxis: {
+                title: {
+                    text: 'R$'
+                }
+            },
+        });
+
+        $.ajax({
+            url: '/JsonData/TransactionsHighcharts',
+            type: "GET",
+            dataType: "json",
+            data: { dashboardId: '@Model.Dashboard.Id', panelId: '@Model.Id', tryCategorize: false },
+            success: function (json) {
+                HighchartsHelper.SetChart(chart, json.Categories, json.Series, json.Drilldown);
+            },
+            cache: false
+        });
+    });
+</script>

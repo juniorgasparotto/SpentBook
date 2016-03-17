@@ -44,12 +44,30 @@ namespace SpentBook.Web.Models
 
         [Display(Name = "Agrupamento principal por")]
         public TransactionGroupBy GroupBy { get; set; }
+        
+        [Display(Name = "Ordernar por")]
+        public TransactionOrder GroupByOrderBy { get; set; }
+        
+        [Display(Name = "Classificar por")]
+        public TransactionOrderClassification GroupByOrderByClassification { get; set; }
 
         [Display(Name = "Agrupamento secundário por")]
         public TransactionGroupBy GroupBy2 { get; set; }
+        
+        [Display(Name = "Ordernar por")]
+        public TransactionOrder GroupByOrderBy2 { get; set; }
+        
+        [Display(Name = "Classificar por")]
+        public TransactionOrderClassification GroupByOrderByClassification2 { get; set; }
 
         [Display(Name = "Agrupamento terciario por")]
         public TransactionGroupBy GroupBy3 { get; set; }
+        
+        [Display(Name = "Ordernar por")]
+        public TransactionOrder GroupByOrderBy3 { get; set; }
+
+        [Display(Name = "Classificar por")]
+        public TransactionOrderClassification GroupByOrderByClassification3 { get; set; }
 
         #endregion
 
@@ -95,5 +113,8 @@ namespace SpentBook.Web.Models
 
         #endregion
 
+
+
+        public Panel Panel { get; set; }
     }
 }

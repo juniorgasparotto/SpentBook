@@ -197,8 +197,14 @@ namespace SpentBook.Web.Controllers
                 model.PanelWidth = panel.PanelWidth;
                 model.PanelType = panel.PanelType;
                 model.GroupBy = panel.GroupBy;
+                model.GroupByOrderBy = panel.GroupByOrderBy;
+                model.GroupByOrderByClassification = panel.GroupByOrderByClassification;
                 model.GroupBy2 = panel.GroupBy2;
+                model.GroupByOrderBy2 = panel.GroupByOrderBy2;
+                model.GroupByOrderByClassification2 = panel.GroupByOrderByClassification2;
                 model.GroupBy3 = panel.GroupBy3;
+                model.GroupByOrderBy3 = panel.GroupByOrderBy3;
+                model.GroupByOrderByClassification3 = panel.GroupByOrderByClassification3;
                 model.OrderBy = panel.OrderBy;
                 model.OrderByClassification = panel.OrderByClassification;
                 model.FilterTransactionType = panel.Filter.TransactionType;
@@ -207,6 +213,8 @@ namespace SpentBook.Web.Controllers
                 model.FilterValueStart = panel.Filter.ValueStart;
                 model.FilterValueEnd = panel.Filter.ValueEnd;
                 model.ViewName = panel.ViewName;
+
+                model.Panel = panel;
 
                 if (panel.Filter.Categories != null)
                     model.FilterCategories = string.Join(",", panel.Filter.Categories);
@@ -229,8 +237,14 @@ namespace SpentBook.Web.Controllers
             panel.PanelOrder = model.PanelOrder;
             panel.PanelWidth = model.PanelWidth;
             panel.GroupBy = model.GroupBy;
+            panel.GroupByOrderBy = model.GroupByOrderBy;
+            panel.GroupByOrderByClassification = model.GroupByOrderByClassification;
             panel.GroupBy2 = model.GroupBy2;
+            panel.GroupByOrderBy2 = model.GroupByOrderBy2;
+            panel.GroupByOrderByClassification2 = model.GroupByOrderByClassification2;
             panel.GroupBy3 = model.GroupBy3;
+            panel.GroupByOrderBy3 = model.GroupByOrderBy3;
+            panel.GroupByOrderByClassification3 = model.GroupByOrderByClassification3;
             panel.OrderBy = model.OrderBy;
             panel.OrderByClassification = model.OrderByClassification;
             panel.Filter = new TransactionFilter();

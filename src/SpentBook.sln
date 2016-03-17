@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpentBook.Data.FileSystem",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNet.Highcharts", "DotNet.Highcharts\DotNet.Highcharts.csproj", "{6FE2EA1E-85E3-4969-BE6C-C08C9BA9029A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionGraph", "..\..\ExpressionGraph\src\ExpressionGraph\ExpressionGraph.csproj", "{8DE63A2D-7367-473D-8CF2-0EFA652E5FBD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{6FE2EA1E-85E3-4969-BE6C-C08C9BA9029A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FE2EA1E-85E3-4969-BE6C-C08C9BA9029A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FE2EA1E-85E3-4969-BE6C-C08C9BA9029A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DE63A2D-7367-473D-8CF2-0EFA652E5FBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DE63A2D-7367-473D-8CF2-0EFA652E5FBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DE63A2D-7367-473D-8CF2-0EFA652E5FBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DE63A2D-7367-473D-8CF2-0EFA652E5FBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
