@@ -50,7 +50,7 @@
     <Compile Include="TransactionOrderClassification.cs" />
     <Compile Include="TransactionOrder.cs" />
     <Compile Include="TransactionGroupBy.cs" />
-    <Compile Include="PanelType.cs" />
+    <Compile Include="PanelComponents.cs" />
     <Compile Include="TransactionType.cs" />
     <Compile Include="Panel.cs" />
     <Compile Include="TransactionFilter.cs" />

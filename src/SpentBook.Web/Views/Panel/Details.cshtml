@@ -19,7 +19,7 @@
 </div>
 
 <div class="panel-body">
-    @if (Model.PanelType.HasFlag(SpentBook.Domain.PanelType.ChartBar))
+    @if (Model.PanelComponents.HasFlag(SpentBook.Domain.PanelComponents.Chart))
     { 
         <div id="chart-@Model.Id">
             @switch (Model.Panel.GetDataType())
@@ -41,7 +41,7 @@
         </div>
     }
     
-    @if (Model.PanelType.HasFlag(SpentBook.Domain.PanelType.Table))
+    @if (Model.PanelComponents.HasFlag(SpentBook.Domain.PanelComponents.Table))
     {
         <div id="table-@Model.Id">
             <script language="javascript">

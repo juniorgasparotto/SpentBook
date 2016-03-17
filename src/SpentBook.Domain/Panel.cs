@@ -26,7 +26,7 @@ namespace SpentBook.Domain
         public string ViewName { get; set; }
         
         public string Title { get; set; }
-        public PanelType PanelType { get; set; }
+        public PanelComponents PanelComponents { get; set; }
         public int PanelOrder { get; set; }
 
         public TransactionGroupBy GroupBy { get; set; }

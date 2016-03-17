@@ -20,9 +20,9 @@ namespace SpentBook.Web.Models
         [Display(Name = "Titulo do painel")]
         public string Title { get; set; }
 
-        [Display(Name = "Tipo do painel")]
+        [Display(Name = "Exibir componentes")]
         [Required]
-        public PanelType PanelType { get; set; }
+        public PanelComponents PanelComponents { get; set; }
 
         [Display(Name = "Tamanho do painel")]
         [Required]

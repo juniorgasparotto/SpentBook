@@ -4,15 +4,12 @@ using System.ComponentModel.DataAnnotations;
 namespace SpentBook.Domain
 {
     [Flags]
-    public enum PanelType
+    public enum PanelComponents
     {
         [Display(Name = "Tabela")]
         Table = 1,
 
-        [Display(Name = "Gráfico em barras")]
-        ChartBar = 2,
-
-        [Display(Name = "Gráfico de pizza")]
-        ChartDoughnut = 4,
+        [Display(Name = "Gráfico")]
+        Chart = 2,
     }
 }
