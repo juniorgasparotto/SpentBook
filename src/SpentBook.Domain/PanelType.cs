@@ -1,16 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace SpentBook.Domain
 {
+    [Flags]
     public enum PanelType
     {
         [Display(Name = "Tabela")]
-        Table,
+        Table = 1,
 
         [Display(Name = "Gráfico em barras")]
-        ChartBar,
+        ChartBar = 2,
 
         [Display(Name = "Gráfico de pizza")]
-        ChartDoughnut,
+        ChartDoughnut = 4,
     }
 }

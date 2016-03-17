@@ -167,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\BinderConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\ResumeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Binders\CustomModelBinder.cs" />
     <Compile Include="Filters\JsonOutputWhenGenericExceptionAttribute.cs" />
     <Compile Include="Filters\JsonNetActionFilter.cs" />
     <Compile Include="Filters\JsonOutputWhenModelInvalidAttribute.cs" />

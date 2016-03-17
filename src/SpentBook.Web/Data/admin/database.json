@@ -40,7 +40,7 @@
         {
           "Id": "c4c40721-0bb4-4757-9152-9a6e5c3b7c25",
           "CreateDate": "2016-02-11T22:37:26.0078002-02:00",
-          "LastUpdateDate": "2016-03-17T00:24:57.8789965-03:00",
+          "LastUpdateDate": "2016-03-17T01:09:35.5561509-03:00",
           "ViewName": "~/Views/CustomPanels/ChartLines.cshtml",
           "Title": "Teste",
           "PanelType": 1,

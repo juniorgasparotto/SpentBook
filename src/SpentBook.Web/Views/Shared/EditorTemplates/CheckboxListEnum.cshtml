@@ -19,18 +19,20 @@
 
         return en.ToString();
     };
+    
     var listItems = Enum.GetValues(Model.GetType()).OfType<Enum>().Select(e =>
     new SelectListItem()
     {
         Text = getDescription(e),
         Value = e.ToString(),
-        Selected = e.Equals(Model)
+        Selected = Model.HasFlag(e)
     });
     string prefix = ViewData.TemplateInfo.HtmlFieldPrefix;
     int index = 0;
     ViewData.TemplateInfo.HtmlFieldPrefix = string.Empty;
 
     <div>
+        model: @Model.ToString()
         @foreach (var li in listItems)
         {
             string fieldName = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}_{1}", prefix, index++);
@@ -41,7 +43,10 @@
                 </div>*@
             
             <label class="checkbox-inline">
-                @Html.CheckBox(prefix, li.Value, li.Selected, new { @id = fieldName }) @li.Text
+                @*@Html.CheckBox(prefix, li.Selected, new { @id = fieldName, @value = li.Value })*@ 
+
+                <input type="checkbox" value="@li.Value" name="@prefix" id="@fieldName" @(li.Selected ? "checked=\"checked\"" : "")>
+                @li.Text
             </label>
         }
         
