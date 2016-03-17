@@ -19,18 +19,18 @@
 </div>
 
 <div class="panel-body">
-    @if (Model.PanelType == SpentBook.Domain.PanelType.ChartBar)
+    @if (Model.PanelType.HasFlag(SpentBook.Domain.PanelType.ChartBar))
     { 
         <div id="chart-@Model.Id">
-            @switch (Model.Panel.GetChartType())
+            @switch (Model.Panel.GetDataType())
             {
-                case SpentBook.Domain.Panel.PanelChartType.NonGroup:
-                case SpentBook.Domain.Panel.PanelChartType.NonGroupAndSortDate:
+                case SpentBook.Domain.Panel.PanelDataType.NonGroup:
+                case SpentBook.Domain.Panel.PanelDataType.NonGroupAndSortDate:
                     @Html.Partial("~/Views/Templates/Charts/Lines.cshtml", Model)
                     break;
-                case SpentBook.Domain.Panel.PanelChartType.OneGroup:
-                case SpentBook.Domain.Panel.PanelChartType.TwoGroup:
-                case SpentBook.Domain.Panel.PanelChartType.ThreeOrMoreGroup:
+                case SpentBook.Domain.Panel.PanelDataType.OneGroup:
+                case SpentBook.Domain.Panel.PanelDataType.TwoGroup:
+                case SpentBook.Domain.Panel.PanelDataType.ThreeOrMoreGroup:
                 @Html.Partial("~/Views/Templates/Charts/Columns.cshtml", Model)
                     break;
             }
@@ -41,7 +41,7 @@
         </div>
     }
     
-    @if (Model.PanelType == SpentBook.Domain.PanelType.Table)
+    @if (Model.PanelType.HasFlag(SpentBook.Domain.PanelType.Table))
     {
         <div id="table-@Model.Id">
             <script language="javascript">

@@ -32,7 +32,6 @@
     ViewData.TemplateInfo.HtmlFieldPrefix = string.Empty;
 
     <div>
-        model: @Model.ToString()
         @foreach (var li in listItems)
         {
             string fieldName = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}_{1}", prefix, index++);
