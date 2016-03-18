@@ -23,13 +23,13 @@
         @{
             var activeTab = "active";
         }
-        @if (Model.PanelComponents.HasFlag(SpentBook.Domain.PanelComponents.Chart))
+        @if (Model.PanelComponents.HasFlag(SpentBook.Domain.PanelComponents.Chart) && Model.PanelComponents != SpentBook.Domain.PanelComponents.Chart)
         {
             <li class="@activeTab"><a data-toggle="tab" href="#chart-@Model.Id">Gráfico</a></li>
             activeTab = "";
         }
 
-        @if (Model.PanelComponents.HasFlag(SpentBook.Domain.PanelComponents.Table))
+        @if (Model.PanelComponents.HasFlag(SpentBook.Domain.PanelComponents.Table) && Model.PanelComponents != SpentBook.Domain.PanelComponents.Table)
         {
             <li class="@activeTab"><a data-toggle="tab" href="#table-@Model.Id">Tabela</a></li>
             activeTab = "";
