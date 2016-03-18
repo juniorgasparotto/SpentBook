@@ -37,17 +37,18 @@
 @section Styles
 {
     @Styles.Render("~/Content/css/jqueryui")
+    @Styles.Render("~/Content/css/treegrid")
 }
 
 @section ScriptsTop {
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/Custom/Dashboard")
+    @Scripts.Render("~/bundles/jquery-treegrid")
     @Scripts.Render("~/bundles/highcharts")
+    @Scripts.Render("~/bundles/custom/highcharts-helper")
 }
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryui")
-    @Scripts.Render("~/bundles/Custom/Dashboard")
-    @*@Scripts.Render("~/bundles/Custom/ChartHelper")*@
-
     <script language="javascript">
         Dashboard.Id = '@Model.Dashboard.Id.ToString()';        
         Dashboard.Context = $("#content-panels #sortable");

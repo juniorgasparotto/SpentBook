@@ -257,7 +257,6 @@ div#legend span
 }
 
 #sortable { list-style-type: none; margin: 0; padding: 0; }
-#sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left;  }
 
 /* show the move cursor as the user moves the mouse over the panel header.*/
 #sortable .panel-heading {

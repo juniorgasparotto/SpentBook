@@ -40,10 +40,10 @@
         {
           "Id": "c4c40721-0bb4-4757-9152-9a6e5c3b7c25",
           "CreateDate": "2016-02-11T22:37:26.0078002-02:00",
-          "LastUpdateDate": "2016-03-17T01:26:29.8791668-03:00",
+          "LastUpdateDate": "2016-03-17T21:21:22.3012834-03:00",
           "ViewName": "~/Views/CustomPanels/ChartLines.cshtml",
           "Title": "Teste",
-          "PanelComponents": 2,
+          "PanelComponents": 3,
           "PanelOrder": 1,
           "GroupBy": 4,
           "GroupByOrderBy": 0,
@@ -66,7 +66,7 @@
             "Names": null,
             "TransactionType": 2
           },
-          "PanelWidth": 0
+          "PanelWidth": 1
         }
       ],
       "FriendlyUrl": "teste"
