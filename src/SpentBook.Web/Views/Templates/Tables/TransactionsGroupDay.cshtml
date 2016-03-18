@@ -14,7 +14,7 @@
         @foreach (var group in Model)
         {
             <tr class="treegrid-@group.GetHashCode()">
-                <td>@group.Key.ToString("d")</td>
+                <td nowrap>@group.Key.ToString("d")</td>
                 <td>@group.Sum(f => f.Value)</td>
                 <td></td>
                 <td></td>
@@ -24,7 +24,7 @@
             foreach (var transaction in group)
             {
                 <tr class="treegrid-parent-@group.GetHashCode()">
-                    <td>@transaction.Name</td>
+                    <td nowrap>@transaction.Name</td>
                     <td>@transaction.Value</td>
                     <td>@transaction.Date.ToString("hh:mm")</td>
                     <td>@transaction.Category</td>

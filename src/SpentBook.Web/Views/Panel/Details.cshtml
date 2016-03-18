@@ -25,13 +25,13 @@
         }
         @if (Model.PanelComponents.HasFlag(SpentBook.Domain.PanelComponents.Chart))
         {
-            <li class="@activeTab"><a data-toggle="tab" href="#chart">Gráfico</a></li>
+            <li class="@activeTab"><a data-toggle="tab" href="#chart-@Model.Id">Gráfico</a></li>
             activeTab = "";
         }
 
         @if (Model.PanelComponents.HasFlag(SpentBook.Domain.PanelComponents.Table))
         {
-            <li class="@activeTab"><a data-toggle="tab" href="#table">Tabela</a></li>
+            <li class="@activeTab"><a data-toggle="tab" href="#table-@Model.Id">Tabela</a></li>
             activeTab = "";
         }
     </ul>
@@ -42,24 +42,22 @@
         }
         @if (Model.PanelComponents.HasFlag(SpentBook.Domain.PanelComponents.Chart))
         {
-            <div id="chart" class="tab-pane fade in @activeContent">
-                <div id="chart-@Model.Id">
-                    @switch (Model.Panel.GetDataType())
-                    {
-                        case SpentBook.Domain.Panel.PanelDataType.NonGroup:
-                        case SpentBook.Domain.Panel.PanelDataType.NonGroupAndSortDate:
-                            @Html.Partial("~/Views/Templates/Charts/Lines.cshtml", Model)
-                            break;
-                        case SpentBook.Domain.Panel.PanelDataType.OneGroup:
-                        case SpentBook.Domain.Panel.PanelDataType.TwoGroup:
-                        case SpentBook.Domain.Panel.PanelDataType.ThreeOrMoreGroup:
-                        @Html.Partial("~/Views/Templates/Charts/Columns.cshtml", Model)
-                            break;
-                    }
+            <div id="chart-@Model.Id" class="tab-pane fade in @activeContent">
+                @switch (Model.Panel.GetDataType())
+                {
+                    case SpentBook.Domain.Panel.PanelDataType.NonGroup:
+                    case SpentBook.Domain.Panel.PanelDataType.NonGroupAndSortDate:
+                        @Html.Partial("~/Views/Templates/Charts/Lines.cshtml", Model)
+                        break;
+                    case SpentBook.Domain.Panel.PanelDataType.OneGroup:
+                    case SpentBook.Domain.Panel.PanelDataType.TwoGroup:
+                    case SpentBook.Domain.Panel.PanelDataType.ThreeOrMoreGroup:
+                    @Html.Partial("~/Views/Templates/Charts/Columns.cshtml", Model)
+                        break;
+                }
 
-                    <div class="content-chart">
+                <div class="content-chart">
 
-                    </div>
                 </div>
             </div>
             
@@ -68,28 +66,26 @@
         
         @if (Model.PanelComponents.HasFlag(SpentBook.Domain.PanelComponents.Table))
         {   
-            <div id="table" class="tab-pane fade @activeContent">
-                <div id="table-@Model.Id">
-                    <script language="javascript">
-                        $(document).ready(function () {
-                            $.ajax({
-                                url: '/JsonData/TransactionsTable',
-                                type: "GET",
-                                dataType: "json",
-                                data: { dashboardId: '@Model.Dashboard.Id', panelId: '@Model.Id', tryCategorize: false },
-                                success: function (json) {
-                                    var wrapper = $('#table-@Model.Id .content-table');
-                                    wrapper.html(json.Table);
-                                    wrapper.find("table").treegrid();
-                                },
-                                cache: false
-                            });
+            <div id="table-@Model.Id" class="tab-pane fade @activeContent">
+                <script language="javascript">
+                    $(document).ready(function () {
+                        $.ajax({
+                            url: '/JsonData/TransactionsTable',
+                            type: "GET",
+                            dataType: "json",
+                            data: { dashboardId: '@Model.Dashboard.Id', panelId: '@Model.Id', tryCategorize: false },
+                            success: function (json) {
+                                var wrapper = $('#table-@Model.Id .content-table');
+                                wrapper.html(json.Table);
+                                wrapper.find("table").treegrid();
+                            },
+                            cache: false
                         });
-                    </script>
+                    });
+                </script>
 
-                    <div class="content-table">
+                <div class="content-table">
 
-                    </div>
                 </div>
             </div>
             

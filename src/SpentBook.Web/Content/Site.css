@@ -305,3 +305,15 @@ div#legend span
     /*height: 2000px;*/
     width: 100%;
 }
+
+/*tab-content*/
+.tab-content .content-table,
+.tab-content .content-chart {
+    margin-top: 5px;
+    height: 300px;
+}
+
+.tab-content .content-table
+ {
+    overflow: auto;
+}
