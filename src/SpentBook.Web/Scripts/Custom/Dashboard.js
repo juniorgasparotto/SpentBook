@@ -126,11 +126,16 @@ $(document).ready(function ($) {
                             .OrderBy(function (item) { return item.PanelOrder })
                             .ToArray();
 
-                        var itemTemplate = '<div class="panel panel-info {2}" id="{0}">{1}</div>';
+                        var waiting = '<div class="progress2">' +
+                                          '<div class="progress-bar2 bar" role="progressbar2">' +
+                                          '</div>' +
+                                       '</div>';
 
+                        var itemTemplate = '<div class="panel panel-info {0}" id="{1}"><div class="progress-wrapper">{2}</div> <div class="content-panel"></div></div>';
+                       
                         for (var iPanel in panelsChangeds) {
                             var panel = panelsChangeds[iPanel];
-                            var panelHtmlObjectWrapper = $(itemTemplate.format(panel.Id, "Aguarde", panel.PanelWidth));
+                            var panelHtmlObjectWrapper = $(itemTemplate.format(panel.PanelWidth, panel.Id, waiting));
 
                             // remove if already exists to update
                             Dashboard.Context.find("#" + panel.Id).remove();
@@ -152,11 +157,19 @@ $(document).ready(function ($) {
             });
         },
         UpdatePanelUI: function (panel, panelHtmlObjectWrapper) {
+            var content = panelHtmlObjectWrapper.find('.content-panel');
+
             $.ajax({
                 type: "GET",
                 url: Dashboard.UrlPanelView,
                 data: { dashboardId: Dashboard.Id, panelId: panel.Id },
                 dataType: "html",
+                beforeSend: function () {
+                    Dashboard.StartPanelPreloader(panelHtmlObjectWrapper);
+                },
+                complete: function () {
+                    Dashboard.EndPanelPreloader(panelHtmlObjectWrapper);
+                },
                 success: function (html) {
                     if (!Dashboard.Panels)
                         Dashboard.Panels = new Array();
@@ -168,7 +181,7 @@ $(document).ready(function ($) {
                     else
                         Dashboard.Panels.push(panel);
                     
-                    panelHtmlObjectWrapper.html(html);
+                    content.html(html);
                     SetPanelActionsUI(panelHtmlObjectWrapper);
                 },
                 error: function (error) {
@@ -192,6 +205,40 @@ $(document).ready(function ($) {
                 Dashboard.EmptyContext.show();
             else
                 Dashboard.EmptyContext.hide();
+        },
+        StartPanelPreloader: function (panelObject) {
+            var progressWrapper = panelObject.find('.progress-wrapper');
+            progressWrapper.fadeIn(200);
+
+            //progressWrapper.height(panelObject.height());
+            //progressWrapper.width(panelObject.width());
+
+            var $bar = progressWrapper.find('.bar');
+            $bar.width(0);
+
+            var widthProgress = progressWrapper.find('.progress2').width();
+
+            var interval = setInterval(function () {
+                if ($bar.width() >= widthProgress) {
+                    $bar.width(0);
+                } else {
+                    $bar.width($bar.width() + 10);
+                }
+            }, 200);
+
+            panelObject.ProgressBarInterval = interval;
+        },
+        EndPanelPreloader: function (panelObject) {
+            clearInterval(panelObject.ProgressBarInterval);
+
+            var progressWrapper = panelObject.find('.progress-wrapper');
+            var $bar = progressWrapper.find('.bar');
+            var widthProgress = progressWrapper.find('.progress2').width();
+            $bar.animate({
+                width: widthProgress + "px"
+            }, 1000, function () {
+                progressWrapper.fadeOut(1000);
+            });
         }
     }
 }());

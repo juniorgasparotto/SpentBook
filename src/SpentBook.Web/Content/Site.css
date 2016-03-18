@@ -253,7 +253,8 @@ div#legend span
 #sortable .panel.panel-info {
     float: left;
     margin-right: 0.5%;
-    min-height: 200px;
+    height: 420px;
+    position: relative;
 }
 
 #sortable { list-style-type: none; margin: 0; padding: 0; }
@@ -316,4 +317,44 @@ div#legend span
 .tab-content .content-table
  {
     overflow: auto;
+}
+
+/*panel progress bar*/
+#content-panels #sortable .panel .progress-wrapper
+{
+    background-color: #FFF;
+    float: left;
+    display: none;
+    height: 420px;
+    position:absolute;
+    width: 100%;
+    z-index: 1000;
+    opacity: 0.7;
+}
+
+#content-panels #sortable .panel .progress2
+{
+    /*margin: 0 auto;
+    width: 80%;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);*/
+
+    margin: 0 auto;
+    width: 99%;
+    position: relative;
+    top: 3px;
+}
+
+.progress2
+{
+    width: 80%;
+    height: 10px;
+    background-color: #fff;
+}
+
+.progress2 .bar {
+    background-color: red;
+    height: 4px;
+    width: 0px;
 }
