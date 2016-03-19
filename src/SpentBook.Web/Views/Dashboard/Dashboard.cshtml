@@ -16,9 +16,9 @@
 </div>
 
 <div id="content-panels">
-    <ul id="sortable">
+    <div id="sortable">
 
-    </ul>
+    </div>
 
     <div id="empty-panels" class="collapse">
         <span>Você ainda não criou nenhum painel!</span>
@@ -42,19 +42,18 @@
 
 @section ScriptsTop {
     @Scripts.Render("~/bundles/jqueryui")
-    @Scripts.Render("~/bundles/Custom/Dashboard")
     @Scripts.Render("~/bundles/jquery-treegrid")
     @Scripts.Render("~/bundles/highcharts")
+
+    @Scripts.Render("~/bundles/custom/helper")
     @Scripts.Render("~/bundles/custom/highcharts-helper")
+    @Scripts.Render("~/bundles/custom/dashboard")
+    @Scripts.Render("~/bundles/custom/preloader")
+    @Scripts.Render("~/bundles/custom/page-dashboard")
 }
 
 @section Scripts {
     <script language="javascript">
-        Dashboard.Id = '@Model.Dashboard.Id.ToString()';        
-        Dashboard.Context = $("#content-panels #sortable");
-        Dashboard.EmptyContext = $("#content-panels #empty-panels");
-        Dashboard.UrlChangePanelOrder = '/Panel/ChangePanelOrder';
-        Dashboard.UrlPanelView = '/Panel/Details';
-        Dashboard.UrlPanelsUpdated = '/JsonData/Panels';
+        Dashboard.Id = '@Model.Dashboard.Id.ToString()';
     </script>
 }

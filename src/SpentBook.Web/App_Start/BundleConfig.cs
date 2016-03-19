@@ -43,10 +43,13 @@ namespace SpentBook.Web
             // scripts custom
             bundles.Add(new ScriptBundle("~/bundles/chart.js").Include("~/Scripts/Chart.js"));
             bundles.Add(new ScriptBundle("~/bundles/Custom/ChartHelper").Include("~/Scripts/Custom/ChartHelper.js"));
-            bundles.Add(new ScriptBundle("~/bundles/Custom/ChartHelper").Include("~/Scripts/Custom/ChartHelper.js"));
-            bundles.Add(new ScriptBundle("~/bundles/Custom/Dashboards").Include("~/Scripts/Custom/Dashboards.js"));
-            bundles.Add(new ScriptBundle("~/bundles/custom/dashboard").Include("~/Scripts/Custom/Dashboard.js"));
+            
+            bundles.Add(new ScriptBundle("~/bundles/custom/dashboards").Include("~/Scripts/Custom/Dashboards.js"));
+            bundles.Add(new ScriptBundle("~/bundles/custom/helper").Include("~/Scripts/Custom/Helper.js"));
             bundles.Add(new ScriptBundle("~/bundles/custom/highcharts-helper").Include("~/Scripts/Custom/HighchartsHelper.js"));
+            bundles.Add(new ScriptBundle("~/bundles/custom/dashboard").Include("~/Scripts/Custom/Dashboard.js"));
+            bundles.Add(new ScriptBundle("~/bundles/custom/preloader").Include("~/Scripts/Custom/Preloader.js"));
+            bundles.Add(new ScriptBundle("~/bundles/custom/page-dashboard").Include("~/Scripts/Custom/PageDashboard.js"));
 
             //styles
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/bootstrap.css", "~/Content/site.css"));

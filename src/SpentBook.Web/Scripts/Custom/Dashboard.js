@@ -1,18 +1,3 @@
-$(document).ready(function ($) {
-    Dashboard.UpdateAllPanels();
-    Dashboard.EmptyContext.hide();
-    Dashboard.EnableSortable();
-
-    //Dashboard.IntervalRef = setInterval(
-    //    function () {
-    //        Dashboard.UpdateAllPanels();
-    //    }
-    //    , 10000
-    //);
-
-    
-});
-
 (function () {
 
     // ****************************
@@ -23,23 +8,23 @@ $(document).ready(function ($) {
     // ****************************
     // fields
     // ****************************
-    var disabledWindowElement = $('<div style="width: 100%; height: 100%; position: absolute; left: 0; top: 0;" id="disabled-window"> </div>');
+    //var disabledWindowElement = $('<div style="width: 100%; height: 100%; position: absolute; left: 0; top: 0;" id="disabled-window"> </div>');
 
     // ****************************
     // private methods
     // ****************************
 
-    var DisableWindow = function () {
-        $("body").append(disabledWindowElement);
-    }
+    //var DisableWindow = function () {
+    //    $("body").append(disabledWindowElement);
+    //}
 
-    var EnabledWindow = function () {
-        disabledWindowElement.remove();
-    }
+    //var EnabledWindow = function () {
+    //    disabledWindowElement.remove();
+    //}
 
     var SetPanelActionsUI = function (panelHtmlObject) {
         panelHtmlObject.find("button.btn-edit").click(function (e) {
-            OpenUrl($(this).find("a").attr("href"));
+            Helper.OpenUrl($(this).find("a").attr("href"));
         });
 
         panelHtmlObject.find("button.btn-delete a").click(function (e) {
@@ -48,14 +33,22 @@ $(document).ready(function ($) {
 
         panelHtmlObject.find("button.btn-delete").click(function (e) {
             if (confirm("Deseja realmente excluir este painel?")) {
+                var preloader = new Preloader($('body'), 'preload-body');
+
                 $.ajax({
                     type: "GET",
                     url: $(this).find("a").attr("href"),
+                    beforeSend: function () {
+                        preloader.StartPanelPreloader();
+                    },
+                    complete: function () {
+                        preloader.EndPanelPreloader();
+                    },
                     success: function (html) {
                         Dashboard.UpdateAllPanels();
                     },
                     error: function (error) {
-                        ErrorResponse(error);
+                        Helper.ErrorResponse(error);
                     }
                 });
             }
@@ -72,22 +65,30 @@ $(document).ready(function ($) {
                 handle: '.panel-heading',
                 connectWith: ".panel",
                 stop: function (event, ui) {
-                    DisableWindow();
+                    Helper.DisableWindow();
 
                     var id = ui.item.attr("id");
 
                     // for final user, the position start with "1" and not "0"
                     var index = ui.item.index() + 1;
 
+                    var preloader = new Preloader($('body'), 'preload-body');
+
                     $.ajax({
                         type: "GET",
                         url: Dashboard.UrlChangePanelOrder,
                         data: { dashboardId: Dashboard.Id, panelId: id, newOrder: index },
+                        beforeSend: function () {
+                            preloader.StartPanelPreloader();
+                        },
+                        complete: function () {
+                            preloader.EndPanelPreloader();
+                        },
                         success: function (json) {
-                            EnabledWindow();
+                            Helper.EnabledWindow();
                         },
                         error: function (error) {
-                            ErrorResponse(error);
+                            Helper.ErrorResponse(error);
                             Dashboard.Context.sortable('cancel');
                         }
                     });
@@ -98,12 +99,20 @@ $(document).ready(function ($) {
             });
         },       
         UpdateAllPanels: function () {
+            var preloader = new Preloader($('body'), 'preload-body');
+            
             $.ajax({
                 type: "POST",
                 url: Dashboard.UrlPanelsUpdated,
                 data: JSON.stringify({ dashboardId: Dashboard.Id, panelsExistsInInterface: Dashboard.Panels }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
+                beforeSend: function () {
+                    preloader.StartPanelPreloader();
+                },
+                complete: function () {
+                    preloader.EndPanelPreloader();
+                },
                 success: function (changes) {
                     if (changes.Deleteds) {
                         for (var panelIndex in changes.Deleteds) {
@@ -124,19 +133,14 @@ $(document).ready(function ($) {
                             .From(changes.News)
                             .Union(changes.Updateds)
                             .OrderBy(function (item) { return item.PanelOrder })
-                            .ToArray();
+                            .ToArray();                        
 
-                        var waiting = '<div class="progress2">' +
-                                          '<div class="progress-bar2 bar" role="progressbar2">' +
-                                          '</div>' +
-                                       '</div>';
-
-                        var itemTemplate = '<div class="panel panel-info {0}" id="{1}"><div class="progress-wrapper">{2}</div> <div class="content-panel"></div></div>';
+                        var itemTemplate = '<div class="panel panel-info {0}" id="{1}"></div>';
                        
                         for (var iPanel in panelsChangeds) {
                             var panel = panelsChangeds[iPanel];
-                            var panelHtmlObjectWrapper = $(itemTemplate.format(panel.PanelWidth, panel.Id, waiting));
-
+                            var panelHtmlObjectWrapper = $(itemTemplate.format(panel.PanelWidth, panel.Id));
+                            
                             // remove if already exists to update
                             Dashboard.Context.find("#" + panel.Id).remove();
 
@@ -152,12 +156,13 @@ $(document).ready(function ($) {
                     }
                 },
                 error: function (error) {
-                    ErrorResponse(error);
+                    Helper.ErrorResponse(error);
                 }
             });
         },
         UpdatePanelUI: function (panel, panelHtmlObjectWrapper) {
             var content = panelHtmlObjectWrapper.find('.content-panel');
+            var preloader = new Preloader(panelHtmlObjectWrapper, 'preload-panel');
 
             $.ajax({
                 type: "GET",
@@ -165,10 +170,10 @@ $(document).ready(function ($) {
                 data: { dashboardId: Dashboard.Id, panelId: panel.Id },
                 dataType: "html",
                 beforeSend: function () {
-                    Dashboard.StartPanelPreloader(panelHtmlObjectWrapper);
+                    preloader.StartPanelPreloader();
                 },
                 complete: function () {
-                    Dashboard.EndPanelPreloader(panelHtmlObjectWrapper);
+                    preloader.EndPanelPreloader();
                 },
                 success: function (html) {
                     if (!Dashboard.Panels)
@@ -181,12 +186,12 @@ $(document).ready(function ($) {
                     else
                         Dashboard.Panels.push(panel);
                     
-                    content.html(html);
+                    panelHtmlObjectWrapper.append(html);
                     SetPanelActionsUI(panelHtmlObjectWrapper);
                 },
                 error: function (error) {
                     alert("Ocorreu um erro ao tentar carregar o painel '" + panel.Id + "', tente edita-lo para resolver o problema");
-                    //ErrorResponse(error);
+                    //Helper.ErrorResponse(error);
                 }
             });
         },
@@ -205,78 +210,6 @@ $(document).ready(function ($) {
                 Dashboard.EmptyContext.show();
             else
                 Dashboard.EmptyContext.hide();
-        },
-        StartPanelPreloader: function (panelObject) {
-            var progressWrapper = panelObject.find('.progress-wrapper');
-            progressWrapper.fadeIn(200);
-
-            //progressWrapper.height(panelObject.height());
-            //progressWrapper.width(panelObject.width());
-
-            var $bar = progressWrapper.find('.bar');
-            $bar.width(0);
-
-            var widthProgress = progressWrapper.find('.progress2').width();
-
-            var interval = setInterval(function () {
-                if ($bar.width() >= widthProgress) {
-                    $bar.width(0);
-                } else {
-                    $bar.width($bar.width() + 10);
-                }
-            }, 200);
-
-            panelObject.ProgressBarInterval = interval;
-        },
-        EndPanelPreloader: function (panelObject) {
-            clearInterval(panelObject.ProgressBarInterval);
-
-            var progressWrapper = panelObject.find('.progress-wrapper');
-            var $bar = progressWrapper.find('.bar');
-            var widthProgress = progressWrapper.find('.progress2').width();
-            $bar.animate({
-                width: widthProgress + "px"
-            }, 1000, function () {
-                progressWrapper.fadeOut(1000);
-            });
-        }
+        },        
     }
 }());
-
-function ErrorResponse(error) {
-    if (error.responseJSON) {
-        if (error.responseJSON.message) {
-            // Type: Action Exception
-            alert(error.responseJSON.message)
-        }
-        else if (error.responseJSON[0]) {
-            // Type: Invalid Model error
-            var strError = "";
-            for (var iField in error.responseJSON)
-                for (var iErro in error.responseJSON[iField].errors)
-                    strError += "- " + error.responseJSON[iField].errors[iErro] + "\r\n";
-            alert(strError);
-        }
-    }
-    else {
-        // Type: Inexpected Exception
-        alert(error.statusText)
-    }
-}
-
-String.prototype.format = function () {
-    var formatted = this;
-    for (var arg in arguments) {
-        formatted = formatted.replace("{" + arg + "}", arguments[arg]);
-    }
-    return formatted;
-};
-
-function OpenUrl(url) {
-    var win = window.open(url, '_self');
-    win.focus();
-}
-
-function DisableWindow() {
-    $("body").append('<div style="width: 100%; height: 100%; position: absolute; left: 0; top: 0;" id="disabled-window"> </div>');
-}

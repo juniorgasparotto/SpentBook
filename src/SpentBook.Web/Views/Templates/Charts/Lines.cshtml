@@ -4,11 +4,12 @@
     $(document).ready(function () {
         Highcharts.setOptions({ global: { useUTC: false } });
         Highcharts.setOptions({ "lang": { "decimalPoint": ",", "thousandsSep": "." } });
+        var container = $('#chart-@Model.Id .content-chart');
 
         var chart = new Highcharts.Chart({
             chart:
                 {
-                    renderTo: $('#chart-@Model.Id .content-chart')[0],
+                    renderTo: container[0],
                     type: 'spline'
                 },
             subtitle: {
@@ -32,15 +33,29 @@
             },
         });
 
-        $.ajax({
-            url: '/JsonData/TransactionsHighcharts',
-            type: "GET",
-            dataType: "json",
-            data: { dashboardId: '@Model.Dashboard.Id', panelId: '@Model.Id', tryCategorize: false },
-            success: function (json) {
-                HighchartsHelper.SetChart(chart, json.Categories, json.Series, json.Drilldown);
-            },
-            cache: false
-        });
+        var preloader = new Preloader(container.parents(".panel"), 'preload-panel-chart-data');
+        var loadData = function () {
+            $.ajax({
+                url: '/JsonData/TransactionsHighcharts',
+                type: "GET",
+                dataType: "json",
+                data: { dashboardId: '@Model.Dashboard.Id', panelId: '@Model.Id', tryCategorize: false },
+                beforeSend: function () {
+                    preloader.StartPanelPreloader();
+                },
+                complete: function () {
+                    preloader.EndPanelPreloader();
+                },
+                success: function (json) {
+                    HighchartsHelper.SetChart(chart, json.Categories, json.Series, json.Drilldown);
+                },
+                cache: false
+            });
+        };
+
+        loadData();
+        var interval = setInterval(function () {
+            loadData();
+        }, 10000);
     });
 </script>

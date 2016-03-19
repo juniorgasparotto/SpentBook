@@ -3,9 +3,11 @@
 <script language="javascript">
     $(document).ready(function () {
         Highcharts.setOptions({ "lang": { "decimalPoint": ",", "thousandsSep": "." } });
+        var container = $('#chart-@Model.Id .content-chart');
+
         var chart = new Highcharts.Chart({
             chart: {
-                renderTo: $('#chart-@Model.Id .content-chart')[0],
+                renderTo: container[0],
                 type: "column"
             },
             legend: {
@@ -78,16 +80,30 @@
                 }
             }
         });
-        
-        $.ajax({
-            url: '/JsonData/TransactionsHighcharts',
-            type: "GET",
-            dataType: "json",
-            data: { dashboardId: '@Model.Dashboard.Id', panelId: '@Model.Id' },
-            success: function (json) {
-                HighchartsHelper.SetChart(chart, json.Categories, json.Series, json.Drilldown);
-            },
-            cache: false
-        });
+
+        var preloader = new Preloader(container.parents(".panel"), 'preload-panel-chart-data');
+        var loadData = function () {
+            $.ajax({
+                url: '/JsonData/TransactionsHighcharts',
+                type: "GET",
+                dataType: "json",
+                data: { dashboardId: '@Model.Dashboard.Id', panelId: '@Model.Id' },
+                beforeSend: function () {
+                    preloader.StartPanelPreloader();
+                },
+                complete: function () {
+                    preloader.EndPanelPreloader();
+                },
+                success: function (json) {
+                    HighchartsHelper.SetChart(chart, json.Categories, json.Series, json.Drilldown);
+                },
+                cache: false
+            });
+        };
+
+        loadData();
+        var interval = setInterval(function () {
+            loadData();
+        }, 10000);
     });
 </script>

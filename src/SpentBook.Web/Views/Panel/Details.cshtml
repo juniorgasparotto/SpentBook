@@ -18,31 +18,43 @@
     </div>
 </div>
 
-<div class="panel-body">
-    <ul class="nav nav-pills nav-justified">
-        @{
-            var activeTab = "active";
-        }
-        @if (Model.PanelComponents.HasFlag(SpentBook.Domain.PanelComponents.Chart) && Model.PanelComponents != SpentBook.Domain.PanelComponents.Chart)
-        {
-            <li class="@activeTab"><a data-toggle="tab" href="#chart-@Model.Id">Gráfico</a></li>
-            activeTab = "";
-        }
+@{
+    var hasChart = Model.PanelComponents.HasFlag(SpentBook.Domain.PanelComponents.Chart);
+    var hasTable = Model.PanelComponents.HasFlag(SpentBook.Domain.PanelComponents.Table);
 
-        @if (Model.PanelComponents.HasFlag(SpentBook.Domain.PanelComponents.Table) && Model.PanelComponents != SpentBook.Domain.PanelComponents.Table)
-        {
-            <li class="@activeTab"><a data-toggle="tab" href="#table-@Model.Id">Tabela</a></li>
-            activeTab = "";
-        }
-    </ul>
+    var countTab = hasChart ? 1 : 0;
+    countTab += hasTable ? 1 : 0;
+}
 
+<div class="panel-body @(countTab > 1 ? "with-tab" : "without-tab")">
+    @if (countTab > 1)
+    { 
+        <ul class="nav nav-pills nav-justified">
+            @{
+                var activeTabClass = "active";
+            }
+
+            @if (hasChart)
+            {
+                <li class="@activeTabClass"><a data-toggle="tab" href="#chart-@Model.Id">Gráfico</a></li>
+                activeTabClass = "";
+            }
+
+            @if (hasTable)
+            {
+                <li class="@activeTabClass"><a data-toggle="tab" href="#table-@Model.Id">Tabela</a></li>
+                activeTabClass = "";
+            }
+        </ul>
+    }
+    
     <div class="tab-content">
         @{
-            var activeContent = "in active";
+            var activeContentClass = "in active";
         }
-        @if (Model.PanelComponents.HasFlag(SpentBook.Domain.PanelComponents.Chart))
+        @if (hasChart)
         {
-            <div id="chart-@Model.Id" class="tab-pane fade in @activeContent">
+            <div id="chart-@Model.Id" class="tab-pane fade in @activeContentClass">
                 @switch (Model.Panel.GetDataType())
                 {
                     case SpentBook.Domain.Panel.PanelDataType.NonGroup:
@@ -61,26 +73,41 @@
                 </div>
             </div>
             
-            activeContent = "";
+            activeContentClass = "";
         }
         
-        @if (Model.PanelComponents.HasFlag(SpentBook.Domain.PanelComponents.Table))
+        @if (hasTable)
         {   
-            <div id="table-@Model.Id" class="tab-pane fade @activeContent">
+            <div id="table-@Model.Id" class="tab-pane fade @activeContentClass">
                 <script language="javascript">
                     $(document).ready(function () {
-                        $.ajax({
-                            url: '/JsonData/TransactionsTable',
-                            type: "GET",
-                            dataType: "json",
-                            data: { dashboardId: '@Model.Dashboard.Id', panelId: '@Model.Id', tryCategorize: false },
-                            success: function (json) {
-                                var wrapper = $('#table-@Model.Id .content-table');
-                                wrapper.html(json.Table);
-                                wrapper.find("table").treegrid();
-                            },
-                            cache: false
-                        });
+                        var preloader = new Preloader($('#table-@Model.Id').parents(".panel"), 'preload-panel-table-data');
+
+                        var loadData = function () {
+                            $.ajax({
+                                url: '/JsonData/TransactionsTable',
+                                type: "GET",
+                                dataType: "json",
+                                data: { dashboardId: '@Model.Dashboard.Id', panelId: '@Model.Id', tryCategorize: false },
+                                beforeSend: function () {
+                                    preloader.StartPanelPreloader();
+                                },
+                                complete: function () {
+                                    preloader.EndPanelPreloader();
+                                },
+                                success: function (json) {
+                                    var wrapper = $('#table-@Model.Id .content-table');
+                                    wrapper.html(json.Table);
+                                    wrapper.find("table").treegrid();
+                                },
+                                cache: false
+                            });
+                        };
+
+                        loadData();
+                        var interval = setInterval(function () {
+                            loadData();
+                        }, 4000);
                     });
                 </script>
 
@@ -89,7 +116,7 @@
                 </div>
             </div>
             
-            activeContent = "";
+            activeContentClass = "";
         }
 </div>
 
@@ -97,6 +124,7 @@
     @Scripts.Render("~/bundles/jquery-treegrid")
     @Scripts.Render("~/bundles/highcharts")
     @Scripts.Render("~/bundles/custom/highcharts-helper")
+    @Scripts.Render("~/bundles/custom/preloader")
 }
 
 @section styles {

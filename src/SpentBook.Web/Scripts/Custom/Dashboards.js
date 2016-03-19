@@ -12,7 +12,7 @@ window.onload = function () {
                         updateDashboardBox();
                     },
                     error: function (error) {
-                        ErrorResponse(error);
+                        Helper.ErrorResponse(error);
                     }
                 });
             });
@@ -27,7 +27,7 @@ window.onload = function () {
                         updateDashboardBox();
                     },
                     error: function (error) {
-                        ErrorResponse(error);
+                        Helper.ErrorResponse(error);
                     }
                 });
             });
@@ -40,25 +40,3 @@ window.onload = function () {
 
     updateAll();
 };
-
-function ErrorResponse(error)
-{
-    if (error.responseJSON) {
-        if (error.responseJSON.message) {
-            // Type: Action Exception
-            alert(error.responseJSON.message)
-        }
-        else if (error.responseJSON[0]) {
-            // Type: Invalid Model error
-            var strError = "";
-            for (var iField in error.responseJSON)
-                for (var iErro in error.responseJSON[iField].errors)
-                    strError += "- " + error.responseJSON[iField].errors[iErro] + "\r\n";
-            alert(strError);
-        }
-    }
-    else {
-        // Type: Inexpected Exception
-        alert(error.statusText)
-    }
-}
