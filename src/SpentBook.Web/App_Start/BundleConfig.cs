@@ -50,6 +50,7 @@ namespace SpentBook.Web
             bundles.Add(new ScriptBundle("~/bundles/custom/dashboard").Include("~/Scripts/Custom/Dashboard.js"));
             bundles.Add(new ScriptBundle("~/bundles/custom/preloader").Include("~/Scripts/Custom/Preloader.js"));
             bundles.Add(new ScriptBundle("~/bundles/custom/page-dashboard").Include("~/Scripts/Custom/PageDashboard.js"));
+            bundles.Add(new ScriptBundle("~/bundles/custom/code-control").Include("~/Scripts/Custom/CodeControl.js"));
 
             //styles
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/bootstrap.css", "~/Content/site.css"));

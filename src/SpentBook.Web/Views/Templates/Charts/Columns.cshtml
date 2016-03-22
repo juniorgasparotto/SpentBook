@@ -3,19 +3,22 @@
 <script language="javascript">
     $(document).ready(function () {
         Highcharts.setOptions({ "lang": { "decimalPoint": ",", "thousandsSep": "." } });
-        var container = $('#chart-@Model.Id .content-chart');
+
+        var wrapper = $('#chart-@Model.Id');
+        var content = wrapper.find('.content-chart');
+        var panel = wrapper.parents(".panel");
+        var keyCode = 'chart-@Model.Id';
 
         var chart = new Highcharts.Chart({
             chart: {
-                renderTo: container[0],
+                renderTo: content[0],
                 type: "column"
             },
             legend: {
                 align: "center",
                 labelFormatter: function () {
                     var count = 0;
-                    for (var i = 0 ; i < this.yData.length; i++)
-                    {
+                    for (var i = 0 ; i < this.yData.length; i++) {
                         count += this.yData[i];
                     }
                     return this.name + ' (' + Highcharts.numberFormat(count) + ')';
@@ -81,29 +84,50 @@
             }
         });
 
-        var preloader = new Preloader(container.parents(".panel"), 'preload-panel-chart-data');
-        var loadData = function () {
-            $.ajax({
-                url: '/JsonData/TransactionsHighcharts',
-                type: "GET",
-                dataType: "json",
-                data: { dashboardId: '@Model.Dashboard.Id', panelId: '@Model.Id' },
-                beforeSend: function () {
-                    preloader.StartPanelPreloader();
-                },
-                complete: function () {
-                    preloader.EndPanelPreloader();
-                },
-                success: function (json) {
-                    HighchartsHelper.SetChart(chart, json.Categories, json.Series, json.Drilldown);
-                },
-                cache: false
-            });
+        // remove o código anterior desse painel se existir
+        CodeControl.Remove(keyCode);
+
+        var config = {
+            key: keyCode,
+            args: null,
+            method: function (args) {
+                var preloader = new Preloader(panel, 'preload-panel-chart-data');
+
+                $.ajax({
+                    url: '/JsonData/TransactionsHighcharts',
+                    type: "GET",
+                    dataType: "json",
+                    data: { dashboardId: '@Model.Dashboard.Id', panelId: '@Model.Id' },
+                    beforeSend: function () {
+                        preloader.StartPanelPreloader();
+                    },
+                    complete: function () {
+                        preloader.EndPanelPreloader();
+                    },
+                    success: function (json) {
+                        HighchartsHelper.SetChart(chart, json.Categories, json.Series, json.Drilldown);
+                    },
+                    cache: false
+                });
+            },
+            interval: 20000,
+            autoPause: null,
+            autoRemove: function (args) {
+                if (!panel.parent().length) {
+                    return true;
+                }
+
+                return false;
+            },
+            executeIfTrue: function (args) {
+                if (wrapper.is(':visible')) {
+                    return true;
+                }
+
+                return false;
+            }
         };
 
-        loadData();
-        var interval = setInterval(function () {
-            loadData();
-        }, 10000);
+        CodeControl.Add(config, true, true);
     });
 </script>
