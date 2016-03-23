@@ -74,7 +74,6 @@
            
         if (executionItem.interval) {
             executionItem.intervalId = setInterval(function () {
-                console.log(executionItem.key);
                 // 1. caso o método de auto pause retorne TRUE então não pode executar o código
                 // 2. o intervalo deve ser removido
                 var canExecute = true;

@@ -8,21 +8,14 @@
     // ****************************
     // fields
     // ****************************
-    //var disabledWindowElement = $('<div style="width: 100%; height: 100%; position: absolute; left: 0; top: 0;" id="disabled-window"> </div>');
+    // var ...
 
     // ****************************
     // private methods
     // ****************************
 
-    //var DisableWindow = function () {
-    //    $("body").append(disabledWindowElement);
-    //}
-
-    //var EnabledWindow = function () {
-    //    disabledWindowElement.remove();
-    //}
-
     var SetPanelActionsUI = function (panelHtmlObject) {
+        // success state
         panelHtmlObject.find("button.btn-edit").click(function (e) {
             Helper.OpenUrl($(this).find("a").attr("href"));
         });
@@ -32,27 +25,20 @@
         });
 
         panelHtmlObject.find("button.btn-delete").click(function (e) {
-            if (confirm("Deseja realmente excluir este painel?")) {
-                var preloader = new Preloader($('body'), 'preload-body');
-
-                $.ajax({
-                    type: "GET",
-                    url: $(this).find("a").attr("href"),
-                    beforeSend: function () {
-                        preloader.StartPanelPreloader();
-                    },
-                    complete: function () {
-                        preloader.EndPanelPreloader();
-                    },
-                    success: function (html) {
-                        Dashboard.UpdateAllPanels();
-                    },
-                    error: function (error) {
-                        Helper.ErrorResponse(error);
-                    }
-                });
-            }
+            Dashboard.DeletePanelServer($(this).find("a").attr("href"));
         });
+
+        // Error state
+        panelHtmlObject.find(".error a.btn-edit").click(function (e) {
+            Helper.OpenUrl($(this).attr("href"));
+        });
+
+        panelHtmlObject.find(".error a.btn-delete").click(function (e) {
+            Dashboard.DeletePanelServer($(this).attr("href"));
+            e.preventDefault();
+        });
+
+        
     };
 
     // ****************************
@@ -164,6 +150,16 @@
             var content = panelHtmlObjectWrapper.find('.content-panel');
             var preloader = new Preloader(panelHtmlObjectWrapper, 'preload-panel');
 
+            if (!Dashboard.Panels)
+                Dashboard.Panels = new Array();
+
+            var index = Dashboard.Panels.map(function (e) { return e.Id; }).indexOf(panel.Id);
+
+            if (index !== -1)
+                Dashboard.Panels[index] = panel;
+            else
+                Dashboard.Panels.push(panel);
+
             $.ajax({
                 type: "GET",
                 url: Dashboard.UrlPanelView,
@@ -176,22 +172,15 @@
                     preloader.EndPanelPreloader();
                 },
                 success: function (html) {
-                    if (!Dashboard.Panels)
-                        Dashboard.Panels = new Array();
-
-                    var index = Dashboard.Panels.map(function (e) { return e.Id; }).indexOf(panel.Id);
-
-                    if (index !== -1)
-                        Dashboard.Panels[index] = panel;
-                    else
-                        Dashboard.Panels.push(panel);
-                    
                     panelHtmlObjectWrapper.append(html);
                     SetPanelActionsUI(panelHtmlObjectWrapper);
                 },
                 error: function (error) {
-                    alert("Ocorreu um erro ao tentar carregar o painel '" + panel.Id + "', tente edita-lo para resolver o problema");
-                    //Helper.ErrorResponse(error);
+                    var editUrl = '/Panel/Edit?dashboardId={0}&panelId={1}'.format(Dashboard.Id, panel.Id);
+                    var removeUrl = '/Panel/Delete?dashboardId={0}&panelId={1}'.format(Dashboard.Id, panel.Id);
+                    var msgError = "<p class='error'>Ocorreu um erro ao tentar carregar o painel '" + panel.Title + "', tente <a href='{0}' class='btn-edit'>edita-lo</a> para resolver o problema ou até mesmo <a href='{1}' class='btn-delete'>remove-lo</a></p>".format(editUrl, removeUrl);
+                    panelHtmlObjectWrapper.append(msgError);
+                    SetPanelActionsUI(panelHtmlObjectWrapper);
                 }
             });
         },
@@ -204,6 +193,28 @@
             Dashboard.Context.find("#" + id).remove();
             if (Dashboard.Panels.length == 0)
                 Dashboard.ShowEmptyMessage(true);
+        },
+        DeletePanelServer: function(removeUrl) {
+            if (confirm("Deseja realmente excluir este painel?")) {
+                var preloader = new Preloader($('body'), 'preload-body');
+
+                $.ajax({
+                    type: "GET",
+                    url: removeUrl,
+                    beforeSend: function () {
+                        preloader.StartPanelPreloader();
+                    },
+                    complete: function () {
+                        preloader.EndPanelPreloader();
+                    },
+                    success: function (html) {
+                        Dashboard.UpdateAllPanels();
+                    },
+                    error: function (error) {
+                        Helper.ErrorResponse(error);
+                    }
+                });
+            }
         },
         ShowEmptyMessage: function (show) {
             if (show)

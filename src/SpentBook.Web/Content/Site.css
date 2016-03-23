@@ -248,46 +248,6 @@ div#legend span
     max-width: 100%;
 }
 
-/*dashboard page*/
-
-#sortable .panel.panel-info {
-    float: left;
-    margin-right: 0.5%;
-    height: 420px;
-    position: relative;
-    overflow: hidden;
-}
-
-#sortable .panel.panel-info .panel-heading {
-    height: 40px;
-}
-
-#sortable .panel.panel-info .panel-body {
-    overflow: auto;
-    height: 380px;
-}
-
-#sortable { list-style-type: none; margin: 0; padding: 0; }
-
-/* show the move cursor as the user moves the mouse over the panel header.*/
-#sortable .panel-heading {
-    cursor: move;
-}
-
-#sortable .panel.small 
-{
-    width: 24.5%;
-}
-
-#sortable .panel.medium 
-{
-    width: 49%;
-}
-
-#sortable .panel.large 
-{
-    width: 100%;
-}
 
 /*bootstrap extensions*/
 .field-date-from-to {
@@ -311,30 +271,6 @@ div#legend span
     padding: 15px 6px 6px;
 }
 
-.ui-sortable {
-    background: black none repeat scroll 0 0;
-    width: 100%;
-}
-
-/*tab-content*/
-/*.tab-content {
-    width: 100%;
-    height: auto;
-}*/
-
-.tab-content .content-table,
-.tab-content .content-chart {
-    margin-top: 5px;
-}
-
-.panel-body.with-tab .tab-content .content-chart {
-    height: 300px;
-}
-
-.panel-body.without-tab .tab-content .content-chart {
-    height: 340px;
-}
-
 /* progress bar - generic */
 .preload-wrapper
 {
@@ -356,7 +292,6 @@ div#legend span
 }
 
 .preload-wrapper .preload .preload-bar {
-    /*background-color: red;*/
     background-color: #428bca;
     height: 4px;
     width: 0px;
@@ -389,6 +324,66 @@ div#legend span
 }
 
 /*dashboard page*/
+#sortable .panel.panel-info {
+    float: left;
+    margin-right: 0.5%;
+    height: 420px;
+    position: relative;
+    overflow: hidden;
+}
+
+#sortable .panel.panel-info .panel-heading {
+    height: 40px;
+}
+
+#sortable .panel.panel-info .panel-body {
+    overflow: auto;
+    height: 380px;
+}
+
+#sortable { list-style-type: none; margin: 0; padding: 0; }
+
+#sortable .panel-heading {
+    cursor: move;
+}
+
+#sortable .panel.small 
+{
+    width: 24.5%;
+}
+
+#sortable .panel.medium 
+{
+    width: 49%;
+}
+
+#sortable .panel.large 
+{
+    width: 100%;
+}
+
+.ui-sortable {
+    background: black none repeat scroll 0 0;
+    width: 100%;
+}
+
+.tab-content .content-table,
+.tab-content .content-chart {
+    margin-top: 5px;
+}
+
+.panel-body.with-tab .tab-content .content-chart {
+    height: 300px;
+}
+
+.panel-body.without-tab .tab-content .content-chart {
+    height: 340px;
+}
+
+.panel .error {
+    padding: 20px;
+}
+
 .preload-wrapper.preload-panel {
     background-color: #fff;
     opacity: 0.3;

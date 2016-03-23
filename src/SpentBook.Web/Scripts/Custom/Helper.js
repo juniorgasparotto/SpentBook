@@ -44,8 +44,9 @@
                 alert(error.statusText)
             }
         },
-        OpenUrl: function(url) {
-            var win = window.open(url, '_self');
+        OpenUrl: function (url, target) {
+            target = target ? target : '_self';
+            var win = window.open(url, target);
             win.focus();
         },
         DisableWindow: function () {

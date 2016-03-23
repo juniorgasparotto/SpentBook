@@ -9,9 +9,9 @@
         {
           "Id": "c4c40721-0bb4-4757-9152-9a6e5c3b7c25",
           "CreateDate": "2016-02-11T22:37:26.0078002-02:00",
-          "LastUpdateDate": "2016-03-22T00:07:16.6975617-03:00",
+          "LastUpdateDate": "2016-03-22T20:53:55.3440344-03:00",
           "ViewName": "~/Views/CustomPanels/ChartLines.cshtml",
-          "Title": "Teste",
+          "Title": "Teste 2",
           "PanelComponents": 1,
           "PanelOrder": 1,
           "GroupBy": 0,
@@ -36,6 +36,37 @@
             "TransactionType": 2
           },
           "PanelWidth": 1
+        },
+        {
+          "Id": "51a6273e-2604-486a-b0c7-639dbb0cff31",
+          "CreateDate": "2016-03-22T22:30:55.3239182-03:00",
+          "LastUpdateDate": "2016-03-22T22:30:55.3239182-03:00",
+          "ViewName": "~/Views/CustomPanels/ChartLines.cshtml",
+          "Title": "Teste 4",
+          "PanelComponents": 0,
+          "PanelOrder": 2,
+          "GroupBy": 0,
+          "GroupByOrderBy": 0,
+          "GroupByOrderByClassification": 0,
+          "GroupBy2": 0,
+          "GroupByOrderBy2": 0,
+          "GroupByOrderByClassification2": 0,
+          "GroupBy3": 0,
+          "GroupByOrderBy3": 0,
+          "GroupByOrderByClassification3": 0,
+          "OrderBy": 0,
+          "OrderByClassification": 0,
+          "Filter": {
+            "DateStart": null,
+            "DateEnd": null,
+            "ValueStart": null,
+            "ValueEnd": null,
+            "Categories": null,
+            "SubCategories": null,
+            "Names": null,
+            "TransactionType": 0
+          },
+          "PanelWidth": 0
         }
       ],
       "FriendlyUrl": "teste"

@@ -39,7 +39,7 @@ namespace SpentBook.Web.Controllers
                 from panelInterface in panelsExistsInInterface.Where(f => f.Id == panelDB.Id).DefaultIfEmpty()
                 where panelInterface == null
                 orderby panelDB.PanelOrder, panelDB.Title ascending
-                select new { panelDB.Id, panelDB.LastUpdateDate, panelDB.PanelOrder, PanelWidth = panelDB.PanelWidth.ToString().ToLower() }
+                select new { panelDB.Id, panelDB.Title, panelDB.LastUpdateDate, panelDB.PanelOrder, PanelWidth = panelDB.PanelWidth.ToString().ToLower() }
             ).ToList();
 
             // exists in both, but the update date in DB is more than interface
@@ -48,7 +48,7 @@ namespace SpentBook.Web.Controllers
                 join panelInterface in panelsExistsInInterface on panelDB.Id equals panelInterface.Id
                 where panelDB.LastUpdateDate > panelInterface.LastUpdateDate
                 orderby panelDB.PanelOrder, panelDB.Title ascending
-                select new { panelDB.Id, panelDB.LastUpdateDate, panelDB.PanelOrder, PanelWidth = panelDB.PanelWidth.ToString().ToLower() }
+                select new { panelDB.Id, panelDB.LastUpdateDate, panelDB.Title, panelDB.PanelOrder, PanelWidth = panelDB.PanelWidth.ToString().ToLower() }
             ).ToList();
 
             // exists in interface but not exists in DB
