@@ -40,10 +40,10 @@
         {
           "Id": "51a6273e-2604-486a-b0c7-639dbb0cff31",
           "CreateDate": "2016-03-22T22:30:55.3239182-03:00",
-          "LastUpdateDate": "2016-03-22T22:30:55.3239182-03:00",
+          "LastUpdateDate": "2016-03-22T23:03:44.1205269-03:00",
           "ViewName": "~/Views/CustomPanels/ChartLines.cshtml",
           "Title": "Teste 4",
-          "PanelComponents": 0,
+          "PanelComponents": 2,
           "PanelOrder": 2,
           "GroupBy": 0,
           "GroupByOrderBy": 0,

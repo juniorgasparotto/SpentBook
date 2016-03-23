@@ -46,7 +46,8 @@
     // ****************************
 
     Dashboard = Dashboard.prototype = {
-        EnableSortable: function() {
+        PanelDataUpdateTimer: 20000,
+        EnableSortable: function () {
             Dashboard.Context.sortable({
                 handle: '.panel-heading',
                 connectWith: ".panel",
@@ -80,13 +81,13 @@
                     });
                 },
                 update: function (event, ui) {
-                    
+
                 }
             });
-        },       
+        },
         UpdateAllPanels: function () {
             var preloader = new Preloader($('body'), 'preload-body');
-            
+
             $.ajax({
                 type: "POST",
                 url: Dashboard.UrlPanelsUpdated,
@@ -119,14 +120,14 @@
                             .From(changes.News)
                             .Union(changes.Updateds)
                             .OrderBy(function (item) { return item.PanelOrder })
-                            .ToArray();                        
+                            .ToArray();
 
                         var itemTemplate = '<div class="panel panel-info {0}" id="{1}"></div>';
-                       
+
                         for (var iPanel in panelsChangeds) {
                             var panel = panelsChangeds[iPanel];
                             var panelHtmlObjectWrapper = $(itemTemplate.format(panel.PanelWidth, panel.Id));
-                            
+
                             // remove if already exists to update
                             Dashboard.Context.find("#" + panel.Id).remove();
 
@@ -194,7 +195,7 @@
             if (Dashboard.Panels.length == 0)
                 Dashboard.ShowEmptyMessage(true);
         },
-        DeletePanelServer: function(removeUrl) {
+        DeletePanelServer: function (removeUrl) {
             if (confirm("Deseja realmente excluir este painel?")) {
                 var preloader = new Preloader($('body'), 'preload-body');
 
@@ -221,6 +222,6 @@
                 Dashboard.EmptyContext.show();
             else
                 Dashboard.EmptyContext.hide();
-        },        
-    }
+        },
+    };
 }());
