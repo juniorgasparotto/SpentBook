@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -28,21 +29,27 @@ namespace SpentBook.Domain
         public string Title { get; set; }
         public PanelComponents PanelComponents { get; set; }
         public int PanelOrder { get; set; }
+        
+        public TransactionOrder OrderBy { get; set; }
+        public OrderClassification OrderByClassification { get; set; }
 
         public TransactionGroupBy GroupBy { get; set; }
         public TransactionOrder GroupByOrderBy { get; set; }
-        public TransactionOrderClassification GroupByOrderByClassification { get; set; }
+        public OrderClassification GroupByOrderByClassification { get; set; }
+        public TransactionGroupOrder GroupByOrderByGroup { get; set; }
+        public OrderClassification GroupByOrderByGroupClassification { get; set; }
 
         public TransactionGroupBy GroupBy2 { get; set; }
         public TransactionOrder GroupByOrderBy2 { get; set; }
-        public TransactionOrderClassification GroupByOrderByClassification2 { get; set; }
+        public OrderClassification GroupByOrderByClassification2 { get; set; }
+        public TransactionGroupOrder GroupByOrderByGroup2 { get; set; }
+        public OrderClassification GroupByOrderByGroupClassification2 { get; set; }
 
         public TransactionGroupBy GroupBy3 { get; set; }
         public TransactionOrder GroupByOrderBy3 { get; set; }
-        public TransactionOrderClassification GroupByOrderByClassification3 { get; set; }
-
-        public TransactionOrder OrderBy { get; set; }
-        public TransactionOrderClassification OrderByClassification { get; set; }
+        public OrderClassification GroupByOrderByClassification3 { get; set; }
+        public TransactionGroupOrder GroupByOrderByGroup3 { get; set; }
+        public OrderClassification GroupByOrderByGroupClassification3 { get; set; }
 
         public TransactionFilter Filter { get; set; }
         public PanelWidth PanelWidth { get; set; }
@@ -52,7 +59,7 @@ namespace SpentBook.Domain
             if (this._groupDefinitions == null)
             {
                 this._groupDefinitions = new List<TransactionGroupDefinition>();
-                var onlyOutputs = this.Filter.TransactionType == TransactionType.Output;
+                //var onlyOutputs = this.Filter.TransactionType == TransactionType.Output;
                 var groupByName = "";
                 var orderByName = "";
 
@@ -60,13 +67,17 @@ namespace SpentBook.Domain
                 {
                     var groupBy1 = new TransactionGroupDefinition()
                     {
-                        GroupBy = this.GroupBy,
                         OrderBy = this.GroupByOrderBy,
                         OrderByClassification = this.GroupByOrderByClassification,
+                        OrderByExpression = this.GetOrderByExpression(this.GroupByOrderBy, out orderByName),
+                        OrderByName = orderByName,
+                        GroupBy = this.GroupBy,
                         GroupByExpression = this.GetGroupByExpression(this.GroupBy, out groupByName),
                         GroupByName = groupByName,
-                        OrderByExpression = this.GetOrderByExpression(this.GroupByOrderBy, out orderByName),
-                        OrderByName = groupByName,
+                        OrderByGroup = this.GroupByOrderByGroup,
+                        OrderByGroupClassification = this.GroupByOrderByGroupClassification,
+                        OrderByGroupExpression = this.GetOrderByGroupExpression(this.GroupByOrderByGroup, out orderByName),
+                        OrderByGroupName = orderByName,
                     };
                     this._groupDefinitions.Add(groupBy1);
                 }
@@ -75,13 +86,17 @@ namespace SpentBook.Domain
                 {
                     var groupBy2 = new TransactionGroupDefinition()
                     {
-                        GroupBy = this.GroupBy2,
                         OrderBy = this.GroupByOrderBy2,
                         OrderByClassification = this.GroupByOrderByClassification2,
+                        OrderByExpression = this.GetOrderByExpression(this.GroupByOrderBy2, out orderByName),
+                        OrderByName = orderByName,
+                        GroupBy = this.GroupBy2,
                         GroupByExpression = this.GetGroupByExpression(this.GroupBy2, out groupByName),
                         GroupByName = groupByName,
-                        OrderByExpression = this.GetOrderByExpression(this.GroupByOrderBy2, out orderByName),
-                        OrderByName = groupByName,
+                        OrderByGroup = this.GroupByOrderByGroup2,
+                        OrderByGroupClassification = this.GroupByOrderByGroupClassification2,
+                        OrderByGroupExpression = this.GetOrderByGroupExpression(this.GroupByOrderByGroup2, out orderByName),
+                        OrderByGroupName = orderByName,
                     };
                     this._groupDefinitions.Add(groupBy2);
                 }
@@ -90,13 +105,17 @@ namespace SpentBook.Domain
                 {
                     var groupBy3 = new TransactionGroupDefinition()
                     {
-                        GroupBy = this.GroupBy3,
                         OrderBy = this.GroupByOrderBy3,
                         OrderByClassification = this.GroupByOrderByClassification3,
+                        OrderByExpression = this.GetOrderByExpression(this.GroupByOrderBy3, out orderByName),
+                        OrderByName = orderByName,
+                        GroupBy = this.GroupBy3,
                         GroupByExpression = this.GetGroupByExpression(this.GroupBy3, out groupByName),
                         GroupByName = groupByName,
-                        OrderByExpression = this.GetOrderByExpression(this.GroupByOrderBy3, out orderByName),
-                        OrderByName = groupByName,
+                        OrderByGroup = this.GroupByOrderByGroup3,
+                        OrderByGroupClassification = this.GroupByOrderByGroupClassification3,
+                        OrderByGroupExpression = this.GetOrderByGroupExpression(this.GroupByOrderByGroup3, out orderByName),
+                        OrderByGroupName = orderByName,
                     };
                     this._groupDefinitions.Add(groupBy3);
                 }
@@ -176,6 +195,50 @@ namespace SpentBook.Domain
                     return f => f.Name;
             }
             orderByName = "Nenhum";
+            return null;
+        }
+
+        public Expression<Func<TransactionGroup, object>> GetOrderByGroupExpression(TransactionGroupOrder orderBy, out string orderByName)
+        {
+            switch (orderBy)
+            {
+                case TransactionGroupOrder.Agrupador:
+                    orderByName = "Agrupador";
+                    break;
+                case TransactionGroupOrder.Total:
+                    orderByName = "Total";
+                    break;
+                case TransactionGroupOrder.TransactionCount:
+                    orderByName = "Qtd. de transações";
+                    break;
+                default:
+                    orderByName = "Nenhum";
+                    break;
+            }
+
+            return f => GetTransactionGroupOrderByValue(f, orderBy);
+        }
+
+        public static object GetTransactionGroupOrderByValue(TransactionGroup transactionGroup, TransactionGroupOrder orderBy)
+        {
+            switch (orderBy)
+            {
+                case TransactionGroupOrder.Agrupador:
+                    var groupBy = transactionGroup.Parent.GroupByDefinition.GroupBy;
+                    if (groupBy == TransactionGroupBy.DateDay)
+                        return DateTime.ParseExact(transactionGroup.Key, "yyyy/MM/dd", CultureInfo.InvariantCulture);
+                    else if (groupBy == TransactionGroupBy.DateMonth)
+                        return DateTime.ParseExact(transactionGroup.Key + "/01", "yyyy/MM/01", CultureInfo.InvariantCulture);
+                    else if (groupBy == TransactionGroupBy.DateMonth)
+                        return DateTime.ParseExact(transactionGroup.Key + "/01/01", "yyyy/01/01", CultureInfo.InvariantCulture);
+
+                    return transactionGroup.Key;
+                case TransactionGroupOrder.Total:
+                    return transactionGroup.Total;
+                case TransactionGroupOrder.TransactionCount:
+                    return transactionGroup.TransactionCount;
+            }
+
             return null;
         }
     }

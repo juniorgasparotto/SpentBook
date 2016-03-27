@@ -26,19 +26,18 @@
                 y: 3
             },
             plotOptions: {
-                column:
-                    {
-                        borderWidth: 0,
-                        dataLabels: {
-                            align: "left",
-                            color: "#000000",
-                            enabled: true,
-                            format: "{point.y:.2f}",
-                            rotation: 270,
-                            verticalAlign: "middle"
-                        },
-                        pointPadding: 0.2,
-                    }
+                column: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        align: "left",
+                        color: "#000000",
+                        enabled: true,
+                        format: "{point.y:.2f}",
+                        rotation: 270,
+                        verticalAlign: "middle"
+                    },
+                    pointPadding: 0.2,
+                },
             },
             title: {
                 text: null
@@ -50,7 +49,8 @@
             yAxis: {
                 title: {
                     text: "R$"
-                }
+                },
+                //reversed: true
             },
             xAxis: {
                 type: 'category',
@@ -84,6 +84,8 @@
             }
         });
 
+        window.chart = chart;
+
         // remove o código anterior desse painel se existir
         CodeControl.Remove(keyCode);
 
@@ -105,7 +107,10 @@
                         preloader.EndPanelPreloader();
                     },
                     success: function (json) {
-                        HighchartsHelper.SetChart(chart, json.Categories, json.Series, json.Drilldown);
+                        //if (json.Reversed) {
+                        //    chart.yAxis[0].reversed = true;
+                        //}
+                        HighchartsHelper.SetChart(chart, json.Categories, json.Series, json.Drilldown);                        
                     },
                     cache: false
                 });

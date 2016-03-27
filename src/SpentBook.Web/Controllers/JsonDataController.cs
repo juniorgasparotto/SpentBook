@@ -116,6 +116,8 @@ namespace SpentBook.Web.Controllers
 
             var panel = this.GetPanel(dashboardId, panelId);
             var transactions = this.GetTransactionsFiltrated(panel);
+            var hasOnlyOutputs = true;
+
             var type = panel.GetDataType();
             switch (type)
             {
@@ -135,10 +137,16 @@ namespace SpentBook.Web.Controllers
                     var index = 0;
                     foreach (var transactionDayGroup in transactionsDayGrouped)
                     {
+                        var total = transactionDayGroup.Sum(f => f.Value);
+
                         serieData[index] = new SeriesData();
                         serieData[index].X = Helper.UnixTicks(transactionDayGroup.Key);
-                        serieData[index].Y = (Number)transactionDayGroup.Sum(f => f.Value);
+                        serieData[index].Y = (Number)total;
                         serieData[index].Name = transactionDayGroup.Key.ToString("d");
+
+                        if (total > 0)
+                            hasOnlyOutputs = false;
+
                         index++;
                     }
                     break;
@@ -192,6 +200,9 @@ namespace SpentBook.Web.Controllers
                                     Id = data.Category,
                                     Drilldown = data.ItemPath
                                 };
+
+                                if (data.TotalItemInCategory > 0)
+                                    hasOnlyOutputs = false;
                             }
                         }
                     }
@@ -200,7 +211,7 @@ namespace SpentBook.Web.Controllers
                 }
             }
 
-            return Json(new { Series = series, Drilldown = seriesDrilldown }, JsonRequestBehavior.AllowGet);
+            return Json(new { Series = series, Drilldown = seriesDrilldown, Reversed = hasOnlyOutputs }, JsonRequestBehavior.AllowGet);
         }
 
         //[HttpGet]
@@ -357,7 +368,7 @@ namespace SpentBook.Web.Controllers
             string orderByName;
             var expressionOrderBy = panel.GetOrderByExpression(panel.OrderBy, out orderByName);
 
-            if (panel.OrderByClassification == TransactionOrderClassification.Asc)
+            if (panel.OrderByClassification == OrderClassification.Asc)
                 query = query.OrderBy(expressionOrderBy);
             else
                 query = query.OrderByDescending(expressionOrderBy);
@@ -378,11 +389,11 @@ namespace SpentBook.Web.Controllers
 
                 if (groupDefinitions.Count > groupByIndex)
                     groupByDefinition = groupDefinitions[groupByIndex];
-
+                
                 if (groupByDefinition != null)
                 {
                     var _transactionsQueryable = _transactions.AsQueryable();
-                    if (groupByDefinition.OrderByClassification == TransactionOrderClassification.Asc)
+                    if (groupByDefinition.OrderByClassification == OrderClassification.Asc)
                         _transactionsQueryable = _transactionsQueryable.OrderBy(groupByDefinition.OrderByExpression);
                     else
                         _transactionsQueryable = _transactionsQueryable.OrderByDescending(groupByDefinition.OrderByExpression);
@@ -390,6 +401,8 @@ namespace SpentBook.Web.Controllers
                     var group = _transactionsQueryable
                         .GroupBy(groupByDefinition.GroupByExpression)
                         .ToList();
+
+                    transactionGroupParent.GroupByDefinition = groupByDefinition;
 
                     //if (groupByDefinition.OrderByClassification == TransactionOrderClassification.Asc)
                     //    group = group.OrderBy(f=>f.Sum(o => o.ValueAsPositive)).ToList();
@@ -404,24 +417,28 @@ namespace SpentBook.Web.Controllers
                             var list = g.ToList();
                             var name = this.GetGroupByNameUsingValue(groupByDefinition.GroupBy, list);
                             var key = g.Key.ToString();
-                            var transactionGroup = CreateTransactionGroup(key, name, groupByDefinition, list, null, transactionGroupParent, nextGroupByIndex, onlyOutputs);
+                            var transactionGroup = ConfigureTransactionGroup(new TransactionGroup(), key, name, groupByDefinition, list, null, transactionGroupParent, nextGroupByIndex, onlyOutputs);
                             transactionGroup.SubGroups = methodGroup(list, transactionGroup, nextGroupByIndex);
                             return transactionGroup;
                         }
                     );
 
-                    /// TODO
-                    transactionGroupsNews = transactionGroupsNews.OrderByDescending(f => f.TotalAsPositive);
+                    if (groupByDefinition.OrderByGroupClassification == OrderClassification.Asc)
+                        transactionGroupsNews = transactionGroupsNews.AsQueryable().OrderBy(groupByDefinition.OrderByGroupExpression);
+                    else
+                        transactionGroupsNews = transactionGroupsNews.AsQueryable().OrderByDescending(groupByDefinition.OrderByGroupExpression);
 
-                    transactionGroups.AddRange(transactionGroupsNews.ToList());
+                    var transactionGroupsNewsList = transactionGroupsNews.ToList();
+                    transactionGroups.AddRange(transactionGroupsNewsList);
                 }
 
                 return transactionGroups;
             };
 
-            var transactionGroupsReturn = methodGroup(transactions, null, 0);
+            var transactionGroupRoot = new TransactionGroup();
+            var transactionGroupsReturn = methodGroup(transactions, transactionGroupRoot, 0);
             var transactionsRoot = transactionGroupsReturn.SelectMany(f => f.Transactions).ToList();
-            var transactionGroupRoot = CreateTransactionGroup(null, "Todos", null, transactionsRoot, transactionGroupsReturn, null, 0, onlyOutputs);
+            ConfigureTransactionGroup(transactionGroupRoot, null, "Todos", null, transactionsRoot, transactionGroupsReturn, null, 0, onlyOutputs);
 
             foreach (var s in transactionGroupsReturn)
                 s.Parent = transactionGroupRoot;
@@ -448,11 +465,12 @@ namespace SpentBook.Web.Controllers
                 if (tryCategorize && current.Parent == null)
                 {
                     var children = current.SubGroups;
-                    var grandchildrenGroups = tryCategorize ? children.SelectMany(f => f.SubGroups).GroupBy(f => f.Key).ToList() : null;
+                    var grandchildrenGroups = children.SelectMany(f => f.SubGroups).GroupBy(f => f.Key).ToList();
 
                     foreach (var grandchildrenGroup in grandchildrenGroups)
                     {
                         var list = grandchildrenGroup.ToList();
+
                         var inverted = new TransactionGroupTransversal()
                         {
                             Id = ++id,
@@ -467,7 +485,7 @@ namespace SpentBook.Web.Controllers
                         foreach (var grandchild in list)
                         {
                             var indexOfParent = current.SubGroups.IndexOf(grandchild.Parent);
-                            inverted.Add(grandchild.GetPath(), grandchild.Parent.Key, grandchild.TotalAsPositive, indexOfParent);
+                            inverted.Add(grandchild.GetPath(), grandchild.Parent.Key, grandchild.Total, indexOfParent);
                             methodGroup(grandchild, inverted);
                         }
                     }
@@ -492,7 +510,7 @@ namespace SpentBook.Web.Controllers
                     var index = 0;
                     foreach (var childGroup in current.SubGroups)
                     {
-                        inverted.Add(childGroup.GetPath(), childGroup.Key, childGroup.TotalAsPositive, index++);
+                        inverted.Add(childGroup.GetPath(), childGroup.Key, childGroup.Total, index++);
                         methodGroup(childGroup, inverted);
                     }
                 }
@@ -506,11 +524,11 @@ namespace SpentBook.Web.Controllers
             return listReturn;
         }
 
-        private TransactionGroup CreateTransactionGroup(string key, string name, TransactionGroupDefinition groupByDefinition, List<Transaction> transactions, List<TransactionGroup> subGroups, TransactionGroup parent, int level, bool onlyOutputs)
+        private TransactionGroup ConfigureTransactionGroup(TransactionGroup transactionGroup, string key, string name, TransactionGroupDefinition groupByDefinition, List<Transaction> transactions, List<TransactionGroup> subGroups, TransactionGroup parent, int level, bool onlyOutputs)
         {
-            var transactionGroup = new TransactionGroup();
+            //var transactionGroup = new TransactionGroup();
             transactionGroup.Key = key;
-            transactionGroup.GroupByDefinition = groupByDefinition;
+            //transactionGroup.GroupByDefinition = groupByDefinition;
             transactionGroup.Name = name;
             transactionGroup.Parent = parent;
             transactionGroup.Transactions = transactions;
@@ -520,12 +538,13 @@ namespace SpentBook.Web.Controllers
 
             var totalAsNormal = (double)transactionGroup.Transactions.Sum(f => f.Value);
 
-            if (onlyOutputs)
-                transactionGroup.TotalAsPositive = (double)transactionGroup.Transactions.Sum(f => f.ValueAsPositive);
-            else
-                transactionGroup.TotalAsPositive = totalAsNormal;
-            
-            transactionGroup.TotalAsNormal = totalAsNormal;
+            //if (onlyOutputs)
+            //    transactionGroup.Total = (double)transactionGroup.Transactions.Sum(f => f.ValueAsPositive);
+            //else
+            //    transactionGroup.Total = totalAsNormal;
+
+            transactionGroup.Total = totalAsNormal;
+            transactionGroup.TotalAsPositive = Math.Abs(totalAsNormal);
 
             return transactionGroup;
         }

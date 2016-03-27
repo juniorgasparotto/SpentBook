@@ -1,31 +1,13 @@
-﻿using CsvHelper;
-using SpentBook.Data.FileSystem;
-using SpentBook.Domain;
-using SpentBook.Web.Filters;
-using SpentBook.Web.Models;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Web;
-using System.Web.Mvc;
-using System.Linq.Dynamic;
-using DotNet.Highcharts.Options;
-using DotNet.Highcharts.Helpers;
-using ExpressionGraph;
-
-namespace SpentBook.Web.Models
+﻿using System.Collections.Generic;
+namespace SpentBook.Domain
 {
     public class TransactionGroup
     {
         public string Key { get; set; }
         public TransactionGroupDefinition GroupByDefinition { get; set; }
         public string Name { get; set; }
+        public double Total { get; set; }
         public double TotalAsPositive { get; set; }
-        public double TotalAsNormal { get; set; }
         public List<Transaction> Transactions { get; set; }
         public List<TransactionGroup> SubGroups { get; set; }
         public TransactionGroup Parent { get; set; }

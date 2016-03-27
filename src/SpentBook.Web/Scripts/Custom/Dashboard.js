@@ -46,7 +46,7 @@
     // ****************************
 
     Dashboard = Dashboard.prototype = {
-        PanelDataUpdateTimer: 20000,
+        PanelDataUpdateTimer: 0,
         EnableSortable: function () {
             Dashboard.Context.sortable({
                 handle: '.panel-heading',

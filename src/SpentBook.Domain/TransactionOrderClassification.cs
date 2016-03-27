@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 namespace SpentBook.Domain
 {
-    public enum TransactionOrderClassification
+    public enum OrderClassification
     {
         [Display(Name = "Ascendente")]
         Asc,

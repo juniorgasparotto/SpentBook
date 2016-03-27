@@ -192,9 +192,9 @@
     <Compile Include="Models\Chart\ChartBarModel.cs" />
     <Compile Include="Models\Chart\ChartDoughnutModel.cs" />
     <Compile Include="Models\DashboardsModel.cs" />
-    <Compile Include="Models\TransactionGroupTransversal.cs" />
-    <Compile Include="Models\TransactionGroupDefinition.cs" />
-    <Compile Include="Models\TransactionGroup.cs" />
+    <Compile Include="Models\deleted\TransactionGroupTransversal.cs" />
+    <Compile Include="Models\deleted\TransactionGroupDefinition.cs" />
+    <Compile Include="Models\deleted\TransactionGroup.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\PanelModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

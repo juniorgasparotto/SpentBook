@@ -39,7 +39,7 @@
 
     window.CodeControl.Remove = function (key) {
         if (!executions[key]) {
-            console.log("Key '" + key + "' not found");
+            //console.log("Key '" + key + "' not found");
             return;
         }
 
@@ -54,7 +54,7 @@
 
     window.CodeControl.Pause = function (key) {
         if (!executions[key]) {
-            console.log("Key '" + key + "' not found");
+            //console.log("Key '" + key + "' not found");
             return;
         }
 

@@ -196,15 +196,25 @@ namespace SpentBook.Web.Controllers
                 model.PanelOrder = panel.PanelOrder;
                 model.PanelWidth = panel.PanelWidth;
                 model.PanelComponents = panel.PanelComponents;
+                
                 model.GroupBy = panel.GroupBy;
                 model.GroupByOrderBy = panel.GroupByOrderBy;
                 model.GroupByOrderByClassification = panel.GroupByOrderByClassification;
+                model.GroupByOrderByGroup = panel.GroupByOrderByGroup;
+                model.GroupByOrderByGroupClassification = panel.GroupByOrderByGroupClassification;
+
                 model.GroupBy2 = panel.GroupBy2;
                 model.GroupByOrderBy2 = panel.GroupByOrderBy2;
                 model.GroupByOrderByClassification2 = panel.GroupByOrderByClassification2;
+                model.GroupByOrderByGroup2 = panel.GroupByOrderByGroup2;
+                model.GroupByOrderByGroupClassification2 = panel.GroupByOrderByGroupClassification2;
+
                 model.GroupBy3 = panel.GroupBy3;
                 model.GroupByOrderBy3 = panel.GroupByOrderBy3;
                 model.GroupByOrderByClassification3 = panel.GroupByOrderByClassification3;
+                model.GroupByOrderByGroup3 = panel.GroupByOrderByGroup3;
+                model.GroupByOrderByGroupClassification3 = panel.GroupByOrderByGroupClassification3;
+
                 model.OrderBy = panel.OrderBy;
                 model.OrderByClassification = panel.OrderByClassification;
                 model.FilterTransactionType = panel.Filter.TransactionType;
@@ -236,15 +246,25 @@ namespace SpentBook.Web.Controllers
             panel.PanelComponents = model.PanelComponents;
             panel.PanelOrder = model.PanelOrder;
             panel.PanelWidth = model.PanelWidth;
+            
             panel.GroupBy = model.GroupBy;
             panel.GroupByOrderBy = model.GroupByOrderBy;
             panel.GroupByOrderByClassification = model.GroupByOrderByClassification;
+            panel.GroupByOrderByGroup = model.GroupByOrderByGroup;
+            panel.GroupByOrderByGroupClassification = model.GroupByOrderByGroupClassification;
+
             panel.GroupBy2 = model.GroupBy2;
             panel.GroupByOrderBy2 = model.GroupByOrderBy2;
             panel.GroupByOrderByClassification2 = model.GroupByOrderByClassification2;
+            panel.GroupByOrderByGroup2 = model.GroupByOrderByGroup2;
+            panel.GroupByOrderByGroupClassification2 = model.GroupByOrderByGroupClassification2;
+
             panel.GroupBy3 = model.GroupBy3;
             panel.GroupByOrderBy3 = model.GroupByOrderBy3;
             panel.GroupByOrderByClassification3 = model.GroupByOrderByClassification3;
+            panel.GroupByOrderByGroup3 = model.GroupByOrderByGroup3;
+            panel.GroupByOrderByGroupClassification3 = model.GroupByOrderByGroupClassification3;
+
             panel.OrderBy = model.OrderBy;
             panel.OrderByClassification = model.OrderByClassification;
             panel.Filter = new TransactionFilter();

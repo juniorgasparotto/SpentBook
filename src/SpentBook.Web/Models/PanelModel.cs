@@ -49,7 +49,13 @@ namespace SpentBook.Web.Models
         public TransactionOrder GroupByOrderBy { get; set; }
         
         [Display(Name = "Classificar por")]
-        public TransactionOrderClassification GroupByOrderByClassification { get; set; }
+        public OrderClassification GroupByOrderByClassification { get; set; }
+
+        [Display(Name = "Ordernar grupo por")]
+        public TransactionGroupOrder GroupByOrderByGroup { get; set; }
+
+        [Display(Name = "Classificar grupo por")]
+        public OrderClassification GroupByOrderByGroupClassification { get; set; }
 
         [Display(Name = "Agrupamento secundário por")]
         public TransactionGroupBy GroupBy2 { get; set; }
@@ -58,7 +64,13 @@ namespace SpentBook.Web.Models
         public TransactionOrder GroupByOrderBy2 { get; set; }
         
         [Display(Name = "Classificar por")]
-        public TransactionOrderClassification GroupByOrderByClassification2 { get; set; }
+        public OrderClassification GroupByOrderByClassification2 { get; set; }
+
+        [Display(Name = "Ordernar grupo por")]
+        public TransactionGroupOrder GroupByOrderByGroup2 { get; set; }
+
+        [Display(Name = "Classificar grupo por")]
+        public OrderClassification GroupByOrderByGroupClassification2 { get; set; }
 
         [Display(Name = "Agrupamento terciario por")]
         public TransactionGroupBy GroupBy3 { get; set; }
@@ -67,7 +79,13 @@ namespace SpentBook.Web.Models
         public TransactionOrder GroupByOrderBy3 { get; set; }
 
         [Display(Name = "Classificar por")]
-        public TransactionOrderClassification GroupByOrderByClassification3 { get; set; }
+        public OrderClassification GroupByOrderByClassification3 { get; set; }
+
+        [Display(Name = "Ordernar grupo por")]
+        public TransactionGroupOrder GroupByOrderByGroup3 { get; set; }
+
+        [Display(Name = "Classificar grupo por")]
+        public OrderClassification GroupByOrderByGroupClassification3 { get; set; }
 
         #endregion
 
@@ -77,7 +95,7 @@ namespace SpentBook.Web.Models
         public TransactionOrder OrderBy { get; set; }
 
         [Display(Name = "Classificar")]
-        public TransactionOrderClassification OrderByClassification { get; set; }
+        public OrderClassification OrderByClassification { get; set; }
 
         #endregion
 

@@ -1,4 +1,4 @@
-﻿@model List<ExpressionGraph.Expression<SpentBook.Web.Models.TransactionGroup>>
+﻿@model List<ExpressionGraph.Expression<SpentBook.Domain.TransactionGroup>>
 
 <table class="table tree">
     <thead>
@@ -15,7 +15,7 @@
             {
                 <tr class="treegrid-@expressionItem.Id @(expressionItem.Parent == null ? "" : "treegrid-parent-" + expressionItem.Parent.Id)">
                     <td>@expressionItem.ToString()</td>
-                    <td>@expressionItem.Entity.TotalAsNormal</td>
+                    <td>@expressionItem.Entity.Total</td>
                     <td>@expressionItem.Entity.TransactionCount</td>
                 </tr>
             }

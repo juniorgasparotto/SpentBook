@@ -12,6 +12,8 @@ using System.Security.Principal;
 using SpentBook.Data.FileSystem;
 using System.Text.RegularExpressions;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 
 namespace SpentBook.Web.Controllers
 {
@@ -104,6 +106,15 @@ namespace SpentBook.Web.Controllers
             DateTime d2 = dt.ToUniversalTime();
             TimeSpan ts = new TimeSpan(d2.Ticks - d1.Ticks);
             return ts.TotalMilliseconds;
+        }
+
+        public static string GetDisplayName(this Enum enumValue)
+        {
+            return enumValue.GetType()
+                            .GetMember(enumValue.ToString())
+                            .First()
+                            .GetCustomAttribute<DisplayAttribute>()
+                            .GetName();
         }
     }
 }
