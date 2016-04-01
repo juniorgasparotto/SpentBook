@@ -3,6 +3,30 @@
 <script language="javascript">
     $(document).ready(function () {
         Highcharts.setOptions({ "lang": { "decimalPoint": ",", "thousandsSep": "." } });
+        var pointFormat = "";
+        var yAxisTitle = "";
+        var funcFormat = function (number) { return Highcharts.numberFormat(number); };
+        
+        if ('@Model.DisplayY' == '@SpentBook.Domain.TransactionDisplayY.Value')
+        {
+            pointFormat = "<span style='color:{series.color}'>\u25CF</span> {series.name} - {point.name}: <b>R$ {point.y:.2f}</b><br/>";
+            yAxisTitle = "R$";
+            
+        }
+        else if ('@Model.DisplayY' == '@SpentBook.Domain.TransactionDisplayY.ValuePercentage')
+        {
+            pointFormat = "<span style='color:{series.color}'>\u25CF</span> {series.name} - {point.name}: <b>{point.y:.2f}%</b><br/>";
+            yAxisTitle = "%";
+        }
+        else if ('@Model.DisplayY' == '@SpentBook.Domain.TransactionDisplayY.Count') {
+            pointFormat = "<span style='color:{series.color}'>\u25CF</span> {series.name} - {point.name}: <b>{point.y}</b><br/>";
+            yAxisTitle = "Frequência";
+            funcFormat = function (number) { return number; };
+        }
+        else if ('@Model.DisplayY' == '@SpentBook.Domain.TransactionDisplayY.CountPercentage') {
+            pointFormat = "<span style='color:{series.color}'>\u25CF</span> {series.name} - {point.name}: <b>{point.y:.2f}%</b><br/>";
+            yAxisTitle = "%";
+        }
 
         var wrapper = $('#chart-@Model.Id');
         var content = wrapper.find('.content-chart');
@@ -21,7 +45,7 @@
                     for (var i = 0 ; i < this.yData.length; i++) {
                         count += this.yData[i];
                     }
-                    return this.name + ' (' + Highcharts.numberFormat(count) + ')';
+                    return this.name + ' (' + funcFormat(count) + ')';
                 },
                 y: 3
             },
@@ -32,7 +56,7 @@
                         align: "left",
                         color: "#000000",
                         enabled: true,
-                        format: "{point.y:.2f}",
+                        formatter: function () { return funcFormat(this.y); },
                         rotation: 270,
                         verticalAlign: "middle"
                     },
@@ -44,11 +68,11 @@
             },
             tooltip: {
                 headerFormat: "",
-                pointFormat: "<span style='color:{series.color}'>\u25CF</span> {series.name} - {point.name}: <b>R$ {point.y:.2f}</b><br/>"
+                pointFormat: pointFormat,
             },
             yAxis: {
                 title: {
-                    text: "R$"
+                    text: yAxisTitle
                 },
                 //reversed: true
             },

@@ -6,18 +6,23 @@ namespace SpentBook.Domain
         public string Key { get; set; }
         public TransactionGroupDefinition GroupByDefinition { get; set; }
         public string Name { get; set; }
-        public double Total { get; set; }
-        public double TotalAsPositive { get; set; }
+        public decimal Total { get; set; }        
+        public int Count { get; set; }
+        public List<decimal> TotalPercentage { get; set; }
+        public List<decimal> CountPercentage { get; set; }
+        //public double TotalAsPositive { get; set; }
         public List<Transaction> Transactions { get; set; }
         public List<TransactionGroup> SubGroups { get; set; }
         public TransactionGroup Parent { get; set; }
-        public int TransactionCount { get; set; }
+        
         public int Level { get; set; }
 
         public TransactionGroup()
         {
             this.Transactions = new List<Transaction>();
             this.SubGroups = new List<TransactionGroup>();
+            this.TotalPercentage = new List<decimal>();
+            this.CountPercentage = new List<decimal>();
         }
 
         public string GetPath()
@@ -45,5 +50,6 @@ namespace SpentBook.Domain
         {
             return this.Name;
         }
+
     }
 }

@@ -5,18 +5,26 @@
         <tr>
             <th></th>
             <th>Total</th>
-            <th>Quantidade</th>
+            <th>%</th>
+            <th>Total</th>
+            <th>%</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var expression in Model)
-        {
+        {   
             foreach (var expressionItem in expression)
             {
+                var hasChildren = expressionItem.HasChildren();
+                var totalPercent = !hasChildren ? expressionItem.Entity.TotalPercentage.Last().ToString("0.00") + "%": "";
+                var countPercent = !hasChildren ? expressionItem.Entity.CountPercentage.Last().ToString("0.00") + "%" : "";
+                
                 <tr class="treegrid-@expressionItem.Id @(expressionItem.Parent == null ? "" : "treegrid-parent-" + expressionItem.Parent.Id)">
                     <td>@expressionItem.ToString()</td>
                     <td>@expressionItem.Entity.Total</td>
-                    <td>@expressionItem.Entity.TransactionCount</td>
+                    <td>@totalPercent</td>
+                    <td>@expressionItem.Entity.Count</td>
+                    <td>@countPercent</td>
                 </tr>
             }
         }

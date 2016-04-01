@@ -196,6 +196,7 @@ namespace SpentBook.Web.Controllers
                 model.PanelOrder = panel.PanelOrder;
                 model.PanelWidth = panel.PanelWidth;
                 model.PanelComponents = panel.PanelComponents;
+                model.DisplayY = panel.DisplayY;
                 
                 model.GroupBy = panel.GroupBy;
                 model.GroupByOrderBy = panel.GroupByOrderBy;
@@ -243,10 +244,11 @@ namespace SpentBook.Web.Controllers
         {
             var panel = new Panel();
             panel.Title = model.Title;
-            panel.PanelComponents = model.PanelComponents;
             panel.PanelOrder = model.PanelOrder;
             panel.PanelWidth = model.PanelWidth;
-            
+            panel.PanelComponents = model.PanelComponents;
+            panel.DisplayY = model.DisplayY;
+
             panel.GroupBy = model.GroupBy;
             panel.GroupByOrderBy = model.GroupByOrderBy;
             panel.GroupByOrderByClassification = model.GroupByOrderByClassification;

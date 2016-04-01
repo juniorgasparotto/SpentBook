@@ -36,6 +36,11 @@
         @Html.LabelFor(m => m.PanelComponents)
         @Html.EditorFor(m => m.PanelComponents, "CheckboxListEnum")
     </div>
+
+    <div class="form-group form-group-extension">
+        @Html.LabelFor(m => m.DisplayY)
+        @Html.EditorFor(m => m.DisplayY, "RadioButtonListEnum")
+    </div>
     
     <div class="form-group form-group-extension">
         @Html.LabelFor(m => m.PanelWidth)

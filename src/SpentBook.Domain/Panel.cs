@@ -236,10 +236,12 @@ namespace SpentBook.Domain
                 case TransactionGroupOrder.Total:
                     return transactionGroup.Total;
                 case TransactionGroupOrder.TransactionCount:
-                    return transactionGroup.TransactionCount;
+                    return transactionGroup.Count;
             }
 
             return null;
         }
+
+        public TransactionDisplayY DisplayY { get; set; }
     }
 }

@@ -84,8 +84,26 @@ namespace SpentBook.Web.Controllers
                 {
                     if (type == Panel.PanelDataType.NonGroupAndSortDate)
                     {
-                        var transactionsDayGrouped = transactions.GroupBy(f => f.Date.Date).ToList();
-                        htmlTable = Helper.RenderPartialViewToString("~/Views/Templates/Tables/TransactionsGroupDay.cshtml", transactionsDayGrouped, this);
+                        var group = new TransactionGroupDefinition {
+                            OrderBy = null,
+                            OrderByClassification = null,
+                            OrderByExpression = null,
+                            OrderByName = null,
+                            GroupBy = null,
+                            //GroupByExpression = panel.GetGroupByExpression(panel.GroupBy, out groupByName),
+                            GroupByExpression = f => f.Date.Date,                            
+                            GroupByName = null,
+                            OrderByGroup = null,
+                            OrderByGroupClassification = null,
+                            OrderByGroupExpression =null,
+                            OrderByGroupName = null,
+                        };
+
+                        var transactionGroup = GetTransactionGroupRoot(transactions, group);
+                        htmlTable = Helper.RenderPartialViewToString("~/Views/Templates/Tables/TransactionsGroupDay.cshtml", transactionGroup, this);
+
+                        //var transactionsDayGrouped = transactions.GroupBy(f => f.Date.Date).ToList();
+                        //htmlTable = Helper.RenderPartialViewToString("~/Views/Templates/Tables/TransactionsGroupDay.cshtml", transactionsDayGrouped, this);
                     }
                     else
                     {
@@ -98,7 +116,7 @@ namespace SpentBook.Web.Controllers
                 case SpentBook.Domain.Panel.PanelDataType.TwoGroup:
                 case SpentBook.Domain.Panel.PanelDataType.ThreeOrMoreGroup:
                 {
-                    var transactionGroup = this.GetTransactionGroupRoot(panel, transactions);
+                    var transactionGroup = this.GetTransactionGroupRoot(transactions, panel.GetGroupDefinitions().ToArray());
                     var expressions = this.GetTransactionGroupToExpression(transactionGroup);
                     htmlTable = Helper.RenderPartialViewToString("~/Views/Templates/Tables/TransactionsGroupMulti.cshtml", expressions, this);
                     break;
@@ -125,6 +143,9 @@ namespace SpentBook.Web.Controllers
                 case Panel.PanelDataType.NonGroupAndSortDate:
                 {
                     var transactionsDayGrouped = transactions.OrderBy(f => f.Date).GroupBy(f=>f.Date.Date).ToList();
+                    var total = transactions.Sum(f => f.Value);
+                    var count = transactions.Count();
+
                     var serieData = new SeriesData[transactionsDayGrouped.Count];
                     var serie = new Series
                     {
@@ -137,14 +158,31 @@ namespace SpentBook.Web.Controllers
                     var index = 0;
                     foreach (var transactionDayGroup in transactionsDayGrouped)
                     {
-                        var total = transactionDayGroup.Sum(f => f.Value);
+                        var y = 0d;
+                        switch(panel.DisplayY)
+                        {
+                            case TransactionDisplayY.Value:
+                                y = (double)transactionDayGroup.Sum(f => f.Value);
+                                break;
+                            case TransactionDisplayY.ValuePercentage:
+                                var totalDay = transactionDayGroup.Sum(f => f.Value);
+                                y = (double)((totalDay * 100m) / total);
+                                break;
+                            case TransactionDisplayY.Count:
+                                y = transactionDayGroup.Count();
+                                break;
+                            case TransactionDisplayY.CountPercentage:
+                                var countDay = transactionDayGroup.Sum(f => f.Value);
+                                y = (double)(countDay * 100m) / count;
+                                break;
+                        }
 
                         serieData[index] = new SeriesData();
                         serieData[index].X = Helper.UnixTicks(transactionDayGroup.Key);
-                        serieData[index].Y = (Number)total;
+                        serieData[index].Y = (Number)y;
                         serieData[index].Name = transactionDayGroup.Key.ToString("d");
 
-                        if (total > 0)
+                        if (y > 0)
                             hasOnlyOutputs = false;
 
                         index++;
@@ -155,16 +193,16 @@ namespace SpentBook.Web.Controllers
                 case SpentBook.Domain.Panel.PanelDataType.TwoGroup:
                 case SpentBook.Domain.Panel.PanelDataType.ThreeOrMoreGroup:
                 {
-                    var transactionGroup = this.GetTransactionGroupRoot(panel, transactions);
+                    var transactionGroup = this.GetTransactionGroupRoot(transactions, panel.GetGroupDefinitions().ToArray());
                     var tryCategorize = true;
 
                     // Como só existe 1 nível, fica impossível criar categorização
                     if (type == Panel.PanelDataType.OneGroup)
                         tryCategorize = false;
 
-                    var transactionGroupTransversal = GetTransactionGroupTransversal(transactionGroup, tryCategorize);
+                    var chartDataCategorizeds = GetChartDataCategorized(transactionGroup, tryCategorize);
 
-                    foreach (var item in transactionGroupTransversal)
+                    foreach (var item in chartDataCategorizeds)
                     {
                         var serieData = new SeriesData[item.Items.Length];
                         var serie = new Series
@@ -193,15 +231,38 @@ namespace SpentBook.Web.Controllers
                             }
                             else
                             {
+                                var y = 0d;
+                                switch (panel.DisplayY)
+                                {
+                                    case TransactionDisplayY.Value:
+                                        y = (double)data.Total;
+                                        break;
+                                    case TransactionDisplayY.ValuePercentage:
+                                        if (tryCategorize && item.ParentPath == null)
+                                            y = (double)data.TotalPercentageGrandParentRelation;
+                                        else
+                                            y = (double)data.TotalPercentage;
+                                        break;
+                                    case TransactionDisplayY.Count:
+                                        y = (double)data.Count;
+                                        break;
+                                    case TransactionDisplayY.CountPercentage:
+                                        if (tryCategorize && item.ParentPath == null)
+                                            y = (double)data.CountPercentageGrandParentRelation;
+                                        else
+                                            y = (double)data.CountPercentage;
+                                        break;
+                                }
+
                                 serieData[index++] = new SeriesData
                                 {
-                                    Y = (Number)data.TotalItemInCategory,
+                                    Y = (Number)y,
                                     Name = data.Category,
                                     Id = data.Category,
                                     Drilldown = data.ItemPath
                                 };
 
-                                if (data.TotalItemInCategory > 0)
+                                if (data.Total > 0)
                                     hasOnlyOutputs = false;
                             }
                         }
@@ -211,7 +272,7 @@ namespace SpentBook.Web.Controllers
                 }
             }
 
-            return Json(new { Series = series, Drilldown = seriesDrilldown, Reversed = hasOnlyOutputs }, JsonRequestBehavior.AllowGet);
+            return Json(new { Series = series, Drilldown = seriesDrilldown, Reversed = hasOnlyOutputs, DisplatY = panel.DisplayY }, JsonRequestBehavior.AllowGet);
         }
 
         //[HttpGet]
@@ -321,8 +382,8 @@ namespace SpentBook.Web.Controllers
 
 
             var transactions = this.GetTransactionsFiltrated(panel);
-            var root = GetTransactionGroupRoot(panel, transactions);
-            return Json(GetTransactionGroupTransversal(root, tryCategorize), JsonRequestBehavior.AllowGet);
+            var root = GetTransactionGroupRoot(transactions, panel.GetGroupDefinitions().ToArray());
+            return Json(GetChartDataCategorized(root, tryCategorize), JsonRequestBehavior.AllowGet);
             return Json(root, JsonRequestBehavior.AllowGet);
         }
 
@@ -376,57 +437,55 @@ namespace SpentBook.Web.Controllers
             return query.ToList();
         }
 
-        public TransactionGroup GetTransactionGroupRoot(Panel panel, List<Transaction> transactions)
+        public TransactionGroup GetTransactionGroupRoot(List<Transaction> transactions, params TransactionGroupDefinition[] groupDefinitions)
         {
-            var onlyOutputs = panel.Filter.TransactionType == TransactionType.Output;
-            var groupDefinitions = panel.GetGroupDefinitions();
-
             Func<List<Transaction>, TransactionGroup, int, List<TransactionGroup>> methodGroup = null;
             methodGroup = (_transactions, transactionGroupParent, groupByIndex) =>
             {
                 var groupByDefinition = default(TransactionGroupDefinition);
                 var transactionGroups = new List<TransactionGroup>();
 
-                if (groupDefinitions.Count > groupByIndex)
+                if (groupDefinitions.Length > groupByIndex)
                     groupByDefinition = groupDefinitions[groupByIndex];
                 
                 if (groupByDefinition != null)
                 {
                     var _transactionsQueryable = _transactions.AsQueryable();
-                    if (groupByDefinition.OrderByClassification == OrderClassification.Asc)
-                        _transactionsQueryable = _transactionsQueryable.OrderBy(groupByDefinition.OrderByExpression);
-                    else
-                        _transactionsQueryable = _transactionsQueryable.OrderByDescending(groupByDefinition.OrderByExpression);
+
+                    if (groupByDefinition.OrderByClassification != null)
+                    {
+                        if (groupByDefinition.OrderByClassification == OrderClassification.Asc)
+                            _transactionsQueryable = _transactionsQueryable.OrderBy(groupByDefinition.OrderByExpression);
+                        else
+                            _transactionsQueryable = _transactionsQueryable.OrderByDescending(groupByDefinition.OrderByExpression);
+                    }
 
                     var group = _transactionsQueryable
                         .GroupBy(groupByDefinition.GroupByExpression)
                         .ToList();
 
                     transactionGroupParent.GroupByDefinition = groupByDefinition;
-
-                    //if (groupByDefinition.OrderByClassification == TransactionOrderClassification.Asc)
-                    //    group = group.OrderBy(f=>f.Sum(o => o.ValueAsPositive)).ToList();
-                    //else
-                    //    group = group.OrderByDescending(f => f.Sum(o => o.ValueAsPositive)).ToList();
-
+                    
                     var nextGroupByIndex = groupByIndex + 1;
-
                     var transactionGroupsNews = group.Select(
                         (g, gIndex) =>
                         {
                             var list = g.ToList();
                             var name = this.GetGroupByNameUsingValue(groupByDefinition.GroupBy, list);
                             var key = g.Key.ToString();
-                            var transactionGroup = ConfigureTransactionGroup(new TransactionGroup(), key, name, groupByDefinition, list, null, transactionGroupParent, nextGroupByIndex, onlyOutputs);
+                            var transactionGroup = ConfigureTransactionGroup(new TransactionGroup(), key, name, list, null, transactionGroupParent, nextGroupByIndex);
                             transactionGroup.SubGroups = methodGroup(list, transactionGroup, nextGroupByIndex);
                             return transactionGroup;
                         }
                     );
 
-                    if (groupByDefinition.OrderByGroupClassification == OrderClassification.Asc)
-                        transactionGroupsNews = transactionGroupsNews.AsQueryable().OrderBy(groupByDefinition.OrderByGroupExpression);
-                    else
-                        transactionGroupsNews = transactionGroupsNews.AsQueryable().OrderByDescending(groupByDefinition.OrderByGroupExpression);
+                    if (groupByDefinition.OrderByGroupClassification != null)
+                    {
+                        if (groupByDefinition.OrderByGroupClassification == OrderClassification.Asc)
+                            transactionGroupsNews = transactionGroupsNews.AsQueryable().OrderBy(groupByDefinition.OrderByGroupExpression);
+                        else
+                            transactionGroupsNews = transactionGroupsNews.AsQueryable().OrderByDescending(groupByDefinition.OrderByGroupExpression);
+                    }
 
                     var transactionGroupsNewsList = transactionGroupsNews.ToList();
                     transactionGroups.AddRange(transactionGroupsNewsList);
@@ -436,20 +495,23 @@ namespace SpentBook.Web.Controllers
             };
 
             var transactionGroupRoot = new TransactionGroup();
-            var transactionGroupsReturn = methodGroup(transactions, transactionGroupRoot, 0);
-            var transactionsRoot = transactionGroupsReturn.SelectMany(f => f.Transactions).ToList();
-            ConfigureTransactionGroup(transactionGroupRoot, null, "Todos", null, transactionsRoot, transactionGroupsReturn, null, 0, onlyOutputs);
+            ConfigureTransactionGroup(transactionGroupRoot, null, "Todos", transactions, null, null, 0);
+            transactionGroupRoot.SubGroups = methodGroup(transactions, transactionGroupRoot, 0);
 
-            foreach (var s in transactionGroupsReturn)
-                s.Parent = transactionGroupRoot;
+            //var transactionGroupsReturn = methodGroup(transactions, transactionGroupRoot, 0);
+            //var transactionsRoot = transactionGroupsReturn.SelectMany(f => f.Transactions).ToList();
+            //ConfigureTransactionGroup(transactionGroupRoot, null, "Todos", null, transactionsRoot, transactionGroupsReturn, null, 0, onlyOutputs);
+
+            //foreach (var s in transactionGroupsReturn)
+            //    s.Parent = transactionGroupRoot;
 
             return transactionGroupRoot;
         }
 
-        public List<TransactionGroupTransversal> GetTransactionGroupTransversal(TransactionGroup transactionGroupRoot, bool tryCategorize = true)
+        public List<ChartDataCategorized> GetChartDataCategorized(TransactionGroup transactionGroupRoot, bool tryCategorize = true)
         {
-            var listReturn = new List<TransactionGroupTransversal>();
-            Action<TransactionGroup, TransactionGroupTransversal> methodGroup = null;
+            var listReturn = new List<ChartDataCategorized>();
+            Action<TransactionGroup, ChartDataCategorized> methodGroup = null;
             int id = 0;
             methodGroup = (current, parentTransversal) =>
             {
@@ -471,13 +533,13 @@ namespace SpentBook.Web.Controllers
                     {
                         var list = grandchildrenGroup.ToList();
 
-                        var inverted = new TransactionGroupTransversal()
+                        var inverted = new ChartDataCategorized()
                         {
                             Id = ++id,
                             IdParent = (parentTransversal == null ? null : (int?)parentTransversal.Id),
                             ParentPath = current.GetPath(),
                             ItemGroupName = grandchildrenGroup.Key,
-                            Items = new TransactionGroupTransversal.TransactionGroupTransversalItem[children.Count]
+                            Items = new ChartDataCategorized.Item[children.Count]
                         };
 
                         listReturn.Add(inverted);
@@ -485,7 +547,7 @@ namespace SpentBook.Web.Controllers
                         foreach (var grandchild in list)
                         {
                             var indexOfParent = current.SubGroups.IndexOf(grandchild.Parent);
-                            inverted.Add(grandchild.GetPath(), grandchild.Parent.Key, grandchild.Total, indexOfParent);
+                            inverted.Add(grandchild.GetPath(), grandchild.Parent.Key, indexOfParent, grandchild);
                             methodGroup(grandchild, inverted);
                         }
                     }
@@ -496,13 +558,13 @@ namespace SpentBook.Web.Controllers
                     if (current.Parent == null && name == null)
                         name = current.SubGroups.First().GroupByDefinition.GroupByName ?? "Todos";
 
-                    var inverted = new TransactionGroupTransversal()
+                    var inverted = new ChartDataCategorized()
                     {
                         Id = ++id,
                         IdParent = (parentTransversal == null ? null : (int?)parentTransversal.Id),
                         ParentPath = current.GetPath(),
                         ItemGroupName = name,
-                        Items = new TransactionGroupTransversal.TransactionGroupTransversalItem[current.SubGroups.Count]
+                        Items = new ChartDataCategorized.Item[current.SubGroups.Count]
                     };
 
                     listReturn.Add(inverted);
@@ -510,7 +572,7 @@ namespace SpentBook.Web.Controllers
                     var index = 0;
                     foreach (var childGroup in current.SubGroups)
                     {
-                        inverted.Add(childGroup.GetPath(), childGroup.Key, childGroup.Total, index++);
+                        inverted.Add(childGroup.GetPath(), childGroup.Key, index++, childGroup);
                         methodGroup(childGroup, inverted);
                     }
                 }
@@ -524,27 +586,36 @@ namespace SpentBook.Web.Controllers
             return listReturn;
         }
 
-        private TransactionGroup ConfigureTransactionGroup(TransactionGroup transactionGroup, string key, string name, TransactionGroupDefinition groupByDefinition, List<Transaction> transactions, List<TransactionGroup> subGroups, TransactionGroup parent, int level, bool onlyOutputs)
+        private TransactionGroup ConfigureTransactionGroup(TransactionGroup transactionGroup, string key, string name, List<Transaction> transactions, List<TransactionGroup> subGroups, TransactionGroup parent, int level)
         {
-            //var transactionGroup = new TransactionGroup();
             transactionGroup.Key = key;
             //transactionGroup.GroupByDefinition = groupByDefinition;
             transactionGroup.Name = name;
             transactionGroup.Parent = parent;
             transactionGroup.Transactions = transactions;
-            transactionGroup.TransactionCount = transactionGroup.Transactions.Count;
             transactionGroup.SubGroups = subGroups;
             transactionGroup.Level = level;
+            
+            if (transactionGroup.Total == 0)
+                transactionGroup.Total = transactionGroup.Transactions.Sum(f => f.Value);
 
-            var totalAsNormal = (double)transactionGroup.Transactions.Sum(f => f.Value);
+            if (transactionGroup.Count == 0)
+                transactionGroup.Count = transactionGroup.Transactions.Count;
 
-            //if (onlyOutputs)
-            //    transactionGroup.Total = (double)transactionGroup.Transactions.Sum(f => f.ValueAsPositive);
-            //else
-            //    transactionGroup.Total = totalAsNormal;
+            //transactionGroup.TotalAsPositive = Math.Abs(transactionGroup.Total);
+            if (parent == null)
+            {
+                transactionGroup.TotalPercentage.Add(100m);
+                transactionGroup.CountPercentage.Add(100m);
+            }
 
-            transactionGroup.Total = totalAsNormal;
-            transactionGroup.TotalAsPositive = Math.Abs(totalAsNormal);
+            while (parent != null)
+            {
+                transactionGroup.TotalPercentage.Add((transactionGroup.Total * 100m) / parent.Total);
+                transactionGroup.CountPercentage.Add((transactionGroup.Count * 100m) / parent.Count);
+
+                parent = parent.Parent;
+            }
 
             return transactionGroup;
         }
@@ -556,24 +627,28 @@ namespace SpentBook.Web.Controllers
             return dashboard.Panels.FirstOrDefault(f => f.Id == panelId);
         }
 
-        private string GetGroupByNameUsingValue(TransactionGroupBy group, List<Transaction> transactions)
+        private string GetGroupByNameUsingValue(TransactionGroupBy? group, List<Transaction> transactions)
         {
-            var transaction = transactions.FirstOrDefault();
-            switch (group)
+            if (group != null)
             {
-                case TransactionGroupBy.Category:
-                    return transaction.Category;
-                case TransactionGroupBy.SubCategory:
-                    return transaction.SubCategory;
-                case TransactionGroupBy.DateDay:
-                    return transaction.Date.ToString("yyyy/MM/dd");
-                case TransactionGroupBy.DateMonth:
-                    return transaction.Date.ToString("yyyy/MM");
-                case TransactionGroupBy.DateYear:
-                    return transaction.Date.ToString("yyyy");
-                case TransactionGroupBy.Name:
-                    return transaction.Name;
+                var transaction = transactions.FirstOrDefault();
+                switch (group)
+                {
+                    case TransactionGroupBy.Category:
+                        return transaction.Category;
+                    case TransactionGroupBy.SubCategory:
+                        return transaction.SubCategory;
+                    case TransactionGroupBy.DateDay:
+                        return transaction.Date.ToString("yyyy/MM/dd");
+                    case TransactionGroupBy.DateMonth:
+                        return transaction.Date.ToString("yyyy/MM");
+                    case TransactionGroupBy.DateYear:
+                        return transaction.Date.ToString("yyyy");
+                    case TransactionGroupBy.Name:
+                        return transaction.Name;
+                }
             }
+
             return null;
         }
 

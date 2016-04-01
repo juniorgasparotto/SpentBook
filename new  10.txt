@@ -40,3 +40,8 @@ Root  (3 agrupamentos)
 			almoco
 --
  ROOT + (2015/10 + (2015/10/01 + (alimentação + café) + (alimentação2 + café)) + (2015/10/02 + (bradesco + imposto?)) + (2015/10/04 + (alimentação + almoço)) + (2015/10/03 + (alimentação + almoço))) + (2015/11 + (2015/11/04 + (b + almoço)) + (2015/11/03 + (alimentação + almoço)))
+ 
+ 
+				JAN		FEV
+ Alimentação 	  1		 2
+ Cafe			  2		 3

@@ -1,4 +1,4 @@
-﻿@model List<IGrouping<DateTime, SpentBook.Domain.Transaction>>
+﻿@model SpentBook.Domain.TransactionGroup
 
 <table class="table tree">
     <thead>
@@ -11,17 +11,17 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var group in Model)
+        @foreach (var group in Model.SubGroups)
         {
             <tr class="treegrid-@group.GetHashCode()">
-                <td nowrap>@group.Key.ToString("d")</td>
-                <td>@group.Sum(f => f.Value)</td>
+                <td nowrap>@group.Key</td>
+                <td>@group.Total</td>
                 <td></td>
                 <td></td>
                 <td></td>
             </tr>
 
-            foreach (var transaction in group)
+            foreach (var transaction in group.Transactions)
             {
                 <tr class="treegrid-parent-@group.GetHashCode()">
                     <td nowrap>@transaction.Name</td>

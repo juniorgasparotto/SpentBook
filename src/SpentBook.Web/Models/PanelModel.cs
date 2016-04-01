@@ -24,6 +24,10 @@ namespace SpentBook.Web.Models
         [Required]
         public PanelComponents PanelComponents { get; set; }
 
+        [Display(Name = "Exibir no gráfico")]
+        [Required]
+        public TransactionDisplayY DisplayY { get; set; }
+
         [Display(Name = "Tamanho do painel")]
         [Required]
         public PanelWidth PanelWidth { get; set; }

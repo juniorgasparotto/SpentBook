@@ -9,7 +9,7 @@
         {
           "Id": "51a6273e-2604-486a-b0c7-639dbb0cff31",
           "CreateDate": "2016-03-22T22:30:55.3239182-03:00",
-          "LastUpdateDate": "2016-03-27T14:10:59.2825884-03:00",
+          "LastUpdateDate": "2016-04-01T17:51:46.6761868-03:00",
           "ViewName": "~/Views/CustomPanels/ChartLines.cshtml",
           "Title": "Teste 4 Ricardo",
           "PanelComponents": 3,
@@ -41,7 +41,8 @@
             "Names": null,
             "TransactionType": 0
           },
-          "PanelWidth": 2
+          "PanelWidth": 2,
+          "DisplayY": 1
         }
       ],
       "FriendlyUrl": "teste"
