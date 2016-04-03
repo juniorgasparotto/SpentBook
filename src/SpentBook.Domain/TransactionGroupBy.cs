@@ -8,8 +8,6 @@ namespace SpentBook.Domain
         None,
         [Display(Name = "Dia")]
         DateDay,
-        //DateDay,
-        //DateWeek,
         [Display(Name = "Mês")]
         DateMonth,
         [Display(Name = "Ano")]
@@ -20,5 +18,7 @@ namespace SpentBook.Domain
         SubCategory,
         [Display(Name = "Nome da transação")]
         Name,
+        [Display(Name = "Receita e Despesa")]
+        InputOutput,
     }
 }

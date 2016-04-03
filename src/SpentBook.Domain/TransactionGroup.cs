@@ -3,7 +3,7 @@ namespace SpentBook.Domain
 {
     public class TransactionGroup
     {
-        public string Key { get; set; }
+        public object Key { get; set; }
         public TransactionGroupDefinition GroupByDefinition { get; set; }
         public string Name { get; set; }
         public decimal Total { get; set; }        

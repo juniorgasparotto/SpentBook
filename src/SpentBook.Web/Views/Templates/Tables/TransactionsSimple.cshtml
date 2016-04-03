@@ -1,6 +1,6 @@
-﻿@model List<SpentBook.Domain.Transaction>
+﻿@model SpentBook.Domain.TransactionGroup
 
-<table class="table tree">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>Nome</th>
@@ -11,15 +11,28 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var transaction in Model)
+        <tr>
+            <td><strong>Total</strong></td>
+            <td>-</td>
+            <td><strong>@Model.Total</strong></td>
+            <td>-</td>
+            <td>-</td>
+        </tr>
+
+        @foreach (var group in Model.SubGroups)
         {
-            <tr>
-                <td>@transaction.Name</td>
-                <td>@transaction.Date</td>
-                <td>@transaction.Value</td>
-                <td>@transaction.Category</td>
-                <td>@transaction.SubCategory</td>
-            </tr>
+            foreach (var transaction in group.Transactions)
+            {
+                <tr>
+                    <td>@transaction.Name</td>
+                    <td>@transaction.Date</td>
+                    <td>@transaction.Value</td>
+                    <td>@transaction.Category</td>
+                    <td>@transaction.SubCategory</td>
+                </tr>
+            }
         }
+
+        
     </tbody>
 </table>

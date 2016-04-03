@@ -4,6 +4,25 @@
     $(document).ready(function () {
         Highcharts.setOptions({ global: { useUTC: false } });
         Highcharts.setOptions({ "lang": { "decimalPoint": ",", "thousandsSep": "." } });
+        var pointFormat = "";
+        var yAxisTitle = "";
+        var funcFormat = function () { return '<b>' + this.point.name + '</b><br/>' + 'R$ ' + Highcharts.numberFormat(this.y) };
+
+        if ('@Model.DisplayY' == '@SpentBook.Domain.TransactionDisplayY.Value') {
+            yAxisTitle = "R$";
+        }
+        else if ('@Model.DisplayY' == '@SpentBook.Domain.TransactionDisplayY.ValuePercentage') {
+            funcFormat = function () { return '<b>' + this.point.name + '</b><br/>' + Highcharts.numberFormat(this.y) + "%"};
+            yAxisTitle = "%";
+        }
+        else if ('@Model.DisplayY' == '@SpentBook.Domain.TransactionDisplayY.Count') {
+            funcFormat = function () { return '<b>' + this.point.name + '</b><br/>' + this.y };
+            yAxisTitle = "Frequência";
+        }
+        else if ('@Model.DisplayY' == '@SpentBook.Domain.TransactionDisplayY.CountPercentage') {
+            funcFormat = function () { return '<b>' + this.point.name + '</b><br/>' + Highcharts.numberFormat(this.y) + "%" };
+            yAxisTitle = "%";
+        }
 
         var wrapper = $('#chart-@Model.Id');
         var content = wrapper.find('.content-chart');
@@ -23,16 +42,14 @@
                 text: ''
             },
             tooltip: {
-                formatter: function () {
-                    return '<b>' + this.point.name + '</b><br/>' + 'R$ ' + Highcharts.numberFormat(this.y);
-                }
+                formatter: funcFormat
             },
             xAxis: {
                 dateTimeLabelFormats: { month: '%e. %b', year: '%b' }, type: 'datetime'
             },
             yAxis: {
                 title: {
-                    text: 'R$'
+                    text: yAxisTitle
                 }
             },
         });

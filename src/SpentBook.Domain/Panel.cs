@@ -53,6 +53,7 @@ namespace SpentBook.Domain
 
         public TransactionFilter Filter { get; set; }
         public PanelWidth PanelWidth { get; set; }
+        public TransactionDisplayY DisplayY { get; set; }
 
         public List<TransactionGroupDefinition> GetGroupDefinitions()
         {
@@ -169,6 +170,9 @@ namespace SpentBook.Domain
                 case TransactionGroupBy.Name:
                     groupName = "Nomes";
                     return f => f.Name;
+                case TransactionGroupBy.InputOutput:
+                    groupName = "Receitas e despesas";
+                    return f => f.Value > 0 ? "Receita" : "Despesa";
             }
             groupName = "Nenhum";
             return null;
@@ -226,11 +230,11 @@ namespace SpentBook.Domain
                 case TransactionGroupOrder.Agrupador:
                     var groupBy = transactionGroup.Parent.GroupByDefinition.GroupBy;
                     if (groupBy == TransactionGroupBy.DateDay)
-                        return DateTime.ParseExact(transactionGroup.Key, "yyyy/MM/dd", CultureInfo.InvariantCulture);
+                        return DateTime.ParseExact(transactionGroup.Key.ToString(), "yyyy/MM/dd", CultureInfo.InvariantCulture);
                     else if (groupBy == TransactionGroupBy.DateMonth)
-                        return DateTime.ParseExact(transactionGroup.Key + "/01", "yyyy/MM/01", CultureInfo.InvariantCulture);
+                        return DateTime.ParseExact(transactionGroup.Key.ToString() + "/01", "yyyy/MM/01", CultureInfo.InvariantCulture);
                     else if (groupBy == TransactionGroupBy.DateMonth)
-                        return DateTime.ParseExact(transactionGroup.Key + "/01/01", "yyyy/01/01", CultureInfo.InvariantCulture);
+                        return DateTime.ParseExact(transactionGroup.Key.ToString() + "/01/01", "yyyy/01/01", CultureInfo.InvariantCulture);
 
                     return transactionGroup.Key;
                 case TransactionGroupOrder.Total:
@@ -242,6 +246,5 @@ namespace SpentBook.Domain
             return null;
         }
 
-        public TransactionDisplayY DisplayY { get; set; }
     }
 }

@@ -1,31 +1,48 @@
 ﻿@model List<ExpressionGraph.Expression<SpentBook.Domain.TransactionGroup>>
+@using ExpressionGraph;
 
-<table class="table tree">
+<table class="table tree table-striped">
     <thead>
         <tr>
             <th></th>
             <th>Total</th>
             <th>%</th>
-            <th>Total</th>
+            <th>Frequência</th>
             <th>%</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var expression in Model)
-        {   
+        {
             foreach (var expressionItem in expression)
-            {
-                var hasChildren = expressionItem.HasChildren();
-                var totalPercent = !hasChildren ? expressionItem.Entity.TotalPercentage.Last().ToString("0.00") + "%": "";
-                var countPercent = !hasChildren ? expressionItem.Entity.CountPercentage.Last().ToString("0.00") + "%" : "";
-                
-                <tr class="treegrid-@expressionItem.Id @(expressionItem.Parent == null ? "" : "treegrid-parent-" + expressionItem.Parent.Id)">
-                    <td>@expressionItem.ToString()</td>
-                    <td>@expressionItem.Entity.Total</td>
-                    <td>@totalPercent</td>
-                    <td>@expressionItem.Entity.Count</td>
-                    <td>@countPercent</td>
-                </tr>
+            {   
+                if (expressionItem.Index == 0)
+                { 
+                    <tr>
+                        <td><strong>Total</strong></td>
+                        <td><strong>@expressionItem.Entity.Total</strong></td>
+                        <td>-</td>
+                        <td><strong>@expressionItem.Entity.Count</strong></td>
+                        <td>-</td>
+                    </tr>
+                }
+                else
+                {
+                    var hasChildren = expressionItem.HasChildren();
+                    var totalPercent = !hasChildren ? expressionItem.Entity.TotalPercentage.Last().ToString("0.00") + "%" : "";
+                    var countPercent = !hasChildren ? expressionItem.Entity.CountPercentage.Last().ToString("0.00") + "%" : "";
+                    var classHasHildren = hasChildren ? "has-children" : "";
+                    var classParent = expressionItem.Level > 2 ? "treegrid-parent-" + expressionItem.Parent.Id : "";
+                    var classAlternative = expressionItem.Index % 2 == 0 ? "pair" : "odd";
+                    
+                    <tr class="treegrid-@expressionItem.Id @classParent @classHasHildren @classAlternative">
+                        <td>@expressionItem.ToString()</td>
+                        <td>@expressionItem.Entity.Total</td>
+                        <td>@totalPercent</td>
+                        <td>@expressionItem.Entity.Count</td>
+                        <td>@countPercent</td>
+                    </tr>
+                }
             }
         }
     </tbody>

@@ -404,6 +404,25 @@ div#legend span
     margin-top: 10px;
 }
 
+/*.panel-body .table {
+    border: 1px solid #e6e6e6;
+}
+
+.panel-body .table tr th
+{
+    background-color: #e6e6e6;
+}
+
+.panel-body .table tr.pair
+{
+    background-color: #f2f2f2;
+}
+
+.panel-body .table tr.odd
+{
+    background-color: #fff;
+}*/
+
 /*all page with header bar*/
 .preload-wrapper.preload-body {
     width: 100%;
