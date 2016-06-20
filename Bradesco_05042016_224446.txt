@@ -1,0 +1,432 @@
+
+Bradesco Internet Banking
+Data:05/04/2016 - 22h44
+Extrato de: Ag: 927 | Conta: 53619-9 | Entre 01/12/2015 e 04/04/2016
+
+Data                    Histórico                Docto.                  Crédito (R$)             Débito (R$)             Saldo (R$)
+30/11/15                SALDO ANTERIOR                                                                                    -1.455,86
+01/12/15                Visa Electron            0795538                                          -2,80                   -1.458,66
+                                 Global Foods
+02/12/15                Iof Util Limite          3073744                                          -8,73                   -1.467,39
+03/12/15                Visa Electron            0735189                                          -13,76                  -1.481,15
+                               Picanharia Jasmim
+04/12/15                Visa Electron            0795780                                          -5,20                   -1.486,35
+                                 Global Foods
+07/12/15                Deb.automatico           0215877                                          -321,92                 -1.808,27
+                           Cgmp-sem Parar/sp*-02158779
+07/12/15                Visa Electron            0024208                                          -6,23
+                                   ki Pao
+07/12/15                Visa Electron            0051500                                          -50,00
+                             Supermercados Sao Vice
+07/12/15                Visa Electron            0240790                                          -15,70
+                                Fabio Alves e me
+07/12/15                Visa Electron            0448258                                          -15,00
+                              jj Rodrigues Santos la
+07/12/15                Visa Electron            0555441                                          -126,05                 -2.021,25
+                               Auto Posto da Ilha
+08/12/15                tv p/assinatura          9831139                                          -83,08                  -2.104,33
+                             Claro Tv-0210798311398
+08/12/15                Visa Electron            0003964                                          -4,52
+                                Dia Brasil lj 373
+
+08/12/15                Visa Electron            0484629                                          -10,00
+                                Gilmar Barbosa
+08/12/15                Visa Electron            0484638                                          -8,00                   -2.126,85
+                                Gilmar Barbosa
+10/12/15                Enc Lim Credito          3073744                                          -106,23                 -2.233,08
+                               Encargo - 11,92%
+11/12/15                Visa Electron            0277741                                          -100,00                 -2.333,08
+                              Vision Vistoria Tecnic
+14/12/15                Cart.protegido           3990348                                          -4,20                   -2.337,28
+14/12/15                Visa Electron            0058387                                          -102,68
+                              Extra Loja 2060 Campin
+14/12/15                Visa Electron            0457677                                          -5,39
+                               Confeitaria Romana
+14/12/15                Visa Electron            0906364                                          -137,01
+                               Auto Posto da Ilha
+14/12/15                Visa Electron            0981206                                          -29,20                  -2.611,56
+                                Fabio Alves e me
+15/12/15                Pagto Cobranca           0000146                                          -293,05                 -2.904,61
+                              Bradesco Auto re S/a
+15/12/15                Tarifa Bancaria          0011215                                          -42,00
+                                Cesta Exclusive
+15/12/15                Visa Electron            0484844                                          -11,50                  -2.958,11
+                                Gilmar Barbosa
+18/12/15                Visa Electron            0695048                                          -33,40                  -2.991,51
+                                Mingui e Aliche
+21/12/15                Visa Electron            0100585                                          -189,69                 -3.181,20
+                                Pontal Loja 19
+21/12/15                Visa Electron            0405144                                          -16,00
+                                Fabio Alves e me
+21/12/15                Visa Electron            0448651                                          -35,75
+                              jj Rodrigues Santos la
+21/12/15                Visa Electron            0448692                                          -17,50
+                              jj Rodrigues Santos la
+21/12/15                Visa Electron            0952274                                          -170,00                 -3.420,45
+                                Auto Posto Madri
+22/12/15                Visa Electron            0796938                                          -2,80                   -3.423,25
+                                 Global Foods
+22/12/15                Visa Electron            0867946                                          -39,60                  -3.462,85
+                               Casa da Moqueca
+23/12/15                Ted-t Elet Disp          4994609                 5.000,00                                         1.537,15
+                            Remet.glauber Donizeti Gas
+23/12/15                Aplic.em Papeis          5038699                                          -1.496,62
+23/12/15                Visa Electron            0258862                                          -33,93
+                              Bar Dos Lagos Rest e p
+23/12/15                Visa Electron            0796983                                          -5,60                   1,00
+                                 Global Foods
+28/12/15                Resg.de Papeis           5038699                 390,06                                           391,06
+28/12/15                Saque cc Autoat          2939340                                          -200,00
+                         Ag06468maq052939seq0734028121200
+28/12/15                Visa Electron            0448900                                          -33,00
+                              jj Rodrigues Santos la
+28/12/15                Visa Electron            0548889                                          -127,06
+                              Supermercados Lavape
+28/12/15                Visa Electron            0859600                                          -30,00                  1,00
+                               Bodega do Petisco
+04/01/16                Resg.de Papeis           5038699                 290,80                                           291,80
+
+04/01/16                Visa Electron            0020781                                          -40,80
+                              Supermercado Bon Net
+04/01/16                Visa Electron            0449006                                          -41,00
+                              jj Rodrigues Santos la
+04/01/16                Visa Electron            0559572                                          -195,00
+                               Auto Posto da Ilha
+04/01/16                Visa Electron            0986005                                          -14,00                  1,00
+                                Fabio Alves e me
+05/01/16                Resg.de Papeis           5038699                 478,12                                           479,12
+05/01/16                Deb.automatico           0215877                                          -292,47
+                           Cgmp-sem Parar/sp*-02158779
+05/01/16                Visa Electron            0055086                                          -173,79
+                              Extra Loja 2060 Campin
+05/01/16                Iof Util Limite          3073744                                          -11,86                  1,00
+08/01/16                Resg.de Papeis           5038699                 83,08                                            84,08
+08/01/16                tv p/assinatura          9831139                                          -83,08                  1,00
+                             Claro Tv-0210798311398
+11/01/16                Resg.de Papeis           5038699                 232,13                                           233,13
+11/01/16                Visa Electron            0032138                                          -31,20
+                                Fabio Alves e me
+
+11/01/16                Visa Electron            0100234                                          -42,21
+                               Raia Drogasil 510
+11/01/16                Enc Lim Credito          3073744                                          -158,72                 1,00
+                               Encargo - 12,30%
+13/01/16                Resg.de Papeis           5038699                 22,55                                            23,55
+13/01/16                Visa Electron            0635497                                          -48,63
+                                 Metropoly Bar
+13/01/16                Gasto c Credito          3990013                                          -4,20                   -29,28
+15/01/16                Pagto Cobranca           0000147                                          -293,05                 -322,33
+                              Bradesco Auto re S/a
+15/01/16                Tarifa Bancaria          0040116                                          -42,00
+                                Cesta Exclusive
+15/01/16                Visa Electron            0377226                                          -50,00                  -414,33
+                               Auto Posto Planalto
+18/01/16                Visa Electron            0161128                                          -42,96                  -457,29
+                              Supermercado Bon Net
+18/01/16                Visa Electron            0302514                                          -41,00
+                                Fabio Alves e me
+18/01/16                Visa Electron            0449390                                          -33,00
+                              jj Rodrigues Santos la
+18/01/16                Visa Electron            0542453                                          -13,50
+                                Tortelli Delivery
+18/01/16                Visa Electron            0911511                                          -173,00                 -717,79
+                               Auto Posto da Ilha
+21/01/16                Visa Electron            0609438                                          -19,95                  -737,74
+                                 Global Foods
+21/01/16                Visa Electron            0798345                                          -9,60                   -747,34
+                                 Global Foods
+22/01/16                Visa Electron            0002977                                          -5,37                   -752,71
+
+                                Dia Brasil lj 373
+22/01/16                Visa Electron            0021010                                          -20,90                  -773,61
+                                  Ganash
+25/01/16                Visa Electron            0230259                                          -10,79                  -784,40
+                               Raia Drogasil 510
+25/01/16                Visa Electron            0250012                                          -75,79                  -860,19
+                               Raia Drogasil 510
+27/01/16                Visa Electron            0271227                                          -17,91                  -878,10
+                              Spasso Sabores Horti
+28/01/16                Visa Electron            0799064                                          -5,60                   -883,70
+                                 Global Foods
+29/01/16                Visa Electron            0290207                                          -16,65                  -900,35
+                               Raia Drogasil 510
+01/02/16                Visa Electron            0174730                                          -14,00                  -914,35
+                                Fabio Alves e me
+01/02/16                Visa Electron            0449717                                          -16,50
+                              jj Rodrigues Santos la
+01/02/16                Visa Electron            0507418                                          -50,00
+                               Posto Dudao Galeria
+01/02/16                Visa Electron            0520158                                          -120,00
+                                 Guiche Web
+01/02/16                Visa Electron            0563414                                          -187,02
+                               Auto Posto da Ilha
+01/02/16                Visa Electron            0620196                                          -9,72                   -1.297,59
+                                Dutra & Felicio
+02/02/16                Iof Util Limite          3073744                                          -4,45                   -1.302,04
+03/02/16                Ted-t Elet Disp          4182693                 3.000,00                                         1.697,96
+                            Remet.glauber Donizeti Gas
+03/02/16                Aplic.em Papeis          6634928                                          -1.670,39
+03/02/16                Visa Electron            0428227                                          -26,57                  1,00
+                              Mercado Preco Certo
+05/02/16                Resg.de Papeis           6634928                 280,22                                           281,22
+05/02/16                Deb.automatico           0215877                                          -280,22                 1,00
+                           Cgmp-sem Parar/sp*-02158779
+10/02/16                Resg.de Papeis           6634928                 1.390,20                                         1.391,20
+10/02/16                Doc Cred.autom*          0126878                 120,00
+                              Jean Carlos Gasparotto
+10/02/16                Visa Electron            0081480                                          -121,21
+                                Sup Sao Vicente
+10/02/16                Visa Electron            0100200                                          -42,21
+                               Raia Drogasil 510
+10/02/16                Visa Electron            0138057                                          -11,00
+                                Fabio Alves e me
+10/02/16                Visa Electron            0378271                                          -12,40
+                                 Brasil Cacau
+10/02/16                Visa Electron            0449876                                          -30,00
+                              jj Rodrigues Santos la
+10/02/16                Visa Electron            0449885                                          -10,00
+                              jj Rodrigues Santos la
+10/02/16                Visa Electron            0564551                                          -110,02
+                               Auto Posto da Ilha
+10/02/16                Visa Electron            0669969                                          -118,14
+                              Supermercados Lavape
+10/02/16                Pague Facil              0040067                                          -13,00
+                             Recarga Claro Pre Pago
+10/02/16                Enc Lim Credito          3073744                                          -61,55                  981,67
+
+                               Encargo - 12,30%
+12/02/16                Visa Electron            0860493                                          -19,00                  962,67
+                               Bodega do Petisco
+15/02/16                Pagto Cobranca           0000148                                          -293,05                 669,62
+                              Bradesco Auto re S/a
+15/02/16                Visa Electron            0450083                                          -20,00
+                              jj Rodrigues Santos la
+15/02/16                Visa Electron            0527639                                          -57,77
+                                Fabio Alves e me
+15/02/16                Visa Electron            0539000                                          -15,00
+                                Sorveteria Danju
+15/02/16                Visa Electron            0565520                                          -139,79
+                               Auto Posto da Ilha
+15/02/16                Visa Electron            0620683                                          -17,00
+                                Dutra & Felicio
+15/02/16                Visa Electron            0882357                                          -35,00
+                             Pimenta Rosa Semijoias
+15/02/16                Gasto c Credito          3990046                                          -280,84                 104,22
+16/02/16                Visa Electron            0096697                                          -50,00                  54,22
+                              Botequim da Estacao
+
+17/02/16                Tarifa Bancaria          0010216                                          -42,00                  12,22
+                                Cesta Exclusive
+17/02/16                Visa Electron            0339836                                          -25,00
+                                Mingui & Aliche
+17/02/16                Visa Electron            0768654                                          -32,50                  -45,28
+                                Daniel Pattaro
+18/02/16                Visa Electron            0196219                                          -56,80                  -102,08
+                              Ruggiero Ramos Comer
+19/02/16                Visa Electron            0460905                                          -82,43                  -184,51
+                              Supermercados Lavape
+19/02/16                Visa Electron            0800274                                          -5,70                   -190,21
+                                 Global Foods
+22/02/16                Visa Electron            0252417                                          -17,80                  -208,01
+                              Lanchonete Buscaratt
+22/02/16                Visa Electron            0450243                                          -31,00
+                              jj Rodrigues Santos la
+22/02/16                Visa Electron            0479733                                          -11,95
+                                Gilmar Barbosa
+22/02/16                Visa Electron            0587759                                          -21,78
+                                Mingui e Aliche
+22/02/16                Visa Electron            0756290                                          -9,50
+                                Fabio Alves e me
+22/02/16                Visa Electron            0916655                                          -123,01                 -405,25
+                               Auto Posto da Ilha
+23/02/16                Visa Electron            0288085                                          -6,50                   -411,75
+                                 Gran Sapore
+23/02/16                Visa Electron            0800507                                          -5,60                   -417,35
+                                 Global Foods
+24/02/16                Visa Electron            0300801                                          -48,34                  -465,69
+
+                               Supercenter d Pedro
+24/02/16                Visa Electron            0623558                                          -50,80
+                                  Pizza Hut
+24/02/16                Visa Electron            0800626                                          -5,60                   -522,09
+                                 Global Foods
+25/02/16                Visa Electron            0795800                                          -27,40                  -549,49
+                                  Ganash
+26/02/16                Visa Electron            0800939                                          -4,65                   -554,14
+                                 Global Foods
+26/02/16                Visa Electron            0801004                                          -3,00                   -557,14
+                                 Global Foods
+29/02/16                Visa Electron            0006489                                          -8,00                   -565,14
+                                Fabio Alves e me
+29/02/16                Visa Electron            0007388                                          -152,24
+                                 C&a Htl - 667
+29/02/16                Visa Electron            0270448                                          -25,50
+                                mc Donalds Hor
+29/02/16                Visa Electron            0423220                                          -30,00
+                                  Wood Bar
+29/02/16                Visa Electron            0450336                                          -39,00
+                              jj Rodrigues Santos la
+29/02/16                Visa Electron            0450368                                          -12,50
+                              jj Rodrigues Santos la
+29/02/16                Visa Electron            0487274                                          -7,17
+                                Gilmar Barbosa
+29/02/16                Visa Electron            0779584                                          -12,93
+                              Seu Mario Lanchonete
+29/02/16                Visa Electron            0917832                                          -143,57                 -988,05
+                               Auto Posto da Ilha
+02/03/16                Ted-t Elet Disp          8061729                 1.700,00                                         711,95
+                            Remet.glauber Donizeti Gas
+02/03/16                Visa Electron            0418417                                          -130,00
+                              Supermercados Lavape
+02/03/16                Iof Util Limite          3073744                                          -5,94                   576,01
+07/03/16                Deb.automatico           0215877                                          -276,97                 299,04
+                           Cgmp-sem Parar/sp*-02158779
+07/03/16                Visa Electron            0018529                                          -26,00
+                                   Minero
+07/03/16                Visa Electron            0108689                                          -8,00
+                                Fabio Alves e me
+07/03/16                Visa Electron            0410499                                          -25,80
+                                Tortelle Delivery
+07/03/16                Visa Electron            0450485                                          -78,00
+                              jj Rodrigues Santos la
+07/03/16                Visa Electron            0450543                                          -22,50
+                              jj Rodrigues Santos la
+07/03/16                Visa Electron            0450544                                          -5,00
+                              jj Rodrigues Santos la
+07/03/16                Visa Electron            0450548                                          -10,00
+                              jj Rodrigues Santos la
+07/03/16                Visa Electron            0450564                                          -29,00
+                              jj Rodrigues Santos la
+07/03/16                Visa Electron            0487401                                          -8,50                   86,24
+                                Gilmar Barbosa
+08/03/16                Visa Electron            0487484                                          -5,85                   80,39
+                                Gilmar Barbosa
+
+09/03/16                Visa Electron            0090541                                          -159,97                 -79,58
+                                Sup Sao Vicente
+09/03/16                Visa Electron            0487500                                          -5,64
+                                Gilmar Barbosa
+09/03/16                Visa Electron            0919434                                          -188,84                 -274,06
+                               Auto Posto da Ilha
+10/03/16                Visa Electron            0100012                                          -146,78                 -420,84
+                              o Boticario Bpcs-8454
+10/03/16                Enc Lim Credito          3073744                                          -25,70                  -446,54
+                               Encargo - 12,63%
+14/03/16                Visa Electron            0036989                                          -43,00                  -489,54
+                                Fabio Alves e me
+14/03/16                Visa Electron            0920279                                          -130,01
+                               Auto Posto da Ilha
+14/03/16                Visa Electron            0981988                                          -17,90
+                              Supermercados Lavape
+14/03/16                Gasto c Credito          3990074                                          -230,84                 -868,29
+15/03/16                Tarifa Bancaria          0010316                                          -42,00                  -910,29
+                                Cesta Exclusive
+16/03/16                Visa Electron            0340689                                          -33,90                  -944,19
+
+                                Mingui & Aliche
+16/03/16                Visa Electron            0802123                                          -6,00
+                                 Global Foods
+16/03/16                Visa Electron            0802189                                          -6,20                   -956,39
+                                 Global Foods
+18/03/16                Visa Electron            0180008                                          -60,40                  -1.016,79
+                               Raia Drogasil 510
+18/03/16                Visa Electron            0802344                                          -3,60
+                                 Global Foods
+18/03/16                Visa Electron            0802405                                          -3,50
+                                 Global Foods
+18/03/16                Visa Electron            0934949                                          -25,90                  -1.049,79
+                                  Ganash
+21/03/16                Visa Electron            0042696                                          -79,49                  -1.129,28
+                              Supermercados Lavape
+21/03/16                Visa Electron            0371235                                          -29,40
+                                  Ganash
+21/03/16                Visa Electron            0450892                                          -4,50
+                              jj Rodrigues Santos la
+21/03/16                Visa Electron            0481627                                          -14,00
+                                Tortelli Delivery
+21/03/16                Visa Electron            0599160                                          -8,00
+                                Fabio Alves e me
+21/03/16                Visa Electron            0621510                                          -17,00
+                                Dutra & Felicio
+21/03/16                Visa Electron            0761143                                          -13,67
+                              Drogaria Novamanda
+21/03/16                Visa Electron            0802451                                          -5,60
+                                 Global Foods
+
+21/03/16                Visa Electron            0802548                                          -3,50                   -1.224,95
+                                 Global Foods
+22/03/16                Visa Electron            0339701                                          -20,90                  -1.245,85
+                                  Ganash
+22/03/16                Visa Electron            0790472                                          -3,00
+                               Cafeteria Barcelona
+22/03/16                Visa Electron            0802607                                          -5,60
+                                 Global Foods
+22/03/16                Visa Electron            0977532                                          -50,00                  -1.304,45
+                               Posto Santa Cruz
+23/03/16                Visa Electron            0230175                                          -298,32                 -1.602,77
+                               Raia Drogasil 510
+23/03/16                Visa Electron            0549059                                          -6,00
+                               Cafeteria Barcelona
+23/03/16                Visa Electron            0802756                                          -5,60
+                                 Global Foods
+23/03/16                Visa Electron            0802827                                          -3,00
+                                 Global Foods
+23/03/16                Visa Electron            0849504                                          -21,90                  -1.639,27
+                                  Ganash
+24/03/16                Visa Electron            0508215                                          -13,00                  -1.652,27
+                              San Thomas American
+24/03/16                Visa Electron            0638694                                          -69,56
+                              Supermercados Lavape
+24/03/16                Visa Electron            0803003                                          -3,00                   -1.724,83
+                                 Global Foods
+28/03/16                Visa Electron            0216793                                          -182,85                 -1.907,68
+                                 Cred Campo
+28/03/16                Visa Electron            0306570                                          -48,80
+                              m de f Rodrigues da si
+28/03/16                Visa Electron            0451004                                          -25,50
+                              jj Rodrigues Santos la
+28/03/16                Visa Electron            0451005                                          -5,00
+                              jj Rodrigues Santos la
+28/03/16                Visa Electron            0606031                                          -8,00
+                                Fabio Alves e me
+28/03/16                Visa Electron            0652461                                          -3,00
+                               Cafeteria Barcelona
+28/03/16                Visa Electron            0803078                                          -5,60
+                                 Global Foods
+28/03/16                Visa Electron            0803145                                          -3,00                   -2.006,58
+                                 Global Foods
+29/03/16                Visa Electron            0803558                                          -6,50                   -2.013,08
+                                 Global Foods
+30/03/16                Visa Electron            0637451                                          -39,50                  -2.052,58
+                                Daniel Pattaro
+30/03/16                Visa Electron            0803620                                          -3,00
+                                 Global Foods
+30/03/16                Visa Electron            0803695                                          -6,50                   -2.062,08
+                                 Global Foods
+01/04/16                Visa Electron            0010822                                          -159,00                 -2.221,08
+                                Mac Campinas
+01/04/16                Visa Electron            0803903                                          -5,50                   -2.226,58
+                                 Global Foods
+                        Total                                            12.987,16                -13.757,88              -2.226,58
+
+
+Os dados acima têm como base 05/04/2016 às 22h44 e estão sujeitos a alterações.
+
+Últimos Lançamentos
+
+Data                         Histórico                     Docto.                       Crédito (R$)                 Débito (R$)
+04/04/16                     Cartao Visa Electron          0451180                                                   -34,50
+                                      jj Rodrigues Santos la
+04/04/16                     Cartao Visa Electron          0923783                                                   -188,45
+                                       Auto Posto da Ilha
+04/04/16                     Cartao Visa Electron          0985872                                                   -8,00
+                                       Fabio Alves e me
+04/04/16                     Encargos Limite de Cred       2600095                                                   -10,23
+                             Total                                                      0,00                         -241,18
+
+SAC – Serviço de Apoio ao Cliente
+Alô Bradesco                          Deficiente Auditivo ou de Fala        Cancelamentos, Reclamações e Informações.
+0800 704 8383                         0800 722 0099                         Atendimento 24 horas por dia, 7 dias por semana.
+Ouvidoria 0800 727 9933 Atendimento de segunda a sexta-feira das 8h às 18h, exceto feriados.
+Demais telefones consulte o site Fale Conosco
+

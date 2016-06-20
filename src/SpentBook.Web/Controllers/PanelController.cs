@@ -19,6 +19,7 @@ namespace SpentBook.Web.Controllers
     public class PanelController : Controller
     {
         private const string CREATE_OR_EDIT_TEMPLATE = "CreateOrEdit";
+        private const string PAGE_CSS_PANEL_EDIT_CREATE = "page-panel-edit-create";
         
         [HttpGet]
         public ActionResult Details(Guid dashboardId, Guid panelId)
@@ -38,6 +39,8 @@ namespace SpentBook.Web.Controllers
         public ActionResult Create(Guid dashboardId)
         {
             ViewBag.IsEdit = false;
+            ViewBag.PageName = PAGE_CSS_PANEL_EDIT_CREATE;
+
             var uow = Helper.GetUnitOfWorkByCurrentUser();
             var dashboard = uow.Dashboards.Get(f => f.Id == dashboardId).FirstOrDefault();
             
@@ -58,6 +61,7 @@ namespace SpentBook.Web.Controllers
         public ActionResult Create(Guid dashboardId, PanelModel model)
         {
             ViewBag.IsEdit = false;
+            ViewBag.PageName = PAGE_CSS_PANEL_EDIT_CREATE;
 
             if (ModelState.IsValid)
             {
@@ -98,6 +102,7 @@ namespace SpentBook.Web.Controllers
         public ActionResult Edit(Guid dashboardId, Guid panelId)
         {
             ViewBag.IsEdit = true;
+            ViewBag.PageName = PAGE_CSS_PANEL_EDIT_CREATE;
 
             var uow = Helper.GetUnitOfWorkByCurrentUser();
             var dashboard = uow.Dashboards.Get(f => f.Id == dashboardId).First();
@@ -114,6 +119,7 @@ namespace SpentBook.Web.Controllers
         public ActionResult Edit(Guid dashboardId, Guid panelId, PanelModel model)
         {
             ViewBag.IsEdit = true;
+            ViewBag.PageName = PAGE_CSS_PANEL_EDIT_CREATE;
 
             if (ModelState.IsValid)
             {
@@ -216,8 +222,8 @@ namespace SpentBook.Web.Controllers
                 model.GroupByOrderByGroup3 = panel.GroupByOrderByGroup3;
                 model.GroupByOrderByGroupClassification3 = panel.GroupByOrderByGroupClassification3;
 
-                model.OrderBy = panel.OrderBy;
-                model.OrderByClassification = panel.OrderByClassification;
+                model.OrderBy = panel.Filter.OrderBy;
+                model.OrderByClassification = panel.Filter.OrderByClassification;
                 model.FilterTransactionType = panel.Filter.TransactionType;
                 model.FilterDateStart = panel.Filter.DateStart;
                 model.FilterDateEnd = panel.Filter.DateEnd;
@@ -267,8 +273,8 @@ namespace SpentBook.Web.Controllers
             panel.GroupByOrderByGroup3 = model.GroupByOrderByGroup3;
             panel.GroupByOrderByGroupClassification3 = model.GroupByOrderByGroupClassification3;
 
-            panel.OrderBy = model.OrderBy;
-            panel.OrderByClassification = model.OrderByClassification;
+            //panel.OrderBy = model.OrderBy;
+            //panel.OrderByClassification = model.OrderByClassification;
             panel.Filter = new TransactionFilter();
             panel.Filter.TransactionType = model.FilterTransactionType;
             panel.Filter.DateStart = model.FilterDateStart;
@@ -276,6 +282,11 @@ namespace SpentBook.Web.Controllers
             panel.Filter.ValueStart = model.FilterValueStart;
             panel.Filter.ValueEnd = model.FilterValueEnd;
             panel.ViewName = model.ViewName;
+
+
+            // depois tenho que apagar o orderby e orderbyclassification
+            panel.Filter.OrderBy = model.OrderBy;
+            panel.Filter.OrderByClassification = model.OrderByClassification;
 
             if (!string.IsNullOrWhiteSpace(model.FilterCategories))
             { 

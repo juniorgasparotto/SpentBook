@@ -7,16 +7,20 @@
         @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav navbar-right">
+            
             <li>
-                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink("Transações", "Index", "Transaction", routeValues: null, htmlAttributes: new { title = "Dashboard" })
             </li>
             <li>
                 @Html.ActionLink("Dashboard", "Index", "Dashboard", routeValues: null, htmlAttributes: new { title = "Dashboard" })
             </li>
             <li>
-                @Html.ActionLink("Atualizar DB", "Index", "DBUpdate")
+                @Html.ActionLink("Minha conta", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            <li>
+                @Html.ActionLink("Atualizar DB", "Index", "DBUpdate")
+            </li>
         </ul>
     }
 }

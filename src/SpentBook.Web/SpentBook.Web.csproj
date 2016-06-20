@@ -171,8 +171,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Binders\DateTimeFormattedModelBinder.cs" />
     <Compile Include="Controllers\DBUpdateController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\_deleted\HighchartsDataController - Copy.cs" />
     <Compile Include="Controllers\JsonDataController.cs" />
     <Compile Include="Controllers\PanelController.cs" />
@@ -180,7 +182,7 @@
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\ResumeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Binders\CustomModelBinder.cs" />
+    <Compile Include="Binders\EnumModelBinder.cs" />
     <Compile Include="Filters\JsonOutputWhenGenericExceptionAttribute.cs" />
     <Compile Include="Filters\JsonNetActionFilter.cs" />
     <Compile Include="Filters\JsonOutputWhenModelInvalidAttribute.cs" />
@@ -196,13 +198,22 @@
     <Compile Include="Models\deleted\TransactionGroupDefinition.cs" />
     <Compile Include="Models\deleted\TransactionGroup.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\PageTransactionModel.cs" />
+    <Compile Include="Models\TransactionFilterModel.cs" />
+    <Compile Include="Models\TransactionModel.cs" />
     <Compile Include="Models\PanelModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="TransactionCSVRepository\TransactionCSVRepository.cs" />
+    <Compile Include="TransactionCSVRepository\TransactionCSVUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\handsontable\handsontable.css" />
+    <Content Include="Content\handsontable\handsontable.full.css" />
+    <Content Include="Content\handsontable\handsontable.full.min.css" />
+    <Content Include="Content\handsontable\handsontable.min.css" />
     <Content Include="Content\jquery.gridster.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -241,8 +252,13 @@
     <Content Include="Scripts\Custom\PageDashboard.js" />
     <Content Include="Scripts\Custom\Helper.js" />
     <Content Include="Scripts\Custom\CodeControl.js" />
+    <Content Include="Scripts\Custom\PageTransaction.js" />
     <Content Include="Scripts\Custom\Preloader.js" />
     <Content Include="Scripts\Custom\HighchartsHelper.js" />
+    <Content Include="Scripts\handsontable\handsontable.full.js" />
+    <Content Include="Scripts\handsontable\handsontable.full.min.js" />
+    <Content Include="Scripts\handsontable\handsontable.js" />
+    <Content Include="Scripts\handsontable\handsontable.min.js" />
     <Content Include="Scripts\Highcharts-4.0.1\js\adapters\standalone-framework.js" />
     <Content Include="Scripts\Highcharts-4.0.1\js\adapters\standalone-framework.src.js" />
     <Content Include="Scripts\Highcharts-4.0.1\js\highcharts-3d.js" />
@@ -432,6 +448,10 @@
     <Content Include="Views\Templates\Tables\TransactionsSimple.cshtml" />
     <Content Include="Views\_deleted\Columns.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CheckboxListEnum.cshtml" />
+    <Content Include="Views\TransactionImport\FilesList.cshtml" />
+    <Content Include="Views\TransactionImport\Index.cshtml" />
+    <Content Include="Views\TransactionImport\SpentsList.cshtml" />
+    <Content Include="Views\Transaction\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

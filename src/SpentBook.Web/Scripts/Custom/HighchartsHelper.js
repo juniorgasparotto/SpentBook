@@ -13,7 +13,6 @@
         SetChart: function(chart, categories, series, drilldown) {
             if (categories)
                 chartSet.xAxis[0].setCategories(categories);
-            console.log(series.length);
 
             while (chart.series.length > 0) {
                 chart.series[0].remove(true);

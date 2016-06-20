@@ -1,0 +1,98 @@
+﻿@model SpentBook.Web.Models.PageTransactionModel
+
+@{
+    ViewBag.Title = "Transações";
+}
+
+@using (Html.BeginForm())
+{
+    <h2>@ViewBag.Title</h2>
+
+    <hr />
+    
+    @Html.ValidationSummary()
+
+    <ul class="nav nav-pills nav-justified">
+        <li class="active"><a data-toggle="tab" href="#tab-filter">Busca</a></li>
+        <li><a data-toggle="tab" href="#tab-import">Importar</a></li>
+    </ul>
+
+    <div id="tab-transaction">
+        <div id="tab-filter" class="tab-pane fade in active">
+            <div id="filter" class="tab-pane fade in">
+                <div class="form-group form-group-extension-small">
+                    @Html.LabelFor(m => m.Filter.TransactionType)
+                    @Html.EditorFor(m => m.Filter.TransactionType, "RadioButtonListEnum")
+                </div>
+
+                <div class="form-group form-group-extension-small field-date-from-to">
+                    @Html.Label("Filtrar transações por periodo")
+                    <div class="input-group input-daterange">
+                        @Html.TextBoxFor(m => m.Filter.DateStart, "{0:dd/MM/yyyy}", new { @class = "form-control" })
+                        <span class="input-group-addon">até</span>
+                        @Html.TextBoxFor(m => m.Filter.DateEnd, "{0:dd/MM/yyyy}", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group form-group-extension-small field-decimal-from-to">
+                    @Html.Label("Filtrar transações por valor")
+                    <div class="input-group input-daterange">
+                        @Html.TextBoxFor(m => m.Filter.ValueStart, new { @class = "form-control" })
+                        <span class="input-group-addon">até</span>
+                        @Html.TextBoxFor(m => m.Filter.ValueEnd, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Filter.Categories)
+                    @Html.TextBoxFor(m => m.Filter.Categories, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group form-group-extension-small">
+                    @Html.LabelFor(m => m.Filter.SubCategories)
+                    @Html.TextBoxFor(m => m.Filter.SubCategories, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group form-group-extension-small">
+                    @Html.LabelFor(m => m.Filter.TransactionNames)
+                    @Html.TextBoxFor(m => m.Filter.TransactionNames, new { @class = "form-control" })
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn btn2 btn-default">
+                        <span>Pesquisar</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="transactionSheet">
+
+            </div>
+        </div>
+        <div id="tab-import" class="tab-pane fade in">
+
+        </div>
+    </div>
+}
+
+<div class="clearfix"></div>
+
+@section styles {
+    @Styles.Render("~/Content/css/handsontable")
+}
+
+@section Scripts {
+    <script>
+        var PageTransaction = new Object();
+        @if (Model.Transactions != null && Model.Transactions.Count > 0)
+        {
+        <text>
+        PageTransaction.Transactions = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Transactions));
+        </text>
+        }
+    </script>
+    @Scripts.Render("~/bundles/handsontable")
+    @Scripts.Render("~/bundles/custom/page-transaction")
+    <script src="http://docs.handsontable.com/0.18.0/bower_components/numeraljs/languages/pt-br.js"></script>
+}
+    

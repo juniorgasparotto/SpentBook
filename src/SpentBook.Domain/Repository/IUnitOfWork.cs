@@ -10,7 +10,5 @@ namespace SpentBook.Domain
     {
         IRepository<Dashboard> Dashboards { get; }
         IRepository<Transaction> Transactions { get; }
-        //IRepository<TransactionFilter> TransactionFilters { get; }
-        //IRepository<Panel> Panels { get; }
     }
 }

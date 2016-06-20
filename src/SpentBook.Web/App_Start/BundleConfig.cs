@@ -17,6 +17,7 @@ namespace SpentBook.Web
             bundles.Add(new ScriptBundle("~/bundles/jquery-linq").Include("~/Scripts/jquery.linq.js"));
             bundles.Add(new ScriptBundle("~/bundles/jquery-gridster").Include("~/Scripts/jquery.gridster.js"));
 
+            //highcharts
             bundles.Add(new ScriptBundle("~/bundles/highcharts")
                 .Include("~/Scripts/highcharts/4.2.3/highcharts.src.js")
                 .Include("~/Scripts/Highcharts/4.2.3/modules/data.src.js")
@@ -49,7 +50,6 @@ namespace SpentBook.Web
             bundles.Add(new ScriptBundle("~/bundles/custom/highcharts-helper").Include("~/Scripts/Custom/HighchartsHelper.js"));
             bundles.Add(new ScriptBundle("~/bundles/custom/dashboard").Include("~/Scripts/Custom/Dashboard.js"));
             bundles.Add(new ScriptBundle("~/bundles/custom/preloader").Include("~/Scripts/Custom/Preloader.js"));
-            bundles.Add(new ScriptBundle("~/bundles/custom/page-dashboard").Include("~/Scripts/Custom/PageDashboard.js"));
             bundles.Add(new ScriptBundle("~/bundles/custom/code-control").Include("~/Scripts/Custom/CodeControl.js"));
 
             //styles
@@ -57,6 +57,14 @@ namespace SpentBook.Web
             bundles.Add(new StyleBundle("~/Content/css/jqueryui").Include("~/Content/themes/base/*.css"));
             bundles.Add(new ScriptBundle("~/Content/css/jquery-gridster").Include("~/Content/jquery.gridster.css"));
             bundles.Add(new ScriptBundle("~/Content/css/treegrid").Include("~/Content/treegrid/jquery.treegrid.css"));
+
+            //handsontable
+            bundles.Add(new StyleBundle("~/Content/css/handsontable").Include("~/Content/handsontable/handsontable.full.css"));
+            bundles.Add(new ScriptBundle("~/bundles/handsontable").Include("~/Scripts/handsontable/handsontable.full.js"));
+
+            //pages
+            bundles.Add(new ScriptBundle("~/bundles/custom/page-dashboard").Include("~/Scripts/Custom/PageDashboard.js"));
+            bundles.Add(new ScriptBundle("~/bundles/custom/page-transaction").Include("~/Scripts/Custom/PageTransaction.js"));
         }
     }
 }

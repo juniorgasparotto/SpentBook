@@ -1,14 +1,17 @@
 (function () {
     window.CodeControl = window.CodeControl || {};
+    window.CodeControl.Debug = false;
     var executions = {};
 
     window.CodeControl.Add = function (config, executeOneTime, playNow) {
         if (!config.key) {
-            console.log("Key not defined");
+            if (window.CodeControl.Debug)
+                console.log("Key not defined");
             return;
         }
         else if (!config.method) {
-            console.log("Method not defined");
+            if (window.CodeControl.Debug)
+                console.log("Method not defined");
             return;
         }
 
@@ -39,7 +42,8 @@
 
     window.CodeControl.Remove = function (key) {
         if (!executions[key]) {
-            //console.log("Key '" + key + "' not found");
+            if (window.CodeControl.Debug)
+                console.log("Key '" + key + "' not found");
             return;
         }
 
@@ -54,7 +58,8 @@
 
     window.CodeControl.Pause = function (key) {
         if (!executions[key]) {
-            //console.log("Key '" + key + "' not found");
+            if (window.CodeControl.Debug)
+                console.log("Key '" + key + "' not found");
             return;
         }
 
@@ -66,7 +71,8 @@
 
     window.CodeControl.Play = function (key) {
         if (!executions[key]) {
-            console.log("Key '" + key + "' not found");
+            if (window.CodeControl.Debug)
+                console.log("Key '" + key + "' not found");
             return;
         }
 
@@ -100,7 +106,8 @@
             }, executionItem.interval);
         }
         else {
-            console.log("Interval not defined");
+            if (window.CodeControl.Debug)
+                console.log("Interval not defined");
         }
 
         return window.CodeControl;

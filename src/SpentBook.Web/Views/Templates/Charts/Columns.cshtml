@@ -3,6 +3,12 @@
 <script language="javascript">
     $(document).ready(function () {
         Highcharts.setOptions({ "lang": { "decimalPoint": ",", "thousandsSep": "." } });
+        Highcharts.setOptions({
+            lang: {
+                drillUpText: '<< Voltar para {series.name}'
+            }
+        });
+
         var pointFormat = "";
         var yAxisTitle = "";
         var funcFormat = function (number) { return Highcharts.numberFormat(number); };
@@ -53,14 +59,16 @@
                 column: {
                     borderWidth: 0,
                     dataLabels: {
-                        align: "left",
+                        //align: "left",
                         color: "#000000",
                         enabled: true,
                         formatter: function () { return funcFormat(this.y); },
-                        rotation: 270,
-                        verticalAlign: "middle"
+                        rotation: 0,
+                        //verticalAlign: "middle",                        
+                        //inside: true,
                     },
                     pointPadding: 0.2,
+                    minPointLength: 2
                 },
             },
             title: {
@@ -89,26 +97,24 @@
                         y: 0,
                         x: 0
                     },
-                    theme: {
-                        fill: 'white',
-                        'stroke-width': 1,
-                        stroke: 'silver',
-                        r: 0,
-                        states: {
-                            hover: {
-                                fill: '#bada55'
-                            },
-                            select: {
-                                stroke: '#039',
-                                fill: '#bada55'
-                            }
-                        }
-                    }
+                    //theme: {
+                    //    fill: 'white',
+                    //    'stroke-width': 1,
+                    //    stroke: 'silver',
+                    //    r: 0,
+                    //    states: {
+                    //        hover: {
+                    //            fill: '#bada55'
+                    //        },
+                    //        select: {
+                    //            stroke: '#039',
+                    //            fill: '#bada55'
+                    //        }
+                    //    }
+                    //}
                 }
             }
         });
-
-        window.chart = chart;
 
         // remove o código anterior desse painel se existir
         CodeControl.Remove(keyCode);
@@ -134,6 +140,16 @@
                         //if (json.Reversed) {
                         //    chart.yAxis[0].reversed = true;
                         //}
+
+                        //for (var index in json.Series) {
+                        //    var data = json.Series[index].data;
+                        //    for (var dataIndex in data) {
+                        //        data[dataIndex].y = Math.abs(data[dataIndex].y);
+                        //        console.log(data[dataIndex].y);
+                        //        json.Series[index].negativeColor = "red";
+                        //    }
+                        //}
+
                         HighchartsHelper.SetChart(chart, json.Categories, json.Series, json.Drilldown);                        
                     },
                     cache: false

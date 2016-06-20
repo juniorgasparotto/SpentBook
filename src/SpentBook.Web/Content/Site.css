@@ -255,12 +255,17 @@ div#legend span
 }
 
 .field-decimal-from-to {
-    width: 300px;
+    width: 240px;
 }
 
 .form-group-extension
 {
     margin-bottom: 40px;
+}
+
+.form-group-extension-small
+{
+    margin-bottom: 13px;
 }
 
 .validation-summary-errors {
@@ -404,6 +409,12 @@ div#legend span
     margin-top: 10px;
 }
 
+.panel-body text {
+    text-decoration: none !important;
+    text-shadow: initial;
+    color: !important;
+}
+
 /*.panel-body .table {
     border: 1px solid #e6e6e6;
 }
@@ -439,3 +450,25 @@ div#legend span
     background-color: #428bca;
 }
 
+/* Page: Panel Edit */
+.page-panel-edit-create .tab-content {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Page: Transaction manage */
+#tab-transaction {
+    padding-bottom: 10px
+}
+
+#filter {
+    float: left;
+    width: 30%;
+}
+
+#transactionSheet {
+    float: left;
+    width: 70%;
+    height: 470px;
+    overflow:scroll;
+}

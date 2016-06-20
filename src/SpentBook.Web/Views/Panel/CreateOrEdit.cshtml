@@ -22,174 +22,189 @@
     
     @Html.ValidationSummary()
 
-    <div class="form-group form-group-extension">
-        @Html.LabelFor(m => m.Title)
-        @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
-    </div>
-
-    <div class="form-group form-group-extension">
-        @Html.LabelFor(m => m.ViewName)
-        @Html.TextBoxFor(m => m.ViewName, new { @class = "form-control" })
-    </div>
+    <ul class="nav nav-pills nav-justified">
+        <li class="active"><a data-toggle="tab" href="#general">Geral</a></li>
+        <li><a data-toggle="tab" href="#filter">Filtro</a></li>
+        <li><a data-toggle="tab" href="#order">Ordenação</a></li>
+        <li><a data-toggle="tab" href="#group">Agrupamentos</a></li>
+        <li><a data-toggle="tab" href="#chart-options">Opções de gráfico</a></li>
+    </ul>
     
-    <div class="form-group form-group-extension">
-        @Html.LabelFor(m => m.PanelComponents)
-        @Html.EditorFor(m => m.PanelComponents, "CheckboxListEnum")
-    </div>
+    <div class="tab-content">
+        <div id="general" class="tab-pane fade in active">
+            <div class="form-group form-group-extension">
+                @Html.LabelFor(m => m.Title)
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+            </div>
 
-    <div class="form-group form-group-extension">
-        @Html.LabelFor(m => m.DisplayY)
-        @Html.EditorFor(m => m.DisplayY, "RadioButtonListEnum")
-    </div>
-    
-    <div class="form-group form-group-extension">
-        @Html.LabelFor(m => m.PanelWidth)
-        @Html.EditorFor(m => m.PanelWidth, "RadioButtonListEnum")
-    </div>
-    
-    <div class="form-group form-group-extension">
-        @Html.LabelFor(m => m.PanelOrder)
-        @Html.TextBoxFor(m => m.PanelOrder, new { @class = "form-control" })
-    </div>
-    
-    <fieldset>
-        <legend>Agrupamento dos dados - primário</legend>
-        <div class="form-group form-group-extension">
-            @Html.LabelFor(m => m.GroupBy)
-            @Html.EditorFor(m => m.GroupBy, "RadioButtonListEnum")
-        </div>
+            <div class="form-group form-group-extension">
+                @Html.LabelFor(m => m.ViewName)
+                @Html.TextBoxFor(m => m.ViewName, new { @class = "form-control" })
+            </div>
 
-        <div class="form-group form-group-extension">
-            @Html.LabelFor(m => m.GroupByOrderBy)
-            @Html.EditorFor(m => m.GroupByOrderBy, "RadioButtonListEnum")
-        </div>
+            <div class="form-group form-group-extension">
+                @Html.LabelFor(m => m.PanelComponents)
+                @Html.EditorFor(m => m.PanelComponents, "CheckboxListEnum")
+            </div>
 
-        <div class="form-group form-group-extension">
-            @Html.LabelFor(m => m.GroupByOrderByClassification)
-            @Html.EditorFor(m => m.GroupByOrderByClassification, "RadioButtonListEnum")
-        </div>
+            <div class="form-group form-group-extension">
+                @Html.LabelFor(m => m.PanelWidth)
+                @Html.EditorFor(m => m.PanelWidth, "RadioButtonListEnum")
+            </div>
 
-        <div class="form-group form-group-extension">
-            @Html.LabelFor(m => m.GroupByOrderByGroup)
-            @Html.EditorFor(m => m.GroupByOrderByGroup, "RadioButtonListEnum")
-        </div>
-
-        <div class="form-group form-group-extension">
-            @Html.LabelFor(m => m.GroupByOrderByGroupClassification)
-            @Html.EditorFor(m => m.GroupByOrderByGroupClassification, "RadioButtonListEnum")
-        </div>
-    </fieldset>
-    
-    <fieldset>
-        <legend>Agrupamento dos dados - secundário</legend>
-        <div class="form-group form-group-extension">
-            @Html.LabelFor(m => m.GroupBy2)
-            @Html.EditorFor(m => m.GroupBy2, "RadioButtonListEnum")
-        </div>
-
-        <div class="form-group form-group-extension">
-            @Html.LabelFor(m => m.GroupByOrderBy2)
-            @Html.EditorFor(m => m.GroupByOrderBy2, "RadioButtonListEnum")
-        </div>
-
-        <div class="form-group form-group-extension">
-            @Html.LabelFor(m => m.GroupByOrderByClassification2)
-            @Html.EditorFor(m => m.GroupByOrderByClassification2, "RadioButtonListEnum")
-        </div>
-
-        <div class="form-group form-group-extension">
-            @Html.LabelFor(m => m.GroupByOrderByGroup2)
-            @Html.EditorFor(m => m.GroupByOrderByGroup2, "RadioButtonListEnum")
-        </div>
-
-        <div class="form-group form-group-extension">
-            @Html.LabelFor(m => m.GroupByOrderByGroupClassification2)
-            @Html.EditorFor(m => m.GroupByOrderByGroupClassification2, "RadioButtonListEnum")
-        </div>
-    </fieldset>
-
-    <fieldset>
-        <legend>Agrupamento dos dados - terciário</legend>
-        <div class="form-group form-group-extension">
-            @Html.LabelFor(m => m.GroupBy3)
-            @Html.EditorFor(m => m.GroupBy3, "RadioButtonListEnum")
-        </div>
-
-        <div class="form-group form-group-extension">
-            @Html.LabelFor(m => m.GroupByOrderBy3)
-            @Html.EditorFor(m => m.GroupByOrderBy3, "RadioButtonListEnum")
-        </div>
-
-        <div class="form-group form-group-extension">
-            @Html.LabelFor(m => m.GroupByOrderByClassification3)
-            @Html.EditorFor(m => m.GroupByOrderByClassification3, "RadioButtonListEnum")
-        </div>
-
-        <div class="form-group form-group-extension">
-            @Html.LabelFor(m => m.GroupByOrderByGroup3)
-            @Html.EditorFor(m => m.GroupByOrderByGroup3, "RadioButtonListEnum")
-        </div>
-
-        <div class="form-group form-group-extension">
-            @Html.LabelFor(m => m.GroupByOrderByGroupClassification3)
-            @Html.EditorFor(m => m.GroupByOrderByGroupClassification3, "RadioButtonListEnum")
-        </div>
-    </fieldset>
-    
-    <fieldset>
-        <legend>Ordem dos dados</legend>
-        <div class="form-group form-group-extension">
-            @Html.LabelFor(m => m.OrderBy)
-            @Html.EditorFor(m => m.OrderBy, "RadioButtonListEnum")
-        </div>
-        <div class="form-group form-group-extension">
-            @Html.LabelFor(m => m.OrderByClassification)
-            @Html.EditorFor(m => m.OrderByClassification, "RadioButtonListEnum")
-        </div>
-    </fieldset>
-
-    <fieldset>
-        <legend>Filtros</legend>
-
-        <div class="form-group form-group-extension">
-            @Html.LabelFor(m => m.FilterTransactionType)
-            @Html.EditorFor(m => m.FilterTransactionType, "RadioButtonListEnum")
-        </div>
-
-        <div class="form-group form-group-extension field-date-from-to">
-            @Html.Label("Filtrar transações por periodo")
-            <div class="input-group input-daterange">
-                @Html.TextBoxFor(m => m.FilterDateStart, new { @class = "form-control" })
-                <span class="input-group-addon">até</span>
-                @Html.TextBoxFor(m => m.FilterDateEnd, new { @class = "form-control" })
+            <div class="form-group form-group-extension">
+                @Html.LabelFor(m => m.PanelOrder)
+                @Html.TextBoxFor(m => m.PanelOrder, new { @class = "form-control" })
             </div>
         </div>
+        <div id="filter" class="tab-pane fade in">
+            <div class="form-group form-group-extension">
+                @Html.LabelFor(m => m.FilterTransactionType)
+                @Html.EditorFor(m => m.FilterTransactionType, "RadioButtonListEnum")
+            </div>
 
-        <div class="form-group form-group-extension field-decimal-from-to">
-            @Html.Label("Filtrar transações por valor")
-            <div class="input-group input-daterange">
-                <span class="input-group-addon">R$</span>
-                @Html.TextBoxFor(m => m.FilterValueStart, new { @class = "form-control" })
-                <span class="input-group-addon">até</span>
-                @Html.TextBoxFor(m => m.FilterValueEnd, new { @class = "form-control" })
+            <div class="form-group form-group-extension field-date-from-to">
+                @Html.Label("Filtrar transações por periodo")
+                <div class="input-group input-daterange">
+                    @Html.TextBoxFor(m => m.FilterDateStart, "{0:dd/MM/yyyy}", new { @class = "form-control" })
+                    <span class="input-group-addon">até</span>
+                    @Html.TextBoxFor(m => m.FilterDateEnd, "{0:dd/MM/yyyy}", new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group form-group-extension field-decimal-from-to">
+                @Html.Label("Filtrar transações por valor")
+                <div class="input-group input-daterange">
+                    <span class="input-group-addon">R$</span>
+                    @Html.TextBoxFor(m => m.FilterValueStart, new { @class = "form-control" })
+                    <span class="input-group-addon">até</span>
+                    @Html.TextBoxFor(m => m.FilterValueEnd, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.FilterCategories)
+                @Html.TextBoxFor(m => m.FilterCategories, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group form-group-extension">
+                @Html.LabelFor(m => m.FilterSubCategories)
+                @Html.TextBoxFor(m => m.FilterSubCategories, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group form-group-extension">
+                @Html.LabelFor(m => m.FilterTransactionNames)
+                @Html.TextBoxFor(m => m.FilterTransactionNames, new { @class = "form-control" })
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.FilterCategories)
-            @Html.TextBoxFor(m => m.FilterCategories, new { @class = "form-control" })
+        <div id="order" class="tab-pane fade in">
+            <div class="form-group form-group-extension">
+                @Html.LabelFor(m => m.OrderBy)
+                @Html.EditorFor(m => m.OrderBy, "RadioButtonListEnum")
+            </div>
+            <div class="form-group form-group-extension">
+                @Html.LabelFor(m => m.OrderByClassification)
+                @Html.EditorFor(m => m.OrderByClassification, "RadioButtonListEnum")
+            </div>
         </div>
+        <div id="group" class="tab-pane fade in">
+            <fieldset>
+                <legend data-toggle="collapse" data-target="#primary">Primário</legend>
+                <div id="primary" class="collapse">
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupBy)
+                        @Html.EditorFor(m => m.GroupBy, "RadioButtonListEnum")
+                    </div>
 
-        <div class="form-group form-group-extension">
-            @Html.LabelFor(m => m.FilterSubCategories)
-            @Html.TextBoxFor(m => m.FilterSubCategories, new { @class = "form-control" })
-        </div>
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderBy)
+                        @Html.EditorFor(m => m.GroupByOrderBy, "RadioButtonListEnum")
+                    </div>
 
-        <div class="form-group form-group-extension">
-            @Html.LabelFor(m => m.FilterTransactionNames)
-            @Html.TextBoxFor(m => m.FilterTransactionNames, new { @class = "form-control" })
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderByClassification)
+                        @Html.EditorFor(m => m.GroupByOrderByClassification, "RadioButtonListEnum")
+                    </div>
+
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderByGroup)
+                        @Html.EditorFor(m => m.GroupByOrderByGroup, "RadioButtonListEnum")
+                    </div>
+
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderByGroupClassification)
+                        @Html.EditorFor(m => m.GroupByOrderByGroupClassification, "RadioButtonListEnum")
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend data-toggle="collapse" data-target="#secondary">Secundário</legend>
+                <div id="secondary" class="collapse">
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupBy2)
+                        @Html.EditorFor(m => m.GroupBy2, "RadioButtonListEnum")
+                    </div>
+
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderBy2)
+                        @Html.EditorFor(m => m.GroupByOrderBy2, "RadioButtonListEnum")
+                    </div>
+
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderByClassification2)
+                        @Html.EditorFor(m => m.GroupByOrderByClassification2, "RadioButtonListEnum")
+                    </div>
+
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderByGroup2)
+                        @Html.EditorFor(m => m.GroupByOrderByGroup2, "RadioButtonListEnum")
+                    </div>
+
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderByGroupClassification2)
+                        @Html.EditorFor(m => m.GroupByOrderByGroupClassification2, "RadioButtonListEnum")
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend data-toggle="collapse" data-target="#terciary">Terciário</legend>
+                <div id="terciary" class="collapse">
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupBy3)
+                        @Html.EditorFor(m => m.GroupBy3, "RadioButtonListEnum")
+                    </div>
+
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderBy3)
+                        @Html.EditorFor(m => m.GroupByOrderBy3, "RadioButtonListEnum")
+                    </div>
+
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderByClassification3)
+                        @Html.EditorFor(m => m.GroupByOrderByClassification3, "RadioButtonListEnum")
+                    </div>
+
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderByGroup3)
+                        @Html.EditorFor(m => m.GroupByOrderByGroup3, "RadioButtonListEnum")
+                    </div>
+
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderByGroupClassification3)
+                        @Html.EditorFor(m => m.GroupByOrderByGroupClassification3, "RadioButtonListEnum")
+                    </div>
+                </div>
+            </fieldset>
         </div>
-    </fieldset>
+        <div id="chart-options" class="tab-pane fade in">
+            <div class="form-group form-group-extension">
+                @Html.LabelFor(m => m.DisplayY)
+                @Html.EditorFor(m => m.DisplayY, "RadioButtonListEnum")
+            </div>
+        </div>
+    </div>
     
     <div class="btn-group">
         <button type="submit" class="btn btn2 btn-default">
