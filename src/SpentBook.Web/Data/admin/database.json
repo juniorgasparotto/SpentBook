@@ -14,8 +14,6 @@
           "Title": "Teste 4 Ricardo",
           "PanelComponents": 3,
           "PanelOrder": 1,
-          "OrderBy": 0,
-          "OrderByClassification": 0,
           "GroupBy": 7,
           "GroupByOrderBy": 4,
           "GroupByOrderByClassification": 1,
@@ -39,13 +37,63 @@
             "Categories": null,
             "SubCategories": null,
             "Names": null,
-            "TransactionType": 0
+            "TransactionType": 0,
+            "OrderBy": 0,
+            "OrderByClassification": 0
           },
           "PanelWidth": 2,
           "DisplayY": 0
         }
       ],
       "FriendlyUrl": "teste"
+    },
+    {
+      "Id": "7e45e84b-450e-4c8c-8bdd-1265a0be0618",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "teste3",
+      "Panels": [
+        {
+          "Id": "34a3e5c7-0e11-4d0f-bb13-997ce4b056af",
+          "CreateDate": "2016-06-20T21:07:09.1012192-03:00",
+          "LastUpdateDate": "2016-06-20T21:08:30.1108526-03:00",
+          "ViewName": "~",
+          "Title": "teste",
+          "PanelComponents": 3,
+          "PanelOrder": 1,
+          "GroupBy": 0,
+          "GroupByOrderBy": 0,
+          "GroupByOrderByClassification": 0,
+          "GroupByOrderByGroup": 0,
+          "GroupByOrderByGroupClassification": 0,
+          "GroupBy2": 0,
+          "GroupByOrderBy2": 0,
+          "GroupByOrderByClassification2": 0,
+          "GroupByOrderByGroup2": 0,
+          "GroupByOrderByGroupClassification2": 0,
+          "GroupBy3": 0,
+          "GroupByOrderBy3": 0,
+          "GroupByOrderByClassification3": 0,
+          "GroupByOrderByGroup3": 0,
+          "GroupByOrderByGroupClassification3": 0,
+          "Filter": {
+            "DateStart": null,
+            "DateEnd": null,
+            "ValueStart": null,
+            "ValueEnd": null,
+            "Categories": null,
+            "SubCategories": null,
+            "Names": null,
+            "TransactionType": 0,
+            "OrderBy": 0,
+            "OrderByClassification": 0
+          },
+          "PanelWidth": 0,
+          "DisplayY": 0
+        }
+      ],
+      "FriendlyUrl": "teste3"
     }
   ],
+  "Transactions": []
 }
