@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Identity.Service;
 using Microsoft.AspNetCore.Identity.Service.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using mvcAuth.Identity.Models;
-using mvcAuth.Identity.Models.ManageViewModels;
-using mvcAuth.Identity.Services;
+using SpentBook.Web.Identity.Models;
+using SpentBook.Web.Identity.Models.ManageViewModels;
+using SpentBook.Web.Identity.Services;
 
-namespace mvcAuth.Identity.Controllers
+namespace SpentBook.Web.Identity.Controllers
 {
     [Authorize(IdentityServiceOptions.LoginPolicyName)]
     [Area("IdentityService")]

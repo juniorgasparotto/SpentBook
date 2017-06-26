@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace mvcAuth.Identity.Models.HomeViewModels
+namespace SpentBook.Web.Identity.Models.HomeViewModels
 {
     public class IdentityServiceViewModel
     {

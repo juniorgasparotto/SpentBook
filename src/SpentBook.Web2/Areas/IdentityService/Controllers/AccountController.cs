@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
@@ -9,11 +9,11 @@ using Microsoft.AspNetCore.Identity.Service.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using mvcAuth.Identity.Models;
-using mvcAuth.Identity.Models.AccountViewModels;
-using mvcAuth.Identity.Services;
+using SpentBook.Web.Identity.Models;
+using SpentBook.Web.Identity.Models.AccountViewModels;
+using SpentBook.Web.Identity.Services;
 
-namespace mvcAuth.Identity.Controllers
+namespace SpentBook.Web.Identity.Controllers
 {
     [Area("IdentityService")]
     [IdentityServiceRoute("[controller]/[action]")]

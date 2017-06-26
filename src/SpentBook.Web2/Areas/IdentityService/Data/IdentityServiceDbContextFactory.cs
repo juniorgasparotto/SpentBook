@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace mvcAuth.Identity.Data
+namespace SpentBook.Web.Identity.Data
 {
     public class IdentityServiceDbContextFactory : IDbContextFactory<IdentityServiceDbContext>
     {

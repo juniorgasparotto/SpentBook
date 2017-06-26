@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.Service;
 using Microsoft.AspNetCore.Identity.Service.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using mvcAuth.Identity.Models;
+using SpentBook.Web.Identity.Models;
 
-namespace mvcAuth.Identity.Data
+namespace SpentBook.Web.Identity.Data
 {
     public class IdentityServiceDbContext : IdentityServiceDbContext<ApplicationUser, IdentityServiceApplication>
     {

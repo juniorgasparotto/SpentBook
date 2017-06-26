@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.Identity.Service.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using mvcAuth.Identity.Models;
+using SpentBook.Web.Identity.Models;
 
-namespace mvcAuth.Identity.Controllers
+namespace SpentBook.Web.Identity.Controllers
 {
     [Area("IdentityService")]
     [IdentityServiceRoute(IdentityServiceConstants.DefaultPolicy + "/oauth2/v" + IdentityServiceConstants.Version + "/[action]")]

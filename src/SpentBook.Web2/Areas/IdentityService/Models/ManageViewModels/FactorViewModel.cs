@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace mvcAuth.Identity.Models.ManageViewModels
+namespace SpentBook.Web.Identity.Models.ManageViewModels
 {
     public class FactorViewModel
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace mvcAuth.Models
+namespace SpentBook.Web.Models
 {
     public class ErrorViewModel
     {

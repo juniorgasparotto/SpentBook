@@ -4,10 +4,10 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <MvcRazorCompileOnPublish>true</MvcRazorCompileOnPublish>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
-    <UserSecretsId>aspnet-mvcAuth-2C15CD8A-9861-4301-98D1-2A8CC43499A9</UserSecretsId>
+    <UserSecretsId>aspnet-SpentBook.Web-2C15CD8A-9861-4301-98D1-2A8CC43499A9</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <None Update="mvcAuth.db" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="SpentBook.Web.db" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>

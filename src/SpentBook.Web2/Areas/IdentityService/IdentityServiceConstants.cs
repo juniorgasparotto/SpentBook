@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.Service.Extensions;
 
-namespace mvcAuth.Identity
+namespace SpentBook.Web.Identity
 {
     // These values are used to setup the identity servcie and should not be changed
     public class IdentityServiceConstants

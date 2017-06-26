@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity.Service;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace mvcAuth.Identity.Data.Migrations
+namespace SpentBook.Web.Identity.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {
