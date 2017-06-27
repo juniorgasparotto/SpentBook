@@ -10,7 +10,7 @@
             "stopAtEntry": false,
             "console": "externalTerminal"
         }, {
-            "name": ".NET Core Launch (console)",
+            "name": "Run (console)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
@@ -18,10 +18,13 @@
             "args": [],
             "cwd": "${workspaceRoot}",
             "stopAtEntry": false,
-            "externalConsole": false
+            "externalConsole": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
         },
         {
-            "name": ".NET Core Launch (web)",
+            "name": "Run (web)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
@@ -49,12 +52,6 @@
             "sourceFileMap": {
                 "/Views": "${workspaceRoot}/Views"
             }
-        },
-        {
-            "name": ".NET Core Attach",
-            "type": "coreclr",
-            "request": "attach",
-            "processId": "${command.pickProcess}"
         }
     ]
 }
