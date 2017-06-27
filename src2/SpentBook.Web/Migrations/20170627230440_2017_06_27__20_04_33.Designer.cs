@@ -9,8 +9,8 @@ using System;
 namespace SpentBook.Web.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20170626212053_Init")]
-    partial class Init
+    [Migration("20170627230440_2017_06_27__20_04_33")]
+    partial class _2017_06_27__20_04_33
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

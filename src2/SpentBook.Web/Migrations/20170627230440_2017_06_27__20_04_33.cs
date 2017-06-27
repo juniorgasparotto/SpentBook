@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace SpentBook.Web.Migrations
 {
-    public partial class Init : Migration
+    public partial class _2017_06_27__20_04_33 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
