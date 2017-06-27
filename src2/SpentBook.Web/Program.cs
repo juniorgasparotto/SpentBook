@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using SysCommand.ConsoleApp;
 
 namespace SpentBook.Web
 {
@@ -14,6 +15,7 @@ namespace SpentBook.Web
     {
         public static void Main(string[] args)
         {
+            App.RunApplication();
             BuildWebHost(args).Run();
         }
 
