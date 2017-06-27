@@ -52,6 +52,55 @@
             "sourceFileMap": {
                 "/Views": "${workspaceRoot}/Views"
             }
+        }, {
+            "name": "Run/DbUpdate (CMD)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "cmd-dbupdate",
+            "program": "${workspaceRoot}/bin/Debug/netcoreapp2.0/SpentBook.Web.dll",
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "stopAtEntry": false,
+            "console": "externalTerminal"
+        },
+        {
+            "name": "Clean (CMD)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "admin\\Scripts\\clean.bat",
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
+            "name": "Clean All (CMD)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "admin\\Scripts\\clean-all.bat",
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        }, {
+            "name": "DropDb (CMD)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "admin\\Scripts\\dropdb.bat",
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "stopAtEntry": false,
+            "console": "externalTerminal"
+        },
+        {
+            "name": "Restore (CMD)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "admin\\Scripts\\restore.bat",
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "stopAtEntry": false,
+            "console": "internalConsole"
         }
     ]
 }

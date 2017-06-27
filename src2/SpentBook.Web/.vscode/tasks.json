@@ -6,16 +6,39 @@
     "isShellCommand": true,
     "args": [],
     "tasks": [{
-        "taskName": "restore",
-        "args": [],
-        "isBuildCommand": true,
-        // "showOutput": "silent",
-        "problemMatcher": "$msCompile"
-    }, {
-        "taskName": "build",
-        "args": [],
-        "isBuildCommand": true,
-        // "showOutput": "silent",
-        "problemMatcher": "$msCompile"
-    }]
+            "taskName": "restore",
+            "args": [],
+            "isBuildCommand": true,
+            "problemMatcher": "$msCompile"
+        }, {
+            "taskName": "build",
+            "args": [],
+            "isBuildCommand": true,
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "cmd-dbupdate",
+            "command": "cmd",
+            "args": ["/C", "admin\\Scripts\\dbupdate.bat"],
+            "suppressTaskName": true,
+            "showOutput": "always",
+            "echoCommand": true
+        },
+        {
+            "taskName": "cmd-clean",
+            "command": "cmd",
+            "args": ["/C", "admin\\Scripts\\clean.bat"],
+            "suppressTaskName": true,
+            "showOutput": "always",
+            "echoCommand": true
+        },
+        {
+            "taskName": "cmd-clean-all",
+            "command": "cmd",
+            "args": ["/C", "admin\\Scripts\\clean-all.bat"],
+            "suppressTaskName": true,
+            "showOutput": "always",
+            "echoCommand": true
+        }
+    ]
 }
