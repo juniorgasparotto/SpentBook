@@ -1,1 +1,1 @@
-dotnet run clean-migrations-files
+dotnet run --admin clean-migrations-files

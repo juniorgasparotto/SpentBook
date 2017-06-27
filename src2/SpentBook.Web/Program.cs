@@ -9,14 +9,22 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SysCommand.ConsoleApp;
 
-namespace SpentBook.Web
+namespace Teste
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            App.RunApplication();
-            BuildWebHost(args).Run();
+            if (args.FirstOrDefault() == "--admin")
+            {
+                var app = new App();
+                var argsList = args.ToList();
+                argsList.RemoveAt(0);
+                app.Run(argsList.ToArray());
+            }
+            else {
+                BuildWebHost(args).Run();
+            }
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
