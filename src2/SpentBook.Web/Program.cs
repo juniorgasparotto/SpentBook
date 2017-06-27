@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SysCommand.ConsoleApp;
 
-namespace Teste
+namespace SpentBook.Web
 {
     public class Program
     {
