@@ -1,0 +1,178 @@
+﻿@model SpentBook.Web.Models.PanelModel
+
+<script language="javascript">
+    $(document).ready(function () {
+        Highcharts.setOptions({ "lang": { "decimalPoint": ",", "thousandsSep": "." } });
+        Highcharts.setOptions({
+            lang: {
+                drillUpText: '<< Voltar para {series.name}'
+            }
+        });
+
+        var pointFormat = "";
+        var yAxisTitle = "";
+        var funcFormat = function (number) { return Highcharts.numberFormat(number); };
+        
+        if ('@Model.DisplayY' == '@SpentBook.Domain.TransactionDisplayY.Value')
+        {
+            pointFormat = "<span style='color:{series.color}'>\u25CF</span> {series.name} - {point.name}: <b>R$ {point.y:.2f}</b><br/>";
+            yAxisTitle = "R$";
+            
+        }
+        else if ('@Model.DisplayY' == '@SpentBook.Domain.TransactionDisplayY.ValuePercentage')
+        {
+            pointFormat = "<span style='color:{series.color}'>\u25CF</span> {series.name} - {point.name}: <b>{point.y:.2f}%</b><br/>";
+            yAxisTitle = "%";
+        }
+        else if ('@Model.DisplayY' == '@SpentBook.Domain.TransactionDisplayY.Count') {
+            pointFormat = "<span style='color:{series.color}'>\u25CF</span> {series.name} - {point.name}: <b>{point.y}</b><br/>";
+            yAxisTitle = "Frequência";
+            funcFormat = function (number) { return number; };
+        }
+        else if ('@Model.DisplayY' == '@SpentBook.Domain.TransactionDisplayY.CountPercentage') {
+            pointFormat = "<span style='color:{series.color}'>\u25CF</span> {series.name} - {point.name}: <b>{point.y:.2f}%</b><br/>";
+            yAxisTitle = "%";
+        }
+
+        var wrapper = $('#chart-@Model.Id');
+        var content = wrapper.find('.content-chart');
+        var panel = wrapper.parents(".panel");
+        var keyCode = 'chart-@Model.Id';
+
+        var chart = new Highcharts.Chart({
+            chart: {
+                renderTo: content[0],
+                type: "column"
+            },
+            legend: {
+                align: "center",
+                labelFormatter: function () {
+                    var count = 0;
+                    for (var i = 0 ; i < this.yData.length; i++) {
+                        count += this.yData[i];
+                    }
+                    return this.name + ' (' + funcFormat(count) + ')';
+                },
+                y: 3
+            },
+            plotOptions: {
+                column: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        //align: "left",
+                        color: "#000000",
+                        enabled: true,
+                        formatter: function () { return funcFormat(this.y); },
+                        rotation: 0,
+                        //verticalAlign: "middle",                        
+                        //inside: true,
+                    },
+                    pointPadding: 0.2,
+                    minPointLength: 2
+                },
+            },
+            title: {
+                text: null
+            },
+            tooltip: {
+                headerFormat: "",
+                pointFormat: pointFormat,
+            },
+            yAxis: {
+                title: {
+                    text: yAxisTitle
+                },
+                //reversed: true
+            },
+            xAxis: {
+                type: 'category',
+            },
+            exporting: {
+                enabled: true
+            },
+            drilldown: {
+                drillUpButton: {
+                    relativeTo: 'spacingBox',
+                    position: {
+                        y: 0,
+                        x: 0
+                    },
+                    //theme: {
+                    //    fill: 'white',
+                    //    'stroke-width': 1,
+                    //    stroke: 'silver',
+                    //    r: 0,
+                    //    states: {
+                    //        hover: {
+                    //            fill: '#bada55'
+                    //        },
+                    //        select: {
+                    //            stroke: '#039',
+                    //            fill: '#bada55'
+                    //        }
+                    //    }
+                    //}
+                }
+            }
+        });
+
+        // remove o código anterior desse painel se existir
+        CodeControl.Remove(keyCode);
+
+        var config = {
+            key: keyCode,
+            args: null,
+            method: function (args) {
+                var preloader = new Preloader(panel, 'preload-panel-chart-data');
+
+                $.ajax({
+                    url: '/JsonData/TransactionsHighcharts',
+                    type: "GET",
+                    dataType: "json",
+                    data: { dashboardId: '@Model.Dashboard.Id', panelId: '@Model.Id' },
+                    beforeSend: function () {
+                        preloader.StartPanelPreloader();
+                    },
+                    complete: function () {
+                        preloader.EndPanelPreloader();
+                    },
+                    success: function (json) {
+                        //if (json.Reversed) {
+                        //    chart.yAxis[0].reversed = true;
+                        //}
+
+                        //for (var index in json.Series) {
+                        //    var data = json.Series[index].data;
+                        //    for (var dataIndex in data) {
+                        //        data[dataIndex].y = Math.abs(data[dataIndex].y);
+                        //        console.log(data[dataIndex].y);
+                        //        json.Series[index].negativeColor = "red";
+                        //    }
+                        //}
+
+                        HighchartsHelper.SetChart(chart, json.Categories, json.Series, json.Drilldown);                        
+                    },
+                    cache: false
+                });
+            },
+            interval: Dashboard.PanelDataUpdateTimer,
+            autoPause: null,
+            autoRemove: function (args) {
+                if (!panel.parent().length) {
+                    return true;
+                }
+
+                return false;
+            },
+            executeIfTrue: function (args) {
+                if (wrapper.is(':visible')) {
+                    return true;
+                }
+
+                return false;
+            }
+        };
+
+        CodeControl.Add(config, true, true);
+    });
+</script>

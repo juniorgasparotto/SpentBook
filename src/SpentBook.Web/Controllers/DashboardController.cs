@@ -17,7 +17,6 @@ namespace SpentBook.Web.Controllers
 {
     [JsonOutputWhenModelInvalid]
     [JsonOutputWhenGenericException]
-    [Authorize]
     public class DashboardController : Controller
     {
         public ActionResult Index()

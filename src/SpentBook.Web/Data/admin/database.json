@@ -56,11 +56,11 @@
         {
           "Id": "34a3e5c7-0e11-4d0f-bb13-997ce4b056af",
           "CreateDate": "2016-06-20T21:07:09.1012192-03:00",
-          "LastUpdateDate": "2016-06-20T21:08:30.1108526-03:00",
+          "LastUpdateDate": "2017-06-28T19:21:09.8467206-03:00",
           "ViewName": "~",
-          "Title": "teste",
+          "Title": "teste332",
           "PanelComponents": 3,
-          "PanelOrder": 1,
+          "PanelOrder": 2,
           "GroupBy": 0,
           "GroupByOrderBy": 0,
           "GroupByOrderByClassification": 0,
@@ -90,9 +90,55 @@
           },
           "PanelWidth": 0,
           "DisplayY": 0
+        },
+        {
+          "Id": "53d73676-2f26-4680-9212-ab36f4fc501b",
+          "CreateDate": "2017-06-28T19:21:30.3608356-03:00",
+          "LastUpdateDate": "2017-06-28T19:21:30.3608356-03:00",
+          "ViewName": "teste",
+          "Title": "Test",
+          "PanelComponents": 3,
+          "PanelOrder": 1,
+          "GroupBy": 0,
+          "GroupByOrderBy": 0,
+          "GroupByOrderByClassification": 0,
+          "GroupByOrderByGroup": 0,
+          "GroupByOrderByGroupClassification": 0,
+          "GroupBy2": 0,
+          "GroupByOrderBy2": 0,
+          "GroupByOrderByClassification2": 0,
+          "GroupByOrderByGroup2": 0,
+          "GroupByOrderByGroupClassification2": 0,
+          "GroupBy3": 0,
+          "GroupByOrderBy3": 0,
+          "GroupByOrderByClassification3": 0,
+          "GroupByOrderByGroup3": 0,
+          "GroupByOrderByGroupClassification3": 0,
+          "Filter": {
+            "DateStart": null,
+            "DateEnd": null,
+            "ValueStart": null,
+            "ValueEnd": null,
+            "Categories": null,
+            "SubCategories": null,
+            "Names": null,
+            "TransactionType": 0,
+            "OrderBy": 0,
+            "OrderByClassification": 0
+          },
+          "PanelWidth": 2,
+          "DisplayY": 0
         }
       ],
       "FriendlyUrl": "teste3"
+    },
+    {
+      "Id": "fb415569-eb9f-4900-86f5-94fe33a967bb",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Teste2",
+      "Panels": null,
+      "FriendlyUrl": "teste2"
     }
   ],
   "Transactions": []

@@ -30,11 +30,11 @@ namespace SpentBook.Domain.Imports
             using (var sr = new StreamReader(fullName))
             {
                 var reader = new CsvReader(sr);
-                reader.Parser.Configuration.HasHeaderRecord = false;
+                //reader.Parser.Configuration.HasHeaderRecord = false;
                 reader.Parser.Configuration.IgnoreBlankLines = true;
-                reader.Parser.Configuration.IgnoreHeaderWhiteSpace = true;
+                //reader.Parser.Configuration.IgnoreHeaderWhiteSpace = true;
                 reader.Parser.Configuration.Delimiter = ";";
-                reader.Parser.Configuration.IgnoreReadingExceptions = true;
+                //reader.Parser.Configuration.IgnoreReadingExceptions = true;
 
                 var lines = reader.GetRecords<CSVLine>().ToList();
                 foreach(var line in lines)

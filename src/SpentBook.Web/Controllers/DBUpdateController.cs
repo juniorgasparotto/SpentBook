@@ -13,7 +13,6 @@ using SpentBook.Data.FileSystem;
 
 namespace SpentBook.Web.Controllers
 {
-    [Authorize]
     public class DBUpdateController : Controller
     {
         public ActionResult Index()

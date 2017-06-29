@@ -1,0 +1,155 @@
+﻿@model SpentBook.Web.Models.PanelModel
+
+<div class="panel-heading clearfix">
+    <h4 class="panel-title pull-left">@Model.Title</h4>
+
+    <div class="btn-group pull-right panel-actions">
+        <button type="button" class="btn btn-default btn-xs btn-edit">
+            <span class="glyphicon glyphicon-edit" aria-hidden="true">                
+                @Html.ActionLink("edit", "Edit", "Panel", new { dashboardId = @Model.Dashboard.Id, panelId = Model.Id }, new { @class = "collapse" })
+            </span>
+        </button>
+
+        <button type="button" class="btn btn-default btn-xs btn-delete">
+            <span class="glyphicon glyphicon-trash" aria-hidden="true">
+                @Html.ActionLink("delete", "Delete", "Panel", new { dashboardId = @Model.Dashboard.Id, panelId = Model.Id }, new { @class = "collapse" })
+            </span>
+        </button>
+    </div>
+</div>
+
+@{
+    var hasChart = Model.PanelComponents.HasFlag(SpentBook.Domain.PanelComponents.Chart);
+    var hasTable = Model.PanelComponents.HasFlag(SpentBook.Domain.PanelComponents.Table);
+
+    var countTab = hasChart ? 1 : 0;
+    countTab += hasTable ? 1 : 0;
+}
+
+<div class="panel-body @(countTab > 1 ? "with-tab" : "without-tab")">
+    @if (countTab > 1)
+    { 
+        <ul class="nav nav-pills nav-justified">
+            @{
+                var activeTabClass = "active";
+            }
+
+            @if (hasChart)
+            {
+                <li class="@activeTabClass"><a data-toggle="tab" href="#chart-@Model.Id">Gráfico</a></li>
+                activeTabClass = "";
+            }
+
+            @if (hasTable)
+            {
+                <li class="@activeTabClass"><a data-toggle="tab" href="#table-@Model.Id">Tabela</a></li>
+                activeTabClass = "";
+            }
+        </ul>
+    }
+    
+    <div class="tab-content">
+        @{
+            var activeContentClass = "in active";
+        }
+        @if (hasChart)
+        {
+            <div id="chart-@Model.Id" class="tab-pane fade in @activeContentClass">
+                @switch (Model.Panel.GetDataType())
+                {
+                    case SpentBook.Domain.Panel.PanelDataType.NonGroup:
+                    case SpentBook.Domain.Panel.PanelDataType.NonGroupAndSortDate:
+                        @Html.Partial("~/Views/Templates/Charts/Lines.cshtml", Model)
+                        break;
+                    case SpentBook.Domain.Panel.PanelDataType.OneGroup:
+                    case SpentBook.Domain.Panel.PanelDataType.TwoGroup:
+                    case SpentBook.Domain.Panel.PanelDataType.ThreeOrMoreGroup:
+                    @Html.Partial("~/Views/Templates/Charts/Columns.cshtml", Model)
+                        break;
+                }
+
+                <div class="content-chart">
+
+                </div>
+            </div>
+            
+            activeContentClass = "";
+        }
+        
+        @if (hasTable)
+        {   
+            <div id="table-@Model.Id" class="tab-pane fade @activeContentClass">
+                <script language="javascript">
+                    $(document).ready(function () {
+                        var wrapper = $('#table-@Model.Id');
+                        var content = wrapper.find('.content-table');
+                        var panel = wrapper.parents(".panel");
+                        var keyCode = 'table-@Model.Id';
+
+                        CodeControl.Remove(keyCode);
+
+                        var config = {
+                            key: keyCode,
+                            args: null,
+                            method: function (args) {
+                                var preloader = new Preloader(panel, 'preload-panel-table-data');
+
+                                $.ajax({
+                                    url: '/JsonData/TransactionsTable',
+                                    type: "GET",
+                                    dataType: "json",
+                                    data: { dashboardId: '@Model.Dashboard.Id', panelId: '@Model.Id' },
+                                    beforeSend: function () {
+                                        preloader.StartPanelPreloader();
+                                    },
+                                    complete: function () {
+                                        preloader.EndPanelPreloader();
+                                    },
+                                    success: function (json) {
+                                        content.html(json.Table);
+                                        content.find("table").treegrid();
+                                    },
+                                    cache: false
+                                });
+                            },
+                            interval: Dashboard.PanelDataUpdateTimer,
+                            autoPause: null,
+                            autoRemove: function (args) {
+                                if (!panel.parent().length) {
+                                    return true;
+                                }
+
+                                return false;
+                            },
+                            executeIfTrue: function (args) {
+                                if (wrapper.is(':visible')) {
+                                    return true;
+                                }
+
+                                return false;
+                            }
+                        };
+
+                        CodeControl.Add(config, true, true);
+                    });
+                </script>
+
+                <div class="content-table">
+
+                </div>
+            </div>
+            
+            activeContentClass = "";
+        }
+</div>
+
+@section ScriptsTop {
+    @Scripts.Render("~/bundles/jquery-treegrid")
+    @Scripts.Render("~/bundles/highcharts")
+    @Scripts.Render("~/bundles/custom/highcharts-helper")
+    @Scripts.Render("~/bundles/custom/preloader")
+}
+
+@section styles {
+    @Styles.Render("~/Content/css/treegrid")
+}

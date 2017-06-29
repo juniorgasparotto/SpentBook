@@ -23,9 +23,9 @@ namespace SpentBook.Web.Controllers
 
         public static string GetUserDataBase(IPrincipal user)
         {
-            var userName = user.Identity.Name;
-            if (string.IsNullOrWhiteSpace(userName))
-                throw new Exception("Not logged");
+            var userName = "admin";
+            //if (string.IsNullOrWhiteSpace(userName))
+            //    throw new Exception("Not logged");
 
             var uploadPath = HttpContext.Current.Server.MapPath(@"\Data");
             var userPath = uploadPath + @"\" + userName + @"\database.json";

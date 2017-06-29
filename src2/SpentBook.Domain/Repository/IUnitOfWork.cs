@@ -10,5 +10,6 @@ namespace SpentBook.Domain
     {
         IRepository<Dashboard> Dashboards { get; }
         IRepository<Transaction> Transactions { get; }
+        void Save();
     }
 }

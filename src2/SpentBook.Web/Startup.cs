@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using SpentBook.Web.Models;
+using SpentBook.Domain;
 
 namespace SpentBook.Web
 {
@@ -32,6 +33,7 @@ namespace SpentBook.Web
             services.AddIdentityServiceAuthentication();
 
             services.AddMvc();
+            services.AddScoped<IUnitOfWork, PocDatabaseUoW>();
 
             // Add framework services.
             services.AddDbContext<ApplicationContext>(options =>

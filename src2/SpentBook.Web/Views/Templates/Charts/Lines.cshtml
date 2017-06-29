@@ -1,0 +1,103 @@
+﻿@model SpentBook.Web.Models.PanelModel
+
+<script language="javascript">
+    $(document).ready(function () {
+        Highcharts.setOptions({ global: { useUTC: false } });
+        Highcharts.setOptions({ "lang": { "decimalPoint": ",", "thousandsSep": "." } });
+        var pointFormat = "";
+        var yAxisTitle = "";
+        var funcFormat = function () { return '<b>' + this.point.name + '</b><br/>' + 'R$ ' + Highcharts.numberFormat(this.y) };
+
+        if ('@Model.DisplayY' == '@SpentBook.Domain.TransactionDisplayY.Value') {
+            yAxisTitle = "R$";
+        }
+        else if ('@Model.DisplayY' == '@SpentBook.Domain.TransactionDisplayY.ValuePercentage') {
+            funcFormat = function () { return '<b>' + this.point.name + '</b><br/>' + Highcharts.numberFormat(this.y) + "%"};
+            yAxisTitle = "%";
+        }
+        else if ('@Model.DisplayY' == '@SpentBook.Domain.TransactionDisplayY.Count') {
+            funcFormat = function () { return '<b>' + this.point.name + '</b><br/>' + this.y };
+            yAxisTitle = "Frequência";
+        }
+        else if ('@Model.DisplayY' == '@SpentBook.Domain.TransactionDisplayY.CountPercentage') {
+            funcFormat = function () { return '<b>' + this.point.name + '</b><br/>' + Highcharts.numberFormat(this.y) + "%" };
+            yAxisTitle = "%";
+        }
+
+        var wrapper = $('#chart-@Model.Id');
+        var content = wrapper.find('.content-chart');
+        var panel = wrapper.parents(".panel");
+        var keyCode = 'chart-@Model.Id';
+
+        var chart = new Highcharts.Chart({
+            chart:
+                {
+                    renderTo: content[0],
+                    type: 'spline'
+                },
+            subtitle: {
+                text: ''
+            },
+            title: {
+                text: ''
+            },
+            tooltip: {
+                formatter: funcFormat
+            },
+            xAxis: {
+                dateTimeLabelFormats: { month: '%e. %b', year: '%b' }, type: 'datetime'
+            },
+            yAxis: {
+                title: {
+                    text: yAxisTitle
+                }
+            },
+        });
+
+        // remove o código anterior desse painel se existir
+        CodeControl.Remove(keyCode);
+
+        var config = {
+            key: keyCode,
+            args: null,
+            method: function (args) {
+                var preloader = new Preloader(panel, 'preload-panel-chart-data');
+
+                $.ajax({
+                    url: '/JsonData/TransactionsHighcharts',
+                    type: "GET",
+                    dataType: "json",
+                    data: { dashboardId: '@Model.Dashboard.Id', panelId: '@Model.Id', tryCategorize: false },
+                    beforeSend: function () {
+                        preloader.StartPanelPreloader();
+                    },
+                    complete: function () {
+                        preloader.EndPanelPreloader();
+                    },
+                    success: function (json) {
+                        HighchartsHelper.SetChart(chart, json.Categories, json.Series, json.Drilldown);
+                    },
+                    cache: false
+                });
+            },
+            interval: Dashboard.PanelDataUpdateTimer,
+            autoPause: null,
+            autoRemove: function (args) {
+                if (!panel.parent().length) {
+                    return true;
+                }
+
+                return false;
+            },
+            executeIfTrue: function (args) {
+                if (wrapper.is(':visible')) {
+                    return true;
+                }
+
+                return false;
+            }
+        };
+
+        CodeControl.Add(config, true, true);
+    });
+</script>

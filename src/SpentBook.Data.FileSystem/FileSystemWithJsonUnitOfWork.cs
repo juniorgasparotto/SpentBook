@@ -9,7 +9,7 @@ namespace SpentBook.Data.FileSystem
 {
     public class FileSystemWithJsonUnitOfWork : IUnitOfWork
     {
-        private readonly Dictionary<Type, IRepository<IEntity>> repositories;     
+        private readonly Dictionary<Type, IRepository<IEntity>> repositories; 
    
         public string FileDb { get; private set; }
 

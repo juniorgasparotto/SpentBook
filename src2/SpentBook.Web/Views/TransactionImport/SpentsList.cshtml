@@ -1,0 +1,51 @@
+﻿@model List<SpentBook.Domain.Transaction>
+
+<h1>Dados</h1>
+@if (Model.Count > 0)
+{
+    <table class="rwd-table">
+        <tr>
+            <th></th>
+            <th>@Html.CheckBox("spentItemAll", false)</th>
+            <th>Data</th>
+            <th>Categoria</th>
+            <th>SubCategoria</th>
+            <th>Local</th>
+            <th>Valor</th>
+        </tr>
+        @{
+            var i = 1;
+            foreach (var transaction in Model) {
+                <tr class="@(i % 2 == 0 ? "pair" : "odd")">
+                    <td>
+                        @i
+                    </td>           
+                    <td>
+                        @Html.CheckBox("spentItem", false)
+                    </td>  
+                    <td>
+                        @transaction.Date
+                    </td>
+                    <td>
+                        @transaction.Category
+                    </td>
+                    <td>
+                        @transaction.SubCategory
+                    </td>
+                    <td>
+                        @transaction.Name
+                    </td>
+                     <td>
+                        @transaction.Value
+                    </td>
+                </tr>
+            
+                i++;
+            }
+        }
+    </table>
+}
+else
+{
+    <p>Nenhuma informação foi encontrada para ser exibida</p>
+}

@@ -1,82 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4BA8F0D9-943E-42DC-B833-077F354D3AEA}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SpentBook.Domain</RootNamespace>
-    <AssemblyName>SpentBook.Domain</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
-      <HintPath>..\packages\CsvHelper.2.13.5.0\lib\net40-client\CsvHelper.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="CsvHelper" Version="3.0.0-chi05" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0-preview2-25405-01" PrivateAssets="All" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Services\TransactionService.cs" />
-    <Compile Include="Models\PanelPosition.cs" />
-    <Compile Include="Repository\IEntity.cs" />
-    <Compile Include="Repository\IUnitOfWork.cs" />
-    <Compile Include="Repository\IRepository.cs" />
-    <Compile Include="Imports\TransactionImportDefaultCSV.cs" />
-    <Compile Include="_deleteds\Services.cs" />
-    <Compile Include="Models\PanelWidth.cs" />
-    <Compile Include="Models\TransactionGroup.cs" />
-    <Compile Include="Models\TransactionDisplayY.cs" />
-    <Compile Include="Models\TransactionGroupDefinition.cs" />
-    <Compile Include="Models\ChartDataCategorized.cs" />
-    <Compile Include="Models\TransactionGroupOrder.cs" />
-    <Compile Include="Models\OrderByClassification.cs" />
-    <Compile Include="Models\TransactionOrder.cs" />
-    <Compile Include="Models\TransactionGroupBy.cs" />
-    <Compile Include="Models\PanelComponents.cs" />
-    <Compile Include="Models\TransactionType.cs" />
-    <Compile Include="Models\Panel.cs" />
-    <Compile Include="Models\TransactionFilter.cs" />
-    <Compile Include="Models\Dashboard.cs" />
-    <Compile Include="Models\Transaction.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
