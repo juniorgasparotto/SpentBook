@@ -15,6 +15,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using SpentBook.Web.Models;
 using SpentBook.Domain;
+using SpentBook.Web.Filters;
 
 namespace SpentBook.Web
 {
@@ -32,9 +33,14 @@ namespace SpentBook.Web
         {
             services.AddIdentityServiceAuthentication();
 
-            services.AddMvc();
-            services.AddScoped<IUnitOfWork, PocDatabaseUoW>();
+            services.AddMvc(options =>
+            {
+                //options.Filters.Add(new HandleErrorAttribute());
+                //options.Filters.Add(new JsonNetActionFilter());
+            });
 
+            services.AddScoped<IUnitOfWork, PocDatabaseUoW>();
+            
             // Add framework services.
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(ConfigurationManager.GetConnectionString()));
@@ -59,7 +65,7 @@ namespace SpentBook.Web
             app.UseRewriter(new RewriteOptions().AddIISUrlRewrite(env.ContentRootFileProvider, "urlRewrite.config"));
 
             app.UseAuthentication();
-
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

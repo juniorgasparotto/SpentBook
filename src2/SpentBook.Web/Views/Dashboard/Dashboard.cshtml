@@ -6,7 +6,6 @@
 
 <div id="title-and-buttons">
     <h2>@ViewBag.Title</h2>
-    @*<a href="#modal-new-panel" class="btn btn2 no-action">+ Painel</a>*@
     @Html.ActionLink("+ Painel", "Create", "Panel", new { dashboardId = Model.Dashboard.Id }, new { @class = "btn btn2 no-action" })
     <a href="javascript: Dashboard.UpdateAllPanels();" class="btn btn2 no-action">Atualizar</a>
 </div>
@@ -36,44 +35,26 @@
 
 @section Styles
 {
-    @*@Styles.Render("~/Content/css/jqueryui")*@
     <link rel="stylesheet" href="~/css/treegrid/jquery.treegrid.css" />
 }
 
 @section ScriptsTop {
     @*@Scripts.Render("~/bundles/jqueryui")*@
 
-    @*@Scripts.Render("~/bundles/jquery-treegrid")*@
     <script src="~/js/treegrid/jquery.treegrid.js"></script>
     <script src="~/js/treegrid/jquery.treegrid.bootstrap3.js"></script>
 
-    @*@Scripts.Render("~/bundles/highcharts")*@
     <script src="~/js/Highcharts/4.2.3/highcharts.src.js"></script>
     <script src="~/js/Highcharts/4.2.3/modules/data.src.js"></script>
     <script src="~/js/Highcharts/4.2.3/modules/exporting.src.js"></script>
     <script src="~/js/Highcharts/4.2.3/modules/drilldown.src.js"></script>
     <script src="~/js/Highcharts/4.2.3/highcharts-more.js"></script>
-    @*<script src="~/js/Highcharts/plugins/value-in-legend.js"></script>
-    <script src="~/js/Highcharts/4.2.3/modules/funnel.src.js"></script>
-    <script src="~/js/Highcharts/4.2.3/modules/solid-gauge.src.js"></script>
-    <script src="~/js/Highcharts/4.2.3/modules/drilldown.src.js"></script*@>
 
-    @*@Scripts.Render("~/bundles/custom/helper")*@
     <script src="~/js/Custom/Helper.js"></script>
-
-    @*@Scripts.Render("~/bundles/custom/highcharts-helper")*@
     <script src="~/js/Custom/HighchartsHelper.js"></script>
-
-    @*@Scripts.Render("~/bundles/custom/dashboard")*@
     <script src="~/js/Custom/Dashboard.js"></script>
-
-    @*@Scripts.Render("~/bundles/custom/preloader")*@
     <script src="~/js/Custom/Preloader.js"></script>
-
-    @*@Scripts.Render("~/bundles/custom/page-dashboard")*@
     <script src="~/js/Custom/PageDashboard.js"></script>
-
-    @*@Scripts.Render("~/bundles/custom/code-control")*@
     <script src="~/js/Custom/CodeControl.js"></script>
 }
 

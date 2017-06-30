@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26621.2
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpentBook.Web", "SpentBook.Web\SpentBook.Web.csproj", "{91878DE7-1608-4785-9764-CEC598F77999}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpentBook.Domain", "..\SpentBook.Domain\SpentBook.Domain.csproj", "{691847A9-DF67-47D9-8A2D-5C956F0C6EC1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet.Highcharts", "..\DotNet.Highcharts\DotNet.Highcharts.csproj", "{027042C5-7781-43DE-B1B6-2F152F13F69D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQuery", "..\..\..\ExpressionGraph\src\GraphQuery\GraphQuery.csproj", "{280225D2-F95C-473B-A7F3-472B96775B80}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{91878DE7-1608-4785-9764-CEC598F77999}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91878DE7-1608-4785-9764-CEC598F77999}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91878DE7-1608-4785-9764-CEC598F77999}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91878DE7-1608-4785-9764-CEC598F77999}.Release|Any CPU.Build.0 = Release|Any CPU
+		{691847A9-DF67-47D9-8A2D-5C956F0C6EC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{691847A9-DF67-47D9-8A2D-5C956F0C6EC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{691847A9-DF67-47D9-8A2D-5C956F0C6EC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{691847A9-DF67-47D9-8A2D-5C956F0C6EC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{027042C5-7781-43DE-B1B6-2F152F13F69D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{027042C5-7781-43DE-B1B6-2F152F13F69D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{027042C5-7781-43DE-B1B6-2F152F13F69D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{027042C5-7781-43DE-B1B6-2F152F13F69D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{280225D2-F95C-473B-A7F3-472B96775B80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{280225D2-F95C-473B-A7F3-472B96775B80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{280225D2-F95C-473B-A7F3-472B96775B80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{280225D2-F95C-473B-A7F3-472B96775B80}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F4701B40-C086-4288-8939-C73A89F0DDEB}
+	EndGlobalSection
+EndGlobal

@@ -1,4 +1,5 @@
 ﻿@model SpentBook.Web.Models.PanelModel
+@addTagHelper *, SpentBook.Web.TagHelpers
 
 @{
     if (ViewBag.IsEdit)
@@ -12,7 +13,6 @@
         ViewBag.ButtonName = "Adicionar";
     }
 }
-
 
 @using (Html.BeginForm())
 {
@@ -45,6 +45,9 @@
             <div class="form-group form-group-extension">
                 @Html.LabelFor(m => m.PanelComponents)
                 @Html.EditorFor(m => m.PanelComponents, "CheckboxListEnum")
+                
+                <checkbox-list value="PanelComponents"></checkbox-list>
+                <checkbox-list id="teste" name="bla" value="PanelComponents"/>
             </div>
 
             <div class="form-group form-group-extension">

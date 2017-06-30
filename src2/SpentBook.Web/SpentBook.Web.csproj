@@ -19,9 +19,11 @@
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0-preview1-final" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0-preview1-final" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0-preview1-final" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Runtime" Version="2.0.0-preview2-final" />
     <PackageReference Include="PocDatabase" Version="1.0.1" />
     <PackageReference Include="SysCommand" Version="1.0.9" />
-    <PackageReference Include="CsvHelper" Version="2.13.5.0" />
+    <PackageReference Include="CsvHelper" Version="3.0.0-chi05" />
+    <!--<PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0-preview2-25405-01" PrivateAssets="All" />-->
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +31,7 @@
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0-preview1-final" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0-preview1-final" />
     <DotNetCliToolReference Include="BundlerMinifier.Core" Version="2.0.238" />
+    <DotNetCliToolReference Include="Microsoft.AspNetCore.Razor.Tools" Version="1.1.0-preview4-final" />
   </ItemGroup>
 
   <ItemGroup>
