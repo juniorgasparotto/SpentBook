@@ -1,0 +1,215 @@
+﻿@model SpentBook.Web.Models.PanelModel
+@addTagHelper *, SpentBook.Web.TagHelpers
+
+@{
+    if (ViewBag.IsEdit)
+    { 
+        ViewBag.Title = "Alterar painel";
+        ViewBag.ButtonName = "Alterar";
+    }
+    else
+    {
+        ViewBag.Title = "Novo painel";
+        ViewBag.ButtonName = "Adicionar";
+    }
+}
+
+@using (Html.BeginForm())
+{
+    <h2>@ViewBag.Title</h2>
+    
+    <hr />
+    
+    @Html.ValidationSummary()
+
+    <ul class="nav nav-pills nav-justified">
+        <li class="active"><a data-toggle="tab" href="#general">Geral</a></li>
+        <li><a data-toggle="tab" href="#filter">Filtro</a></li>
+        <li><a data-toggle="tab" href="#order">Ordenação</a></li>
+        <li><a data-toggle="tab" href="#group">Agrupamentos</a></li>
+        <li><a data-toggle="tab" href="#chart-options">Opções de gráfico</a></li>
+    </ul>
+    
+    <div class="tab-content">
+        <div id="general" class="tab-pane fade in active">
+            <div class="form-group form-group-extension">
+                @Html.LabelFor(m => m.Title)
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group form-group-extension">
+                @Html.LabelFor(m => m.ViewName)
+                @Html.TextBoxFor(m => m.ViewName, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group form-group-extension">
+                @Html.LabelFor(m => m.PanelComponents)
+                <checkbox-list source="PanelComponents"></checkbox-list>
+            </div>
+
+            <div class="form-group form-group-extension">
+                @Html.LabelFor(m => m.PanelWidth)
+                <radio-list source="PanelWidth"></radio-list>
+            </div>
+
+            <div class="form-group form-group-extension">
+                @Html.LabelFor(m => m.PanelOrder)
+                @Html.TextBoxFor(m => m.PanelOrder, new { @class = "form-control" })
+            </div>
+        </div>
+        <div id="filter" class="tab-pane fade in">
+            <div class="form-group form-group-extension">
+                @Html.LabelFor(m => m.FilterTransactionType)
+                <radio-list source="FilterTransactionType"></radio-list>
+            </div>
+
+            <div class="form-group form-group-extension field-date-from-to">
+                @Html.Label("Filtrar transações por periodo")
+                <div class="input-group input-daterange">
+                    @Html.TextBoxFor(m => m.FilterDateStart, "{0:dd/MM/yyyy}", new { @class = "form-control" })
+                    <span class="input-group-addon">até</span>
+                    @Html.TextBoxFor(m => m.FilterDateEnd, "{0:dd/MM/yyyy}", new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group form-group-extension field-decimal-from-to">
+                @Html.Label("Filtrar transações por valor")
+                <div class="input-group input-daterange">
+                    <span class="input-group-addon">R$</span>
+                    @Html.TextBoxFor(m => m.FilterValueStart, new { @class = "form-control" })
+                    <span class="input-group-addon">até</span>
+                    @Html.TextBoxFor(m => m.FilterValueEnd, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.FilterCategories)
+                @Html.TextBoxFor(m => m.FilterCategories, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group form-group-extension">
+                @Html.LabelFor(m => m.FilterSubCategories)
+                @Html.TextBoxFor(m => m.FilterSubCategories, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group form-group-extension">
+                @Html.LabelFor(m => m.FilterTransactionNames)
+                @Html.TextBoxFor(m => m.FilterTransactionNames, new { @class = "form-control" })
+            </div>
+        </div>
+        <div id="order" class="tab-pane fade in">
+            <div class="form-group form-group-extension">
+                @Html.LabelFor(m => m.OrderBy)
+                <radio-list source="OrderBy"></radio-list>
+
+            </div>
+            <div class="form-group form-group-extension">
+                @Html.LabelFor(m => m.OrderByClassification)
+                <radio-list source="OrderByClassification"></radio-list>
+            </div>
+        </div>
+        <div id="group" class="tab-pane fade in">
+            <fieldset>
+                <legend data-toggle="collapse" data-target="#primary">Primário</legend>
+                <div id="primary" class="collapse">
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupBy)
+                        <radio-list source="GroupBy"></radio-list>
+                    </div>
+
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderBy)
+                        <radio-list source="GroupByOrderBy"></radio-list>
+                    </div>
+
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderByClassification)
+                        <radio-list source="GroupByOrderByClassification"></radio-list>
+                    </div>
+
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderByGroup)
+                        <radio-list source="GroupByOrderByGroup"></radio-list>
+                    </div>
+
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderByGroupClassification)
+                        <radio-list source="GroupByOrderByGroupClassification"></radio-list>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend data-toggle="collapse" data-target="#secondary">Secundário</legend>
+                <div id="secondary" class="collapse">
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupBy2)
+                        <radio-list source="GroupBy2"></radio-list>
+                    </div>
+
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderBy2)
+                        <radio-list source="GroupByOrderBy2"></radio-list>
+                    </div>
+
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderByClassification2)
+                        <radio-list source="GroupByOrderByClassification2"></radio-list>
+                    </div>
+
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderByGroup2)
+                        <radio-list source="GroupByOrderByGroup2"></radio-list>
+                    </div>
+
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderByGroupClassification2)
+                        <radio-list source="GroupByOrderByGroupClassification2"></radio-list>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend data-toggle="collapse" data-target="#terciary">Terciário</legend>
+                <div id="terciary" class="collapse">
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupBy3)
+                        <radio-list source="GroupBy3"></radio-list>
+                    </div>
+
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderBy3)
+                        <radio-list source="GroupByOrderBy3"></radio-list>
+                    </div>
+
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderByClassification3)
+                        <radio-list source="GroupByOrderByClassification3"></radio-list>
+                    </div>
+
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderByGroup3)
+                        <radio-list source="GroupByOrderByGroup3"></radio-list>
+                    </div>
+
+                    <div class="form-group form-group-extension">
+                        @Html.LabelFor(m => m.GroupByOrderByGroupClassification3)
+                        <radio-list source="GroupByOrderByGroupClassification3"></radio-list>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div id="chart-options" class="tab-pane fade in">
+            <div class="form-group form-group-extension">
+                @Html.LabelFor(m => m.DisplayY)
+                <radio-list source="DisplayY"></radio-list>
+            </div>
+        </div>
+    </div>
+    
+    <div class="btn-group">
+        <button type="submit" class="btn btn2 btn-default">
+            @ViewBag.ButtonName
+        </button>
+    </div>
+}

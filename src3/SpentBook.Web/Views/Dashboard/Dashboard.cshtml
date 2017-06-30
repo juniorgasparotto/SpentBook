@@ -1,0 +1,66 @@
+﻿@model SpentBook.Web.Models.DashboardModel
+
+@{
+    ViewBag.Title = Model.Dashboard.Name;
+}
+
+<div id="title-and-buttons">
+    <h2>@ViewBag.Title</h2>
+    @Html.ActionLink("+ Painel", "Create", "Panel", new { dashboardId = Model.Dashboard.Id }, new { @class = "btn btn2 no-action" })
+    <a href="javascript: Dashboard.UpdateAllPanels();" class="btn btn2 no-action">Atualizar</a>
+</div>
+
+<div id="modal-new-panel" class="modalDialog">
+    
+</div>
+
+<div id="content-panels">
+    <div id="sortable">
+
+    </div>
+
+    <div id="empty-panels" class="collapse">
+        <span>Você ainda não criou nenhum painel!</span>
+    </div>
+
+    @*@if (Model.Dashboard.Panels == null || Model.Dashboard.Panels.Count == 0)
+    {
+        <div class="empty-panels">
+            <span>Você ainda não criou nenhum painel!</span>
+        </div>
+    }*@
+</div>
+
+<div class="clearfix"></div>
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/treegrid/jquery.treegrid.css" />
+}
+
+@section ScriptsTop {
+    
+}
+
+@section Scripts {
+    <script src="~/lib/jquery-ui/jquery-ui.js"></script>
+    <script src="~/js/treegrid/jquery.treegrid.js"></script>
+    <script src="~/js/treegrid/jquery.treegrid.bootstrap3.js"></script>
+
+    <script src="~/js/Highcharts/4.2.3/highcharts.src.js"></script>
+    <script src="~/js/Highcharts/4.2.3/modules/data.src.js"></script>
+    <script src="~/js/Highcharts/4.2.3/modules/exporting.src.js"></script>
+    <script src="~/js/Highcharts/4.2.3/modules/drilldown.src.js"></script>
+    <script src="~/js/Highcharts/4.2.3/highcharts-more.js"></script>
+
+    <script src="~/js/Custom/Helper.js"></script>
+    <script src="~/js/Custom/HighchartsHelper.js"></script>
+    <script src="~/js/Custom/Dashboard.js"></script>
+    <script src="~/js/Custom/Preloader.js"></script>
+    <script src="~/js/Custom/PageDashboard.js"></script>
+    <script src="~/js/Custom/CodeControl.js"></script>
+
+    <script language="javascript">
+        Dashboard.Id = '@Model.Dashboard.Id.ToString()';
+    </script>
+}

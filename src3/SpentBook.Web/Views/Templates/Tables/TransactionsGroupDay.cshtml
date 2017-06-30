@@ -1,0 +1,48 @@
+﻿@model SpentBook.Domain.TransactionGroup
+
+<table class="table tree table-striped">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Total</th>
+            <th>Hora</th>
+            <th>Categoria</th>
+            <th>Sub-Categoria</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Total</strong></td>
+            <td><strong>@Model.Total</strong></td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+        </tr>
+        @foreach (var group in Model.SubGroups)
+        {
+            var totalPercent = group.TotalPercentage.Last().ToString("0.00") + "%";
+            var countPercent = group.CountPercentage.Last().ToString("0.00") + "%";
+
+            <tr class="treegrid-@group.GetHashCode()">
+                <td nowrap>@(((DateTime)group.Key).ToString("d"))</td>
+                <td>@group.Total (@totalPercent)</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            foreach (var transaction in group.Transactions)
+            {
+                <tr class="treegrid-parent-@group.GetHashCode()">
+                    <td nowrap>@transaction.Name</td>
+                    <td>@transaction.Value</td>
+                    <td>@transaction.Date.ToString("hh:mm")</td>
+                    <td>@transaction.Category</td>
+                    <td>@transaction.SubCategory</td>
+                </tr>
+            }
+        }
+
+        
+    </tbody>
+</table>

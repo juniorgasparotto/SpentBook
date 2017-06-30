@@ -1,0 +1,98 @@
+{
+  "Dashboards": [
+    {
+      "Id": "5821a43e-0b5b-427f-a231-3784342e8c73",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Teste",
+      "Panels": [
+        {
+          "Id": "7b015cf8-3a58-4401-bac9-1f2cd7ab8cf7",
+          "CreateDate": "2017-06-30T13:07:02.7822232-03:00",
+          "LastUpdateDate": "2017-06-30T13:07:02.7822232-03:00",
+          "ViewName": "~/Views/CustomPanels/ChartLines.cshtml",
+          "Title": "Teste",
+          "PanelComponents": 3,
+          "PanelOrder": 2,
+          "GroupBy": 0,
+          "GroupByOrderBy": 0,
+          "GroupByOrderByClassification": 0,
+          "GroupByOrderByGroup": 0,
+          "GroupByOrderByGroupClassification": 0,
+          "GroupBy2": 0,
+          "GroupByOrderBy2": 0,
+          "GroupByOrderByClassification2": 0,
+          "GroupByOrderByGroup2": 0,
+          "GroupByOrderByGroupClassification2": 0,
+          "GroupBy3": 0,
+          "GroupByOrderBy3": 0,
+          "GroupByOrderByClassification3": 0,
+          "GroupByOrderByGroup3": 0,
+          "GroupByOrderByGroupClassification3": 0,
+          "Filter": {
+            "DateStart": null,
+            "DateEnd": null,
+            "ValueStart": null,
+            "ValueEnd": null,
+            "Categories": null,
+            "SubCategories": null,
+            "Names": null,
+            "TransactionType": 0,
+            "OrderBy": 0,
+            "OrderByClassification": 0
+          },
+          "PanelWidth": 2,
+          "DisplayY": 0
+        },
+        {
+          "Id": "85e8fdbf-6770-496d-96af-77ab5cfb74e1",
+          "CreateDate": "2017-06-30T13:16:49.5515187-03:00",
+          "LastUpdateDate": "2017-06-30T17:20:20.948897-03:00",
+          "ViewName": "~/Views/CustomPanels/ChartLines.cshtml",
+          "Title": "Teste4",
+          "PanelComponents": 3,
+          "PanelOrder": 1,
+          "GroupBy": 0,
+          "GroupByOrderBy": 0,
+          "GroupByOrderByClassification": 0,
+          "GroupByOrderByGroup": 0,
+          "GroupByOrderByGroupClassification": 0,
+          "GroupBy2": 0,
+          "GroupByOrderBy2": 0,
+          "GroupByOrderByClassification2": 0,
+          "GroupByOrderByGroup2": 0,
+          "GroupByOrderByGroupClassification2": 0,
+          "GroupBy3": 0,
+          "GroupByOrderBy3": 0,
+          "GroupByOrderByClassification3": 0,
+          "GroupByOrderByGroup3": 0,
+          "GroupByOrderByGroupClassification3": 0,
+          "Filter": {
+            "DateStart": null,
+            "DateEnd": null,
+            "ValueStart": null,
+            "ValueEnd": null,
+            "Categories": null,
+            "SubCategories": null,
+            "Names": null,
+            "TransactionType": 0,
+            "OrderBy": 0,
+            "OrderByClassification": 0
+          },
+          "PanelWidth": 2,
+          "DisplayY": 0
+        }
+      ],
+      "FriendlyUrl": "teste"
+    },
+    {
+      "Id": "e16624a2-37eb-435a-9926-d8883f511bad",
+      "CreateDate": "0001-01-01T00:00:00",
+      "LastUpdateDate": "0001-01-01T00:00:00",
+      "Name": "Teste2",
+      "Panels": null,
+      "FriendlyUrl": "teste2"
+    }
+  ],
+  "Transactions": null
+}
