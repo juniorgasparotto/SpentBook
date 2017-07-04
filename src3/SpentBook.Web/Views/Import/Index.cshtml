@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Importar extrato(s)";
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+<h3>@ViewData["Message"]</h3>
+
+<form id="form" action="/upload">
+    <div id="steps">
+        <h3>Selecione o formato do extrato</h3>
+        <section>
+            @await Html.PartialAsync("~/Views/Import/PartSelectFormat.cshtml")
+        </section>
+        <h3>Selecione os arquivos</h3>
+        <section>
+            @await Html.PartialAsync("~/Views/Import/PartFileUpload.cshtml")
+        </section>
+        <h3>Finalizar</h3>
+        <section>a</section>
+    </div>
+</form>
+
+@section Styles {
+    <link href="~/lib/jquery.steps/demo/css/jquery.steps.css" rel="stylesheet" />
+    <link href="~/lib/dropzone/dist/dropzone.css" rel="stylesheet" />
+    <link href="~/css/pages/import.css" rel="stylesheet" />
+}
+
+@section ScriptsTop {
+
+}
+
+@section Scripts {
+    <script src="~/lib/jquery-debounce/jquery.debounce.js"></script>
+    <script src="~/lib/dropzone/dist/dropzone.js"></script>
+    <script src="~/lib/jquery.steps/build/jquery.steps.js"></script>
+    <script src="~/lib/jquery.steps/build/jquery.steps.fix.js"></script>
+    <script src="~/js/Custom/PageImport.js"></script>
+}

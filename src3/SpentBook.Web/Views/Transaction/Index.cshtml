@@ -78,7 +78,7 @@
 <div class="clearfix"></div>
 
 @section styles {
-    @Styles.Render("~/Content/css/handsontable")
+    <link rel="stylesheet" href="~/css/handsontable/handsontable.full.css" />
 }
 
 @section Scripts {
@@ -91,8 +91,9 @@
         </text>
         }
     </script>
-    @Scripts.Render("~/bundles/handsontable")
-    @Scripts.Render("~/bundles/custom/page-transaction")
+
+    <script src="~/js/handsontable/handsontable.full.js"></script>
+    <script src="~/js/Custom/PageTransaction.js"></script>
     <script src="http://docs.handsontable.com/0.18.0/bower_components/numeraljs/languages/pt-br.js"></script>
 }
     

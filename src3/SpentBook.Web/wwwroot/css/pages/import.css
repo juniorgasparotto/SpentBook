@@ -1,0 +1,83 @@
+﻿/*
+*   FileUpload
+*/
+
+.dropzone {
+    border: 2px dashed #0087F7;
+    border-radius: 5px;
+    background: white;
+}
+
+.dropzone .dz-message {
+    font-weight: 400;
+}
+
+.dropzone .dz-message .note {
+    font-size: 0.8em;
+    font-weight: 200;
+    display: block;
+    margin-top: 1.4rem;
+}
+
+.dropzone .dz-preview.dz-file-preview .dz-image {
+    border-radius: 20px;
+    background: #77a4d9;
+}
+
+.dropzone .dz-preview .dz-details .dz-filename span, .dropzone .dz-preview .dz-details .dz-size span {
+    background-color: transparent;
+    color: #fff;
+}
+
+/*
+*   Banks
+*/
+.cc-selector input {
+    position: absolute;
+    z-index: 999;
+    visibility: hidden;
+}
+
+.csv {
+    background-image: url(../../images/icons/import_csv.png);
+}
+
+.bradesco {
+    background-image: url(../../images/icons/import_bradesco.png);
+}
+
+.cc-selector input:active + .drinkcard-cc, .cc-selector input:active + .drinkcard-cc {
+    opacity: .9;
+}
+
+.cc-selector input:checked + .drinkcard-cc, .cc-selector input:checked + .drinkcard-cc {
+    -webkit-filter: none;
+    -moz-filter: none;
+    filter: none;
+}
+
+.drinkcard-cc {
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100px;
+    height: 70px;
+    -webkit-transition: all 100ms ease-in;
+    transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+    -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+    filter: brightness(0.8) grayscale(1) opacity(.7);
+}
+
+.cc-selector input {
+    margin: 5px 0 0 12px;
+}
+
+/*
+*   Steps
+*/
+
+.wizard > .steps > ul > li {
+    width: 33%;
+}
