@@ -1,10 +1,12 @@
 ﻿$(document).ready(function () {
+    window.PageImport = {};
     configureSteps();
     configureUpload();
+    configurePreview();
 });
 
-function configureSteps() {
-    $("#steps").steps({
+function configureSteps() {    
+    PageImport.Steps = $("#steps").steps({
         headerTag: "h3",
         bodyTag: "section",
         transitionEffect: "slideLeft",
@@ -12,121 +14,185 @@ function configureSteps() {
         labels:
         {
             previous: "Voltar",
-            next: "Prosseguir",
-            finish: "Importar!",
+            next: "Continuar",
+            finish: "Finalizar!",
         },
         onInit: function (event, current) {
-            $('.actions > ul > li:first-child').attr('style', 'display:none');
+            
         },
         onStepChanging: function (event, currentIndex, newIndex) {
-            if (newIndex >= 1) {
-                $('.actions > ul > li:first-child').attr('style', '');
-            } else {
-                $('.actions > ul > li:first-child').attr('style', 'display:none');
+            if (currentIndex == 0) {
+                return validateStep1();
             }
-
-            var inputFormatValue = $('input[name=importFormat]:checked').val();
-            if (!inputFormatValue) {
-                alert("Selecione um formato");
+            else if (currentIndex == 1) {
+                var valid = validateStep2();
+                if (valid) {
+                    if (PageImport.Dropzone.getQueuedFiles().length == 0) {
+                        return true;
+                    } 
+                    else {
+                        PageImport.Dropzone.processQueue();
+                    }
+                }
                 return false;
             }
-            //form.validate().settings.ignore = ":disabled,:hidden";
-            //return true;
+            else if (currentIndex == 2) {
+                return validateStep3();
+            }
+
             return true;
         },
         onStepChanged: function (event, currentIndex, priorIndex) {
-            
+            if (currentIndex == 0) {
+                PageImport.Steps.btnNext.text("Selecionar");
+            }
+            else if (currentIndex == 1) {
+                PageImport.Steps.btnPrevious.hide();
+                PageImport.Steps.firstTab.addClass("disabled");
+                PageImport.Steps.firstTab.attr("aria-disabled", true);
+                PageImport.Steps.btnNext.text("Importar...");
+                PageImport.Dropzone.options.acceptedFiles = getAcceptExtension();
+            }
+            else if (currentIndex == 2) {
+                PageImport.Steps.secondTab.addClass("disabled");
+                PageImport.Steps.secondTab.attr("aria-disabled", true);
+            }
         },
         onFinishing: function (event, currentIndex) {
-            //form.validate().settings.ignore = ":disabled";
-            //return form.valid();
+            
         },
         onFinished: function (event, currentIndex) {
-            alert("Submitted!");
+            
         }
     });
+
+    PageImport.Steps.btnPrevious = $(".actions > ul > li a[href='#previous']");
+    PageImport.Steps.btnNext = $(".actions > ul > li a[href='#next']");
+    PageImport.Steps.firstTab = $('#steps li.first');
+    PageImport.Steps.secondTab = PageImport.Steps.firstTab.next();
+    PageImport.Steps.btnPrevious.parent().hide();
 }
 
 function configureUpload() {
     Dropzone.autoDiscover = false;
+    Dropzone.prototype.defaultOptions.dictDefaultMessage = "Arraste os arquivos de extratos nesta área";
+    Dropzone.prototype.defaultOptions.dictFileTooBig = "O arquivo é muito grande ({{filesize}}MiB). O máximo permitido é: {{maxFilesize}}MiB.";
+    Dropzone.prototype.defaultOptions.dictInvalidFileType = "O formato desse arquivo não é suportado";
+    Dropzone.prototype.defaultOptions.dictResponseError = "Erro do servidor (código: {{statusCode}})";
+    Dropzone.prototype.defaultOptions.dictRemoveFile = "Remover";
+    Dropzone.prototype.defaultOptions.dictMaxFilesExceeded = "Você não pode importar mais arquivos nesse mesmo processo.";
 
-    // Get the template HTML and remove it from the doument
-    //var previewNode = document.querySelector("#template");
-    //previewNode.id = "";
-    //var previewTemplate = previewNode.parentNode.innerHTML;
-    //previewNode.parentNode.removeChild(previewNode);
-
-    var dropzone = new Dropzone('#dropzone', {
-        //previewTemplate: document.querySelector('#preview-template').innerHTML,
-        parallelUploads: 2,
-        thumbnailHeight: 120,
-        thumbnailWidth: 120,
-        maxFilesize: 3,
+    var dropzone = new Dropzone('#dropzoneStatement', {
+        previewTemplate: document.querySelector('#preview-template').innerHTML,
+        parallelUploads: 12,
+        maxFiles: 12,
+        maxFilesize: 20,
         filesizeBase: 1000,
-        //thumbnail: function (file, dataUrl) {
-        //    if (file.previewElement) {
-        //        file.previewElement.classList.remove("dz-file-preview");
-        //        var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
-        //        for (var i = 0; i < images.length; i++) {
-        //            var thumbnailElement = images[i];
-        //            thumbnailElement.alt = file.name;
-        //            thumbnailElement.src = dataUrl;
-        //        }
-        //        setTimeout(function () { file.previewElement.classList.add("dz-image-preview"); }, 1);
-        //    }
-        //}
-
+        acceptedFiles: ".csv,.ofx,.cs",
+        addRemoveLinks: true,
+        createImageThumbnails: false,
+        paramName: "files",
+        autoProcessQueue: false,
+        uploadMultiple: false
     });
 
-    dropzone.on("totaluploadprogress", function (progress) {
-       
+    dropzone.on("error", function (file, response) {
+        $(file._removeLink).show();
+        var span = $(file.previewElement).find(".dz-error-message span");
+
+        if (response.message)
+            span.text(response.message);
+        else
+            span.text(response);
     });
 
+    dropzone.on("addedfiles", function (files) {
+        for (var index in files) {
+            $(files[index].previewElement).addClass(getFormatType());
+        }
+        jQueryStepsResize();
+    });
+
+    dropzone.on("removedfile", function (file) {
+        jQueryStepsResize();
+    });
+
+    // Esconde durante o envio, e só volta se ocorrer um erro
     dropzone.on("sending", function (file) {
+        $(file._removeLink).hide();
+    });
+
+    // File upload Progress
+    dropzone.on("totaluploadprogress", function (progress) {
 
     });
 
     dropzone.on("queuecomplete", function (progress) {
+        PageImport.Steps.steps("next");
+    });
+
+    dropzone.on("success", function (file, responseText, e) {
         
     });
 
-    // Now fake the file upload, since GitHub does not handle file uploads
-    // and returns a 404
-    var minSteps = 6,
-        maxSteps = 60,
-        timeBetweenSteps = 100,
-        bytesPerStep = 100000;
+    PageImport.Dropzone = dropzone;
+}
 
-    dropzone.uploadFiles = function (files) {
-        resizeJquerySteps();
+function configurePreview() {
+    jQueryStepsResize();
+    var data = [
+        ["", "Ford", "Volvo", "Toyota", "Honda"],
+        ["2016", 10, 11, 12, 13],
+        ["2017", 20, 11, 14, 13],
+        ["2018", 30, 15, 12, 13]
+    ];
 
-        var self = this;
+    var container = document.getElementById('example');
+    var hot = new Handsontable(container, {
+        data: data,
+        rowHeaders: true,
+        colHeaders: true
+    });
+}
 
-        for (var i = 0; i < files.length; i++) {
+function validateStep1() {
+    var inputFormatValue = getFormatType();
+    if (!inputFormatValue) {
+        alert("Selecione um formato");
+        return false;
+    }
 
-            var file = files[i];
-            totalSteps = Math.round(Math.min(maxSteps, Math.max(minSteps, file.size / bytesPerStep)));
+    return true;
+}
 
-            for (var step = 0; step < totalSteps; step++) {
-                var duration = timeBetweenSteps * (step + 1);
-                setTimeout(function (file, totalSteps, step) {
-                    return function () {
-                        file.upload = {
-                            progress: 100 * (step + 1) / totalSteps,
-                            total: file.size,
-                            bytesSent: (step + 1) * file.size / totalSteps
-                        };
-
-                        self.emit('uploadprogress', file, file.upload.progress, file.upload.bytesSent);
-                        if (file.upload.progress == 100) {
-                            file.status = Dropzone.SUCCESS;
-                            self.emit("success", file, 'success', null);
-                            self.emit("complete", file);
-                            self.processQueue();
-                        }
-                    };
-                }(file, totalSteps, step), duration);
+function validateStep2() {
+    if (PageImport.Dropzone.files.length == 0) {
+        alert("Selecione ao menos um arquivo para continuar");
+        return false;
+    }
+    else {
+        for (var index in PageImport.Dropzone.files) {
+            if (PageImport.Dropzone.files[index].status == 'error') {
+                alert("Existem arquivos com problemas na importação, por favor, remova-os para continuar");
+                return false;
             }
         }
-    };
+    }
+
+    return true;
+}
+
+function validateStep3() {
+    return true;
+}
+
+function getFormatType() {
+    return $('input[name=importFormat]:checked').val();
+}
+
+function getAcceptExtension() {
+    var format = getFormatType();
+    if (format == "bradesco")
+        return ".ofx";
+    return ".csv";
 }

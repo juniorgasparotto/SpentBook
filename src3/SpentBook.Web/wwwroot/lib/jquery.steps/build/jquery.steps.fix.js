@@ -1,9 +1,11 @@
 $(document).ready(function () {
-	$(window).resize($.debounce(250, resizeJquerySteps));
-});
+    if (!window.jQueryStepsResize) {
+        window.jQueryStepsResize = $.debounce(function () {
+            $('.wizard .content').animate({
+                height: $('.body.current').outerHeight()
+            }, 'slow');
+        }, 250);
+    }
 
-function resizeJquerySteps() {
-    $('.wizard .content').animate({
-        height: $('.body.current').outerHeight()
-    }, 'slow');
-}
+    $(window).resize(window.jQueryStepsResize);
+});

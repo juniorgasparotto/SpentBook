@@ -9,6 +9,7 @@
     "jquery-ui": "*",
     "jquery.steps": "*",
     "dropzone": "*",
-    "jquery-debounce": "*"
+    "jquery-debounce": "*",
+    "handsontable": "*"
   }
 }

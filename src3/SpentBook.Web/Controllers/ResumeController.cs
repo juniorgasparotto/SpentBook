@@ -42,12 +42,13 @@ namespace SpentBook.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult MultipleUpload(IEnumerable<IFormFile> files)
+        public ActionResult MultipleUpload()
         {
             var userPath = GetStatementsPath();
 
             if (!Directory.Exists(userPath))
                 Directory.CreateDirectory(userPath);
+            var files = Request.Form.Files;
 
             foreach (var file in files)
             {

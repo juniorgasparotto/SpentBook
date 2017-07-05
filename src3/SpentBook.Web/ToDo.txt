@@ -1,0 +1,2 @@
+﻿- Ligar a flag "uploadMultiple" no upload de arquivos, mas precisa pensar em uma maneira de tratar os erros individualmente 
+  e não falhar todos os outros que deram certo, apenas os que deram errados.

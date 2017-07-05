@@ -6,20 +6,20 @@
 <hr />
 <h3>@ViewData["Message"]</h3>
 
-<form id="form" action="/upload">
-    <div id="steps">
-        <h3>Selecione o formato do extrato</h3>
-        <section>
-            @await Html.PartialAsync("~/Views/Import/PartSelectFormat.cshtml")
-        </section>
-        <h3>Selecione os arquivos</h3>
-        <section>
-            @await Html.PartialAsync("~/Views/Import/PartFileUpload.cshtml")
-        </section>
-        <h3>Finalizar</h3>
-        <section>a</section>
-    </div>
-</form>
+<div id="steps">
+    <h3>Selecione o formato do extrato</h3>
+    <section>
+        @await Html.PartialAsync("~/Views/Import/PartSelectFormat.cshtml")
+    </section>
+    <h3>Selecione os arquivos</h3>
+    <section>
+        @await Html.PartialAsync("~/Views/Import/PartFileUpload.cshtml")
+    </section>
+    <h3>Finalizar</h3>
+    <section>
+        @await Html.PartialAsync("~/Views/Import/PartPreview.cshtml")
+    </section>
+</div>
 
 @section Styles {
     <link href="~/lib/jquery.steps/demo/css/jquery.steps.css" rel="stylesheet" />
@@ -32,6 +32,7 @@
 }
 
 @section Scripts {
+    <script src="~/lib/handsontable/dist/handsontable.js"></script>
     <script src="~/lib/jquery-debounce/jquery.debounce.js"></script>
     <script src="~/lib/dropzone/dist/dropzone.js"></script>
     <script src="~/lib/jquery.steps/build/jquery.steps.js"></script>
