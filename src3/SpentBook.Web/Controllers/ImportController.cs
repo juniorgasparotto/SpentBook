@@ -90,7 +90,7 @@ namespace SpentBook.Web.Views.Import
                                 orderby t.Date ascending
                                 select GetTransactionEditableByTransaction(t)).ToList();
 
-            ValidateTransationsEditable(transactions, false, false, false);
+            ValidateTransationsEditable(transactions, false, false, false, false);
             return GetGetResponseModel(transactions);
         }
         
@@ -105,7 +105,8 @@ namespace SpentBook.Web.Views.Import
                 return BadRequest(errors);
             }
 
-            ValidateTransationsEditable(model.Transactions);
+            // não faz o auto-fill
+            ValidateTransationsEditable(model.Transactions, true, true, false, true);
             var hasError = model.Transactions.Any(f => f.Status == TransactionEditableModel.StatusCode.Error);
 
             if (hasError)
@@ -158,8 +159,8 @@ namespace SpentBook.Web.Views.Import
                 transaction.UserId = model.UserId ?? Helper.GetLoggedUserId(HttpContext, userManager);
                 transaction.BankName = model.BankName;
                 transaction.Name = model.Name;
-                transaction.Date = model.Date;
-                transaction.Value = model.Value;
+                transaction.Date = model.Date.Value;
+                transaction.Value = model.Value.Value;
                 transaction.Category = model.Category;
                 transaction.SubCategory = model.SubCategory;
                 transaction.CreateDate = transaction.CreateDate != DateTime.MinValue ? transaction.CreateDate : DateTime.Now;
@@ -212,7 +213,7 @@ namespace SpentBook.Web.Views.Import
             return transactionEditable;
         }
 
-        private void ValidateTransationsEditable(List<TransactionEditableModel> transactions, bool validateDuplicateInEditable = true, bool validadeDuplicateInDatabase = true, bool autoFillCategorySubCategory = true)
+        private void ValidateTransationsEditable(List<TransactionEditableModel> transactions, bool validateDuplicateInEditable = true, bool validadeDuplicateInDatabase = true, bool autoFillCategorySubCategory = true, bool validateBanks = true)
         {
             // clean validations
             foreach(var t in transactions)
@@ -221,7 +222,7 @@ namespace SpentBook.Web.Views.Import
                 t.StatusMessage?.Clear();
                 t.StatusMessage = t.StatusMessage ?? new List<string>();
             }
-
+            
             if (validateDuplicateInEditable)
             {
                 var groupsDuplicate = from t in transactions
@@ -250,11 +251,21 @@ namespace SpentBook.Web.Views.Import
                     continue;
 
                 var messages = new SortedDictionary<string, string>();
+
+                if (validateBanks)
+                {
+                    var banks = GetBanks();
+                    if (!banks.Contains(transactionEditable.BankName))
+                        messages.Add("bank", "O 'Banco' informado não está cadastrado");
+                }
+
                 if (string.IsNullOrWhiteSpace(transactionEditable.Name))
                     messages.Add("name", "O campo 'Nome' não pode estar vazio");
-                if (transactionEditable.Date == DateTime.MinValue)
+                if (string.IsNullOrWhiteSpace(transactionEditable.BankName))
+                    messages.Add("bank-name", "O campo 'Banco' não pode estar vazio");
+                if (transactionEditable.Date == null || transactionEditable.Date == DateTime.MinValue)
                     messages.Add("date", "O campo 'Data' não pode estar vazio");
-                if (transactionEditable.Value == 0)
+                if (transactionEditable.Value == null || transactionEditable.Value == 0)
                     messages.Add("value", "O campo 'Valor' não pode estar vazio");
 
                 if (validadeDuplicateInDatabase)
@@ -383,9 +394,25 @@ namespace SpentBook.Web.Views.Import
             {
                 InitialIds = transactions.Where(f => f.Id != null).Select(f => f.Id),
                 Transactions = transactions,
-                Categories = uow.Transactions.AsQueryable().GroupBy(f => f.Category).Select(f => f.Key).ToList(),
-                SubCategories = uow.Transactions.AsQueryable().GroupBy(f => f.SubCategory).Select(f => f.Key).ToList()
+                Categories = GetCategories(),
+                SubCategories = GetSubCategories(),
+                Banks = GetBanks()
             };
+        }
+
+        private IEnumerable<string> GetCategories()
+        {
+            return uow.Transactions.AsQueryable().GroupBy(f => f.Category).Select(f => f.Key);
+        }
+
+        private IEnumerable<string> GetSubCategories()
+        {
+            return uow.Transactions.AsQueryable().GroupBy(f => f.SubCategory).Select(f => f.Key);
+        }
+
+        private IEnumerable<string> GetBanks()
+        {
+            return uow.Transactions.AsQueryable().GroupBy(f => f.BankName).Select(f => f.Key);
         }
 
         private class CSVLine
@@ -399,10 +426,11 @@ namespace SpentBook.Web.Views.Import
 
         public class GetResponseModel
         {
-            public List<TransactionEditableModel> Transactions { get; set; }
-            public List<string> Categories { get; set; }
-            public List<string> SubCategories { get; set; }
+            public IEnumerable<TransactionEditableModel> Transactions { get; set; }
+            public IEnumerable<string> Categories { get; set; }
+            public IEnumerable<string> SubCategories { get; set; }
             public IEnumerable<Guid?> InitialIds { get; internal set; }
+            public IEnumerable<string> Banks { get; internal set; }
         }
 
         public class SaveRequestModel
@@ -425,8 +453,8 @@ namespace SpentBook.Web.Views.Import
             public Guid? IdImport { get; set; }
             public Guid? UserId { get; set; }
             public string Name { get; set; }
-            public DateTime Date { get; set; }
-            public decimal Value { get; set; }
+            public DateTime? Date { get; set; }
+            public decimal? Value { get; set; }
             public string Category { get; set; }
             public string SubCategory { get; set; }
             public string BankName { get; set; }

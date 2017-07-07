@@ -270,6 +270,9 @@ function TransactionEditable() {
         };
 
         var negativeValueRenderer = function (instance, td, row, col, prop, value, cellProperties) {
+            if (!value)
+                value = 0;
+
             Handsontable.renderers.NumericRenderer.apply(this, arguments);
 
             if (parseInt(value, 10) < 0) {
@@ -298,13 +301,14 @@ function TransactionEditable() {
 
         var hotSettings = {
             data: data.Transactions,
-            colHeaders: ["", "", "Nome", "Valor", "Data", "Categoria", "Sub-Categoria"],
+            colHeaders: ["", "", "Nome", "Valor", "Data", "Banco", "Categoria", "Sub-Categoria"],
             columns: [
                 { data: "Id", disableVisualSelection:true, renderer: deleteRowRenderer, readOnly: true, width: "20px" },
                 { data: "Status", disableVisualSelection: true, type: 'text', renderer: errorRenderer, readOnly: true, width: "20px" },
                 { data: "Name", type: 'text' },
-                { data: "Value", type: 'numeric', format: '$ 0,0.00', renderer: negativeValueRenderer,language: 'pt-BR' },
+                { data: "Value", type: 'numeric', format: '$ 0,0.00', renderer: negativeValueRenderer, language: 'pt-BR' },
                 { data: "Date", type: 'date', dateFormat: 'DD/MM/YYYY HH:mm:ss', language: 'pt-BR', correctFormat: true },
+                { data: "BankName", type: 'autocomplete', source: data.Banks, strict: false },
                 { data: "Category", type: 'autocomplete', source: data.Categories, strict: false },
                 { data: "SubCategory", type: 'autocomplete', source: data.SubCategories, strict: false },
             ],
@@ -326,7 +330,7 @@ function TransactionEditable() {
         self.Handsontable = new Handsontable(self.TableElement[0], hotSettings);
     };
 
-    this.Load = function (onlyData) {
+    this.Load = function () {
         $.ajax({
             type: "GET",
             url: self.UrlGetData,
@@ -337,9 +341,8 @@ function TransactionEditable() {
 
             },
             success: function (data) {
-                debugger;
                 self.Data = data;
-                if (onlyData)
+                if (self.Handsontable)
                     self.Handsontable.loadData(data.Transactions);
                 else
                     self.Configure(data);
@@ -371,7 +374,7 @@ function TransactionEditable() {
             },
             success: function (data) {
                 if (data.message === "OK") {
-                    self.Load(true);
+                    self.Load();
                     alert("Continuar o fluxo");
                 }
                 else {
