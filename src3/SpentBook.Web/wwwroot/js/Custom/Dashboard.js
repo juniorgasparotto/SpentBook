@@ -192,7 +192,7 @@
                 Dashboard.Panels.splice(index, 1);
 
             Dashboard.Context.find("#" + id).remove();
-            if (Dashboard.Panels.length == 0)
+            if (!Dashboard.Panels.length)
                 Dashboard.ShowEmptyMessage(true);
         },
         DeletePanelServer: function (removeUrl) {

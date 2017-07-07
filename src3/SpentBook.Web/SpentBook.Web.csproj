@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="Uploads\" />
+    <Folder Include="wwwroot\Data\juniorgasparotto%40msn.com\" />
   </ItemGroup>
 
   <ItemGroup>

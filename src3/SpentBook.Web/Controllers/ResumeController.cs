@@ -41,44 +41,7 @@ namespace SpentBook.Web.Controllers
             return PartialView(this.GetSpents());
         }
 
-        [HttpPost]
-        public ActionResult MultipleUpload()
-        {
-            var userPath = GetStatementsPath();
-
-            if (!Directory.Exists(userPath))
-                Directory.CreateDirectory(userPath);
-            var files = Request.Form.Files;
-
-            foreach (var file in files)
-            {
-                if (file != null && file.Length > 0)
-                {
-                    var fileName = file.FileName;
-                    var fileFullName = Path.Combine(userPath, fileName);
-                    if (System.IO.File.Exists(fileFullName))
-                        System.IO.File.Delete(fileFullName);
-
-                    using (var fileStream = new FileStream(fileFullName, FileMode.Create))
-                        file.CopyTo(fileStream);
-
-                    var spents = this.GetSpents(fileFullName);
-                    foreach (var spent in spents)
-                        uow.Transactions.Insert(spent);
-                    uow.Save();
-                }
-            }
-
-            return new EmptyResult();
-        }
-
-        private string GetStatementsPath()
-        {
-            var userName = User.Identity.Name;
-            var webRoot = env.WebRootPath;
-            var userPath = Path.Combine(webRoot, "Data", userName, "Spents");
-            return userPath;
-        }
+        
 
         [HttpGet]
         public JsonResult GetChartDoughnut()
@@ -222,6 +185,14 @@ namespace SpentBook.Web.Controllers
             }
 
             return transactions;
+        }
+
+        private string GetStatementsPath()
+        {
+            var userName = User.Identity.Name;
+            var webRoot = env.WebRootPath;
+            var userPath = Path.Combine(webRoot, "Data", userName, "Spents");
+            return userPath;
         }
 
         private class CSVLine

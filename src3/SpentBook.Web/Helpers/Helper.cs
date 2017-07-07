@@ -5,8 +5,11 @@ using System.Text.RegularExpressions;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
+using Microsoft.AspNetCore.Identity;
+using SpentBook.Web.Models;
+using Microsoft.AspNetCore.Http;
 
-namespace SpentBook.Web.Controllers
+namespace SpentBook.Web
 {
     public static class Helper
     {
@@ -51,22 +54,16 @@ namespace SpentBook.Web.Controllers
             return sbReturn.ToString();
         }
 
-        //public static string RenderPartialViewToString(string viewName, object model, Controller controller)
-        //{
-        //    return "TEMp";
-        //    //if (string.IsNullOrEmpty(viewName))
-        //    //    viewName = controller.ControllerContext.RouteData.GetRequiredString("action");
+        public static string GetLoggedUserName(HttpContext httpContext)
+        {
+            return httpContext.User.Identity.Name;
+        }
 
-        //    //controller.ViewData.Model = model;
-
-        //    //using (StringWriter sw = new StringWriter())
-        //    //{
-        //    //    ViewEngineResult viewResult = ViewEngines.Engines.FindPartialView(controller.ControllerContext, viewName);
-        //    //    ViewContext viewContext = new ViewContext(controller.ControllerContext, viewResult.View, controller.ViewData, controller.TempData, sw);
-        //    //    viewResult.View.Render(viewContext, sw);
-        //    //    return sw.GetStringBuilder().ToString();
-        //    //}
-        //}
+        public static Guid GetLoggedUserId(HttpContext httpContext, UserManager<ApplicationUser> userManager)
+        {
+            var user = new Guid(userManager.GetUserId(httpContext.User));
+            return user;
+        }
 
         public static double UnixTicks(this DateTime dt)
         {
@@ -75,6 +72,7 @@ namespace SpentBook.Web.Controllers
             TimeSpan ts = new TimeSpan(d2.Ticks - d1.Ticks);
             return ts.TotalMilliseconds;
         }
+
 
         public static string GetDisplayName(this Enum enumValue)
         {

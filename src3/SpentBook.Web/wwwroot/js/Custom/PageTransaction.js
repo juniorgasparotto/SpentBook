@@ -12,7 +12,6 @@ $(document).ready(function ($) {
         minSpareCols: 1,
         minSpareRows: 1,
         rowHeaders: true,
-        colHeaders: true,
         contextMenu: false,
         stretchH: 'all',
         colHeaders: ["Nome", "Data", "Valor", "Categoria", "Sub-Categoria"],

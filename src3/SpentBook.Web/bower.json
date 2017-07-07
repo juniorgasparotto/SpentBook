@@ -10,6 +10,7 @@
     "jquery.steps": "*",
     "dropzone": "*",
     "jquery-debounce": "*",
-    "handsontable": "*"
+    "handsontable": "*",
+    "glyphicons": "*"
   }
 }

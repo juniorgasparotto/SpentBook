@@ -6,8 +6,10 @@
 <hr />
 <h3>@ViewData["Message"]</h3>
 
+@await Html.PartialAsync("~/Views/Import/PartPreview.cshtml")
+
 <div id="steps">
-    <h3>Selecione o formato do extrato</h3>
+    <h3>Selecione o banco</h3>
     <section>
         @await Html.PartialAsync("~/Views/Import/PartSelectFormat.cshtml")
     </section>
@@ -16,12 +18,15 @@
         @await Html.PartialAsync("~/Views/Import/PartFileUpload.cshtml")
     </section>
     <h3>Finalizar</h3>
+        @*@await Html.PartialAsync("~/Views/Import/PartPreview.cshtml")*@
     <section>
-        @await Html.PartialAsync("~/Views/Import/PartPreview.cshtml")
     </section>
 </div>
 
 @section Styles {
+    <link href="~/lib/handsontable/dist/pikaday/pikaday.css" rel="stylesheet" />
+    <link href="~/css/handsontable/handsontable.css" rel="stylesheet" />
+
     <link href="~/lib/jquery.steps/demo/css/jquery.steps.css" rel="stylesheet" />
     <link href="~/lib/dropzone/dist/dropzone.css" rel="stylesheet" />
     <link href="~/css/pages/import.css" rel="stylesheet" />
@@ -32,10 +37,18 @@
 }
 
 @section Scripts {
+    <script src="~/lib/handsontable/dist/pikaday/pikaday.js"></script>
+    <script src="~/lib/handsontable/dist/moment/moment.js"></script>
+    <script src="~/lib/handsontable/dist/zeroclipboard/ZeroClipboard.js"></script>
+    <script src="~/lib/handsontable/dist/numbro/numbro.js"></script>
+    <script src="~/lib/handsontable/dist/numbro/languages.js"></script>
     <script src="~/lib/handsontable/dist/handsontable.js"></script>
+    
+
     <script src="~/lib/jquery-debounce/jquery.debounce.js"></script>
     <script src="~/lib/dropzone/dist/dropzone.js"></script>
     <script src="~/lib/jquery.steps/build/jquery.steps.js"></script>
     <script src="~/lib/jquery.steps/build/jquery.steps.fix.js"></script>
+    <script src="~/js/Custom/Helper.js"></script>
     <script src="~/js/Custom/PageImport.js"></script>
 }

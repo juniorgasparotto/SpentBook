@@ -1,11 +1,14 @@
 ﻿$(document).ready(function () {
     window.PageImport = {};
+    PageImport.Steps = null;
+    PageImport.Dropzone = null;
+    PageImport.TransactionEditable = new TransactionEditable();
+    PageImport.TransactionEditable.Load();
     configureSteps();
     configureUpload();
-    configurePreview();
 });
 
-function configureSteps() {    
+function configureSteps() {
     PageImport.Steps = $("#steps").steps({
         headerTag: "h3",
         bodyTag: "section",
@@ -21,13 +24,13 @@ function configureSteps() {
             
         },
         onStepChanging: function (event, currentIndex, newIndex) {
-            if (currentIndex == 0) {
+            if (currentIndex === 0) {
                 return validateStep1();
             }
-            else if (currentIndex == 1) {
+            else if (currentIndex === 1) {
                 var valid = validateStep2();
                 if (valid) {
-                    if (PageImport.Dropzone.getQueuedFiles().length == 0) {
+                    if (PageImport.Dropzone.getQueuedFiles().length === 0) {
                         return true;
                     } 
                     else {
@@ -36,26 +39,29 @@ function configureSteps() {
                 }
                 return false;
             }
-            else if (currentIndex == 2) {
+            else if (currentIndex === 2) {
                 return validateStep3();
             }
 
             return true;
         },
         onStepChanged: function (event, currentIndex, priorIndex) {
-            if (currentIndex == 0) {
+            if (currentIndex === 0) {
                 PageImport.Steps.btnNext.text("Selecionar");
             }
-            else if (currentIndex == 1) {
+            else if (currentIndex === 1) {
                 PageImport.Steps.btnPrevious.hide();
                 PageImport.Steps.firstTab.addClass("disabled");
                 PageImport.Steps.firstTab.attr("aria-disabled", true);
                 PageImport.Steps.btnNext.text("Importar...");
                 PageImport.Dropzone.options.acceptedFiles = getAcceptExtension();
+                $('#dropzoneStatement #bank').val(getFormatType());
+                $('#dropzoneStatement #format').val(getAcceptExtension());
             }
-            else if (currentIndex == 2) {
+            else if (currentIndex === 2) {
                 PageImport.Steps.secondTab.addClass("disabled");
                 PageImport.Steps.secondTab.attr("aria-disabled", true);
+                PageImport.TransactionEditable.Load();
             }
         },
         onFinishing: function (event, currentIndex) {
@@ -138,23 +144,6 @@ function configureUpload() {
     PageImport.Dropzone = dropzone;
 }
 
-function configurePreview() {
-    jQueryStepsResize();
-    var data = [
-        ["", "Ford", "Volvo", "Toyota", "Honda"],
-        ["2016", 10, 11, 12, 13],
-        ["2017", 20, 11, 14, 13],
-        ["2018", 30, 15, 12, 13]
-    ];
-
-    var container = document.getElementById('example');
-    var hot = new Handsontable(container, {
-        data: data,
-        rowHeaders: true,
-        colHeaders: true
-    });
-}
-
 function validateStep1() {
     var inputFormatValue = getFormatType();
     if (!inputFormatValue) {
@@ -166,13 +155,13 @@ function validateStep1() {
 }
 
 function validateStep2() {
-    if (PageImport.Dropzone.files.length == 0) {
+    if (PageImport.Dropzone.files.length === 0) {
         alert("Selecione ao menos um arquivo para continuar");
         return false;
     }
     else {
         for (var index in PageImport.Dropzone.files) {
-            if (PageImport.Dropzone.files[index].status == 'error') {
+            if (PageImport.Dropzone.files[index].status === 'error') {
                 alert("Existem arquivos com problemas na importação, por favor, remova-os para continuar");
                 return false;
             }
@@ -192,7 +181,161 @@ function getFormatType() {
 
 function getAcceptExtension() {
     var format = getFormatType();
-    if (format == "bradesco")
+    if (format === "bradesco")
         return ".ofx";
     return ".csv";
+}
+
+function TransactionEditable() {
+    var self = this;
+    this.UrlGetData = "Import/GetTransactionsEditable";
+    this.UrlSave = "Import/SaveTransactions";
+    this.Handsontable = null;
+    this.Configure = function (data) {
+        var enumStatus = [];
+        enumStatus[0] = "success";
+        enumStatus[1] = "warning";
+        enumStatus[2] = "automatic-resolved";
+        enumStatus[3] = "error";
+
+        var iconClasses = [];
+        iconClasses[0] = "glyphicon-ok";
+        iconClasses[1] = "glyphicon-info-sign";
+        iconClasses[2] = "glyphicon-info-sign";
+        iconClasses[3] = "glyphicon-exclamation-sign";
+
+        var errorRenderer = function (instance, td, row, col, prop, value, cellProperties) {
+            var rowValue = instance.getDataAtRow(row);
+            var status = enumStatus[value];
+            var iconClass = iconClasses[value];
+            var message = instance.getSourceDataAtRow(row).StatusMessage;
+            
+            while (td.firstChild) {
+                td.removeChild(td.firstChild);
+            }
+            
+            var wrapper = $('<div class="transaction-status"></div>');
+            var icon = $('<span class="icon glyphicon"></span>');
+            icon.addClass(iconClass);
+            icon.addClass(status);
+            wrapper.append(icon);
+            td.appendChild(wrapper[0]);
+
+            if (message && message.length) {
+                
+                var messageElement = $(document.createElement('DIV'));
+                wrapper.append(messageElement);
+
+                messageElement.addClass('message');
+                messageElement.addClass(status);
+                messageElement.html(Helper.CreateULByArray(message));
+
+                // setar comportamento de exibição
+                messageElement.hide();
+
+                var time;
+                icon.mouseover(function () {
+                    messageElement.show();
+                }).mouseout(function () {
+                    if (time)
+                        clearTimeout(time);
+
+                    time = setTimeout(function () {
+                        messageElement.hide();
+                    }, 20);
+                });
+
+                messageElement.mouseenter(function () {
+                    clearTimeout(time);
+                }).mouseleave(function () {
+                    messageElement.hide();
+                });
+            }
+        };
+
+        var negativeValueRenderer = function (instance, td, row, col, prop, value, cellProperties) {
+            Handsontable.renderers.NumericRenderer.apply(this, arguments);
+
+            if (parseInt(value, 10) < 0) {
+                td.style.color = 'red';
+            }
+            else {
+                td.style.color = 'blue';
+            }
+        };
+
+        var deleteRowRenderer = function (instance, td, row, col, prop, value, cellProperties) {
+            while (td.firstChild) {
+                td.removeChild(td.firstChild);
+            }
+
+            var remove = $('<span class="glyphicon glyphicon-floppy-remove icon remove" title="Remover transação"></span>');
+            remove.click(function () {
+                if (confirm("Deseja realmente excluir essa transação?")) {
+                    return instance.alter("remove_row", row);
+                }
+            });
+            td.appendChild(remove[0]);
+        }
+
+        var hotElement = document.querySelector('#hot');
+        
+        var hotSettings = {
+            data: data.Transactions,
+            colHeaders: ["", "", "Nome", "Valor", "Data", "Categoria", "Sub-Categoria"],
+            columns: [
+                { data: "Remover", disableVisualSelection:true, renderer: deleteRowRenderer, readOnly: true, width: "20px" },
+                { data: "Status", disableVisualSelection: true, type: 'text', renderer: errorRenderer, readOnly: true, width: "20px" },
+                { data: "Name", type: 'text' },
+                { data: "Value", type: 'numeric', format: '$ 0,0.00', renderer: negativeValueRenderer,language: 'pt-BR' },
+                { data: "Date", type: 'date', dateFormat: 'DD/MM/YYYY', correctFormat: true, language: 'pt-BR' },
+                { data: "Category", type: 'autocomplete', source: data.Categories, strict: false },
+                { data: "SubCategory", type: 'autocomplete', source: data.SubCategories, strict: false },
+            ],
+            stretchH: 'all',
+            autoWrapRow: true,
+            //rowHeaders: true,
+        };
+
+        self.Handsontable = new Handsontable(hotElement, hotSettings);
+    };
+
+    this.Load = function () {
+        $.ajax({
+            type: "GET",
+            url: self.UrlGetData,
+            beforeSend: function () {
+
+            },
+            complete: function () {
+
+            },
+            success: function (data) {
+                self.Configure(data);
+            },
+            error: function (error) {
+                Helper.ErrorResponse(error);
+            }
+        });
+    };
+
+    this.Save = function () {
+        $.ajax({
+            type: "POST",
+            url: this.UrlSave,
+            data: self.Handsontable.getData(),
+            beforeSend: function () {
+
+            },
+            complete: function () {
+
+            },
+            success: function (data) {
+                alert('Data saved');
+            },
+            error: function (error) {
+                Helper.ErrorResponse(error);
+            }
+        });
+    };
 }

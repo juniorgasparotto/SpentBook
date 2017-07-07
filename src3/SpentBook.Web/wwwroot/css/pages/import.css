@@ -107,10 +107,101 @@
         margin: 5px 0 0 12px;
     }
 
-    /*
-    *   Steps
-    */
+/*
+*   Steps
+*/
 
-    .wizard > .steps > ul > li {
-        width: 33%;
-    }
+.wizard > .steps > ul > li {
+    width: 33%;
+}
+
+/*
+*   Preview
+*/
+
+.handsontable td .htAutocompleteArrow {
+    color: black;
+}
+
+#table-statement {
+    background: red none repeat scroll 0 0;
+    height: 100%;
+    width: 100%;
+}
+
+#table-statement table > tbody > tr:nth-child(2n) > td {
+    background: #f7f3f1;
+}
+
+#table-statement table > tbody > tr:nth-child(2n+1) > td {
+    background: #fff;
+}
+
+#table-statement .transaction-status  {
+    width: 20px;
+}
+
+#table-statement .transaction-status .message {
+    position: absolute;
+    z-index: 1000;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    font-size: 13px;
+    width: 300px;
+    line-height: initial;
+    white-space: normal;
+}
+
+#table-statement .transaction-status .message ul {
+    margin: 0;
+}
+
+#table-statement .transaction-status .message.success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #3c763d;
+}
+
+#table-statement .transaction-status .message.error {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #C94442;
+}
+
+#table-statement .transaction-status .message.warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #8a6d3b;
+}
+
+#table-statement .transaction-status .message.automatic-resolved {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #31708f;
+}
+
+#table-statement .transaction-status .icon.success {
+    color: #3c763d;
+}
+
+#table-statement .transaction-status .icon.error {
+    color: #a94442;
+}
+
+#table-statement .transaction-status .icon.warning {
+    color: #8a6d3b;
+}
+
+#table-statement .transaction-status .icon.automatic-resolved {
+    color: #31708f;
+}
+
+#table-statement .icon {
+    margin-left: 7px;
+}
+
+#table-statement .icon.remove:hover {
+    color: red;
+}

@@ -1,9 +1,6 @@
 ﻿using SpentBook.Domain;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpentBook.Web
 {
@@ -34,6 +31,8 @@ namespace SpentBook.Web
                 return repository;
             }
         }
+
+        public IRepository<TransactionImport> TransactionsImports => throw new NotImplementedException();
 
         public void Save()
         {

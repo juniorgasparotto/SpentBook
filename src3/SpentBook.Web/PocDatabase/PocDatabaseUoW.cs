@@ -14,6 +14,7 @@ namespace SpentBook.Web
         {
             public List<Dashboard> Dashboards { get; set; }
             public List<Transaction> Transactions { get; set; }
+            public List<TransactionImport> TransactionsImports { get; set; }
         }
 
         public PocDatabaseUoW()
@@ -45,6 +46,20 @@ namespace SpentBook.Web
                     repository = (IRepository<Transaction>)repositories[typeof(Transaction)];
                 else
                     repository = new PocDatabaseRepository<Transaction>(pocFile);
+
+                return repository;
+            }
+        }
+
+        public IRepository<TransactionImport> TransactionsImports
+        {
+            get
+            {
+                IRepository<TransactionImport> repository;
+                if (repositories.ContainsKey(typeof(TransactionImport)))
+                    repository = (IRepository<TransactionImport>)repositories[typeof(TransactionImport)];
+                else
+                    repository = new PocDatabaseRepository<TransactionImport>(pocFile);
 
                 return repository;
             }

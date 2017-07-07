@@ -55,5 +55,23 @@
         EnabledWindow: function () {
             $("#disabled-window").remove();
         },
+        CreateULByArray: function (array) {
+            // Create the list element:
+            var list = $('<ul></ul>');
+
+            for (var i = 0; i < array.length; i++) {
+                // Create the list item:
+                var item = $('<li></li>');
+
+                // Set its contents:
+                item.html(array[i]);
+
+                // Add it to the list:
+                list.append(item);
+            }
+
+            // Finally, return the constructed list:
+            return list;
+        }
     }
 }());

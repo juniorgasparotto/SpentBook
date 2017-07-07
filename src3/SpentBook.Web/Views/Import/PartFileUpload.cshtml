@@ -1,4 +1,7 @@
-﻿<form id="dropzoneStatement" enctype="multipart/form-data" asp-controller="Resume" asp-action="MultipleUpload" class="dropzone needsclick dz-clickable" method="post">
+﻿<form id="dropzoneStatement" enctype="multipart/form-data" asp-controller="Import" asp-action="Upload" class="dropzone needsclick dz-clickable" method="post">
+    <input type="hidden" id="bank" name="bank" value="teste" />
+    <input type="hidden" id="format" name="format" value="teste2" />
+
     <div class="dz-message needsclick">
         Arraste os arquivos de extratos nesta área <br />
         <span class="note needsclick">(ou clique aqui para localiza-los)</span>
