@@ -275,7 +275,7 @@ function TransactionEditable() {
 
             Handsontable.renderers.NumericRenderer.apply(this, arguments);
 
-            if (parseInt(value, 10) < 0) {
+            if (parseInt(value, 10) <= 0) {
                 td.style.color = 'red';
             }
             else {
