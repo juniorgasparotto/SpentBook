@@ -87,7 +87,7 @@ namespace SpentBook.Web.Views.Import
         
         private TransactionImport GetTransactionImportWithErrorIfExists(TransactionImport transactionImport)
         {
-            var messages = new Dictionary<string, string>();
+            var messages = new SortedDictionary<string, string>();
             if (string.IsNullOrWhiteSpace(transactionImport.Name))
                 messages.Add("name", "O campo 'Nome' não pode estar vazio");
             if (transactionImport.Date == DateTime.MinValue)
