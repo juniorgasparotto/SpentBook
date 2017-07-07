@@ -200,11 +200,12 @@ function getAcceptExtension() {
 
 function TransactionEditable() {
     var self = this;
-    this.UrlGetData = "Import/GetTransactionEditableGridByImport";
+    this.UrlGetData = "Import/Get";
     this.UrlSave = "Import/Save";
     this.TableElement = $("#table-statement #table");
     this.SaveButtonElement = $("#table-statement #save");
     this.Handsontable = null;
+    this.Data = null;
 
     this.Configure = function (data) {
         var enumStatus = [];
@@ -221,8 +222,8 @@ function TransactionEditable() {
 
         var errorRenderer = function (instance, td, row, col, prop, value, cellProperties) {
             var rowValue = instance.getDataAtRow(row);
-            var status = enumStatus[value];
-            var iconClass = iconClasses[value];
+            var status = value ? enumStatus[value] : enumStatus[0];
+            var iconClass = value ? iconClasses[value] : iconClasses[0];
             var message = instance.getSourceDataAtRow(row).StatusMessage;
             
             while (td.firstChild) {
@@ -325,7 +326,7 @@ function TransactionEditable() {
         self.Handsontable = new Handsontable(self.TableElement[0], hotSettings);
     };
 
-    this.Load = function () {
+    this.Load = function (onlyData) {
         $.ajax({
             type: "GET",
             url: self.UrlGetData,
@@ -336,7 +337,12 @@ function TransactionEditable() {
 
             },
             success: function (data) {
-                self.Configure(data);
+                debugger;
+                self.Data = data;
+                if (onlyData)
+                    self.Handsontable.loadData(data.Transactions);
+                else
+                    self.Configure(data);
             },
             error: function (error) {
                 Helper.ErrorResponse(error);
@@ -354,7 +360,7 @@ function TransactionEditable() {
         $.ajax({
             type: "POST",
             url: self.UrlSave,
-            data: JSON.stringify(self.Handsontable.getSourceData()),
+            data: JSON.stringify({ InitialIds: self.Data.InitialIds, Transactions: self.Handsontable.getSourceData() }),
             dataType: 'json',
             contentType: 'application/json',
             beforeSend: function () {
@@ -364,16 +370,17 @@ function TransactionEditable() {
 
             },
             success: function (data) {
-                alert('Data saved');
-            },
-            error: function (error) {
-                if (error.responseJSON && error.responseJSON.message) {
-                    alert(error.responseJSON.message);
-                    self.Handsontable.loadData(error.responseJSON.transactions);
+                if (data.message === "OK") {
+                    self.Load(true);
+                    alert("Continuar o fluxo");
                 }
                 else {
-                    Helper.ErrorResponse(error);
+                    alert(data.message);
+                    self.Handsontable.loadData(data.transactions);
                 }
+            },
+            error: function (error) {
+                Helper.ErrorResponse(error);
             }
         });
     };

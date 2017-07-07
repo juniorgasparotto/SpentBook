@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpentBook.Domain
 {
@@ -21,6 +17,7 @@ namespace SpentBook.Domain
         public decimal Value { get; set; }
         public decimal ValueAsPositive { get { return Math.Abs(Value); }}
 
+        public Guid? IdImport { get; set; }
 
         public bool IsSpent()
         {
