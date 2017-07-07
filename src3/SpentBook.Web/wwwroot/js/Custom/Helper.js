@@ -33,9 +33,15 @@
                 else if (error.responseJSON[0]) {
                     // Type: Invalid Model error
                     var strError = "";
-                    for (var iField in error.responseJSON)
-                        for (var iErro in error.responseJSON[iField].errors)
-                            strError += "- " + error.responseJSON[iField].errors[iErro] + "\r\n";
+                    if (error.responseJSON[0].errors) {
+                        for (var iField in error.responseJSON)
+                            for (var iErro in error.responseJSON[iField].errors)
+                                strError += "- " + error.responseJSON[iField].errors[iErro] + "\r\n";
+                    }
+                    else {
+                        for (var iErro2 in error.responseJSON)
+                            strError += error.responseJSON[iErro2] + "\r\n";
+                    }
                     alert(strError);
                 }
             }

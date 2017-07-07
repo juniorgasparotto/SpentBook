@@ -13,6 +13,7 @@ using System.Linq;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Http;
 using SpentBook.Web.Filters;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace SpentBook.Web
 {
@@ -33,6 +34,9 @@ namespace SpentBook.Web
             // Razor render dependences
             services.AddTransient<ViewRenderService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            
+            // assim pega o body real
+            services.Configure<FormOptions>(options => options.BufferBody = true);
 
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(ConfigurationManager.GetConnectionString()));
@@ -61,6 +65,8 @@ namespace SpentBook.Web
                 {
                     var res = resolver as DefaultContractResolver;
                     res.NamingStrategy = null;
+
+                    opt.SerializerSettings.DateFormatString = "dd/MM/yyyy HH:mm:ss";
                 }
             });
         }

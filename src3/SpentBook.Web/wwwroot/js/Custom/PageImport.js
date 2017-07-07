@@ -4,6 +4,18 @@
     PageImport.Dropzone = null;
     PageImport.TransactionEditable = new TransactionEditable();
     PageImport.TransactionEditable.Load();
+
+    $("#save").click(function () {
+        PageImport.TransactionEditable.Validate(function (valid) {
+            if (valid) {
+                PageImport.TransactionEditable.Save();
+            }
+            else {
+                alert("Existem erros que precisam ser corrigidos.");
+            }
+        });
+    });
+
     configureSteps();
     configureUpload();
 });
@@ -188,9 +200,12 @@ function getAcceptExtension() {
 
 function TransactionEditable() {
     var self = this;
-    this.UrlGetData = "Import/GetTransactionsEditable";
-    this.UrlSave = "Import/SaveTransactions";
+    this.UrlGetData = "Import/GetTransactionEditableGridByImport";
+    this.UrlSave = "Import/Save";
+    this.TableElement = $("#table-statement #table");
+    this.SaveButtonElement = $("#table-statement #save");
     this.Handsontable = null;
+
     this.Configure = function (data) {
         var enumStatus = [];
         enumStatus[0] = "success";
@@ -278,26 +293,36 @@ function TransactionEditable() {
             td.appendChild(remove[0]);
         }
 
-        var hotElement = document.querySelector('#hot');
-        
+        //[{ "Id": "f6a6f1ec-ee37-499a-8fd7-a9e5a479d708", "UserId": "04786e69-5f8d-460f-adec-0bd145d90814", "Name": "Tes", "Date": "14-07-2017 00:00", "Value": -2.8, "Category": "alimentação", "SubCategory": "café", "BankName": "teste", "FormatFile": "teste2", "Status": 3, "StatusMessage": ["O campo 'Data' não pode estar vazio", "O campo 'Nome' não pode estar vazio"] }]
+
         var hotSettings = {
             data: data.Transactions,
             colHeaders: ["", "", "Nome", "Valor", "Data", "Categoria", "Sub-Categoria"],
             columns: [
-                { data: "Remover", disableVisualSelection:true, renderer: deleteRowRenderer, readOnly: true, width: "20px" },
+                { data: "Id", disableVisualSelection:true, renderer: deleteRowRenderer, readOnly: true, width: "20px" },
                 { data: "Status", disableVisualSelection: true, type: 'text', renderer: errorRenderer, readOnly: true, width: "20px" },
                 { data: "Name", type: 'text' },
                 { data: "Value", type: 'numeric', format: '$ 0,0.00', renderer: negativeValueRenderer,language: 'pt-BR' },
-                { data: "Date", type: 'date', dateFormat: 'DD/MM/YYYY', correctFormat: true, language: 'pt-BR' },
+                { data: "Date", type: 'date', dateFormat: 'DD/MM/YYYY HH:mm:ss', language: 'pt-BR', correctFormat: true },
                 { data: "Category", type: 'autocomplete', source: data.Categories, strict: false },
                 { data: "SubCategory", type: 'autocomplete', source: data.SubCategories, strict: false },
             ],
             stretchH: 'all',
             autoWrapRow: true,
-            //rowHeaders: true,
+            rowHeaders: true,
+            //hiddenColumns: {
+            //    columns: [0],
+            //    indicators: true
+            //}
+            //afterValidate: function (isValid, value, row, prop, source) {
+            //    if (!isValid) 
+            //        self.SaveButtonElement.hide();
+            //    else 
+            //        self.SaveButtonElement.show();
+            //}
         };
 
-        self.Handsontable = new Handsontable(hotElement, hotSettings);
+        self.Handsontable = new Handsontable(self.TableElement[0], hotSettings);
     };
 
     this.Load = function () {
@@ -319,11 +344,19 @@ function TransactionEditable() {
         });
     };
 
-    this.Save = function () {
+    this.Validate = function (actionIfInvalid) {
+        self.Handsontable.validateCells(function (valid) {
+            actionIfInvalid(valid);
+        });
+    };
+
+    this.Save = function () {        
         $.ajax({
             type: "POST",
-            url: this.UrlSave,
-            data: self.Handsontable.getData(),
+            url: self.UrlSave,
+            data: JSON.stringify(self.Handsontable.getSourceData()),
+            dataType: 'json',
+            contentType: 'application/json',
             beforeSend: function () {
 
             },
@@ -334,7 +367,13 @@ function TransactionEditable() {
                 alert('Data saved');
             },
             error: function (error) {
-                Helper.ErrorResponse(error);
+                if (error.responseJSON && error.responseJSON.message) {
+                    alert(error.responseJSON.message);
+                    self.Handsontable.loadData(error.responseJSON.transactions);
+                }
+                else {
+                    Helper.ErrorResponse(error);
+                }
             }
         });
     };

@@ -8,6 +8,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Identity;
 using SpentBook.Web.Models;
 using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace SpentBook.Web
 {
@@ -81,6 +82,16 @@ namespace SpentBook.Web
                             .First()
                             .GetCustomAttribute<DisplayAttribute>()
                             .GetName();
+        }
+
+        public static string GetRequestBody(HttpContext httpContext)
+        {
+            var stream = httpContext.Request.Body;
+            stream.Position = 0;
+            using (var reader = new StreamReader(stream))
+            {
+                return reader.ReadToEnd();
+            }
         }
     }
 }
