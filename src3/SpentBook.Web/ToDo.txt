@@ -5,3 +5,6 @@
 - Criar cancelar importação
 - Criar mecanismo de notificação
 - Criar busca de transações
+- problema com o alinhamento do numero da linha com a linha, esta ficando desalinhado
+- não existe scroll quando esta usando por cima da tabela
+- header fixo na tabela

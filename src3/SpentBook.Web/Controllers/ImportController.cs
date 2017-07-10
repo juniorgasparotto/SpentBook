@@ -29,11 +29,11 @@ namespace SpentBook.Web.Views.Import
 
         public IActionResult Index()
         {
-            return View();
+            return View(Guid.NewGuid());
         }
 
         [HttpPost]
-        public ActionResult Upload(string format, string bank)
+        public ActionResult Upload(string format, string bank, Guid idImport)
         {
             var userPath = GetTransactionPath(bank, format);
 
@@ -58,7 +58,7 @@ namespace SpentBook.Web.Views.Import
                         case "bradesco":
                             break;
                         default:
-                            var transactions = this.GetTransactionsImportsCsvFromFile(bank, format, fileFullName);
+                            var transactions = this.GetTransactionsImportsCsvFromFile(bank, format, idImport, fileFullName);
                             foreach (var t in transactions)
                                 uow.TransactionsImports.Insert(t);
                             uow.Save();
@@ -71,15 +71,31 @@ namespace SpentBook.Web.Views.Import
         }
         
         [HttpGet]
-        public GetResponseModel GetByImport()
+        public GetResponseModel GetByImport(Guid idImport)
         {
             var transactions = (from t in uow.TransactionsImports.AsQueryable()
-                               where t.UserId == Helper.GetLoggedUserId(HttpContext, userManager)
-                               orderby t.Date ascending
+                               where t.UserId == Helper.GetLoggedUserId(HttpContext, userManager) &&
+                                     t.IdImport == idImport
+                                orderby t.Date ascending
                                select GetTransactionEditableByImport(t)).ToList();
 
             ValidateTransationsEditable(transactions);
             return GetGetResponseModel(transactions);
+        }
+
+        [HttpGet]
+        public void CancelImport(Guid idImport)
+        {
+            var transactions = (from t in uow.TransactionsImports.AsQueryable()
+                                where t.UserId == Helper.GetLoggedUserId(HttpContext, userManager) &&
+                                      t.IdImport == idImport
+                                orderby t.Date ascending
+                                select t);
+
+            foreach (var t in transactions)
+                uow.TransactionsImports.Delete(t);
+
+            uow.Save();
         }
 
         [HttpGet]
@@ -236,7 +252,7 @@ namespace SpentBook.Web.Views.Import
 
                     foreach (var item in group)
                     {
-                        var linesStr = string.Join(',', lines.Where(f => f.item != item).Select(f => f.line.ToString()));
+                        var linesStr = string.Join(", ", lines.Where(f => f.item != item).Select(f => f.line.ToString()));
 
                         item.Status = TransactionEditableModel.StatusCode.Error;
                         item.StatusMessage.Add($@"Você está tentando inserir esse item mais de uma vez. Os conflitos ocorreram com as linhas ""{linesStr}""");
@@ -355,7 +371,7 @@ namespace SpentBook.Web.Views.Import
             return userPath;
         }
 
-        private List<TransactionImport> GetTransactionsImportsCsvFromFile(string bank, string format, string fullName)
+        private List<TransactionImport> GetTransactionsImportsCsvFromFile(string bank, string format, Guid idImport, string fullName)
         {
             var transactions = new List<TransactionImport>();
             using (var sr = new StreamReader(fullName))
@@ -371,6 +387,7 @@ namespace SpentBook.Web.Views.Import
                     var transaction = new TransactionImport()
                     {
                         Id = Guid.NewGuid(),
+                        IdImport = idImport,
                         UserId = Helper.GetLoggedUserId(HttpContext, userManager),
                         Date = line.Date,
                         Category = line.Category,

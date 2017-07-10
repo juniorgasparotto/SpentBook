@@ -1,150 +1,146 @@
 ﻿/*
-*   FileUpload
+*   Steps
 */
-    .dropzone {
-        border: 2px dashed #0087F7;
-        border-radius: 5px;
-        background: white;
-    }
 
-    .dropzone .dz-message {
-        font-weight: 400;
-    }
+#body-import #steps-header .disabled a,
+#body-import #steps-header .disabled a:hover,
+#body-import #steps-header .disabled a:active {
+    background: #eee none repeat scroll 0 0;
+    color: #aaa;
+    cursor: default;
+}
 
-    .dropzone .dz-message .note {
-        font-size: 0.8em;
-        font-weight: 200;
-        display: block;
-        margin-top: 1.4rem;
-    }
+#body-import #steps-header ul li {
+    padding: 3px;
+}
 
-    .dropzone .dz-preview.dz-file-preview .dz-image {
-        border-radius: 20px;
-        background: #556970;
-    }
-
-    .dropzone .dz-preview .dz-details .dz-filename span, .dropzone .dz-preview .dz-details .dz-size span {
-        color: #000;
-        font-weight: bold;
-    }
-
-    .dropzone .dz-preview .dz-error-message {
-        top: 49px;
-        width: auto;
-        height: 65px;
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-
-    /*.dropzone .dz-preview.bradesco .dz-image {
-        background-image: url(../../images/icons/file-ofx.png);
-        background-repeat: no-repeat;
-        background-size: 50%;
-        background-position: center center;
-    }
-
-    .dropzone .dz-preview.csv .dz-image {
-        background-image: url(../../images/icons/file-csv.png);
-        background-repeat: no-repeat;
-        background-size: 50%;
-        background-position: center center;
-    }*/
-
-    .dropzone .dz-preview .dz-success-mark {
-        margin-top: -2px;
-    }
-
-    .dropzone .dz-preview .dz-error-mark {
-        margin-top: -13px;
-    }
-
-    .dropzone .dz-preview .dz-progress .dz-upload {
-        background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #9dc8e2, #9dc8e2) repeat
-    }
+#body-import #steps-header .number {
+    font-size: 1.429em;
+}
 
 /*
 *   Banks
 */
-            .cc-selector input {
-        position: absolute;
-        z-index: 999;
-        visibility: hidden;
-    }
+#body-import .cc-selector input {
+    position: absolute;
+    z-index: 999;
+    visibility: hidden;
+}
 
-    .cc-selector .csv {
-        background-image: url(../../images/icons/import_csv.png);
-    }
+#body-import .cc-selector .csv {
+    background-image: url(../../images/icons/import_csv.png);
+}
 
-    .cc-selector .bradesco {
-        background-image: url(../../images/icons/import_bradesco.png);
-    }
+#body-import .cc-selector .bradesco {
+    background-image: url(../../images/icons/import_bradesco.png);
+}
 
-    .cc-selector input:active + .drinkcard-cc, .cc-selector input:active + .drinkcard-cc {
-        opacity: .9;
-    }
+#body-import .cc-selector input:active + .drinkcard-cc,
+#body-import .cc-selector input:active + .drinkcard-cc {
+    opacity: .9;
+}
 
-    .cc-selector input:checked + .drinkcard-cc, .cc-selector input:checked + .drinkcard-cc {
-        -webkit-filter: none;
-        -moz-filter: none;
-        filter: none;
-    }
+#body-import .cc-selector input:checked + .drinkcard-cc,
+#body-import .cc-selector input:checked + .drinkcard-cc {
+    -webkit-filter: none;
+    -moz-filter: none;
+    filter: none;
+}
 
-    .drinkcard-cc {
-        cursor: pointer;
-        background-size: contain;
-        background-repeat: no-repeat;
-        display: inline-block;
-        width: 100px;
-        height: 70px;
-        -webkit-transition: all 100ms ease-in;
-        transition: all 100ms ease-in;
-        -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
-        -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
-        filter: brightness(0.8) grayscale(1) opacity(.7);
-    }
+#body-import .drinkcard-cc {
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100px;
+    height: 70px;
+    -webkit-transition: all 100ms ease-in;
+    transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+    -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+    filter: brightness(0.8) grayscale(1) opacity(.7);
+}
 
-    .cc-selector input {
-        margin: 5px 0 0 12px;
-    }
-
-/*
-*   Steps
-*/
-
-.wizard > .steps > ul > li {
-    width: 33%;
+#body-import .cc-selector input {
+    margin: 5px 0 0 12px;
 }
 
 /*
-*   Preview
+*   FileUpload
+*/
+#body-import .dropzone {
+    border: 2px dashed #0087F7;
+    border-radius: 5px;
+    background: white;
+}
+
+#body-import .dropzone .dz-message {
+    font-weight: 400;
+}
+
+#body-import .dropzone .dz-message .note {
+    font-size: 0.8em;
+    font-weight: 200;
+    display: block;
+    margin-top: 1.4rem;
+}
+
+#body-import .dropzone .dz-preview.dz-file-preview .dz-image {
+    border-radius: 20px;
+    background: #556970;
+}
+
+#body-import .dropzone .dz-preview .dz-details .dz-filename span,
+#body-import .dropzone .dz-preview .dz-details .dz-size span {
+    color: #000;
+    font-weight: bold;
+}
+
+#body-import .dropzone .dz-preview .dz-error-message {
+    top: 49px;
+    width: auto;
+    height: 65px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#body-import .dropzone .dz-preview .dz-success-mark {
+    margin-top: -2px;
+}
+
+#body-import .dropzone .dz-preview .dz-error-mark {
+    margin-top: -13px;
+}
+
+#body-import .dropzone .dz-preview .dz-progress .dz-upload {
+    background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #9dc8e2, #9dc8e2) repeat
+}
+
+/*
+*   TransactionEditable & Preview
 */
 
-.handsontable td .htAutocompleteArrow {
+#body-import .handsontable td .htAutocompleteArrow {
     color: black;
 }
 
-#table-statement {
-    background: red none repeat scroll 0 0;
-    height: 100%;
-    width: 100%;
-}
-
-#table-statement table > tbody > tr:nth-child(2n) > td {
+#body-import #table-statement table > tbody > tr:nth-child(2n) > td {
     background: #f7f3f1;
 }
 
-#table-statement table > tbody > tr:nth-child(2n+1) > td {
+#body-import #table-statement table > tbody > tr:nth-child(2n+1) > td {
     background: #fff;
 }
 
-#table-statement .transaction-status  {
+#body-import #table-statement .transaction-status {
     width: 20px;
 }
 
-#table-statement .transaction-status .message {
+#body-import #table-statement .transaction-status .message {
     position: absolute;
     z-index: 1000;
     padding-top: 5px;
+    padding-right: 15px;
     padding-bottom: 5px;
     border: 2px solid transparent;
     border-radius: 4px;
@@ -154,55 +150,63 @@
     white-space: normal;
 }
 
-#table-statement .transaction-status .message ul {
+#body-import #table-statement .transaction-status .message ul {
     margin: 0;
 }
 
-#table-statement .transaction-status .message.success {
+#body-import #table-statement .transaction-status .message.success {
     color: #3c763d;
     background-color: #dff0d8;
     border-color: #3c763d;
 }
 
-#table-statement .transaction-status .message.error {
+#body-import #table-statement .transaction-status .message.error {
     color: #a94442;
     background-color: #f2dede;
     border-color: #C94442;
 }
 
-#table-statement .transaction-status .message.warning {
+#body-import #table-statement .transaction-status .message.warning {
     color: #8a6d3b;
     background-color: #fcf8e3;
     border-color: #8a6d3b;
 }
 
-#table-statement .transaction-status .message.automatic-resolved {
+#body-import #table-statement .transaction-status .message.automatic-resolved {
     color: #31708f;
     background-color: #d9edf7;
     border-color: #31708f;
 }
 
-#table-statement .transaction-status .icon.success {
+#body-import #table-statement .transaction-status .icon.success {
     color: #3c763d;
 }
 
-#table-statement .transaction-status .icon.error {
+#body-import #table-statement .transaction-status .icon.error {
     color: #a94442;
 }
 
-#table-statement .transaction-status .icon.warning {
+#body-import #table-statement .transaction-status .icon.warning {
     color: #8a6d3b;
 }
 
-#table-statement .transaction-status .icon.automatic-resolved {
+#body-import #table-statement .transaction-status .icon.automatic-resolved {
     color: #31708f;
 }
 
-#table-statement .icon {
-    margin-left: 7px;
-    margin-top: 4px;
+#body-import #table-statement .icon {
+    margin-left: 5px;
 }
 
-#table-statement .icon.remove:hover {
+#body-import #table-statement .icon.remove:hover {
     color: red;
+}
+
+/*
+* Generic buttons
+*/
+#body-import ul.actions li {
+    display: table-cell;
+    float: right;
+    margin-top: 10px;
 }

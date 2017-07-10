@@ -1,4 +1,6 @@
-﻿@{
+﻿@Model System.Guid
+
+@{
     ViewData["Title"] = "Importar extrato(s)";
 }
 
@@ -6,28 +8,69 @@
 <hr />
 <h3>@ViewData["Message"]</h3>
 
-@await Html.PartialAsync("~/Views/Import/PartPreview.cshtml")
 
-<div id="steps">
-    <h3>Selecione o banco</h3>
-    <section>
-        @await Html.PartialAsync("~/Views/Import/PartSelectFormat.cshtml")
-    </section>
-    <h3>Selecione os arquivos</h3>
-    <section>
-        @await Html.PartialAsync("~/Views/Import/PartFileUpload.cshtml")
-    </section>
-    <h3>Finalizar</h3>
-        @*@await Html.PartialAsync("~/Views/Import/PartPreview.cshtml")*@
-    <section>
-    </section>
+<div id="body-import">
+    <input type="hidden" id="idImport" name="idImport" value="@Model" />
+    <div id="steps-header" class="row form-group">
+        <div class="col-xs-12">
+            <ul class="nav nav-pills nav-justified">
+                <li class="active">
+                    <a href="#step-1">
+                        <h4 class="list-group-item-heading">
+                            <span class="number">1.</span>
+                            Selecione o banco
+                        </h4>
+                    </a>
+                </li>
+                <li class="disabled">
+                    <a href="#step-2">
+                        <h4 class="list-group-item-heading">
+                            <span class="number">2.</span>
+                            Selecione os arquivos
+                        </h4>
+                    </a>
+                </li>
+                <li class="disabled">
+                    <a href="#step-3">
+                        <h4 class="list-group-item-heading">
+                            <span class="number">2.</span>
+                            Finalizar
+                        </h4>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="steps-content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="content col-md-12" id="step-1">
+                    @await Html.PartialAsync("~/Views/Import/PartSelectFormat.cshtml")
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="content col-md-12 hidden" id="step-2">
+                    @await Html.PartialAsync("~/Views/Import/PartFileUpload.cshtml", (Guid)Model)
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="content col-md-12 hidden" id="step-3">
+                    @await Html.PartialAsync("~/Views/Import/PartPreview.cshtml")
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Styles {
+    <link href="~/lib/components-font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="~/lib/handsontable/dist/pikaday/pikaday.css" rel="stylesheet" />
     <link href="~/css/handsontable/handsontable.css" rel="stylesheet" />
-
-    <link href="~/lib/jquery.steps/demo/css/jquery.steps.css" rel="stylesheet" />
     <link href="~/lib/dropzone/dist/dropzone.css" rel="stylesheet" />
     <link href="~/css/pages/import.css" rel="stylesheet" />
 }
@@ -44,11 +87,8 @@
     <script src="~/lib/handsontable/dist/numbro/languages.js"></script>
     <script src="~/lib/handsontable/dist/handsontable.js"></script>
     
-
     <script src="~/lib/jquery-debounce/jquery.debounce.js"></script>
     <script src="~/lib/dropzone/dist/dropzone.js"></script>
-    <script src="~/lib/jquery.steps/build/jquery.steps.js"></script>
-    <script src="~/lib/jquery.steps/build/jquery.steps.fix.js"></script>
     <script src="~/js/Custom/Helper.js"></script>
     <script src="~/js/Custom/PageImport.js"></script>
 }

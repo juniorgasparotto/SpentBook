@@ -11,6 +11,7 @@
     "dropzone": "*",
     "jquery-debounce": "*",
     "handsontable": "*",
-    "glyphicons": "*"
+    "glyphicons": "*",
+    "components-font-awesome": "*"
   }
 }

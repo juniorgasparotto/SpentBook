@@ -6,6 +6,7 @@ namespace SpentBook.Domain
     public class TransactionImport
     {
         public Guid Id { get; set; }
+        public Guid IdImport { get; set; }
         public Guid UserId { get; set; }
         public string Name { get; set; }
         public DateTime Date { get; set; }

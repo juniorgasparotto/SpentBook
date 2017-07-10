@@ -1,14 +1,112 @@
 ﻿$(document).ready(function () {
     window.PageImport = {};
-    PageImport.Steps = null;
+    PageImport.IdImport = $("#body-import > input#idImport").val();
     PageImport.Dropzone = null;
-    PageImport.TransactionEditable = new TransactionEditable();
-    PageImport.TransactionEditable.Load();
+    PageImport.TransactionEditable = new TransactionEditable(PageImport.IdImport);
+    PageImport.Steps = new Steps();
+    
+    configureUpload();
+});
 
-    $("#save").click(function () {
+function Steps() {
+    var self = this;
+    var headers = $('#body-import #steps-header li');
+    var contents = $('#body-import #steps-content .content');
+    var btnStep1 = $('#body-import .cc-selector button.continue');
+    var btnStep2 = $('#body-import #file-upload button.continue');
+    var btnStep3 = $('#body-import #table-statement button.continue');
+    var btnStep3Cancel = $('#body-import #table-statement button.cancel');
+    var current = null;
+
+    headers.find('a').click(function (e) {
+        e.preventDefault();
+    });
+    
+    this.GoToStep = function (index) {
+        var li = headers.eq(index - 1);
+        var a = li.find('a');
+        var target = $(a.attr('href'));
+        
+        headers.removeClass('active');
+        headers.addClass('disabled');
+
+        li.removeClass('disabled').addClass('active');
+
+        if (current) {
+            current.fadeOut(200, function () {
+                target.fadeIn(200);
+            });
+        }
+        else {
+            target.show();
+        }
+        current = target;
+    }
+
+    this.GoToSelectFormat = function () {
+        this.GoToStep(1);
+    }
+
+    this.GoToSelectFiles = function () {
+        PageImport.Dropzone.options.acceptedFiles = getAcceptExtension();
+        $('#dropzone #bank').val(getFormatType());
+        $('#dropzone #format').val(getAcceptExtension());
+        this.GoToStep(2);
+    }
+
+    this.GoToPreview = function () {
+        setTimeout(function () {
+            PageImport.TransactionEditable.Load();
+        }, 200);
+        this.GoToStep(3);
+    }
+
+    contents.hide().removeClass("hidden");
+    this.GoToStep(1);
+
+    //this.GoToStep(3);
+    //PageImport.TransactionEditable.Load();
+
+    /*
+    * Buttons actions and validations
+    */
+
+    this.ResetUploadFileButton = function () {
+        btnStep2.button('reset');
+    };
+
+    btnStep1.click(function () {
+        if (validateStep1()) {
+            self.GoToSelectFiles();
+        }
+    });
+
+    btnStep2.click(function () {
+        if (validateStep2()) {
+            if (PageImport.Dropzone.getQueuedFiles().length === 0) {
+                self.GoToPreview();
+            }
+            else {
+                btnStep2.button('loading');
+                PageImport.Dropzone.processQueue();
+            }
+        }
+    });
+
+    btnStep3.click(function () {
         PageImport.TransactionEditable.Validate(function (valid) {
             if (valid) {
-                PageImport.TransactionEditable.Save();
+                btnStep3.button('loading');
+                PageImport.TransactionEditable.Save(function (noBusinessError) {
+                    btnStep3.button('reset');
+
+                    if (noBusinessError) {
+                        alert("Importação concluída com sucesso!");
+                        window.location.href = '/';
+                    }
+                }, function (error) {
+                    btnStep3.button('reset');
+                });
             }
             else {
                 alert("Existem erros que precisam ser corrigidos.");
@@ -16,79 +114,13 @@
         });
     });
 
-    configureSteps();
-    configureUpload();
-});
+    btnStep3Cancel.click(function () {
+        if (!confirm("Deseja realmente cancelar essa importação?"))
+            return;
 
-function configureSteps() {
-    PageImport.Steps = $("#steps").steps({
-        headerTag: "h3",
-        bodyTag: "section",
-        transitionEffect: "slideLeft",
-        autoFocus: true,
-        labels:
-        {
-            previous: "Voltar",
-            next: "Continuar",
-            finish: "Finalizar!",
-        },
-        onInit: function (event, current) {
-            
-        },
-        onStepChanging: function (event, currentIndex, newIndex) {
-            if (currentIndex === 0) {
-                return validateStep1();
-            }
-            else if (currentIndex === 1) {
-                var valid = validateStep2();
-                if (valid) {
-                    if (PageImport.Dropzone.getQueuedFiles().length === 0) {
-                        return true;
-                    } 
-                    else {
-                        PageImport.Dropzone.processQueue();
-                    }
-                }
-                return false;
-            }
-            else if (currentIndex === 2) {
-                return validateStep3();
-            }
-
-            return true;
-        },
-        onStepChanged: function (event, currentIndex, priorIndex) {
-            if (currentIndex === 0) {
-                PageImport.Steps.btnNext.text("Selecionar");
-            }
-            else if (currentIndex === 1) {
-                PageImport.Steps.btnPrevious.hide();
-                PageImport.Steps.firstTab.addClass("disabled");
-                PageImport.Steps.firstTab.attr("aria-disabled", true);
-                PageImport.Steps.btnNext.text("Importar...");
-                PageImport.Dropzone.options.acceptedFiles = getAcceptExtension();
-                $('#dropzoneStatement #bank').val(getFormatType());
-                $('#dropzoneStatement #format').val(getAcceptExtension());
-            }
-            else if (currentIndex === 2) {
-                PageImport.Steps.secondTab.addClass("disabled");
-                PageImport.Steps.secondTab.attr("aria-disabled", true);
-                PageImport.TransactionEditable.Load();
-            }
-        },
-        onFinishing: function (event, currentIndex) {
-            
-        },
-        onFinished: function (event, currentIndex) {
-            
-        }
+        PageImport.TransactionEditable.Cancel();
+        window.location.href = '/Import';
     });
-
-    PageImport.Steps.btnPrevious = $(".actions > ul > li a[href='#previous']");
-    PageImport.Steps.btnNext = $(".actions > ul > li a[href='#next']");
-    PageImport.Steps.firstTab = $('#steps li.first');
-    PageImport.Steps.secondTab = PageImport.Steps.firstTab.next();
-    PageImport.Steps.btnPrevious.parent().hide();
 }
 
 function configureUpload() {
@@ -100,13 +132,13 @@ function configureUpload() {
     Dropzone.prototype.defaultOptions.dictRemoveFile = "Remover";
     Dropzone.prototype.defaultOptions.dictMaxFilesExceeded = "Você não pode importar mais arquivos nesse mesmo processo.";
 
-    var dropzone = new Dropzone('#dropzoneStatement', {
+    var dropzone = new Dropzone('#dropzone', {
         previewTemplate: document.querySelector('#preview-template').innerHTML,
         parallelUploads: 12,
         maxFiles: 12,
         maxFilesize: 20,
         filesizeBase: 1000,
-        acceptedFiles: ".csv,.ofx,.cs",
+        acceptedFiles: ".csv,.ofx",
         addRemoveLinks: true,
         createImageThumbnails: false,
         paramName: "files",
@@ -128,11 +160,10 @@ function configureUpload() {
         for (var index in files) {
             $(files[index].previewElement).addClass(getFormatType());
         }
-        jQueryStepsResize();
     });
 
     dropzone.on("removedfile", function (file) {
-        jQueryStepsResize();
+        
     });
 
     // Esconde durante o envio, e só volta se ocorrer um erro
@@ -146,7 +177,13 @@ function configureUpload() {
     });
 
     dropzone.on("queuecomplete", function (progress) {
-        PageImport.Steps.steps("next");
+        if (validateStep2()) {
+            if (PageImport.Dropzone.getQueuedFiles().length === 0) {
+                PageImport.Steps.GoToPreview();
+            }
+        }
+
+        PageImport.Steps.ResetUploadFileButton();
     });
 
     dropzone.on("success", function (file, responseText, e) {
@@ -198,12 +235,13 @@ function getAcceptExtension() {
     return ".csv";
 }
 
-function TransactionEditable() {
+function TransactionEditable(idImport) {
     var self = this;
-    this.UrlGetData = "Import/Get";
+    this.IdImport = idImport;
+    this.UrlGetData = "Import/GetByImport";
     this.UrlSave = "Import/Save";
-    this.TableElement = $("#table-statement #table");
-    this.SaveButtonElement = $("#table-statement #save");
+    this.UrlCancel = "Import/CancelImport";
+    this.TableElement = "#table-statement #table";
     this.Handsontable = null;
     this.Data = null;
 
@@ -297,14 +335,12 @@ function TransactionEditable() {
             td.appendChild(remove[0]);
         }
 
-        //[{ "Id": "f6a6f1ec-ee37-499a-8fd7-a9e5a479d708", "UserId": "04786e69-5f8d-460f-adec-0bd145d90814", "Name": "Tes", "Date": "14-07-2017 00:00", "Value": -2.8, "Category": "alimentação", "SubCategory": "café", "BankName": "teste", "FormatFile": "teste2", "Status": 3, "StatusMessage": ["O campo 'Data' não pode estar vazio", "O campo 'Nome' não pode estar vazio"] }]
-
         var hotSettings = {
             data: data.Transactions,
             colHeaders: ["", "", "Nome", "Valor", "Data", "Banco", "Categoria", "Sub-Categoria"],
             columns: [
-                { data: "Id", disableVisualSelection:true, renderer: deleteRowRenderer, readOnly: true, width: "20px" },
-                { data: "Status", disableVisualSelection: true, type: 'text', renderer: errorRenderer, readOnly: true, width: "20px" },
+                { data: "Id", disableVisualSelection:true, renderer: deleteRowRenderer, readOnly: true, width: "30px" },
+                { data: "Status", disableVisualSelection: true, type: 'text', renderer: errorRenderer, readOnly: true, width: "30px" },
                 { data: "Name", type: 'text' },
                 { data: "Value", type: 'numeric', format: '$ 0,0.00', renderer: negativeValueRenderer, language: 'pt-BR' },
                 { data: "Date", type: 'date', dateFormat: 'DD/MM/YYYY HH:mm:ss', language: 'pt-BR', correctFormat: true },
@@ -315,25 +351,17 @@ function TransactionEditable() {
             stretchH: 'all',
             autoWrapRow: true,
             rowHeaders: true,
-            //hiddenColumns: {
-            //    columns: [0],
-            //    indicators: true
-            //}
-            //afterValidate: function (isValid, value, row, prop, source) {
-            //    if (!isValid) 
-            //        self.SaveButtonElement.hide();
-            //    else 
-            //        self.SaveButtonElement.show();
-            //}
+            height: 330,
         };
 
-        self.Handsontable = new Handsontable(self.TableElement[0], hotSettings);
+        self.Handsontable = new Handsontable($(self.TableElement)[0], hotSettings);
     };
 
     this.Load = function () {
         $.ajax({
             type: "GET",
             url: self.UrlGetData,
+            data: { idImport: self.IdImport },
             beforeSend: function () {
 
             },
@@ -359,28 +387,40 @@ function TransactionEditable() {
         });
     };
 
-    this.Save = function () {        
+    this.Save = function (success, fail) {
         $.ajax({
             type: "POST",
             url: self.UrlSave,
             data: JSON.stringify({ InitialIds: self.Data.InitialIds, Transactions: self.Handsontable.getSourceData() }),
             dataType: 'json',
             contentType: 'application/json',
-            beforeSend: function () {
-
-            },
-            complete: function () {
-
-            },
             success: function (data) {
                 if (data.message === "OK") {
-                    self.Load();
-                    alert("Continuar o fluxo");
+                    if (success)
+                        success(true);
                 }
                 else {
                     alert(data.message);
                     self.Handsontable.loadData(data.transactions);
+                    if (success)
+                        success(false);
                 }
+            },
+            error: function (error) {
+                if (fail)
+                    fail(error);
+                Helper.ErrorResponse(error);
+            }
+        });
+    };
+
+    this.Cancel = function () {        
+        $.ajax({
+            type: "GET",
+            url: self.UrlCancel,
+            data: { idImport: self.IdImport },
+            async: false,
+            success: function (data) {
             },
             error: function (error) {
                 Helper.ErrorResponse(error);
