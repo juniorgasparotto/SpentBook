@@ -7,8 +7,8 @@ namespace SpentBook.Web
 {
     internal class PocDatabaseUoW : IUnitOfWork
     {
-        private object lockObj = new object();
-        private readonly PocFile<Schema> pocFile;
+        public static PocFile<Schema> _staticPocFile;
+
         private readonly Dictionary<Type, IRepository<IEntity>> repositories;
 
         public class Schema
@@ -16,11 +16,25 @@ namespace SpentBook.Web
             public List<Dashboard> Dashboards { get; set; }
             public List<Transaction> Transactions { get; set; }
             public List<TransactionImport> TransactionsImports { get; set; }
+            public List<Bank> Banks { get; set; }
+        }
+
+        public static PocFile<Schema> PocFile
+        {
+            get
+            {
+                if (_staticPocFile == null)
+                    _staticPocFile = new PocFile<Schema>();
+                return _staticPocFile;
+            }
+            set
+            {
+                _staticPocFile = value;
+            }
         }
 
         public PocDatabaseUoW()
         {
-            this.pocFile = new PocFile<Schema>();
             this.repositories = new Dictionary<Type, IRepository<IEntity>>();
         }
 
@@ -32,7 +46,7 @@ namespace SpentBook.Web
                 if (repositories.ContainsKey(typeof(Dashboard)))
                     repository = (IRepository<Dashboard>)repositories[typeof(Dashboard)];
                 else
-                    repository = new PocDatabaseRepository<Dashboard>(pocFile);
+                    repository = new PocDatabaseRepository<Dashboard>(PocFile);
 
                 return repository;
             }
@@ -46,7 +60,7 @@ namespace SpentBook.Web
                 if (repositories.ContainsKey(typeof(Transaction)))
                     repository = (IRepository<Transaction>)repositories[typeof(Transaction)];
                 else
-                    repository = new PocDatabaseRepository<Transaction>(pocFile);
+                    repository = new PocDatabaseRepository<Transaction>(PocFile);
 
                 return repository;
             }
@@ -60,7 +74,21 @@ namespace SpentBook.Web
                 if (repositories.ContainsKey(typeof(TransactionImport)))
                     repository = (IRepository<TransactionImport>)repositories[typeof(TransactionImport)];
                 else
-                    repository = new PocDatabaseRepository<TransactionImport>(pocFile);
+                    repository = new PocDatabaseRepository<TransactionImport>(PocFile);
+
+                return repository;
+            }
+        }
+
+        public IRepository<Bank> Banks
+        {
+            get
+            {
+                IRepository<Bank> repository;
+                if (repositories.ContainsKey(typeof(Bank)))
+                    repository = (IRepository<Bank>)repositories[typeof(Bank)];
+                else
+                    repository = new PocDatabaseRepository<Bank>(PocFile);
 
                 return repository;
             }
@@ -68,8 +96,8 @@ namespace SpentBook.Web
 
         public void Save()
         {
-            lock(lockObj)
-                pocFile.Save();
+            lock(_staticPocFile)
+                PocFile.Save();
         }
     }
 }

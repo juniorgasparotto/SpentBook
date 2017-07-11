@@ -53,7 +53,7 @@ namespace SpentBook.Web.Views.Import
                     using (var fileStream = new FileStream(fileFullName, FileMode.Create))
                         file.CopyTo(fileStream);
 
-                    switch(format)
+                    switch(bank)
                     {
                         case "bradesco":
                             break;
@@ -271,7 +271,8 @@ namespace SpentBook.Web.Views.Import
                 if (validateBanks)
                 {
                     var banks = GetBanks();
-                    if (!banks.Contains(transactionEditable.BankName))
+
+                    if (!banks.Any(f=> f.ToLower() == transactionEditable.BankName?.ToLower()))
                         messages.Add("bank", "O 'Banco' informado não está cadastrado");
                 }
 
@@ -394,7 +395,7 @@ namespace SpentBook.Web.Views.Import
                         SubCategory = line.SubCategory,
                         Name = line.Name,
                         Value = line.Value,
-                        BankName = bank,
+                        BankName = !string.IsNullOrWhiteSpace(line.BankName) ? line.BankName.ToLower() : bank,
                         FormatFile = format
                     };
 
@@ -429,16 +430,17 @@ namespace SpentBook.Web.Views.Import
 
         private IEnumerable<string> GetBanks()
         {
-            return uow.Transactions.AsQueryable().GroupBy(f => f.BankName).Select(f => f.Key);
+            return uow.Banks.AsQueryable().Select(f=>f.Name).ToList();
         }
 
         private class CSVLine
         {
+            public string Name { get; set; }
             public DateTime Date { get; set; }
+            public decimal Value { get; set; }
+            public string BankName { get; set; }
             public string Category { get; set; }
             public string SubCategory { get; set; }
-            public string Name { get; set; }
-            public decimal Value { get; set; }
         }
 
         public class GetResponseModel

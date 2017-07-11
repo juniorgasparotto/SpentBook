@@ -291,7 +291,7 @@
             $.ajax({
                 type: "GET",
                 url: options.urlCancel,
-                data: { idImport: options.IdImport },
+                data: { idImport: options.idImport },
                 beforeSend: function () {
                     btnCancel.button("loading");
                 },

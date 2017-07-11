@@ -34,6 +34,8 @@ namespace SpentBook.Web
 
         public IRepository<TransactionImport> TransactionsImports => throw new NotImplementedException();
 
+        public IRepository<Bank> Banks => throw new NotImplementedException();
+
         public void Save()
         {
             throw new NotImplementedException();

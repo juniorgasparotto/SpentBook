@@ -8,9 +8,8 @@ namespace SpentBook.Web.Controllers
     {
         public ActionResult Index()
         {
-            //var databaseFile = Helper.GetUserDataBase(HttpContext, HttpContext.User);
-            //FileDataBase.Refresh(databaseFile);
-            return null;
+            PocDatabaseUoW.PocFile = null;
+            return new EmptyResult();
         }
     }
 }
