@@ -1,430 +1,307 @@
 ﻿$(document).ready(function () {
-    window.PageImport = {};
-    PageImport.IdImport = $("#body-import > input#idImport").val();
-    PageImport.Dropzone = null;
-    PageImport.TransactionEditable = new TransactionEditable(PageImport.IdImport);
-    PageImport.Steps = new Steps();
-    
-    configureUpload();
-});
-
-function Steps() {
-    var self = this;
-    var headers = $('#body-import #steps-header li');
-    var contents = $('#body-import #steps-content .content');
-    var btnStep1 = $('#body-import .cc-selector button.continue');
-    var btnStep2 = $('#body-import #file-upload button.continue');
-    var btnStep3 = $('#body-import #table-statement button.continue');
-    var btnStep3Cancel = $('#body-import #table-statement button.cancel');
-    var current = null;
-
-    headers.find('a').click(function (e) {
-        e.preventDefault();
-    });
-    
-    this.GoToStep = function (index) {
-        var li = headers.eq(index - 1);
-        var a = li.find('a');
-        var target = $(a.attr('href'));
-        
-        headers.removeClass('active');
-        headers.addClass('disabled');
-
-        li.removeClass('disabled').addClass('active');
-
-        if (current) {
-            current.fadeOut(200, function () {
-                target.fadeIn(200);
-            });
-        }
-        else {
-            target.show();
-        }
-        current = target;
-    }
-
-    this.GoToSelectFormat = function () {
-        this.GoToStep(1);
-    }
-
-    this.GoToSelectFiles = function () {
-        PageImport.Dropzone.options.acceptedFiles = getAcceptExtension();
-        $('#dropzone #bank').val(getFormatType());
-        $('#dropzone #format').val(getAcceptExtension());
-        this.GoToStep(2);
-    }
-
-    this.GoToPreview = function () {
-        setTimeout(function () {
-            PageImport.TransactionEditable.Load();
-        }, 200);
-        this.GoToStep(3);
-    }
-
-    contents.hide().removeClass("hidden");
-    this.GoToStep(1);
-
-    //this.GoToStep(3);
-    //PageImport.TransactionEditable.Load();
-
-    /*
-    * Buttons actions and validations
-    */
-
-    this.ResetUploadFileButton = function () {
-        btnStep2.button('reset');
-    };
-
-    btnStep1.click(function () {
-        if (validateStep1()) {
-            self.GoToSelectFiles();
-        }
-    });
-
-    btnStep2.click(function () {
-        if (validateStep2()) {
-            if (PageImport.Dropzone.getQueuedFiles().length === 0) {
-                self.GoToPreview();
-            }
-            else {
-                btnStep2.button('loading');
-                PageImport.Dropzone.processQueue();
-            }
-        }
-    });
-
-    btnStep3.click(function () {
-        PageImport.TransactionEditable.Validate(function (valid) {
-            if (valid) {
-                btnStep3.button('loading');
-                PageImport.TransactionEditable.Save(function (noBusinessError) {
-                    btnStep3.button('reset');
-
-                    if (noBusinessError) {
-                        alert("Importação concluída com sucesso!");
-                        window.location.href = '/';
-                    }
-                }, function (error) {
-                    btnStep3.button('reset');
-                });
-            }
-            else {
-                alert("Existem erros que precisam ser corrigidos.");
-            }
-        });
-    });
-
-    btnStep3Cancel.click(function () {
-        if (!confirm("Deseja realmente cancelar essa importação?"))
-            return;
-
-        PageImport.TransactionEditable.Cancel();
-        window.location.href = '/Import';
-    });
-}
-
-function configureUpload() {
     Dropzone.autoDiscover = false;
-    Dropzone.prototype.defaultOptions.dictDefaultMessage = "Arraste os arquivos de extratos nesta área";
-    Dropzone.prototype.defaultOptions.dictFileTooBig = "O arquivo é muito grande ({{filesize}}MiB). O máximo permitido é: {{maxFilesize}}MiB.";
-    Dropzone.prototype.defaultOptions.dictInvalidFileType = "O formato desse arquivo não é suportado";
-    Dropzone.prototype.defaultOptions.dictResponseError = "Erro do servidor (código: {{statusCode}})";
-    Dropzone.prototype.defaultOptions.dictRemoveFile = "Remover";
-    Dropzone.prototype.defaultOptions.dictMaxFilesExceeded = "Você não pode importar mais arquivos nesse mesmo processo.";
 
-    var dropzone = new Dropzone('#dropzone', {
-        previewTemplate: document.querySelector('#preview-template').innerHTML,
-        parallelUploads: 12,
-        maxFiles: 12,
-        maxFilesize: 20,
-        filesizeBase: 1000,
-        acceptedFiles: ".csv,.ofx",
-        addRemoveLinks: true,
-        createImageThumbnails: false,
-        paramName: "files",
-        autoProcessQueue: false,
-        uploadMultiple: false
-    });
+    window.Page = {};
+    var idImport = $("#body-import > input#idImport").val();
+    var steps = new Steps();
 
-    dropzone.on("error", function (file, response) {
-        $(file._removeLink).show();
-        var span = $(file.previewElement).find(".dz-error-message span");
+    Page.BankSelector = new BankSelector({
+        done: function () {
+            var transUploader = new TransactionUploader({
+                acceptedFiles: Page.BankSelector.GetAcceptExtension(),
+                bankName: Page.BankSelector.GetBankName(),
+                done: function () {
+                    var transImport = new TransactionImport({
+                        idImport: idImport
+                    }).Load();
 
-        if (response.message)
-            span.text(response.message);
-        else
-            span.text(response);
-    });
+                    steps.GoToPreview();
+                }
+            }).Load();
 
-    dropzone.on("addedfiles", function (files) {
-        for (var index in files) {
-            $(files[index].previewElement).addClass(getFormatType());
+            steps.GoToSelectFiles();
         }
     });
+    
+    /*
+    * Class "Steps"
+    */
+    function Steps() {
+        var self = this;
+        var headers = $('#body-import #steps-header li');
+        var contents = $('#body-import #steps-content .content');
+        var current = null;
 
-    dropzone.on("removedfile", function (file) {
-        
-    });
+        headers.find('a').click(function(e) {
+            e.preventDefault();
+        });
 
-    // Esconde durante o envio, e só volta se ocorrer um erro
-    dropzone.on("sending", function (file) {
-        $(file._removeLink).hide();
-    });
+        this.GoToStep = function(index) {
+            var li = headers.eq(index - 1);
+            var a = li.find('a');
+            var target = $(a.attr('href'));
 
-    // File upload Progress
-    dropzone.on("totaluploadprogress", function (progress) {
+            headers.removeClass('active');
+            headers.addClass('disabled');
 
-    });
+            li.removeClass('disabled').addClass('active');
 
-    dropzone.on("queuecomplete", function (progress) {
-        if (validateStep2()) {
-            if (PageImport.Dropzone.getQueuedFiles().length === 0) {
-                PageImport.Steps.GoToPreview();
+            if (current) {
+                current.fadeOut(200, function() {
+                    target.fadeIn(200);
+                });
+            } else {
+                target.show();
             }
+            current = target;
         }
 
-        PageImport.Steps.ResetUploadFileButton();
-    });
+        this.GoToSelectFormat = function() {
+            this.GoToStep(1);
+        }
 
-    dropzone.on("success", function (file, responseText, e) {
-        
-    });
+        this.GoToSelectFiles = function() {
+            
+            this.GoToStep(2);
+        }
 
-    PageImport.Dropzone = dropzone;
-}
+        this.GoToPreview = function() {
+            this.GoToStep(3);
+        }
 
-function validateStep1() {
-    var inputFormatValue = getFormatType();
-    if (!inputFormatValue) {
-        alert("Selecione um formato");
-        return false;
+        contents.hide().removeClass("hidden");
+        this.GoToStep(1);
+        return self;
     }
+    
+    /*
+    * Class "BankSelector"
+    */
+    function BankSelector(options) {
+        var self = this;
 
-    return true;
-}
+        if (!options.done)
+            throw "O método de callback 'done' não esta definido em 'BankSelector'";
 
-function validateStep2() {
-    if (PageImport.Dropzone.files.length === 0) {
-        alert("Selecione ao menos um arquivo para continuar");
-        return false;
-    }
-    else {
-        for (var index in PageImport.Dropzone.files) {
-            if (PageImport.Dropzone.files[index].status === 'error') {
-                alert("Existem arquivos com problemas na importação, por favor, remova-os para continuar");
+        var btn = $('#body-import .cc-selector button.continue');
+
+        this.GetBankName = function () {
+            return $('#body-import input[name=importFormat]:checked').val();
+        };
+
+        this.GetAcceptExtension = function() {
+            var format = self.GetBankName();
+            if (format === "bradesco")
+                return ".ofx";
+            return ".csv";
+        }
+
+        btn.click(function () {
+            if (!self.GetBankName()) {
+                alert("Selecione um formato");
                 return false;
             }
-        }
-    }
 
-    return true;
-}
+            options.done();
+        });
 
-function validateStep3() {
-    return true;
-}
+        return self;
+    };
 
-function getFormatType() {
-    return $('input[name=importFormat]:checked').val();
-}
+    /*
+    * Class "TransactionUploader"
+    */
+    function TransactionUploader(options) {
+        var self = this;
 
-function getAcceptExtension() {
-    var format = getFormatType();
-    if (format === "bradesco")
-        return ".ofx";
-    return ".csv";
-}
+        if (!options.done)
+            throw "O método de callback 'done' não esta definido em 'TransactionUploader'";
 
-function TransactionEditable(idImport) {
-    var self = this;
-    this.IdImport = idImport;
-    this.UrlGetData = "Import/GetByImport";
-    this.UrlSave = "Import/Save";
-    this.UrlCancel = "Import/CancelImport";
-    this.TableElement = "#table-statement #table";
-    this.Handsontable = null;
-    this.Data = null;
+        if (!options.bankName)
+            throw "Nenhum banco foi selecionado em 'TransactionUploader'";
 
-    this.Configure = function (data) {
-        var enumStatus = [];
-        enumStatus[0] = "success";
-        enumStatus[1] = "warning";
-        enumStatus[2] = "automatic-resolved";
-        enumStatus[3] = "error";
+        var parent = $('#body-import #file-upload');
+        options.btnContinue = options.btnContinue ? options.btnContinue : parent.find('button.continue');
+        options.inputBankName = options.inputBankName ? options.inputBankName : parent.find('input#bank');
+        options.inputFormat = options.inputFormat ? options.inputFormat : parent.find('input#format');
+        options.formName = options.formName ? options.formName : '#dropzone';
+        options.previewName = options.previewName ? options.previewName : '#body-import #file-upload #preview-template';
+        options.acceptedFiles = options.acceptedFiles ? options.acceptedFiles : '*.*';
 
-        var iconClasses = [];
-        iconClasses[0] = "glyphicon-ok";
-        iconClasses[1] = "glyphicon-info-sign";
-        iconClasses[2] = "glyphicon-info-sign";
-        iconClasses[3] = "glyphicon-exclamation-sign";
+        this.Dropzone = null;
 
-        var errorRenderer = function (instance, td, row, col, prop, value, cellProperties) {
-            var rowValue = instance.getDataAtRow(row);
-            var status = value ? enumStatus[value] : enumStatus[0];
-            var iconClass = value ? iconClasses[value] : iconClasses[0];
-            var message = instance.getSourceDataAtRow(row).StatusMessage;
-            
-            while (td.firstChild) {
-                td.removeChild(td.firstChild);
-            }
-            
-            var wrapper = $('<div class="transaction-status"></div>');
-            var icon = $('<span class="icon glyphicon"></span>');
-            icon.addClass(iconClass);
-            icon.addClass(status);
-            wrapper.append(icon);
-            td.appendChild(wrapper[0]);
+        this.Load = function () {
+            Dropzone.autoDiscover = false;
+            Dropzone.prototype.defaultOptions.dictDefaultMessage = "Arraste os arquivos de extratos nesta área";
+            Dropzone.prototype.defaultOptions.dictFileTooBig = "O arquivo é muito grande ({{filesize}}MiB). O máximo permitido é: {{maxFilesize}}MiB.";
+            Dropzone.prototype.defaultOptions.dictInvalidFileType = "O formato desse arquivo não é suportado";
+            Dropzone.prototype.defaultOptions.dictResponseError = "Erro do servidor (código: {{statusCode}})";
+            Dropzone.prototype.defaultOptions.dictRemoveFile = "Remover";
+            Dropzone.prototype.defaultOptions.dictMaxFilesExceeded = "Você não pode importar mais arquivos nesse mesmo processo.";
 
-            if (message && message.length) {
-                
-                var messageElement = $(document.createElement('DIV'));
-                wrapper.append(messageElement);
+            options.inputBankName.val(options.bankName);
+            options.inputFormat.val(options.acceptedFiles);
 
-                messageElement.addClass('message');
-                messageElement.addClass(status);
-                messageElement.html(Helper.CreateULByArray(message));
+            var dropzone = new Dropzone(options.formName, {
+                previewTemplate: document.querySelector(options.previewName).innerHTML,
+                parallelUploads: 12,
+                maxFiles: 12,
+                maxFilesize: 20,
+                filesizeBase: 1000,
+                acceptedFiles: options.acceptedFiles,
+                addRemoveLinks: true,
+                createImageThumbnails: false,
+                paramName: "files",
+                autoProcessQueue: false,
+                uploadMultiple: false
+            });
 
-                // setar comportamento de exibição
-                messageElement.hide();
+            //dropzone.on("addedfiles", function (files) {
+            //    for (var index in files) {
+            //        $(files[index].previewElement).addClass(..extension..);
+            //    }
+            //});
 
-                var time;
-                icon.mouseover(function () {
-                    messageElement.show();
-                }).mouseout(function () {
-                    if (time)
-                        clearTimeout(time);
+            // Esconde durante o envio, e só volta se ocorrer um erro
+            dropzone.on("sending", function (file) {
+                $(file._removeLink).hide();
+            });
 
-                    time = setTimeout(function () {
-                        messageElement.hide();
-                    }, 20);
-                });
+            dropzone.on("error", function (file, response) {
+                $(file._removeLink).show();
+                var span = $(file.previewElement).find(".dz-error-message span");
 
-                messageElement.mouseenter(function () {
-                    clearTimeout(time);
-                }).mouseleave(function () {
-                    messageElement.hide();
-                });
-            }
-        };
+                if (response.message)
+                    span.text(response.message);
+                else
+                    span.text(response);
+            });
 
-        var negativeValueRenderer = function (instance, td, row, col, prop, value, cellProperties) {
-            if (!value)
-                value = 0;
+            dropzone.on("queuecomplete", function (progress) {
+                options.btnContinue.button('reset');
+                if (!self.Validate())
+                    return;
 
-            Handsontable.renderers.NumericRenderer.apply(this, arguments);
-
-            if (parseInt(value, 10) <= 0) {
-                td.style.color = 'red';
-            }
-            else {
-                td.style.color = 'blue';
-            }
-        };
-
-        var deleteRowRenderer = function (instance, td, row, col, prop, value, cellProperties) {
-            while (td.firstChild) {
-                td.removeChild(td.firstChild);
-            }
-
-            var remove = $('<span class="glyphicon glyphicon-floppy-remove icon remove" title="Remover transação"></span>');
-            remove.click(function () {
-                if (confirm("Deseja realmente excluir essa transação?")) {
-                    return instance.alter("remove_row", row);
+                if (self.Dropzone.getQueuedFiles().length === 0) {
+                    options.done();
                 }
             });
-            td.appendChild(remove[0]);
-        }
 
-        var hotSettings = {
-            data: data.Transactions,
-            colHeaders: ["", "", "Nome", "Valor", "Data", "Banco", "Categoria", "Sub-Categoria"],
-            columns: [
-                { data: "Id", disableVisualSelection:true, renderer: deleteRowRenderer, readOnly: true, width: "30px" },
-                { data: "Status", disableVisualSelection: true, type: 'text', renderer: errorRenderer, readOnly: true, width: "30px" },
-                { data: "Name", type: 'text' },
-                { data: "Value", type: 'numeric', format: '$ 0,0.00', renderer: negativeValueRenderer, language: 'pt-BR' },
-                { data: "Date", type: 'date', dateFormat: 'DD/MM/YYYY HH:mm:ss', language: 'pt-BR', correctFormat: true },
-                { data: "BankName", type: 'autocomplete', source: data.Banks, strict: false },
-                { data: "Category", type: 'autocomplete', source: data.Categories, strict: false },
-                { data: "SubCategory", type: 'autocomplete', source: data.SubCategories, strict: false },
-            ],
-            stretchH: 'all',
-            autoWrapRow: true,
-            rowHeaders: true,
-            height: 330,
+            self.Dropzone = dropzone;
+            return dropzone;
         };
 
-        self.Handsontable = new Handsontable($(self.TableElement)[0], hotSettings);
-    };
-
-    this.Load = function () {
-        $.ajax({
-            type: "GET",
-            url: self.UrlGetData,
-            data: { idImport: self.IdImport },
-            beforeSend: function () {
-
-            },
-            complete: function () {
-
-            },
-            success: function (data) {
-                self.Data = data;
-                if (self.Handsontable)
-                    self.Handsontable.loadData(data.Transactions);
-                else
-                    self.Configure(data);
-            },
-            error: function (error) {
-                Helper.ErrorResponse(error);
-            }
-        });
-    };
-
-    this.Validate = function (actionIfInvalid) {
-        self.Handsontable.validateCells(function (valid) {
-            actionIfInvalid(valid);
-        });
-    };
-
-    this.Save = function (success, fail) {
-        $.ajax({
-            type: "POST",
-            url: self.UrlSave,
-            data: JSON.stringify({ InitialIds: self.Data.InitialIds, Transactions: self.Handsontable.getSourceData() }),
-            dataType: 'json',
-            contentType: 'application/json',
-            success: function (data) {
-                if (data.message === "OK") {
-                    if (success)
-                        success(true);
+        this.Validate = function () {
+            if (self.Dropzone.files.length === 0) {
+                alert("Selecione ao menos um arquivo para continuar");
+                return false;
+            } else {
+                for (var index in self.Dropzone.files) {
+                    if (self.Dropzone.files[index].status === 'error') {
+                        alert("Existem arquivos com problemas na importação, por favor, remova-os para continuar");
+                        return false;
+                    }
                 }
-                else {
-                    alert(data.message);
-                    self.Handsontable.loadData(data.transactions);
-                    if (success)
-                        success(false);
-                }
-            },
-            error: function (error) {
-                if (fail)
-                    fail(error);
-                Helper.ErrorResponse(error);
             }
+            return true;
+        };
+
+        options.btnContinue.click(function () {
+            if (!self.Validate())
+                return;
+
+            options.btnContinue.button('loading');
+            self.Dropzone.processQueue();
+            // continue in "sending", "error" and "queuecomplete"
         });
+
+        return self;
     };
 
-    this.Cancel = function () {        
-        $.ajax({
-            type: "GET",
-            url: self.UrlCancel,
-            data: { idImport: self.IdImport },
-            async: false,
-            success: function (data) {
+    /*
+    * Class TransactionImport
+    */
+    function TransactionImport(options) {
+        var self = this;
+
+        if (!options.idImport)
+            throw new "A propriedade 'IdImport' não esta definido em 'TransactionEditable'";
+
+        var btnContinue = $('#body-import #table-statement button.continue');
+        var btnCancel = $('#body-import #table-statement button.cancel');
+
+        options.urlGetData = "Import/GetByImport";
+        options.urlSave = 'Import/Save';
+        options.urlCancel = "Import/Cancel";
+        options.urlFinishOnCancel = '/Import';
+        options.urlFinishOnSuccess = '/';
+        options.tableElement = '#body-import #table-statement #table';
+
+        var transEditable = new TransactionEditable({
+            tableElement: options.tableElement,
+            urlSave: options.urlSave,
+            beforeSave: function () {
+                btnContinue.button('loading');
             },
-            error: function (error) {
-                Helper.ErrorResponse(error);
-            }
+            completeSave: function (data) {
+                btnContinue.button('reset');
+            },
+            successOnSave: function (data) {
+                alert("Importação concluída com sucesso!");
+                window.location.href = options.urlFinishOnSuccess;
+            },
+            invalidSaveData: function (data) {
+                alert(data.message);
+            },
+            errorOnSave: null
         });
-    };
-}
+
+        this.Load = function () {
+            $.ajax({
+                type: "GET",
+                url: options.urlGetData,
+                data: { idImport: options.idImport },
+                beforeSend: function () {
+                    btnContinue.button('loading');
+                },
+                complete: function () {
+                    btnContinue.button('reset');
+                },
+                success: function (data) {
+                    // é necessário o setTimeout, pois existe um bugs
+                    // no handsontable que não renderiza de primeira
+                    setTimeout(function () {
+                        transEditable.LoadData(data);
+                    }, 200);
+                },
+                error: function (error) {
+                    Helper.ErrorResponse(error);
+                }
+            });
+        };
+
+        btnContinue.click(function () {
+            transEditable.Save();
+        });
+
+        btnCancel.click(function () {
+            if (!confirm("Deseja realmente cancelar essa operação?"))
+                return;
+
+            $.ajax({
+                type: "GET",
+                url: options.urlCancel,
+                data: { idImport: options.IdImport },
+                beforeSend: function () {
+                    btnCancel.button("loading");
+                },
+                complete: function () {
+                    btnCancel.button("reset");
+                    window.location.href = options.urlFinishOnCancel;
+                }
+            });
+        });
+
+        return self;
+    }
+});

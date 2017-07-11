@@ -1,4 +1,4 @@
-﻿@Model System.Guid
+﻿@model System.Guid
 
 @{
     ViewData["Title"] = "Importar extrato(s)";
@@ -7,7 +7,6 @@
 <h2>@ViewData["Title"]</h2>
 <hr />
 <h3>@ViewData["Message"]</h3>
-
 
 <div id="body-import">
     <input type="hidden" id="idImport" name="idImport" value="@Model" />
@@ -89,6 +88,7 @@
     
     <script src="~/lib/jquery-debounce/jquery.debounce.js"></script>
     <script src="~/lib/dropzone/dist/dropzone.js"></script>
+    <script src="~/lib-project/TransactionEditable.js"></script>
     <script src="~/js/Custom/Helper.js"></script>
     <script src="~/js/Custom/PageImport.js"></script>
 }

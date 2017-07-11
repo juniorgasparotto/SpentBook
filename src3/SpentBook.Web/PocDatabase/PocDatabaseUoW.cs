@@ -7,6 +7,7 @@ namespace SpentBook.Web
 {
     internal class PocDatabaseUoW : IUnitOfWork
     {
+        private object lockObj = new object();
         private readonly PocFile<Schema> pocFile;
         private readonly Dictionary<Type, IRepository<IEntity>> repositories;
 
@@ -67,7 +68,8 @@ namespace SpentBook.Web
 
         public void Save()
         {
-            pocFile.Save();
+            lock(lockObj)
+                pocFile.Save();
         }
     }
 }

@@ -24,6 +24,7 @@
   <ItemGroup>
     <Folder Include="Uploads\" />
     <Folder Include="wwwroot\Data\juniorgasparotto%40msn.com\" />
+    <Folder Include="wwwroot\js\NewFolder\" />
   </ItemGroup>
 
   <ItemGroup>

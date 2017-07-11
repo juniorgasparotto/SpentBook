@@ -1,4 +1,6 @@
-﻿<div id="file-upload">
+﻿@model System.Guid
+
+<div id="file-upload">
     <form id="dropzone" enctype="multipart/form-data" asp-controller="Import" asp-action="Upload" class="dropzone needsclick dz-clickable" method="post">
         <input type="hidden" id="bank" name="bank" />
         <input type="hidden" id="format" name="format" />

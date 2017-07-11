@@ -84,7 +84,7 @@ namespace SpentBook.Web.Views.Import
         }
 
         [HttpGet]
-        public void CancelImport(Guid idImport)
+        public void Cancel(Guid idImport)
         {
             var transactions = (from t in uow.TransactionsImports.AsQueryable()
                                 where t.UserId == Helper.GetLoggedUserId(HttpContext, userManager) &&
@@ -93,7 +93,7 @@ namespace SpentBook.Web.Views.Import
                                 select t);
 
             foreach (var t in transactions)
-                uow.TransactionsImports.Delete(t);
+                uow.TransactionsImports.Delete(t.Id);
 
             uow.Save();
         }
