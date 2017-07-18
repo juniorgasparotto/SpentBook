@@ -68,6 +68,7 @@ $(document).ready(function($) {
                     self.BtnSearch.button('loading');
                 },
                 complete: function () {
+                    // apenas não piscar o loading quando o retorno é muito rápido.
                     setTimeout(function () {
                         self.BtnSearch.button('reset');
                     }, 200);
