@@ -1,8 +1,9 @@
 $(document).ready(function($) {
     var transactions = new Transactions();
+    transactions.PageLoad();
 
     transactions.BtnSearch.click(function() {
-        transactions.Load();
+        transactions.LoadData();
     });
 
     transactions.BtnSave.click(function() {
@@ -23,11 +24,12 @@ $(document).ready(function($) {
         var self = this;
         var options = {};
 
-        this.BtnSave = $('#body-transactions #result .actions button.continue');
-        this.BtnCancel = $('#body-transactions #result .actions button.cancel');
+        this.Actions = $('#body-transactions #result .actions');
+        this.BtnSave = this.Actions.find('button.continue');
+        this.BtnCancel = this.Actions.find('button.cancel');
         this.BtnSearch = $('#body-transactions button#search');
         this.Form = $('#body-transactions form');
-
+        
         options.urlGetData = "Transaction/GetTable";
         options.urlSave = 'Transaction/SaveTable';
         options.urlFinishOnCancel = "/Transaction";
@@ -50,7 +52,7 @@ $(document).ready(function($) {
             },
             errorOnSave: null
         });
-
+        
         this.Save = function() {
             transEditable.Save();
         };
@@ -59,7 +61,7 @@ $(document).ready(function($) {
             window.location.href = options.urlFinishOnCancel;
         };
 
-        this.Load = function() {
+        this.LoadData = function() {
             $.ajax({
                 type: "POST",
                 url: options.urlGetData,
@@ -68,6 +70,8 @@ $(document).ready(function($) {
                     self.BtnSearch.button('loading');
                 },
                 complete: function () {
+                    self.Actions.removeClass('hidden');
+
                     // apenas não piscar o loading quando o retorno é muito rápido.
                     setTimeout(function () {
                         self.BtnSearch.button('reset');
@@ -85,6 +89,11 @@ $(document).ready(function($) {
                 }
             });
         };
+
+        this.PageLoad = function () {
+            self.Actions.addClass('hidden');
+            self.LoadData();
+        }
 
         return self;
     }
