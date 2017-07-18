@@ -9,11 +9,11 @@ using SpentBook.Web.Models;
 using SpentBook.Web.Services;
 using SpentBook.Domain;
 using SpentBook.Web.Binders;
-using System.Linq;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Http;
 using SpentBook.Web.Filters;
 using Microsoft.AspNetCore.Http.Features;
+using SpentBook.Domain.Services;
 
 namespace SpentBook.Web
 {
@@ -30,6 +30,12 @@ namespace SpentBook.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IUnitOfWork, PocDatabaseUoW>();
+            services.AddScoped((service) => new TransactionTableService(service.GetService<IUnitOfWork>()));
+            services.AddScoped((service) => {
+                return new TransactionService(service.GetService<IUnitOfWork>());
+            }
+            );
+
 
             // Razor render dependences
             services.AddTransient<ViewRenderService>();

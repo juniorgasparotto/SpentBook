@@ -2,38 +2,44 @@
   "Dashboards": null,
   "Transactions": [
     {
-      "Id": "eb9ec081-e8ff-40dd-8aa4-bbd352d990ed",
-      "UserId": "04786e69-5f8d-460f-adec-0bd145d90814",
-      "BankName": "bradesco",
-      "CreateDate": "2017-07-11T00:00:12.3322611-03:00",
-      "LastUpdateDate": "2017-07-11T00:00:12.3322643-03:00",
+      "Id": "72fcb2b7-1994-4ac6-a357-470ef73100e4",
+      "IdUser": "04786e69-5f8d-460f-adec-0bd145d90814",
+      "IdImport": "edeb2642-cf7e-4c04-af74-a29caa6d59f5",
+      "Bank": {
+        "Id": "e3c4026c-a070-49e2-8924-ccacfca227f8",
+        "Name": "Bradesco"
+      },
+      "CreateDate": "2017-07-17T20:30:19.3078905-03:00",
+      "LastUpdateDate": "2017-07-17T23:57:37.3592891-03:00",
       "Name": "Gasto1",
       "Date": "2015-12-01T00:00:00",
       "Category": "alimentação",
       "SubCategory": "café",
       "Value": -1.0,
-      "ValueAsPositive": 1.0,
-      "IdImport": "8fea96c9-bee7-47fb-8bb3-c1d27f0391d9"
+      "ValueAsPositive": 1.0
     },
     {
-      "Id": "ffbb1262-3dd9-4298-ab44-c1fde626e183",
-      "UserId": "04786e69-5f8d-460f-adec-0bd145d90814",
-      "BankName": "bradesco",
-      "CreateDate": "2017-07-11T00:00:12.3323069-03:00",
-      "LastUpdateDate": "2017-07-11T00:00:12.3323077-03:00",
+      "Id": "de48e0ad-1ba8-4b37-8d4c-4206a0d82581",
+      "IdUser": "04786e69-5f8d-460f-adec-0bd145d90814",
+      "IdImport": "c508a8b2-dfa6-40cd-bd97-5b15dfa1d2d4",
+      "Bank": {
+        "Id": "e3c4026c-a070-49e2-8924-ccacfca227f8",
+        "Name": "Bradesco"
+      },
+      "CreateDate": "2017-07-17T23:57:49.4377436-03:00",
+      "LastUpdateDate": "2017-07-17T23:57:49.437746-03:00",
       "Name": "Gasto2",
       "Date": "2015-12-01T00:00:00",
       "Category": "alimentação",
       "SubCategory": "café",
       "Value": 1.0,
-      "ValueAsPositive": 1.0,
-      "IdImport": "0932c5a0-35a0-45db-8e67-039d596ec4b3"
+      "ValueAsPositive": 1.0
     }
   ],
   "TransactionsImports": [
     {
-      "Id": "8fea96c9-bee7-47fb-8bb3-c1d27f0391d9",
-      "IdImport": "989b189b-af31-4070-ba67-9cabf7ebd751",
+      "Id": "edeb2642-cf7e-4c04-af74-a29caa6d59f5",
+      "IdImport": "7909d143-3d2a-44ca-a0a2-d4d2a57803d0",
       "UserId": "04786e69-5f8d-460f-adec-0bd145d90814",
       "Name": "Gasto1",
       "Date": "2015-12-01T00:00:00",
@@ -44,8 +50,104 @@
       "FormatFile": ".csv"
     },
     {
-      "Id": "0932c5a0-35a0-45db-8e67-039d596ec4b3",
-      "IdImport": "989b189b-af31-4070-ba67-9cabf7ebd751",
+      "Id": "d81d7d72-d5fc-4731-a018-6c8a0bb23ba8",
+      "IdImport": "7909d143-3d2a-44ca-a0a2-d4d2a57803d0",
+      "UserId": "04786e69-5f8d-460f-adec-0bd145d90814",
+      "Name": "Gasto2",
+      "Date": "2015-12-01T00:00:00",
+      "Value": 1.0,
+      "Category": "alimentação",
+      "SubCategory": "café",
+      "BankName": "bradesco",
+      "FormatFile": ".csv"
+    },
+    {
+      "Id": "30de4c60-6f85-42ef-940c-418bea68d840",
+      "IdImport": "0305c132-85fd-4dc6-9450-88f795074bbe",
+      "UserId": "04786e69-5f8d-460f-adec-0bd145d90814",
+      "Name": "Gasto1",
+      "Date": "2015-12-01T00:00:00",
+      "Value": -1.0,
+      "Category": "alimentação",
+      "SubCategory": "café",
+      "BankName": "bradesco",
+      "FormatFile": ".csv"
+    },
+    {
+      "Id": "752bb409-be85-492f-a5db-22209e084135",
+      "IdImport": "0305c132-85fd-4dc6-9450-88f795074bbe",
+      "UserId": "04786e69-5f8d-460f-adec-0bd145d90814",
+      "Name": "Gasto2",
+      "Date": "2015-12-01T00:00:00",
+      "Value": 1.0,
+      "Category": "alimentação",
+      "SubCategory": "café",
+      "BankName": "bradesco",
+      "FormatFile": ".csv"
+    },
+    {
+      "Id": "c6326c29-0967-4edc-847e-52f84d5cad36",
+      "IdImport": "977583b0-d8ac-470d-bd29-473a38faa40a",
+      "UserId": "04786e69-5f8d-460f-adec-0bd145d90814",
+      "Name": "Gasto1",
+      "Date": "2015-12-01T00:00:00",
+      "Value": -1.0,
+      "Category": "alimentação",
+      "SubCategory": "café",
+      "BankName": "bradesco",
+      "FormatFile": ".csv"
+    },
+    {
+      "Id": "835f6bc8-e707-4132-ae58-ed16cca36cea",
+      "IdImport": "977583b0-d8ac-470d-bd29-473a38faa40a",
+      "UserId": "04786e69-5f8d-460f-adec-0bd145d90814",
+      "Name": "Gasto2",
+      "Date": "2015-12-01T00:00:00",
+      "Value": 1.0,
+      "Category": "alimentação",
+      "SubCategory": "café",
+      "BankName": "bradesco",
+      "FormatFile": ".csv"
+    },
+    {
+      "Id": "87a6cef0-622e-4a96-983c-53604f7d7262",
+      "IdImport": "db165206-2bff-4386-a62b-dea599d48230",
+      "UserId": "04786e69-5f8d-460f-adec-0bd145d90814",
+      "Name": "Gasto1",
+      "Date": "2015-12-01T00:00:00",
+      "Value": -1.0,
+      "Category": "alimentação",
+      "SubCategory": "café",
+      "BankName": "bradesco",
+      "FormatFile": ".csv"
+    },
+    {
+      "Id": "94d82676-6330-4d86-b128-97cffcd0eff6",
+      "IdImport": "db165206-2bff-4386-a62b-dea599d48230",
+      "UserId": "04786e69-5f8d-460f-adec-0bd145d90814",
+      "Name": "Gasto2",
+      "Date": "2015-12-01T00:00:00",
+      "Value": 1.0,
+      "Category": "alimentação",
+      "SubCategory": "café",
+      "BankName": "bradesco",
+      "FormatFile": ".csv"
+    },
+    {
+      "Id": "e25478a5-c876-4783-8732-ae7da2a89dd6",
+      "IdImport": "8a6b0aa4-14ca-42e8-9253-14330742c58d",
+      "UserId": "04786e69-5f8d-460f-adec-0bd145d90814",
+      "Name": "Gasto1",
+      "Date": "2015-12-01T00:00:00",
+      "Value": -1.0,
+      "Category": "alimentação",
+      "SubCategory": "café",
+      "BankName": "bradesco",
+      "FormatFile": ".csv"
+    },
+    {
+      "Id": "c508a8b2-dfa6-40cd-bd97-5b15dfa1d2d4",
+      "IdImport": "8a6b0aa4-14ca-42e8-9253-14330742c58d",
       "UserId": "04786e69-5f8d-460f-adec-0bd145d90814",
       "Name": "Gasto2",
       "Date": "2015-12-01T00:00:00",

@@ -18,9 +18,11 @@
     font-size: 1.429em;
 }
 
+
 /*
 *   Banks
 */
+
 #body-import .cc-selector input {
     position: absolute;
     z-index: 999;
@@ -35,13 +37,13 @@
     background-image: url(../../images/icons/import_bradesco.png);
 }
 
-#body-import .cc-selector input:active + .drinkcard-cc,
-#body-import .cc-selector input:active + .drinkcard-cc {
+#body-import .cc-selector input:active+.drinkcard-cc,
+#body-import .cc-selector input:active+.drinkcard-cc {
     opacity: .9;
 }
 
-#body-import .cc-selector input:checked + .drinkcard-cc,
-#body-import .cc-selector input:checked + .drinkcard-cc {
+#body-import .cc-selector input:checked+.drinkcard-cc,
+#body-import .cc-selector input:checked+.drinkcard-cc {
     -webkit-filter: none;
     -moz-filter: none;
     filter: none;
@@ -65,9 +67,11 @@
     margin: 5px 0 0 12px;
 }
 
+
 /*
 *   FileUpload
 */
+
 #body-import .dropzone {
     border: 2px dashed #0087F7;
     border-radius: 5px;
@@ -116,19 +120,20 @@
     background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #9dc8e2, #9dc8e2) repeat
 }
 
+
 /*
-*   TransactionEditable & Preview
+*   TransactionTable & Preview
 */
 
 #body-import .handsontable td .htAutocompleteArrow {
     color: black;
 }
 
-#body-import #table-statement table > tbody > tr:nth-child(2n) > td {
+#body-import #table-statement table>tbody>tr:nth-child(2n)>td {
     background: #f7f3f1;
 }
 
-#body-import #table-statement table > tbody > tr:nth-child(2n+1) > td {
+#body-import #table-statement table>tbody>tr:nth-child(2n+1)>td {
     background: #fff;
 }
 
@@ -202,9 +207,11 @@
     color: red;
 }
 
+
 /*
 * Generic buttons
 */
+
 #body-import ul.actions li {
     display: table-cell;
     float: right;

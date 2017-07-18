@@ -1,12 +1,6 @@
-﻿using SpentBook.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Web;
 
 namespace SpentBook.Domain.Services
 {
@@ -56,8 +50,10 @@ namespace SpentBook.Domain.Services
             if (filter.ValueEnd != null)
                 query = query.Where(t => t.Value <= filter.ValueEnd);
 
-            string orderByName;
-            var expressionOrderBy = filter.GetOrderByExpression(filter.OrderBy, out orderByName);
+            if (filter.IdUser != null)
+                query = query.Where(t => t.IdUser == filter.IdUser);
+
+            var expressionOrderBy = filter.GetOrderByExpression(filter.OrderBy, out string orderByName);
 
             if (filter.OrderByClassification == OrderClassification.Asc)
                 query = query.OrderBy(expressionOrderBy);

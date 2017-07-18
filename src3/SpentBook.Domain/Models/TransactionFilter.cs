@@ -20,6 +20,7 @@ namespace SpentBook.Domain
         public TransactionType TransactionType { get; set; }
         public TransactionOrder OrderBy { get; set; }
         public OrderClassification OrderByClassification { get; set; }
+        public Guid IdUser { get; set; }
 
         public Expression<Func<Transaction, object>> GetGroupByExpression(TransactionGroupBy group, out string groupName)
         {

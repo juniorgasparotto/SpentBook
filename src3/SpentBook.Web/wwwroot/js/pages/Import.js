@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+﻿$(document).ready(function() {
     Dropzone.autoDiscover = false;
 
     window.Page = {};
@@ -6,11 +6,11 @@
     var steps = new Steps();
 
     Page.BankSelector = new BankSelector({
-        done: function () {
+        done: function() {
             var transUploader = new TransactionUploader({
                 acceptedFiles: Page.BankSelector.GetAcceptExtension(),
                 bankName: Page.BankSelector.GetBankName(),
-                done: function () {
+                done: function() {
                     var transImport = new TransactionImport({
                         idImport: idImport
                     }).Load();
@@ -22,10 +22,10 @@
             steps.GoToSelectFiles();
         }
     });
-    
+
     /*
-    * Class "Steps"
-    */
+     * Class "Steps"
+     */
     function Steps() {
         var self = this;
         var headers = $('#body-import #steps-header li');
@@ -61,7 +61,7 @@
         }
 
         this.GoToSelectFiles = function() {
-            
+
             this.GoToStep(2);
         }
 
@@ -73,10 +73,10 @@
         this.GoToStep(1);
         return self;
     }
-    
+
     /*
-    * Class "BankSelector"
-    */
+     * Class "BankSelector"
+     */
     function BankSelector(options) {
         var self = this;
 
@@ -85,7 +85,7 @@
 
         var btn = $('#body-import .cc-selector button.continue');
 
-        this.GetBankName = function () {
+        this.GetBankName = function() {
             return $('#body-import input[name=importFormat]:checked').val();
         };
 
@@ -96,7 +96,7 @@
             return ".csv";
         }
 
-        btn.click(function () {
+        btn.click(function() {
             if (!self.GetBankName()) {
                 alert("Selecione um formato");
                 return false;
@@ -109,8 +109,8 @@
     };
 
     /*
-    * Class "TransactionUploader"
-    */
+     * Class "TransactionUploader"
+     */
     function TransactionUploader(options) {
         var self = this;
 
@@ -130,7 +130,7 @@
 
         this.Dropzone = null;
 
-        this.Load = function () {
+        this.Load = function() {
             Dropzone.autoDiscover = false;
             Dropzone.prototype.defaultOptions.dictDefaultMessage = "Arraste os arquivos de extratos nesta área";
             Dropzone.prototype.defaultOptions.dictFileTooBig = "O arquivo é muito grande ({{filesize}}MiB). O máximo permitido é: {{maxFilesize}}MiB.";
@@ -163,11 +163,11 @@
             //});
 
             // Esconde durante o envio, e só volta se ocorrer um erro
-            dropzone.on("sending", function (file) {
+            dropzone.on("sending", function(file) {
                 $(file._removeLink).hide();
             });
 
-            dropzone.on("error", function (file, response) {
+            dropzone.on("error", function(file, response) {
                 $(file._removeLink).show();
                 var span = $(file.previewElement).find(".dz-error-message span");
 
@@ -177,7 +177,7 @@
                     span.text(response);
             });
 
-            dropzone.on("queuecomplete", function (progress) {
+            dropzone.on("queuecomplete", function(progress) {
                 options.btnContinue.button('reset');
                 if (!self.Validate())
                     return;
@@ -191,7 +191,7 @@
             return dropzone;
         };
 
-        this.Validate = function () {
+        this.Validate = function() {
             if (self.Dropzone.files.length === 0) {
                 alert("Selecione ao menos um arquivo para continuar");
                 return false;
@@ -206,7 +206,7 @@
             return true;
         };
 
-        options.btnContinue.click(function () {
+        options.btnContinue.click(function() {
             if (!self.Validate())
                 return;
 
@@ -219,72 +219,72 @@
     };
 
     /*
-    * Class TransactionImport
-    */
+     * Class TransactionImport
+     */
     function TransactionImport(options) {
         var self = this;
 
         if (!options.idImport)
-            throw new "A propriedade 'IdImport' não esta definido em 'TransactionEditable'";
+            throw new "A propriedade 'IdImport' não esta definido em 'TransactionTable'";
 
         var btnContinue = $('#body-import #table-statement button.continue');
         var btnCancel = $('#body-import #table-statement button.cancel');
 
-        options.urlGetData = "Import/GetByImport";
-        options.urlSave = 'Import/Save';
+        options.urlGetData = "Import/GetTable";
+        options.urlSave = 'Transaction/SaveTable';
         options.urlCancel = "Import/Cancel";
         options.urlFinishOnCancel = '/Import';
         options.urlFinishOnSuccess = '/';
         options.tableElement = '#body-import #table-statement #table';
 
-        var transEditable = new TransactionEditable({
+        var transEditable = new TransactionTable({
             tableElement: options.tableElement,
             urlSave: options.urlSave,
-            beforeSave: function () {
+            beforeSave: function() {
                 btnContinue.button('loading');
             },
-            completeSave: function (data) {
+            completeSave: function(data) {
                 btnContinue.button('reset');
             },
-            successOnSave: function (data) {
+            successOnSave: function(data) {
                 alert("Importação concluída com sucesso!");
                 window.location.href = options.urlFinishOnSuccess;
             },
-            invalidSaveData: function (data) {
+            invalidSaveData: function(data) {
                 alert(data.message);
             },
             errorOnSave: null
         });
 
-        this.Load = function () {
+        this.Load = function() {
             $.ajax({
                 type: "GET",
                 url: options.urlGetData,
                 data: { idImport: options.idImport },
-                beforeSend: function () {
+                beforeSend: function() {
                     btnContinue.button('loading');
                 },
-                complete: function () {
+                complete: function() {
                     btnContinue.button('reset');
                 },
-                success: function (data) {
+                success: function(data) {
                     // é necessário o setTimeout, pois existe um bugs
                     // no handsontable que não renderiza de primeira
-                    setTimeout(function () {
+                    setTimeout(function() {
                         transEditable.LoadData(data);
                     }, 200);
                 },
-                error: function (error) {
+                error: function(error) {
                     Helper.ErrorResponse(error);
                 }
             });
         };
 
-        btnContinue.click(function () {
+        btnContinue.click(function() {
             transEditable.Save();
         });
 
-        btnCancel.click(function () {
+        btnCancel.click(function() {
             if (!confirm("Deseja realmente cancelar essa operação?"))
                 return;
 
@@ -292,10 +292,10 @@
                 type: "GET",
                 url: options.urlCancel,
                 data: { idImport: options.idImport },
-                beforeSend: function () {
+                beforeSend: function() {
                     btnCancel.button("loading");
                 },
-                complete: function () {
+                complete: function() {
                     btnCancel.button("reset");
                     window.location.href = options.urlFinishOnCancel;
                 }

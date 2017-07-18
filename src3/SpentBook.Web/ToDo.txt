@@ -8,3 +8,6 @@
 - problema com o alinhamento do numero da linha com a linha, esta ficando desalinhado
 - não existe scroll quando esta usando por cima da tabela
 - header fixo na tabela
+- Resolver problema de timeout na importação, o vs demora pra responder e o dropzone se perde
+- preciso mudar o banco para usar Id ao inves de nome
+- mudar estrutura de pastas para organizar por componente

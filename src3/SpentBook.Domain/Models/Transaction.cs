@@ -5,8 +5,10 @@ namespace SpentBook.Domain
     public class Transaction : IEntity
     {
         public Guid Id { get; set; }
-        public Guid UserId { get; set; }
-        public string BankName { get; set; }
+        public Guid IdUser { get; set; }
+        public Guid? IdImport { get; set; }
+        public Bank Bank { get; set; }
+
         public DateTime CreateDate { get; set; }
         public DateTime LastUpdateDate { get; set; }
 
@@ -16,8 +18,6 @@ namespace SpentBook.Domain
         public string SubCategory { get; set; }
         public decimal Value { get; set; }
         public decimal ValueAsPositive { get { return Math.Abs(Value); }}
-
-        public Guid? IdImport { get; set; }
 
         public bool IsSpent()
         {

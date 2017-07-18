@@ -1,20 +1,20 @@
-﻿function TransactionEditable(options) {
+﻿function TransactionTable(options) {
     var self = this;
 
     if (!options.urlSave)
-        throw new "A propriedade 'urlSave' não esta definido em 'TransactionEditable'";
+        throw new "A propriedade 'urlSave' não esta definido em 'TransactionTable'";
 
     if (!options.tableElement)
-        throw new "A propriedade 'tableElement' não esta definido em 'TransactionEditable'";
+        throw new "A propriedade 'tableElement' não esta definido em 'TransactionTable'";
 
     if (!options.successOnSave)
-        throw new "O método de callback 'successOnSave' não esta definido em 'TransactionEditable'";
+        throw new "O método de callback 'successOnSave' não esta definido em 'TransactionTable'";
 
     if (!options.invalidSaveData)
-        throw new "O método de callback 'invalidSaveData' não esta definido em 'TransactionEditable'";
+        throw new "O método de callback 'invalidSaveData' não esta definido em 'TransactionTable'";
 
     //if (!options.error)
-    //    throw new "O método de callback 'error' não esta definido em 'TransactionEditable'";
+    //    throw new "O método de callback 'error' não esta definido em 'TransactionTable'";
 
     this.handsontable = null;
     this.initData = null;
@@ -130,16 +130,16 @@
         self.handsontable = new Handsontable($(options.tableElement)[0], hotSettings);
     };
 
-    this.LoadData = function (data) {
+    this.LoadData = function(data) {
         self.initData = data;
         if (self.handsontable)
             self.handsontable.loadData(data.Transactions);
         else
             init(data);
     };
-    
-    this.Save = function () {
-        self.handsontable.validateCells(function (valid) {
+
+    this.Save = function() {
+        self.handsontable.validateCells(function(valid) {
             if (!valid) {
                 alert("Existem erros que precisam ser corrigidos.");
                 return;
@@ -151,15 +151,15 @@
                 data: JSON.stringify({ InitialIds: self.initData.InitialIds, Transactions: self.handsontable.getSourceData() }),
                 dataType: 'json',
                 contentType: 'application/json',
-                beforeSend: function () {
+                beforeSend: function() {
                     if (options.beforeSave)
                         options.beforeSave();
                 },
-                complete: function (data) {
+                complete: function(data) {
                     if (options.completeSave)
                         options.completeSave(data);
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.message === "OK") {
                         options.successOnSave(data);
                     } else {
@@ -167,7 +167,7 @@
                         options.invalidSaveData(data);
                     }
                 },
-                error: function (error) {
+                error: function(error) {
                     if (options.errorOnSave)
                         options.errorOnSave(error);
                     else

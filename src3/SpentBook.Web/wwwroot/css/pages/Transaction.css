@@ -1,0 +1,94 @@
+﻿/*
+*   TransactionTable
+*/
+
+#body-transactions .handsontable td .htAutocompleteArrow {
+    color: black;
+}
+
+#body-transactions #table table > tbody > tr:nth-child(2n) > td {
+    background: #f7f3f1;
+}
+
+#body-transactions #table table > tbody > tr:nth-child(2n+1) > td {
+    background: #fff;
+}
+
+#body-transactions #table .transaction-status {
+    width: 20px;
+}
+
+    #body-transactions #table .transaction-status .message {
+        position: absolute;
+        z-index: 1000;
+        padding-top: 5px;
+        padding-right: 15px;
+        padding-bottom: 5px;
+        border: 2px solid transparent;
+        border-radius: 4px;
+        font-size: 13px;
+        width: 300px;
+        line-height: initial;
+        white-space: normal;
+    }
+
+#body-transactions #table .transaction-status .message ul {
+    margin: 0;
+}
+
+#body-transactions #table .transaction-status .message.success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #3c763d;
+}
+
+#body-transactions #table .transaction-status .message.error {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #C94442;
+}
+
+#body-transactions #table .transaction-status .message.warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #8a6d3b;
+}
+
+#body-transactions #table .transaction-status .message.automatic-resolved {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #31708f;
+}
+
+#body-transactions #table .transaction-status .icon.success {
+    color: #3c763d;
+}
+
+#body-transactions #table .transaction-status .icon.error {
+    color: #a94442;
+}
+
+#body-transactions #table .transaction-status .icon.warning {
+    color: #8a6d3b;
+}
+
+#body-transactions #table .transaction-status .icon.automatic-resolved {
+    color: #31708f;
+}
+
+#body-transactions #table .icon {
+    margin-left: 5px;
+}
+
+#body-transactions #table .icon.remove:hover {
+    color: red;
+}
+
+
+/*
+* Generic buttons
+*/
+
+#body-transactions #result ul.actions li {
+    display: table-cell;
+}
