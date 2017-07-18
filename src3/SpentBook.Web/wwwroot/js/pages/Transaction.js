@@ -26,6 +26,7 @@ $(document).ready(function($) {
         this.BtnSave = $('#body-transactions #result .actions button.continue');
         this.BtnCancel = $('#body-transactions #result .actions button.cancel');
         this.BtnSearch = $('#body-transactions button#search');
+        this.Form = $('#body-transactions form');
 
         options.urlGetData = "Transaction/GetTable";
         options.urlSave = 'Transaction/SaveTable';
@@ -60,14 +61,16 @@ $(document).ready(function($) {
 
         this.Load = function() {
             $.ajax({
-                type: "GET",
+                type: "POST",
                 url: options.urlGetData,
-                data: { idImport: options.idImport },
+                data: self.Form.serialize(),
                 beforeSend: function() {
                     self.BtnSearch.button('loading');
                 },
-                complete: function() {
-                    self.BtnSearch.button('reset');
+                complete: function () {
+                    setTimeout(function () {
+                        self.BtnSearch.button('reset');
+                    }, 200);
                 },
                 success: function(data) {
                     // � necess�rio o setTimeout, pois existe um bugs

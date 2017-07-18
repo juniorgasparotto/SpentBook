@@ -37,11 +37,11 @@ namespace SpentBook.Web.Controllers
 
         [HttpPost]
         [HttpGet]
-        public ActionResult Index(PageTransactionModel model)
+        public ActionResult Index(TransactionFilterModel model)
         {
-            if (model.Filter == null)
+            if (model == null)
             {
-                model.Filter = new TransactionFilterModel
+                model = new TransactionFilterModel
                 {
                     DateStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 01),
                     DateEnd = DateTime.Now.Date,
@@ -52,10 +52,7 @@ namespace SpentBook.Web.Controllers
                     ValueStart = null
                 };
             }
-
-            if (!ModelState.IsValid)
-                model.Errors = this.ModelState.Values.ToList();
-
+            
             return View(model);
         }
 

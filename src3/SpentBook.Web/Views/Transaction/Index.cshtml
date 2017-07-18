@@ -1,4 +1,4 @@
-﻿@model SpentBook.Web.Models.PageTransactionModel
+﻿@model SpentBook.Web.Models.TransactionFilterModel
 @{
     ViewData["Title"] = "Minhas transações";
 }
@@ -7,46 +7,46 @@
     <h2>@ViewData["Title"]</h2>
     <hr />
 
-    <form>
+    <form asp-action="post">
         @Html.ValidationSummary()
 
         <div id="filter">
             <div class="form-group form-group-extension-small">
-                @Html.LabelFor(m => m.Filter.TransactionType)
-                <radio-list source="Filter.TransactionType"></radio-list>
+                @Html.LabelFor(m => m.TransactionType)
+                <radio-list source="TransactionType"></radio-list>
             </div>
 
             <div class="form-group form-group-extension-small field-date-from-to">
                 @Html.Label("Filtrar transações por periodo")
                 <div class="input-group input-daterange">
-                    @Html.TextBoxFor(m => m.Filter.DateStart, "{0:dd/MM/yyyy}", new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.DateStart, "{0:dd/MM/yyyy}", new { @class = "form-control" })
                     <span class="input-group-addon">até</span>
-                    @Html.TextBoxFor(m => m.Filter.DateEnd, "{0:dd/MM/yyyy}", new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.DateEnd, "{0:dd/MM/yyyy}", new { @class = "form-control" })
                 </div>
             </div>
 
             <div class="form-group form-group-extension-small field-decimal-from-to">
                 @Html.Label("Filtrar transações por valor")
                 <div class="input-group input-daterange">
-                    @Html.TextBoxFor(m => m.Filter.ValueStart, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.ValueStart, new { @class = "form-control" })
                     <span class="input-group-addon">até</span>
-                    @Html.TextBoxFor(m => m.Filter.ValueEnd, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.ValueEnd, new { @class = "form-control" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Filter.Categories)
-                @Html.TextBoxFor(m => m.Filter.Categories, new { @class = "form-control" })
+                @Html.LabelFor(m => m.Categories)
+                @Html.TextBoxFor(m => m.Categories, new { @class = "form-control" })
             </div>
 
             <div class="form-group form-group-extension-small">
-                @Html.LabelFor(m => m.Filter.SubCategories)
-                @Html.TextBoxFor(m => m.Filter.SubCategories, new { @class = "form-control" })
+                @Html.LabelFor(m => m.SubCategories)
+                @Html.TextBoxFor(m => m.SubCategories, new { @class = "form-control" })
             </div>
 
             <div class="form-group form-group-extension-small">
-                @Html.LabelFor(m => m.Filter.TransactionNames)
-                @Html.TextBoxFor(m => m.Filter.TransactionNames, new { @class = "form-control" })
+                @Html.LabelFor(m => m.TransactionNames)
+                @Html.TextBoxFor(m => m.TransactionNames, new { @class = "form-control" })
             </div>
 
             <div class="btn-group">

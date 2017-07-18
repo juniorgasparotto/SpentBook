@@ -31,10 +31,7 @@ namespace SpentBook.Web
         {
             services.AddScoped<IUnitOfWork, PocDatabaseUoW>();
             services.AddScoped((service) => new TransactionTableService(service.GetService<IUnitOfWork>()));
-            services.AddScoped((service) => {
-                return new TransactionService(service.GetService<IUnitOfWork>());
-            }
-            );
+            services.AddScoped((service) => new TransactionService(service.GetService<IUnitOfWork>()));
 
 
             // Razor render dependences
