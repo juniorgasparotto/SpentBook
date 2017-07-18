@@ -24,6 +24,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0-preview2-final" PrivateAssets="All" />
     <PackageReference Include="PocDatabase" Version="1.0.1" />
     <PackageReference Include="SysCommand" Version="1.0.9" />
+    <PackageReference Include="SgmlReader" Version="1.8.11" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +42,7 @@
     <ProjectReference Include="..\..\..\ExpressionGraph\src\GraphQuery\GraphQuery.csproj" />
     <ProjectReference Include="..\DotNet.Highcharts\DotNet.Highcharts.csproj" />
     <ProjectReference Include="..\SpentBook.Domain\SpentBook.Domain.csproj" />
+    <ProjectReference Include="..\SpentBook.OfxReader\SpentBook.OfxReader.csproj" />
   </ItemGroup>
 
 </Project>

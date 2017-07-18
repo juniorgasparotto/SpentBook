@@ -1,0 +1,663 @@
+Amount: 21,00
+CheckNum: 7384560						
+Currency: BRL				
+Date: 02/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Transf Autoriz Robson Antonio da Silva					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N10049:02/01/17:21.0:7384560: Transf Autoriz: Robson Antonio da Silva						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: CREDIT
+----------------------------------------------
+Amount: 42,00
+CheckNum: 7384604						
+Currency: BRL				
+Date: 02/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Transf Autoriz Joice Daiana Candido					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N10066:02/01/17:42.0:7384604: Transf Autoriz: Joice Daiana Candido						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: CREDIT
+----------------------------------------------
+Amount: -87,56
+CheckNum: 0020224						
+Currency: BRL				
+Date: 02/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Supermercado Lavapes					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N10083:02/01/17:-87.56:0020224: Visa Electron: Supermercado Lavapes						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -179,86
+CheckNum: 0271987						
+Currency: BRL				
+Date: 02/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Planalto Jaguariuna					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N100A1:02/01/17:-179.86:0271987: Visa Electron: Planalto Jaguariuna						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -86,74
+CheckNum: 0300134						
+Currency: BRL				
+Date: 02/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Supermercado Bonnett					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N100BF:02/01/17:-86.74:0300134: Visa Electron: Supermercado Bonnett						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -21,49
+CheckNum: 0564116						
+Currency: BRL				
+Date: 02/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Showdog Lanchonete l					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N100DD:02/01/17:-21.49:0564116: Visa Electron: Showdog Lanchonete l						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -393,67
+CheckNum: 0625202						
+Currency: BRL				
+Date: 02/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Sleep House					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N100FB:02/01/17:-393.67:0625202: Visa Electron: Sleep House						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -27,10
+CheckNum: 0698101						
+Currency: BRL				
+Date: 02/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Dutra & Felicio					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N10119:02/01/17:-27.1:0698101: Visa Electron: Dutra & Felicio						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -0,97
+CheckNum: 3073744						
+Currency: BRL				
+Date: 03/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Iof Util Limite 					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N10137:03/01/17:-0.97:3073744: Iof Util Limite:						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: 2000,00
+CheckNum: 7384516						
+Currency: BRL				
+Date: 05/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Transf Autoriz Glauber Donizeti Gasparotto Juni					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N10154:05/01/17:2000.0:7384516: Transf Autoriz: Glauber Donizeti Gasparotto Juni						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: CREDIT
+----------------------------------------------
+Amount: -342,04
+CheckNum: 0215877						
+Currency: BRL				
+Date: 05/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Deb.automatico Cgmp-sem Parar/sp*-02158779					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N10171:05/01/17:-342.04:0215877: Deb.automatico: Cgmp-sem Parar/sp*-02158779						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -5,30
+CheckNum: 0758822						
+Currency: BRL				
+Date: 09/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Sem Fio					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N1018F:09/01/17:-5.3:0758822: Visa Electron: Sem Fio						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -6,50
+CheckNum: 0758930						
+Currency: BRL				
+Date: 09/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Sem Fio					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N101AD:09/01/17:-6.5:0758930: Visa Electron: Sem Fio						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -26,00
+CheckNum: 0817801						
+Currency: BRL				
+Date: 09/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Dutra & Felicio					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N101CB:09/01/17:-26.0:0817801: Visa Electron: Dutra & Felicio						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -203,85
+CheckNum: 0643887						
+Currency: BRL				
+Date: 10/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Planalto Jaguariuna					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N101E9:10/01/17:-203.85:0643887: Visa Electron: Planalto Jaguariuna						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -5,30
+CheckNum: 0759015						
+Currency: BRL				
+Date: 10/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Sem Fio					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N10207:10/01/17:-5.3:0759015: Visa Electron: Sem Fio						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -13,50
+CheckNum: 0759133						
+Currency: BRL				
+Date: 10/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Sem Fio					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N10225:10/01/17:-13.5:0759133: Visa Electron: Sem Fio						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -6,65
+CheckNum: 3073744						
+Currency: BRL				
+Date: 10/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Enc Lim Credito Encargo - 13,55%					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N10243:10/01/17:-6.65:3073744: Enc Lim Credito: Encargo - 13,55%						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -155,65
+CheckNum: 0110179						
+Currency: BRL				
+Date: 11/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Raia Drogasil 510					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N10261:11/01/17:-155.65:0110179: Visa Electron: Raia Drogasil 510						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -3,00
+CheckNum: 0196408						
+Currency: BRL				
+Date: 11/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Restaurante e Cafe					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N1027F:11/01/17:-3.0:0196408: Visa Electron: Restaurante e Cafe						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -2,50
+CheckNum: 0759302						
+Currency: BRL				
+Date: 11/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Sem Fio					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N1029D:11/01/17:-2.5:0759302: Visa Electron: Sem Fio						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -5,30
+CheckNum: 0759367						
+Currency: BRL				
+Date: 12/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Sem Fio					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N102BB:12/01/17:-5.3:0759367: Visa Electron: Sem Fio						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -48,00
+CheckNum: 0020117						
+Currency: BRL				
+Date: 13/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Tarifa Bancaria Cesta Exclusive					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N102D9:13/01/17:-48.0:0020117: Tarifa Bancaria: Cesta Exclusive						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -5,30
+CheckNum: 0759566						
+Currency: BRL				
+Date: 13/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Sem Fio					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N102F7:13/01/17:-5.3:0759566: Visa Electron: Sem Fio						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -214,46
+CheckNum: 3990013						
+Currency: BRL				
+Date: 13/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Gasto c Credito 					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N10315:13/01/17:-214.46:3990013: Gasto c Credito:						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -82,11
+CheckNum: 0140499						
+Currency: BRL				
+Date: 16/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Supermercado Lavapes					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N10332:16/01/17:-82.11:0140499: Visa Electron: Supermercado Lavapes						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -23,00
+CheckNum: 0266197						
+Currency: BRL				
+Date: 16/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Mix Mais Acai Jaguar					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N10350:16/01/17:-23.0:0266197: Visa Electron: Mix Mais Acai Jaguar						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -2,50
+CheckNum: 0759708						
+Currency: BRL				
+Date: 16/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Sem Fio					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N1036E:16/01/17:-2.5:0759708: Visa Electron: Sem Fio						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -12,25
+CheckNum: 0818047						
+Currency: BRL				
+Date: 16/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Dutra & Felicio					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N1038C:16/01/17:-12.25:0818047: Visa Electron: Dutra & Felicio						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -2,50
+CheckNum: 0759898						
+Currency: BRL				
+Date: 17/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Sem Fio					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N103AA:17/01/17:-2.5:0759898: Visa Electron: Sem Fio						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -13,50
+CheckNum: 0760043						
+Currency: BRL				
+Date: 17/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Sem Fio					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N103C8:17/01/17:-13.5:0760043: Visa Electron: Sem Fio						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -5,50
+CheckNum: 0760101						
+Currency: BRL				
+Date: 18/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Sem Fio					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N103E6:18/01/17:-5.5:0760101: Visa Electron: Sem Fio						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -9,00
+CheckNum: 0132125						
+Currency: BRL				
+Date: 19/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Tkla Grafica Digital					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N10404:19/01/17:-9.0:0132125: Visa Electron: Tkla Grafica Digital						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -5,50
+CheckNum: 0760355						
+Currency: BRL				
+Date: 19/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Sem Fio					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N10422:19/01/17:-5.5:0760355: Visa Electron: Sem Fio						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -4,00
+CheckNum: 0760710						
+Currency: BRL				
+Date: 20/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Sem Fio					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N10440:20/01/17:-4.0:0760710: Visa Electron: Sem Fio						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -20,00
+CheckNum: 0353081						
+Currency: BRL				
+Date: 23/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron o Point do Candido					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N1045E:23/01/17:-20.0:0353081: Visa Electron: o Point do Candido						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -39,00
+CheckNum: 0458436						
+Currency: BRL				
+Date: 23/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron jj Rodrigues Santos la					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N1047C:23/01/17:-39.0:0458436: Visa Electron: jj Rodrigues Santos la						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -12,00
+CheckNum: 0752253						
+Currency: BRL				
+Date: 23/01/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Visa Electron Eunice de Souza 1379					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N1049A:23/01/17:-12.0:0752253: Visa Electron: Eunice de Souza 1379						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------
+Amount: -39,68
+CheckNum: 2600191						
+Currency: BRL				
+Date: 10/07/2017 00:00:00
+FundAvaliabilityDate: 01/01/0001 00:00:00
+IncorrectTransactionID: 
+Memo: Encargos Limite de Cred 					
+PayeeID: 
+ReferenceNumber: 
+ServerTransactionID: 
+Sic: 
+TransactionCorrectionAction: NA
+TransactionID: N10009:10/07/17:-39.68:2600191: Encargos Limite de Cred:						
+TransactionInitializationDate: 01/01/0001 00:00:00
+TransactionSenderAccount: 
+TransType: DEBIT
+----------------------------------------------

@@ -19,6 +19,8 @@ namespace SpentBook.Domain
         public decimal Value { get; set; }
         public decimal ValueAsPositive { get { return Math.Abs(Value); }}
 
+        public string IdExternal { get; set; }
+
         public bool IsSpent()
         {
             if (Value < 0)

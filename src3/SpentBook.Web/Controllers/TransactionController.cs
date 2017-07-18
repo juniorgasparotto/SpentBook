@@ -11,11 +11,13 @@ using SpentBook.Web.Services;
 using Microsoft.AspNetCore.Identity;
 using System.Transactions;
 using SpentBook.Web.Models.TransactionTable;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SpentBook.Web.Controllers
 {
     [JsonOutputWhenModelInvalid]
     [JsonOutputWhenGenericException]
+    [Authorize]
     public class TransactionController : Controller
     {
         private IUnitOfWork uow;

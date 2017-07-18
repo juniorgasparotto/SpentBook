@@ -27,6 +27,7 @@ namespace SpentBook.Web.Models.TransactionTable
         public StatusCode? Status { get; set; }
         public List<string> StatusMessage { get; set; }
         public Bank Bank { get; internal set; }
+        public string IdExternal { get; internal set; }
     }
 
 }

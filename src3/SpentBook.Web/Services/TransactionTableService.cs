@@ -35,6 +35,7 @@ namespace SpentBook.Web.Services
                 Id = null,
                 IdImport = transactionImport.Id,
                 IdUser = transactionImport.UserId,
+                IdExternal = transactionImport.IdExternal,
                 BankName = transactionImport.BankName,
                 Name = transactionImport.Name,
                 Date = transactionImport.Date,
@@ -53,6 +54,7 @@ namespace SpentBook.Web.Services
                 Id = transaction.Id,
                 IdImport = transaction.IdImport,
                 IdUser = transaction.IdUser,
+                IdExternal = transaction.IdExternal,
                 BankName = transaction.Bank.Name,
                 Name = transaction.Name,
                 Date = transaction.Date,
@@ -112,6 +114,8 @@ namespace SpentBook.Web.Services
 
                 if (string.IsNullOrWhiteSpace(transactionEditable.Name))
                     messages.Add("name", "O campo 'Nome' não pode estar vazio");
+                if (string.IsNullOrWhiteSpace(transactionEditable.IdExternal))
+                    messages.Add("id-external", "O campo 'Número do documento' não pode estar vazio");
                 if (string.IsNullOrWhiteSpace(transactionEditable.BankName))
                     messages.Add("bank-name", "O campo 'Banco' não pode estar vazio");
                 if (transactionEditable.Date == null || transactionEditable.Date == DateTime.MinValue)
@@ -256,6 +260,7 @@ namespace SpentBook.Web.Services
                 transaction.Id = transaction.Id != Guid.Empty ? transaction.Id : (model.Id ?? Guid.NewGuid());
                 transaction.IdImport = model.IdImport;
                 transaction.IdUser = model.IdUser ?? currentUserId; 
+                transaction.IdExternal = transaction.IdExternal ?? model.IdExternal;
                 transaction.Bank = GetBankByName(model.BankName);
                 transaction.Name = model.Name;
                 transaction.Date = model.Date.Value;

@@ -11,6 +11,8 @@ using SpentBook.Web.Models;
 using Microsoft.AspNetCore.Identity;
 using SpentBook.Web.Services;
 using SpentBook.Web.Models.TransactionTable;
+using SpentBook.OfxReader;
+using System.Transactions;
 
 namespace SpentBook.Web.Views.Import
 {
@@ -22,12 +24,12 @@ namespace SpentBook.Web.Views.Import
         private readonly UserManager<ApplicationUser> userManager;
         private readonly TransactionTableService transactionTableService;
 
-        public ImportController(IUnitOfWork uow, IHostingEnvironment env, UserManager<ApplicationUser> userManager)
+        public ImportController(IUnitOfWork uow, IHostingEnvironment env, UserManager<ApplicationUser> userManager, TransactionTableService transactionTableService)
         {
             this.uow = uow;
             this.env = env;
             this.userManager = userManager;
-            this.transactionTableService = new TransactionTableService(uow);
+            this.transactionTableService = transactionTableService;
         }
 
         public IActionResult Index()
@@ -42,31 +44,40 @@ namespace SpentBook.Web.Views.Import
 
             if (!Directory.Exists(userPath))
                 Directory.CreateDirectory(userPath);
+
             var files = Request.Form.Files;
 
             foreach (var file in files)
             {
-                if (file != null && file.Length > 0)
+                if (file == null || file.Length == 0)
+                    continue;
+
+                var fileName = file.FileName;
+                var fileFullName = Path.Combine(userPath, fileName);
+                if (System.IO.File.Exists(fileFullName))
+                    System.IO.File.Delete(fileFullName);
+
+                using (var fileStream = new FileStream(fileFullName, FileMode.Create))
+                    file.CopyTo(fileStream);
+
+                List<TransactionImport> transactions;
+                switch(bank)
                 {
-                    var fileName = file.FileName;
-                    var fileFullName = Path.Combine(userPath, fileName);
-                    if (System.IO.File.Exists(fileFullName))
-                        System.IO.File.Delete(fileFullName);
+                    case "bradesco":
+                        transactions = this.GetFromCsvOfx(bank, format, idImport, fileFullName);
+                        break;
+                    default:
+                        transactions = this.GetFromCsvFile(bank, format, idImport, fileFullName);
+                        break;
+                }
 
-                    using (var fileStream = new FileStream(fileFullName, FileMode.Create))
-                        file.CopyTo(fileStream);
+                using(var scope = new TransactionScope()) {
 
-                    switch(bank)
-                    {
-                        case "bradesco":
-                            break;
-                        default:
-                            var transactions = this.GetFromCsvFile(bank, format, idImport, fileFullName);
-                            foreach (var t in transactions)
-                                uow.TransactionsImports.Insert(t);
-                            uow.Save();
-                            break;
-                    }
+                    foreach (var t in transactions)
+                        uow.TransactionsImports.Insert(t);
+
+                    uow.Save();
+                    scope.Complete();
                 }
             }
 
@@ -127,6 +138,38 @@ namespace SpentBook.Web.Views.Import
                         Name = line.Name,
                         Value = line.Value,
                         BankName = !string.IsNullOrWhiteSpace(line.BankName) ? line.BankName.ToLower() : bank,
+                        FormatFile = format
+                    };
+
+                    transactions.Add(transaction);
+                }
+            }
+
+            return transactions;
+        }
+
+        private List<TransactionImport> GetFromCsvOfx(string bank, string format, Guid idImport, string fullName)
+        {
+            var transactions = new List<TransactionImport>();
+            using (var stream = new FileStream(fullName, FileMode.Open))
+            {
+                var parser = new OFXDocumentParser();
+                var ofxDocument = parser.Import(stream);
+
+                foreach(var t in ofxDocument.Transactions)
+                {
+                    var transaction = new TransactionImport()
+                    {
+                        Id = Guid.NewGuid(),
+                        IdImport = idImport,
+                        IdExternal = t.CheckNum,
+                        UserId = Helper.GetLoggedUserId(HttpContext, userManager),
+                        Date = t.Date,
+                        Category = null,
+                        SubCategory = null,
+                        Name = t.Memo,
+                        Value = t.Amount,
+                        BankName = bank,
                         FormatFile = format
                     };
 

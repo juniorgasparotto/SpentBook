@@ -1,0 +1,44 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "0.1.0",
+    "command": "dotnet",
+    "isShellCommand": true,
+    "args": [],
+    "tasks": [{
+            "taskName": "restore",
+            "args": [],
+            "isBuildCommand": true,
+            "problemMatcher": "$msCompile"
+        }, {
+            "taskName": "build",
+            "args": [],
+            "isBuildCommand": true,
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "cmd-dbupdate",
+            "command": "cmd",
+            "args": ["/C", "admin\\Scripts\\dbupdate.bat"],
+            "suppressTaskName": true,
+            "showOutput": "always",
+            "echoCommand": true
+        },
+        {
+            "taskName": "cmd-clean",
+            "command": "cmd",
+            "args": ["/C", "admin\\Scripts\\clean.bat"],
+            "suppressTaskName": true,
+            "showOutput": "always",
+            "echoCommand": true
+        },
+        {
+            "taskName": "cmd-clean-all",
+            "command": "cmd",
+            "args": ["/C", "admin\\Scripts\\clean-all.bat"],
+            "suppressTaskName": true,
+            "showOutput": "always",
+            "echoCommand": true
+        }
+    ]
+}

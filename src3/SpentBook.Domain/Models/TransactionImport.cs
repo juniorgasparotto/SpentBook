@@ -15,5 +15,6 @@ namespace SpentBook.Domain
         public string SubCategory { get; set; }
         public string BankName { get; set; }
         public string FormatFile { get; set; }
+        public string IdExternal { get; set; }
     }
 }
