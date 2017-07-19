@@ -94,26 +94,42 @@
             }
         };
 
-        var deleteRowRenderer = function(instance, td, row, col, prop, value, cellProperties) {
+        var deleteRowRenderer = function (instance, td, row, col, prop, value, cellProperties) {
             while (td.firstChild) {
                 td.removeChild(td.firstChild);
             }
 
             var remove = $('<span class="glyphicon glyphicon-floppy-remove icon remove" title="Remover transação"></span>');
-            remove.click(function() {
+            remove.click(function () {
                 if (confirm("Deseja realmente excluir essa transação?")) {
                     return instance.alter("remove_row", row);
                 }
             });
             td.appendChild(remove[0]);
-        }
+        };
+
+        var viewTransaction = function (instance, td, row, col, prop, value, cellProperties) {
+            while (td.firstChild) {
+                td.removeChild(td.firstChild);
+            }
+
+            var id = instance.getSourceDataAtRow(row).Id;
+            if (id) {
+                var link = $('<a title="Visualizar transação" href="/Transaction/{0}">{1}</a>'.replace("{0}", id).replace("{1}", value));
+                td.appendChild(link[0]);
+            }
+            else {
+                $(td).text(value);
+            }
+        };
 
         var hotSettings = {
             data: data.Transactions,
-            colHeaders: ["", "", "Nome", "Valor", "Data", "Banco", "Categoria", "Sub-Categoria"],
+            colHeaders: ["", "", "Doc.", "Nome", "Valor", "Data", "Banco", "Categoria", "Sub-Categoria"],
             columns: [
                 { data: "Id", disableVisualSelection: true, renderer: deleteRowRenderer, readOnly: true, width: "30px" },
                 { data: "Status", disableVisualSelection: true, type: 'text', renderer: errorRenderer, readOnly: true, width: "30px" },
+                { data: "IdExternal", type: 'text', renderer: viewTransaction },
                 { data: "Name", type: 'text' },
                 { data: "Value", type: 'numeric', format: '$ 0,0.00', renderer: negativeValueRenderer, language: 'pt-BR' },
                 { data: "Date", type: 'date', dateFormat: 'DD/MM/YYYY HH:mm:ss', language: 'pt-BR', correctFormat: true },
@@ -144,7 +160,7 @@
                 alert("Existem erros que precisam ser corrigidos.");
                 return;
             }
-
+            debugger;
             $.ajax({
                 type: "POST",
                 url: options.urlSave,

@@ -162,12 +162,12 @@ namespace SpentBook.Web.Views.Import
                     {
                         Id = Guid.NewGuid(),
                         IdImport = idImport,
-                        IdExternal = t.CheckNum,
+                        IdExternal = t.CheckNum.Trim(),
                         UserId = Helper.GetLoggedUserId(HttpContext, userManager),
                         Date = t.Date,
                         Category = null,
                         SubCategory = null,
-                        Name = t.Memo,
+                        Name = t.Memo.Trim(),
                         Value = t.Amount,
                         BankName = bank,
                         FormatFile = format

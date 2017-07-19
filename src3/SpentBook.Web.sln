@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet.Highcharts", "DotNet
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQuery", "..\..\ExpressionGraph\src\GraphQuery\GraphQuery.csproj", "{EAF2BD0F-7ADE-4BEA-8B86-0119D42CB785}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpentBook.OfxReader", "SpentBook.OfxReader\SpentBook.OfxReader.csproj", "{0285C3ED-C19F-42AD-8716-432F6E1A1B69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{EAF2BD0F-7ADE-4BEA-8B86-0119D42CB785}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAF2BD0F-7ADE-4BEA-8B86-0119D42CB785}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAF2BD0F-7ADE-4BEA-8B86-0119D42CB785}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0285C3ED-C19F-42AD-8716-432F6E1A1B69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0285C3ED-C19F-42AD-8716-432F6E1A1B69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0285C3ED-C19F-42AD-8716-432F6E1A1B69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0285C3ED-C19F-42AD-8716-432F6E1A1B69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

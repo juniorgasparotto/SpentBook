@@ -37,24 +37,19 @@ namespace SpentBook.Web.Controllers
             this.transactionTableService = transactionTableService;
         }
 
-        [HttpPost]
-        [HttpGet]
-        public ActionResult Index(TransactionFilterModel model)
+        public ActionResult Index()
         {
-            if (model == null)
+            var  model = new TransactionFilterModel
             {
-                model = new TransactionFilterModel
-                {
-                    DateStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 01),
-                    DateEnd = DateTime.Now.Date,
-                    TransactionType = TransactionType.None,
-                    OrderBy = TransactionOrder.Date, 
-                    OrderByClassification = OrderClassification.Desc,
-                    ValueEnd = null,
-                    ValueStart = null
-                };
-            }
-            
+                DateStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 01),
+                DateEnd = DateTime.Now.Date,
+                TransactionType = TransactionType.None,
+                OrderBy = TransactionOrder.Date,
+                OrderByClassification = OrderClassification.Desc,
+                ValueEnd = null,
+                ValueStart = null
+            };
+
             return View(model);
         }
 

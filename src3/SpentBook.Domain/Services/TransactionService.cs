@@ -36,7 +36,10 @@ namespace SpentBook.Domain.Services
                 query = query.Where(t => filter.SubCategories.Contains(t.SubCategory));
 
             if (filter.Names != null && filter.Names.Count > 0)
-                query = query.Where(t => filter.Names.Contains(t.Name));
+                query = from t in query
+                        from name in filter.Names
+                        where t.Name.ToLower().Contains(name.ToLower())
+                        select t;
 
             if (filter.DateStart != null)
                 query = query.Where(t => t.Date >= filter.DateStart);
