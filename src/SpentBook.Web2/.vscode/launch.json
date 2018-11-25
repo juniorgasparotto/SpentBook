@@ -1,0 +1,126 @@
+{
+    "version": "0.2.0",
+    "configurations": [{
+            "name": "Install/Reinstall (CMD)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "admin\\Scripts\\install.bat",
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "stopAtEntry": false,
+            "console": "externalTerminal"
+        }, {
+            "name": "Run (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceRoot}/bin/Debug/netcoreapp2.0/SpentBook.Web.dll",
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "stopAtEntry": false,
+            "externalConsole": true,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "Run (web)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceRoot}/bin/Debug/netcoreapp2.0/SpentBook.Web.dll",
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "stopAtEntry": false,
+            "launchBrowser": {
+                "enabled": true,
+                "args": "${auto-detect-url}",
+                "windows": {
+                    "command": "cmd.exe",
+                    "args": "/C start ${auto-detect-url}"
+                },
+                "osx": {
+                    "command": "open"
+                },
+                "linux": {
+                    "command": "xdg-open"
+                }
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceRoot}/Views"
+            }
+        },
+        {
+            "name": "Run/DbUpdate (web)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "cmd-dbupdate",
+            "program": "${workspaceRoot}/bin/Debug/netcoreapp2.0/SpentBook.Web.dll",
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "stopAtEntry": false,
+            "launchBrowser": {
+                "enabled": true,
+                "args": "${auto-detect-url}",
+                "windows": {
+                    "command": "cmd.exe",
+                    "args": "/C start ${auto-detect-url}"
+                },
+                "osx": {
+                    "command": "open"
+                },
+                "linux": {
+                    "command": "xdg-open"
+                }
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceRoot}/Views"
+            }
+        },
+        {
+            "name": "Clean (CMD)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "admin\\Scripts\\clean.bat",
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
+            "name": "Clean All (CMD)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "admin\\Scripts\\clean-all.bat",
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        }, {
+            "name": "DropDb (CMD)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "admin\\Scripts\\dropdb.bat",
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "stopAtEntry": false,
+            "console": "externalTerminal"
+        },
+        {
+            "name": "Restore (CMD)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "admin\\Scripts\\restore.bat",
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        }
+    ]
+}

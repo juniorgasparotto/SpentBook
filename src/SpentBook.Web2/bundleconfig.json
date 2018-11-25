@@ -1,0 +1,62 @@
+[
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    "inputFiles": [
+      "wwwroot/css/site.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/utils.js",
+    "inputFiles": [
+      "wwwroot/js/json.date-extensions.js",
+      "wwwroot/js/linq.js",
+      "wwwroot/js/jquery.linq.js",
+      "wwwroot/js/Custom/Helper.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/treegrid.js",
+    "inputFiles": [
+      "wwwroot/js/treegrid/jquery.treegrid.js",
+      "wwwroot/js/treegrid/jquery.treegrid.bootstrap3.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/highcharts.full.js",
+    "inputFiles": [
+      "wwwroot/js/highcharts/4.2.3/highcharts.src.js",
+      "wwwroot/js/Highcharts/4.2.3/modules/data.src.js",
+      "wwwroot/js/Highcharts/4.2.3/modules/exporting.src.js",
+      "wwwroot/js/Highcharts/4.2.3/modules/drilldown.src.js",
+      "wwwroot/js/Highcharts/4.2.3/highcharts-more.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/lib/dropzone/dist/basic.min.css",
+    "inputFiles": [
+      "wwwroot/lib/dropzone/dist/basic.css"
+    ]
+  }
+]

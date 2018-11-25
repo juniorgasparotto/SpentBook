@@ -1,0 +1,108 @@
+
+Bradesco Internet Banking
+Data:11/07/2017 - 14h31
+Extrato de: Ag: 927 | Conta: 53619-9 | Entre 01/01/2017 e 31/01/2017
+
+Data                    Histórico                Docto.                  Crédito (R$)             Débito (R$)             Saldo (R$)
+29/12/16                SALDO ANTERIOR                                                                                    381,60
+02/01/17                Transf Autoriz           7384560                 21,00                                            402,60
+                             Robson Antonio da Silva
+02/01/17                Transf Autoriz           7384604                 42,00
+                              Joice Daiana Candido
+02/01/17                Visa Electron            0020224                                          -87,56
+                              Supermercado Lavapes
+02/01/17                Visa Electron            0271987                                          -179,86
+                               Planalto Jaguariuna
+02/01/17                Visa Electron            0300134                                          -86,74
+                              Supermercado Bonnett
+02/01/17                Visa Electron            0564116                                          -21,49
+                              Showdog Lanchonete l
+02/01/17                Visa Electron            0625202                                          -393,67
+                                 Sleep House
+02/01/17                Visa Electron            0698101                                          -27,10                  -351,82
+                                Dutra & Felicio
+03/01/17                Iof Util Limite          3073744                                          -0,97                   -352,79
+05/01/17                Transf Autoriz           7384516                 2.000,00                                         1.647,21
+                           Glauber Donizeti Gasparotto Juni
+05/01/17                Deb.automatico           0215877                                          -342,04                 1.305,17
+                           Cgmp-sem Parar/sp*-02158779
+09/01/17                Visa Electron            0758822                                          -5,30                   1.299,87
+                                  Sem Fio
+
+09/01/17                Visa Electron            0758930                                          -6,50
+                                  Sem Fio
+09/01/17                Visa Electron            0817801                                          -26,00                  1.267,37
+                                Dutra & Felicio
+10/01/17                Visa Electron            0643887                                          -203,85                 1.063,52
+                               Planalto Jaguariuna
+10/01/17                Visa Electron            0759015                                          -5,30
+                                  Sem Fio
+10/01/17                Visa Electron            0759133                                          -13,50
+                                  Sem Fio
+10/01/17                Enc Lim Credito          3073744                                          -6,65                   1.038,07
+                               Encargo - 13,55%
+11/01/17                Visa Electron            0110179                                          -155,65                 882,42
+                               Raia Drogasil 510
+11/01/17                Visa Electron            0196408                                          -3,00
+                               Restaurante e Cafe
+11/01/17                Visa Electron            0759302                                          -2,50                   876,92
+                                  Sem Fio
+12/01/17                Visa Electron            0759367                                          -5,30                   871,62
+                                  Sem Fio
+13/01/17                Tarifa Bancaria          0020117                                          -48,00                  823,62
+                                Cesta Exclusive
+13/01/17                Visa Electron            0759566                                          -5,30
+                                  Sem Fio
+13/01/17                Gasto c Credito          3990013                                          -214,46                 603,86
+16/01/17                Visa Electron            0140499                                          -82,11                  521,75
+                              Supermercado Lavapes
+16/01/17                Visa Electron            0266197                                          -23,00
+                              Mix Mais Acai Jaguar
+16/01/17                Visa Electron            0759708                                          -2,50
+                                  Sem Fio
+16/01/17                Visa Electron            0818047                                          -12,25                  484,00
+                                Dutra & Felicio
+17/01/17                Visa Electron            0759898                                          -2,50                   481,50
+                                  Sem Fio
+17/01/17                Visa Electron            0760043                                          -13,50                  468,00
+                                  Sem Fio
+18/01/17                Visa Electron            0760101                                          -5,50                   462,50
+                                  Sem Fio
+19/01/17                Visa Electron            0132125                                          -9,00                   453,50
+                               Tkla Grafica Digital
+19/01/17                Visa Electron            0760355                                          -5,50                   448,00
+                                  Sem Fio
+20/01/17                Visa Electron            0760710                                          -4,00                   444,00
+                                  Sem Fio
+23/01/17                Visa Electron            0353081                                          -20,00                  424,00
+                               o Point do Candido
+23/01/17                Visa Electron            0458436                                          -39,00
+                              jj Rodrigues Santos la
+23/01/17                Visa Electron            0752253                                          -12,00                  373,00
+                              Eunice de Souza 1379
+                        Total                                            2.063,00                 -2.071,60               373,00
+
+Os dados acima têm como base 11/07/2017 às 14h31 e estão sujeitos a alterações.
+
+Últimos Lançamentos
+
+
+Data                         Histórico                     Docto.                       Crédito (R$)                 Débito (R$)
+10/07/17                     Encargos Limite de Cred       2600191                                                   -39,68
+                             Total                                                      0,00                         -39,68
+
+SAC – Serviço de Apoio ao Cliente
+Alô Bradesco                          Deficiente Auditivo ou de Fala        Cancelamentos, Reclamações e Informações.
+0800 704 8383                         0800 722 0099                         Atendimento 24 horas por dia, 7 dias por semana.
+Ouvidoria 0800 727 9933 Atendimento de segunda a sexta-feira das 8h às 18h, exceto feriados.
+Demais telefones consulte o site Fale Conosco
+
+
+
+
+
+
+
+
+
+

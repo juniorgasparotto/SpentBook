@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Resumo de gastos";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div id="uploadContainer" class="box">
+    <h4>Enviar novos arquivos</h4>
+    <form id="formUpload" enctype="multipart/form-data">
+        <input name="files" type="file" multiple />
+        <a href="javascript:void(0);" id="btnUpload" class="btn btn2">Enviar</a>
+        <progress id="progressBar" value="0" total="0" class="collapse"></progress>
+    </form>
+
+    <div id="filesContainer">
+        <h4>Arquivos atuais:</h4>
+        <div id="content">
+
+        </div>
+    </div>
+</div>
+
+<div id="spentsList">
+    <div id="content">
+    </div>
+</div>
+
+<div id="canvas-holder">
+    <canvas id="chart-doughnut-area" class="collapse"></canvas>
+    <canvas id="chart-bar-area" class="collapse"></canvas>
+    <div id="legend" class="collapse">
+    </div>
+</div>
+
+
+<div class="clearfix"></div>
+
+@section Scripts {
+    <script src="~/js/Chart.js"></script>
+    <script src="~/js/Custom/ChartHelper.js"></script>
+    <script src="~/lib/jquery-ui/jquery-ui.js"></script>
+}

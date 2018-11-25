@@ -1,0 +1,14 @@
+﻿- Ligar a flag "uploadMultiple" no upload de arquivos, mas precisa pensar em uma maneira de tratar os erros individualmente 
+  e não falhar todos os outros que deram certo, apenas os que deram errados.
+- Criar mecanismo de expurgo de importações
+- Criar mecanismo para visualizar todas as importações
+- Criar cancelar importação
+- Criar mecanismo de notificação
+- Criar busca de transações
+- problema com o alinhamento do numero da linha com a linha, esta ficando desalinhado
+- não existe scroll quando esta usando por cima da tabela
+- header fixo na tabela
+- Resolver problema de timeout na importação, o vs demora pra responder e o dropzone se perde
+- preciso mudar o banco para usar Id ao inves de nome
+- mudar estrutura de pastas para organizar por componente
+- criar mensagem quando não existe transações na importação ou na tela de transações

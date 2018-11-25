@@ -1,0 +1,219 @@
+﻿/*
+*   Steps
+*/
+
+#body-import #steps-header .disabled a,
+#body-import #steps-header .disabled a:hover,
+#body-import #steps-header .disabled a:active {
+    background: #eee none repeat scroll 0 0;
+    color: #aaa;
+    cursor: default;
+}
+
+#body-import #steps-header ul li {
+    padding: 3px;
+}
+
+#body-import #steps-header .number {
+    font-size: 1.429em;
+}
+
+
+/*
+*   Banks
+*/
+
+#body-import .cc-selector input {
+    position: absolute;
+    z-index: 999;
+    visibility: hidden;
+}
+
+#body-import .cc-selector .csv {
+    background-image: url(../../images/icons/import_csv.png);
+}
+
+#body-import .cc-selector .bradesco {
+    background-image: url(../../images/icons/import_bradesco.png);
+}
+
+#body-import .cc-selector input:active+.drinkcard-cc,
+#body-import .cc-selector input:active+.drinkcard-cc {
+    opacity: .9;
+}
+
+#body-import .cc-selector input:checked+.drinkcard-cc,
+#body-import .cc-selector input:checked+.drinkcard-cc {
+    -webkit-filter: none;
+    -moz-filter: none;
+    filter: none;
+}
+
+#body-import .drinkcard-cc {
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100px;
+    height: 70px;
+    -webkit-transition: all 100ms ease-in;
+    transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+    -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+    filter: brightness(0.8) grayscale(1) opacity(.7);
+}
+
+#body-import .cc-selector input {
+    margin: 5px 0 0 12px;
+}
+
+
+/*
+*   FileUpload
+*/
+
+#body-import .dropzone {
+    border: 2px dashed #0087F7;
+    border-radius: 5px;
+    background: white;
+}
+
+#body-import .dropzone .dz-message {
+    font-weight: 400;
+}
+
+#body-import .dropzone .dz-message .note {
+    font-size: 0.8em;
+    font-weight: 200;
+    display: block;
+    margin-top: 1.4rem;
+}
+
+#body-import .dropzone .dz-preview.dz-file-preview .dz-image {
+    border-radius: 20px;
+    background: #556970;
+}
+
+#body-import .dropzone .dz-preview .dz-details .dz-filename span,
+#body-import .dropzone .dz-preview .dz-details .dz-size span {
+    color: #000;
+    font-weight: bold;
+}
+
+#body-import .dropzone .dz-preview .dz-error-message {
+    top: 49px;
+    width: auto;
+    height: 65px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#body-import .dropzone .dz-preview .dz-success-mark {
+    margin-top: -2px;
+}
+
+#body-import .dropzone .dz-preview .dz-error-mark {
+    margin-top: -13px;
+}
+
+#body-import .dropzone .dz-preview .dz-progress .dz-upload {
+    background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #9dc8e2, #9dc8e2) repeat
+}
+
+
+/*
+*   TransactionTable & Preview
+*/
+
+#body-import .handsontable td .htAutocompleteArrow {
+    color: black;
+}
+
+#body-import #table-statement table>tbody>tr:nth-child(2n)>td {
+    background: #f7f3f1;
+}
+
+#body-import #table-statement table>tbody>tr:nth-child(2n+1)>td {
+    background: #fff;
+}
+
+#body-import #table-statement .transaction-status {
+    width: 20px;
+}
+
+#body-import #table-statement .transaction-status .message {
+    position: absolute;
+    z-index: 1000;
+    padding-top: 5px;
+    padding-right: 15px;
+    padding-bottom: 5px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    font-size: 13px;
+    width: 300px;
+    line-height: initial;
+    white-space: normal;
+}
+
+#body-import #table-statement .transaction-status .message ul {
+    margin: 0;
+}
+
+#body-import #table-statement .transaction-status .message.success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #3c763d;
+}
+
+#body-import #table-statement .transaction-status .message.error {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #C94442;
+}
+
+#body-import #table-statement .transaction-status .message.warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #8a6d3b;
+}
+
+#body-import #table-statement .transaction-status .message.automatic-resolved {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #31708f;
+}
+
+#body-import #table-statement .transaction-status .icon.success {
+    color: #3c763d;
+}
+
+#body-import #table-statement .transaction-status .icon.error {
+    color: #a94442;
+}
+
+#body-import #table-statement .transaction-status .icon.warning {
+    color: #8a6d3b;
+}
+
+#body-import #table-statement .transaction-status .icon.automatic-resolved {
+    color: #31708f;
+}
+
+#body-import #table-statement .icon {
+    margin-left: 5px;
+}
+
+#body-import #table-statement .icon.remove:hover {
+    color: red;
+}
+
+
+/*
+* Generic buttons
+*/
+
+#body-import ul.actions li {
+    display: table-cell;
+    float: right;
+    margin-top: 10px;
+}

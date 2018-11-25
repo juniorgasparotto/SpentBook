@@ -1,0 +1,359 @@
+OFXHEADER:100
+DATA:OFXSGML
+VERSION:102
+SECURITY:NONE
+ENCODING:USASCII
+CHARSET:1252
+COMPRESSION:NONE
+OLDFILEUID:NONE
+NEWFILEUID:NONE
+
+<OFX>
+	<SIGNONMSGSRSV1>
+		<SONRS>
+			<STATUS>
+				<CODE>0
+				<SEVERITY>INFO
+			</STATUS>
+			<DTSERVER>00000000000000
+			<LANGUAGE>POR
+		</SONRS>
+	</SIGNONMSGSRSV1>
+	<BANKMSGSRSV1>
+		<STMTTRNRS>
+			<TRNUID>1001
+			<STATUS>
+				<CODE>0
+				<SEVERITY>INFO
+			</STATUS>
+			<STMTRS>
+				<CURDEF>BRL
+				<BANKACCTFROM>
+					<BANKID>0237
+					<ACCTID>927/53619
+					<ACCTTYPE>CHECKING
+				</BANKACCTFROM>
+				<BANKTRANLIST>
+					<DTSTART>20170101000000
+					<DTEND>20170131000000
+					<STMTTRN>
+						<TRNTYPE>CREDIT
+						<DTPOSTED>20170102000000[-03:EST]
+						<TRNAMT>21.00
+						<FITID>N10049:02/01/17:21.0:7384560: Transf Autoriz: Robson Antonio da Silva
+						<CHECKNUM>7384560
+						<MEMO>Transf Autoriz Robson Antonio da Silva
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>CREDIT
+						<DTPOSTED>20170102000000[-03:EST]
+						<TRNAMT>42.00
+						<FITID>N10066:02/01/17:42.0:7384604: Transf Autoriz: Joice Daiana Candido
+						<CHECKNUM>7384604
+						<MEMO>Transf Autoriz Joice Daiana Candido
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170102000000[-03:EST]
+						<TRNAMT>-87.56
+						<FITID>N10083:02/01/17:-87.56:0020224: Visa Electron: Supermercado Lavapes
+						<CHECKNUM>0020224
+						<MEMO>Visa Electron Supermercado Lavapes
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170102000000[-03:EST]
+						<TRNAMT>-179.86
+						<FITID>N100A1:02/01/17:-179.86:0271987: Visa Electron: Planalto Jaguariuna
+						<CHECKNUM>0271987
+						<MEMO>Visa Electron Planalto Jaguariuna
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170102000000[-03:EST]
+						<TRNAMT>-86.74
+						<FITID>N100BF:02/01/17:-86.74:0300134: Visa Electron: Supermercado Bonnett
+						<CHECKNUM>0300134
+						<MEMO>Visa Electron Supermercado Bonnett
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170102000000[-03:EST]
+						<TRNAMT>-21.49
+						<FITID>N100DD:02/01/17:-21.49:0564116: Visa Electron: Showdog Lanchonete l
+						<CHECKNUM>0564116
+						<MEMO>Visa Electron Showdog Lanchonete l
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170102000000[-03:EST]
+						<TRNAMT>-393.67
+						<FITID>N100FB:02/01/17:-393.67:0625202: Visa Electron: Sleep House
+						<CHECKNUM>0625202
+						<MEMO>Visa Electron Sleep House
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170102000000[-03:EST]
+						<TRNAMT>-27.10
+						<FITID>N10119:02/01/17:-27.1:0698101: Visa Electron: Dutra &amp; Felicio
+						<CHECKNUM>0698101
+						<MEMO>Visa Electron Dutra &amp; Felicio
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170103000000[-03:EST]
+						<TRNAMT>-0.97
+						<FITID>N10137:03/01/17:-0.97:3073744: Iof Util Limite:
+						<CHECKNUM>3073744
+						<MEMO>Iof Util Limite 
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>CREDIT
+						<DTPOSTED>20170105000000[-03:EST]
+						<TRNAMT>2000.00
+						<FITID>N10154:05/01/17:2000.0:7384516: Transf Autoriz: Glauber Donizeti Gasparotto Juni
+						<CHECKNUM>7384516
+						<MEMO>Transf Autoriz Glauber Donizeti Gasparotto Juni
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170105000000[-03:EST]
+						<TRNAMT>-342.04
+						<FITID>N10171:05/01/17:-342.04:0215877: Deb.automatico: Cgmp-sem Parar/sp*-02158779
+						<CHECKNUM>0215877
+						<MEMO>Deb.automatico Cgmp-sem Parar/sp*-02158779
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170109000000[-03:EST]
+						<TRNAMT>-5.30
+						<FITID>N1018F:09/01/17:-5.3:0758822: Visa Electron: Sem Fio
+						<CHECKNUM>0758822
+						<MEMO>Visa Electron Sem Fio
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170109000000[-03:EST]
+						<TRNAMT>-6.50
+						<FITID>N101AD:09/01/17:-6.5:0758930: Visa Electron: Sem Fio
+						<CHECKNUM>0758930
+						<MEMO>Visa Electron Sem Fio
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170109000000[-03:EST]
+						<TRNAMT>-26.00
+						<FITID>N101CB:09/01/17:-26.0:0817801: Visa Electron: Dutra &amp; Felicio
+						<CHECKNUM>0817801
+						<MEMO>Visa Electron Dutra &amp; Felicio
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170110000000[-03:EST]
+						<TRNAMT>-203.85
+						<FITID>N101E9:10/01/17:-203.85:0643887: Visa Electron: Planalto Jaguariuna
+						<CHECKNUM>0643887
+						<MEMO>Visa Electron Planalto Jaguariuna
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170110000000[-03:EST]
+						<TRNAMT>-5.30
+						<FITID>N10207:10/01/17:-5.3:0759015: Visa Electron: Sem Fio
+						<CHECKNUM>0759015
+						<MEMO>Visa Electron Sem Fio
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170110000000[-03:EST]
+						<TRNAMT>-13.50
+						<FITID>N10225:10/01/17:-13.5:0759133: Visa Electron: Sem Fio
+						<CHECKNUM>0759133
+						<MEMO>Visa Electron Sem Fio
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170110000000[-03:EST]
+						<TRNAMT>-6.65
+						<FITID>N10243:10/01/17:-6.65:3073744: Enc Lim Credito: Encargo - 13,55%
+						<CHECKNUM>3073744
+						<MEMO>Enc Lim Credito Encargo - 13,55%
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170111000000[-03:EST]
+						<TRNAMT>-155.65
+						<FITID>N10261:11/01/17:-155.65:0110179: Visa Electron: Raia Drogasil 510
+						<CHECKNUM>0110179
+						<MEMO>Visa Electron Raia Drogasil 510
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170111000000[-03:EST]
+						<TRNAMT>-3.00
+						<FITID>N1027F:11/01/17:-3.0:0196408: Visa Electron: Restaurante e Cafe
+						<CHECKNUM>0196408
+						<MEMO>Visa Electron Restaurante e Cafe
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170111000000[-03:EST]
+						<TRNAMT>-2.50
+						<FITID>N1029D:11/01/17:-2.5:0759302: Visa Electron: Sem Fio
+						<CHECKNUM>0759302
+						<MEMO>Visa Electron Sem Fio
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170112000000[-03:EST]
+						<TRNAMT>-5.30
+						<FITID>N102BB:12/01/17:-5.3:0759367: Visa Electron: Sem Fio
+						<CHECKNUM>0759367
+						<MEMO>Visa Electron Sem Fio
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170113000000[-03:EST]
+						<TRNAMT>-48.00
+						<FITID>N102D9:13/01/17:-48.0:0020117: Tarifa Bancaria: Cesta Exclusive
+						<CHECKNUM>0020117
+						<MEMO>Tarifa Bancaria Cesta Exclusive
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170113000000[-03:EST]
+						<TRNAMT>-5.30
+						<FITID>N102F7:13/01/17:-5.3:0759566: Visa Electron: Sem Fio
+						<CHECKNUM>0759566
+						<MEMO>Visa Electron Sem Fio
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170113000000[-03:EST]
+						<TRNAMT>-214.46
+						<FITID>N10315:13/01/17:-214.46:3990013: Gasto c Credito:
+						<CHECKNUM>3990013
+						<MEMO>Gasto c Credito 
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170116000000[-03:EST]
+						<TRNAMT>-82.11
+						<FITID>N10332:16/01/17:-82.11:0140499: Visa Electron: Supermercado Lavapes
+						<CHECKNUM>0140499
+						<MEMO>Visa Electron Supermercado Lavapes
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170116000000[-03:EST]
+						<TRNAMT>-23.00
+						<FITID>N10350:16/01/17:-23.0:0266197: Visa Electron: Mix Mais Acai Jaguar
+						<CHECKNUM>0266197
+						<MEMO>Visa Electron Mix Mais Acai Jaguar
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170116000000[-03:EST]
+						<TRNAMT>-2.50
+						<FITID>N1036E:16/01/17:-2.5:0759708: Visa Electron: Sem Fio
+						<CHECKNUM>0759708
+						<MEMO>Visa Electron Sem Fio
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170116000000[-03:EST]
+						<TRNAMT>-12.25
+						<FITID>N1038C:16/01/17:-12.25:0818047: Visa Electron: Dutra &amp; Felicio
+						<CHECKNUM>0818047
+						<MEMO>Visa Electron Dutra &amp; Felicio
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170117000000[-03:EST]
+						<TRNAMT>-2.50
+						<FITID>N103AA:17/01/17:-2.5:0759898: Visa Electron: Sem Fio
+						<CHECKNUM>0759898
+						<MEMO>Visa Electron Sem Fio
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170117000000[-03:EST]
+						<TRNAMT>-13.50
+						<FITID>N103C8:17/01/17:-13.5:0760043: Visa Electron: Sem Fio
+						<CHECKNUM>0760043
+						<MEMO>Visa Electron Sem Fio
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170118000000[-03:EST]
+						<TRNAMT>-5.50
+						<FITID>N103E6:18/01/17:-5.5:0760101: Visa Electron: Sem Fio
+						<CHECKNUM>0760101
+						<MEMO>Visa Electron Sem Fio
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170119000000[-03:EST]
+						<TRNAMT>-9.00
+						<FITID>N10404:19/01/17:-9.0:0132125: Visa Electron: Tkla Grafica Digital
+						<CHECKNUM>0132125
+						<MEMO>Visa Electron Tkla Grafica Digital
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170119000000[-03:EST]
+						<TRNAMT>-5.50
+						<FITID>N10422:19/01/17:-5.5:0760355: Visa Electron: Sem Fio
+						<CHECKNUM>0760355
+						<MEMO>Visa Electron Sem Fio
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170120000000[-03:EST]
+						<TRNAMT>-4.00
+						<FITID>N10440:20/01/17:-4.0:0760710: Visa Electron: Sem Fio
+						<CHECKNUM>0760710
+						<MEMO>Visa Electron Sem Fio
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170123000000[-03:EST]
+						<TRNAMT>-20.00
+						<FITID>N1045E:23/01/17:-20.0:0353081: Visa Electron: o Point do Candido
+						<CHECKNUM>0353081
+						<MEMO>Visa Electron o Point do Candido
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170123000000[-03:EST]
+						<TRNAMT>-39.00
+						<FITID>N1047C:23/01/17:-39.0:0458436: Visa Electron: jj Rodrigues Santos la
+						<CHECKNUM>0458436
+						<MEMO>Visa Electron jj Rodrigues Santos la
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170123000000[-03:EST]
+						<TRNAMT>-12.00
+						<FITID>N1049A:23/01/17:-12.0:0752253: Visa Electron: Eunice de Souza 1379
+						<CHECKNUM>0752253
+						<MEMO>Visa Electron Eunice de Souza 1379
+					</STMTTRN>
+					<STMTTRN>
+						<TRNTYPE>DEBIT
+						<DTPOSTED>20170710000000[-03:EST]
+						<TRNAMT>-39.68
+						<FITID>N10009:10/07/17:-39.68:2600191: Encargos Limite de Cred:
+						<CHECKNUM>2600191
+						<MEMO>Encargos Limite de Cred 
+					</STMTTRN>
+				</BANKTRANLIST>
+				<LEDGERBAL>
+					<BALAMT>373.00
+					<DTASOF>20170123000000[-03:EST]
+				</LEDGERBAL>
+			</STMTRS>
+		</STMTTRNRS>
+	</BANKMSGSRSV1>
+</OFX>

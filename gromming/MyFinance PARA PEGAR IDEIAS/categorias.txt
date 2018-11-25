@@ -1,0 +1,138 @@
+Alimentação
+Alimentação / Feira
+Alimentação / Outros
+Alimentação / Padaria
+Alimentação / Restaurantes
+Alimentação / Supermercado
+Animal de Estimação
+Animal de Estimação / Animal de Estimação
+Animal de Estimação / Suprimentos
+Animal de Estimação / Veterinário
+Bancos
+Bancos / Juros
+Benefícios
+Benefícios / Aposentadoria
+Benefícios / Pensão Alimentícia
+Benefícios / Plano de Previdência
+Despesas com Filhos
+Despesas com Filhos / Alimentação
+Despesas com Filhos / Babá
+Despesas com Filhos / Escola
+Despesas com Filhos / Lazer
+Despesas com Filhos / Médico
+Despesas com Filhos / Mesada
+Despesas com Filhos / Vestuário
+Despesas de Trabalho
+Despesas de Trabalho / Despesas de Trabalho
+Educação
+Educação / Cursos e Treinamentos
+Educação / Escola - Universidade
+Educação / Livros
+Educação / Outros Gastos
+Empregados
+Empregados / Babá
+Empregados / Doméstica
+Empregados / Faxineira - Passadeira
+Empregados / Jardineiro
+Empregados / Motorista
+Empréstimo
+Empréstimo / Empréstimo
+Empréstimo / Juros do Empréstimo
+Estética
+Estética / Cabeleireiro - Manicure - Pedicure
+Estética / Musculação
+Impostos
+Impostos / CPMF
+Impostos / FGTS
+Impostos / Impostos Locais
+Impostos / INSS
+Impostos / IOF
+Impostos / IPTU
+Impostos / IPVA
+Impostos / IRRF
+Impostos / Outros Impostos
+Impostos / PIS
+Investimentos
+Investimentos / Imóvel
+Itens Domésticos
+Itens Domésticos / Mobiliário
+Itens Domésticos / Utensílios
+Lazer
+Lazer / Brinquedos e Jogos
+Lazer / Cinema e Locação
+Lazer / Diversão
+Lazer / Eventos Culturais
+Lazer / Eventos Esportivos
+Lazer / Férias
+Lazer / Fitas e CDs
+Lazer / Livros e Revistas
+Lazer / Viagem
+Moradia
+Moradia / Água e Esgoto
+Moradia / Aluguel
+Moradia / Condicionadores de Ar
+Moradia / Condomínio
+Moradia / Gás
+Moradia / Juros Financ. Imobiliário
+Moradia / Lixo e Reciclagem
+Moradia / Luz
+Outros
+Outros / Outros
+Outros / Presentes
+Outros Rendimentos
+Outros Rendimentos / Devolução de Impostos
+Outros Rendimentos / Loterias
+Outros Rendimentos / Pensão
+Outros Rendimentos / Principal do Empréstimo
+Outros Rendimentos / Seguro Desemprego
+Proventos
+Proventos / Bônus
+Proventos / Comissão
+Proventos / Horas Extras
+Proventos / Salários
+Rendimento de Aposentadoria
+Rendimento de Aposentadoria / Benefícios do INSS
+Rendimento de Aposentadoria / Previdência Privada
+Rendimento de Investimentos
+Rendimento de Investimentos / Ganhos de Capital
+Rendimento de Investimentos / Juros
+Rendimento de Investimentos / Juros não-tributáveis
+Rendimento de Investimentos / Lucros e Dividendos
+Rendimento de Investimentos / Outros
+Rendimento de Investimentos / Renda de Aluguel
+Saúde
+Saúde / Dentista
+Saúde / Fisioterapia
+Saúde / Hospital
+Saúde / Médico
+Saúde / Ótica
+Saúde / Outros
+Saúde / Remédios
+Seguros
+Seguros / Automóvel
+Seguros / Do Locador - Do Locatário
+Seguros / Outros
+Seguros / Saúde
+Seguros / Vida
+Taxas Bancárias
+Taxas Bancárias / Taxa de Serviço
+Taxas Bancárias / Taxas Bancárias
+Telecomunicações
+Telecomunicações / Celular
+Telecomunicações / Internet
+Telecomunicações / Telefone Fixo
+Telecomunicações / TV a cabo
+Transportes
+Transportes / Avião
+Transportes / Catamarã
+Transportes / Combustível
+Transportes / Estacionamento
+Transportes / Manutenção
+Transportes / Metrô
+Transportes / Ônibus
+Transportes / Prestação do Carro
+Transportes / Táxi
+Transportes / Trem
+Vestuário
+Vestuário / Lavanderia - Tinturaria
+Vestuário / Roupas e Acessórios

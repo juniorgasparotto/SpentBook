@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <MvcRazorCompileOnPublish>true</MvcRazorCompileOnPublish>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <UserSecretsId>aspnet-SpentBook.Web-0E2B3630-D805-47FC-82AB-74C5E1C9296D</UserSecretsId>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\js\NewFolder1\**" />
+    <Compile Remove="wwwroot\js\NewFolder\**" />
+    <Content Remove="wwwroot\js\NewFolder1\**" />
+    <Content Remove="wwwroot\js\NewFolder\**" />
+    <EmbeddedResource Remove="wwwroot\js\NewFolder1\**" />
+    <EmbeddedResource Remove="wwwroot\js\NewFolder\**" />
+    <None Remove="wwwroot\js\NewFolder1\**" />
+    <None Remove="wwwroot\js\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0-preview2-final" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0-preview2-final" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0-preview2-final" PrivateAssets="All" />
+    <PackageReference Include="PocDatabase" Version="1.0.1" />
+    <PackageReference Include="SysCommand" Version="1.0.9" />
+    <PackageReference Include="SgmlReader" Version="1.8.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0-preview2-final" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0-preview2-final" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0-preview2-final" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Uploads\" />
+    <Folder Include="wwwroot\Data\juniorgasparotto%40msn.com\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotNet.Highcharts\DotNet.Highcharts.csproj" />
+    <ProjectReference Include="..\SpentBook.Domain\SpentBook.Domain.csproj" />
+    <ProjectReference Include="..\SpentBook.OfxReader\SpentBook.OfxReader.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,94 @@
+﻿@model SpentBook.Web.Models.TransactionFilterModel
+@{
+    ViewData["Title"] = "Minhas transações";
+}
+
+<div id="body-transactions">
+    <h2>@ViewData["Title"]</h2>
+    <hr />
+
+    <form asp-action="post">
+        @Html.ValidationSummary()
+
+        <div id="filter">
+            <div class="form-group form-group-extension-small">
+                @Html.LabelFor(m => m.TransactionType)
+                <radio-list source="TransactionType"></radio-list>
+            </div>
+
+            <div class="form-group form-group-extension-small field-date-from-to">
+                @Html.Label("Filtrar transações por periodo")
+                <div class="input-group input-daterange">
+                    @Html.TextBoxFor(m => m.DateStart, "{0:dd/MM/yyyy}", new { @class = "form-control" })
+                    <span class="input-group-addon">até</span>
+                    @Html.TextBoxFor(m => m.DateEnd, "{0:dd/MM/yyyy}", new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group form-group-extension-small field-decimal-from-to">
+                @Html.Label("Filtrar transações por valor")
+                <div class="input-group input-daterange">
+                    @Html.TextBoxFor(m => m.ValueStart, new { @class = "form-control" })
+                    <span class="input-group-addon">até</span>
+                    @Html.TextBoxFor(m => m.ValueEnd, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Categories)
+                @Html.TextBoxFor(m => m.Categories, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group form-group-extension-small">
+                @Html.LabelFor(m => m.SubCategories)
+                @Html.TextBoxFor(m => m.SubCategories, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group form-group-extension-small">
+                @Html.LabelFor(m => m.TransactionNames)
+                @Html.TextBoxFor(m => m.TransactionNames, new { @class = "form-control" })
+            </div>
+
+            <div class="btn-group">
+                <button id="search" type="button" class="btn btn-primary btn-lg continue" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Pesquisar">Pesquisar</button>
+            </div>
+        </div>
+
+        <div id="result">
+            <div id="table">
+
+            </div>
+
+            <ul class="actions hidden">
+                <li>
+                    <button type="button" class="btn btn-primary btn-lg continue" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Concluir">Concluir</button>
+                    <button type="button" class="btn btn-primary btn-lg cancel" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Cancelar">Cancelar</button>
+                </li>
+            </ul>
+        </div>
+    </form>
+
+    <div class="clearfix"></div>
+</div>
+
+@section styles {
+    <link href="~/lib/components-font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/lib/handsontable/dist/pikaday/pikaday.css" rel="stylesheet" />
+    <link href="~/lib/handsontable/dist/handsontable.css" rel="stylesheet" />
+    <link href="~/css/pages/Transaction.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script src="~/lib/handsontable/dist/pikaday/pikaday.js"></script>
+    <script src="~/lib/handsontable/dist/moment/moment.js"></script>
+    <script src="~/lib/handsontable/dist/zeroclipboard/ZeroClipboard.js"></script>
+    <script src="~/lib/handsontable/dist/numbro/numbro.js"></script>
+    <script src="~/lib/handsontable/dist/numbro/languages.js"></script>
+    <script src="~/lib/handsontable/dist/handsontable.js"></script>
+
+    <script src="~/lib/jquery-debounce/jquery.debounce.js"></script>
+    <script src="~/lib-project/TransactionTable.js"></script>
+    <script src="~/js/Custom/Helper.js"></script>
+
+    <script src="~/js/pages/Transaction.js"></script>
+}

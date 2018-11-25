@@ -1,0 +1,4 @@
+http://blog.goldmap.com.br/2012/05/quais-melhores-praticas-ao-organizar-seus-gastos-pessoais/
+
+http://www.codeproject.com/Articles/350488/A-simple-POC-using-ASP-NET-Web-API-Entity-Framewor
+http://blog.magnusmontin.net/2013/05/30/generic-dal-using-entity-framework/
