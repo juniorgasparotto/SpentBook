@@ -13,6 +13,7 @@ using SpentBook.Web.Services;
 using SpentBook.Web.Models.TransactionTable;
 using SpentBook.OfxReader;
 using System.Transactions;
+using CsvHelper.Configuration;
 
 namespace SpentBook.Web.Views.Import
 {
@@ -119,7 +120,8 @@ namespace SpentBook.Web.Views.Import
             var transactions = new List<TransactionImport>();
             using (var sr = new StreamReader(fullName))
             {
-                var reader = new CsvReader(sr);
+                var configuration = new CsvConfiguration { HasHeaderRecord = false };
+                var reader = new CsvReader(sr, configuration);
                 reader.Parser.Configuration.ThrowOnBadData = false;
                 reader.Parser.Configuration.IgnoreBlankLines = true;
                 reader.Parser.Configuration.Delimiter = ";";

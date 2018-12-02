@@ -47,7 +47,13 @@ namespace SpentBook.Web
             services.AddDbContext<IdentityDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(o => {
+                o.Password.RequireDigit = false;
+                o.Password.RequireLowercase = false;
+                o.Password.RequireUppercase = false;
+                o.Password.RequiredLength = 0;
+                o.Password.RequireNonAlphanumeric = false;
+            })
                 .AddEntityFrameworkStores<IdentityDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -61,6 +67,7 @@ namespace SpentBook.Web
                 // Using the followint code to add the new binder
                 options.AddFlagsEnumModelBinderProvider();
                 options.Filters.Add(new JsonOutputWhenGenericExceptionAttribute());
+                
             }).AddJsonOptions(opt =>
             {
                 var resolver = opt.SerializerSettings.ContractResolver;

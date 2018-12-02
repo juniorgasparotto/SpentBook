@@ -1,0 +1,16 @@
+{
+    "name": "type",
+    "version": "1.0.0",
+    "description": "",
+    "dependencies": {
+        "ts-node": "^7.0.1",
+        "typescript": "^3.1.6"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "build:ts": "tsc",
+        "start": "node output/test.js"
+    },
+    "author": "",
+    "license": "MIT"
+}
